@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import {ConfigModule} from "@nestjs/config";
 import {SequelizeModule} from "@nestjs/sequelize";
-import {DB_CONFIG} from "./db.config";
+import {DB_CONFIG} from "../../config/db.config";
+import {UserModule} from "../user/user.module";
+import {PlaylistModule} from "../playlist/playlist.module";
+import {TrackModule} from "../track/track.module";
 
 @Module({
   imports: [
@@ -12,8 +13,11 @@ import {DB_CONFIG} from "./db.config";
         isGlobal: true,
       }),
       SequelizeModule.forRoot(DB_CONFIG),
+      UserModule,
+      PlaylistModule,
+      TrackModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
