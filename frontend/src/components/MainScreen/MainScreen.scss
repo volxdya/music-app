@@ -1,51 +1,85 @@
 @keyframes animationCircle {
   0% {
-    background-color: #d500d2;
+    background-color: rgba(169, 14, 167, 0.82);
     background-position: 15px 0;
-    box-shadow: 15px 105px 52px #b60b85;
-    border-radius: 20%;
-    filter: blur(9.55rem);
+    box-shadow: 15px 105px 52px rgba(199, 6, 65, 0.8);
+    border-radius: 90%;
+    filter: blur(3rem);
+    height: 510px;
+    width: 650px;
+    transform: rotate(54deg);
   }
 
   25% {
-    background-color: #941a1a;
+    background-color: rgb(248, 193, 57);
     background-position: 15px 0;
-    border-radius: 90%;
-    box-shadow: -55px -50px 15px red;
+    border-radius: 100%;
+    box-shadow: -45px -100px 15px rgba(21, 199, 75, 0.82);
     filter: blur(5.5rem);
+    height: 550px;
+    width: 450px;
+    transform: rotate(80deg);
   }
 
   50% {
-    filter: blur(6.5rem);
-    background-color: #3aedff;
+    filter: blur(9rem);
+    background-color: rgba(33, 176, 190, 0.89);
     background-position: 15px 0;
-    border-radius: 50%;
-    box-shadow: 60px 105px 32px #1713b9;
+    border-radius: 34%;
+    box-shadow: 60px 155px 32px rgba(23, 19, 185, 0.86);
+    height: 450px;
+    width: 450px;
+    transform: rotate(64deg);
   }
 
   100% {
-    filter: blur(1.5rem);
-    background-color: #76009a;
+    background-color: rgba(169, 14, 167, 0.82);
     background-position: 15px 0;
-    box-shadow: 11px 15px 40px #daa86a;
-    border-radius: 20%;
+    box-shadow: 15px 105px 52px rgba(199, 6, 65, 0.8);
+    border-radius: 90%;
+    filter: blur(3rem);
+    height: 510px;
+    width: 650px;
+    transform: rotate(54deg);
   }
 
 }
 
 .circle {
-  height: 450px;
-  width: 450px;
   filter: blur(5.5rem);
   margin-top: 200px;
   border-radius: 5%;
-  position: relative;
   animation: 32s infinite linear animationCircle;
 }
-.title-wave {
-  position: absolute;
-  top: 450px;
-  font-weight: bold;
+
+.wave-button {
+  margin: 0;
+  padding: 0;
 }
 
+.title-wave {
+  width: 20%;
+  top: -450px;
+  right: -650px;
+  position: relative;
+  font-weight: bold;
+  font-size: 25px;
+  height: 50px;
+}
 
+.wave-button {
+  cursor: pointer;
+
+  transition: 0.5s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.circle-container {
+  height: 100%;
+}
+.container-playlists {
+
+}

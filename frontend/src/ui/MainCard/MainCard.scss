@@ -1,0 +1,40 @@
+@mixin center-only-y {
+  display: flex;
+  align-items: center;
+}
+
+@mixin center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-card {
+  background: rgba(45, 45, 45, 0.42);
+  border-radius: 15px;
+  height: 100%;
+  padding: 25px;
+  width: 100%;
+  @include center-only-y;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .main-text {
+    font-weight: 600;
+  }
+
+  .other-text {
+    color: #838383;
+    font-weight: 500;
+  }
+
+  .image-card {
+    background: rgba(44, 44, 44, 0.22);
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    @include center;
+  }
+}
