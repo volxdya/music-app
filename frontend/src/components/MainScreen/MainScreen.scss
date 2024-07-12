@@ -1,0 +1,47 @@
+@keyframes animationCircle {
+  0% {
+    background-color: #d500d2;
+    background-position: 15px 0;
+    box-shadow: 15px 105px 52px #b60b85;
+    border-radius: 20%
+  }
+
+  25% {
+    background-color: #941a1a;
+    background-position: 15px 0;
+    border-radius: 90%;
+    box-shadow: -55px -50px 15px red;
+  }
+
+  50% {
+    background-color: #3aedff;
+    background-position: 15px 0;
+    border-radius: 10%;
+    box-shadow: 60px 105px 32px #1713b9;
+  }
+
+  100% {
+    background-color: #76009a;
+    background-position: 15px 0;
+    box-shadow: 11px 15px 40px #daa86a;
+    border-radius: 20%;
+  }
+
+}
+
+.circle {
+  height: 450px;
+  width: 450px;
+  filter: blur(7.5rem);
+  margin-top: 200px;
+  border-radius: 5%;
+  position: relative;
+  animation: 32s infinite linear animationCircle;
+}
+.title-wave {
+  position: absolute;
+  top: 450px;
+  font-weight: bold;
+}
+
+

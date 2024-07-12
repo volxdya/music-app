@@ -7,8 +7,7 @@ body {
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
-  font-variation-settings:
-          "wdth" 100;
+  font-variation-settings: "wdth" 100;
   background-color: #101010;
   color: white;
 
@@ -27,4 +26,33 @@ a {
 ::selection {
   background: #c41e50;
   color: #090909;
+}
+
+input {
+  background: none;
+  outline: 1px solid #212121;
+  border-radius: 29px;
+  padding: 8px 0 8px 25px;
+  border: none;
+  color: aliceblue;
+  font-size: 14px;
+  width: 100%;
+
+  &::placeholder {
+    color: #818181;
+  }
+
+  &:focus {
+    outline: 2px solid #d5d5d5;
+  }
+
+  &:hover {
+    outline: 1px solid #858585;
+  }
+
+  transition: 0.5s
+}
+
+.main-screen {
+  border-radius: 15px;
 }
