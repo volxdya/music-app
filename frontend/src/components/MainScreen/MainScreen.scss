@@ -5,7 +5,6 @@
     background-position: 15px 0;
     box-shadow: 15px 105px 52px rgba(199, 6, 65, 0.8);
     border-radius: 90%;
-    filter: blur(3rem);
     height: 510px;
     width: 650px;
     outline: 25px solid rgb(255, 0, 0);
@@ -16,14 +15,12 @@
     background-position: 15px 0;
     border-radius: 100%;
     box-shadow: -45px -100px 15px rgba(21, 199, 75, 0.82);
-    filter: blur(5.5rem);
     height: 550px;
     width: 450px;
     outline: 25px solid rgb(0, 255, 60);
   }
 
   50% {
-    filter: blur(9rem);
     background-color: rgba(33, 176, 190, 0.89);
     background-position: 15px 0;
     border-radius: 34%;
@@ -38,7 +35,6 @@
     background-position: 15px 0;
     border-radius: 100%;
     box-shadow: -45px -100px 15px rgba(21, 199, 75, 0.82);
-    filter: blur(5.5rem);
     height: 550px;
     width: 450px;
     outline: 25px solid rgb(0, 255, 60);
@@ -49,7 +45,6 @@
     background-position: 15px 0;
     box-shadow: 15px 105px 52px rgba(199, 6, 65, 0.8);
     border-radius: 90%;
-    filter: blur(3rem);
     height: 510px;
     width: 650px;
     outline: 25px solid rgb(255, 0, 0);
@@ -151,6 +146,7 @@
   background: rgb(179, 179, 179);
   background: linear-gradient(90deg, rgb(78, 128, 243) 0%, rgb(255, 34, 34) 100%);
   margin-top: 200px;
+  filter: blur(4rem);
   animation: 32s infinite linear animationCircle;
 }
 
