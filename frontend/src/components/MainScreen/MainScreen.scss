@@ -63,7 +63,7 @@
   25% {
     height: 350px;
     width: 350px;
-    transform: translate(-100px, 250px);
+    transform: translate(100px, 250px);
     border-radius: 44% 56% 56% 44% / 50% 49% 51% 50%;
     background: rgb(47, 16, 255);
   }
@@ -79,7 +79,7 @@
   75% {
     height: 350px;
     width: 350px;
-    transform: translate(-100px, 250px);
+    transform: translate(-50px, 250px);
     border-radius: 44% 56% 56% 44% / 50% 49% 51% 50%;
     background: rgb(47, 16, 255);
   }
@@ -95,30 +95,34 @@
 
 @keyframes animationThirdCircle {
   0% {
+    outline: 55px solid red;
     transform: translate(-120px, 20px);
     border-radius: 81% 19% 56% 44% / 14% 81% 19% 86%;
     background: rgb(4, 205, 255);
   }
 
   25% {
-    background: rgb(63, 94, 251);
-    transform: translate(100px, 20px);
+    outline: 55px solid #a100ff;
+    transform: translate(-200px, -90px);
     border-radius: 83% 17% 56% 44% / 70% 0% 100% 30%;
     background: rgb(255, 115, 0);
   }
 
   50% {
     transform: translate(150px, 20px);
+    outline: 55px solid #0be3de;
     border-radius: 33% 67% 56% 44% / 70% 49% 51% 30%;
     background: rgb(25, 255, 178);
   }
 
   75% {
+    outline: 55px solid #a100ff;
     transform: translate(100px, 20px);
     border-radius: 83% 17% 56% 44% / 70% 0% 100% 30% ;
     background: rgb(255, 115, 0);
   }
   100% {
+    outline: 55px solid red;
     transform: translate(-120px, 20px);
     border-radius: 81% 19% 56% 44% / 14% 81% 19% 86%;
     background: rgb(4, 205, 255);
@@ -140,14 +144,15 @@
   width: 250px;
   border-radius: 54% 46% 67% 33% / 79% 33% 67% 21%;
   background-color: black;
+
 }
 
 .circle {
   background: rgb(179, 179, 179);
   background: linear-gradient(90deg, rgb(78, 128, 243) 0%, rgb(255, 34, 34) 100%);
   margin-top: 200px;
-  filter: blur(4rem);
-  animation: 32s infinite linear animationCircle;
+  filter: blur(5rem);
+    animation: 32s infinite linear animationCircle;
 }
 
 .wave-button {
