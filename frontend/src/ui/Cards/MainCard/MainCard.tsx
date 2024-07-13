@@ -1,5 +1,5 @@
 import './MainCard.scss';
-import {Heart} from "../../icons/Heart.tsx";
+import {Heart} from "../../../icons/Hearts/Heart.tsx";
 
 export function MainCard() {
     return (

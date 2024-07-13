@@ -1,6 +1,6 @@
 import './MainScreen.scss';
 import { Play } from "../../icons/Play.tsx";
-import { MainCard } from "../../ui/MainCard/MainCard.tsx";
+import { MainCard } from "../../ui/Cards/MainCard/MainCard.tsx";
 
 export function MainScreen() {
     return (

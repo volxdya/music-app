@@ -1,7 +1,7 @@
 import './Sidebar.scss';
 import {Search} from "../../icons/Search.tsx";
 import {Note} from "../../icons/Note.tsx";
-import {Heart} from "../../icons/Heart.tsx";
+import {Heart} from "../../icons/Hearts/Heart.tsx";
 import {Link, useLocation} from "react-router-dom";
 
 interface ISidebar {

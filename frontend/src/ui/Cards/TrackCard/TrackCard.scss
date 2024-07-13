@@ -1,0 +1,53 @@
+$gray-color: #9a9a9a;
+
+.track-card {
+  border-radius: 10px;
+  padding: 10px 20px;
+  transition: 0.4s;
+  width: 50%;
+
+
+  &:hover {
+    background: #1c1c1c;
+    cursor: pointer;
+
+  }
+
+  img {
+    height: 50px;
+    width: 50px;
+    border-radius: 7px;
+  }
+
+  .author {
+    color: $gray-color;
+    font-weight: 600;
+
+    &:hover {
+      color: white;
+    }
+
+    transition: 0.4s;
+  }
+
+  .title {
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .time {
+    color: $gray-color;
+    font-weight: bold;
+  }
+
+  .icon-class {
+    fill: $gray-color;
+
+    &:hover {
+      fill: white;
+    }
+
+    transition: 0.4s;
+  }
+
+}
