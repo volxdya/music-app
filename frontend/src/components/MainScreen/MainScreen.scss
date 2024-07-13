@@ -76,7 +76,7 @@
 
   75% {
     outline: 45px solid rgba(153, 7, 189, 0.51);
-    background: rgb(47, 16, 255);
+    background: rgb(16, 255, 136);
     transform: translate(-200px, 190px);
   }
 
@@ -215,7 +215,23 @@
   );
 }
 
+.c-2  
+.c-3  
+.c-4  
+.c-5  
+.c-6::after{
+  content: '';
+  position: absolute;
+  top: 25px;
+  left: 65px;
+  background: #fff;
+  width: 10px;
+  height: 10px;
+  border-radius: 58% 42% 72% 28% / 37% 41% 59% 63%;
+}
+
 .circle {
+
   height: 490px;
   width: 550px;
   filter: blur(3rem);
