@@ -9,6 +9,8 @@ export function MainScreen() {
                 <div className="circle d-flex justify-content-center">
                     <div className='c-2'></div>
                     <div className='c-3'></div>
+                    <div className='c-4'></div>
+                    <div className='c-5'></div>
                 </div>
             </div>
             <button className="title-wave">
