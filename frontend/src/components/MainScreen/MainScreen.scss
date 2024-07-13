@@ -83,7 +83,7 @@
   100% {
     outline: 15px solid rgba(153, 7, 189, 0.51);
     background: rgb(255, 68, 68);
-    transform: translate(-230px, -190px);
+    transform: translate(-280px, -190px);
   }
 }
 
@@ -220,11 +220,11 @@
 .circle {
   height: 450px;
   width: 500px;
+  filter: blur(4rem);
   background: rgb(179, 179, 179);
   background: linear-gradient(90deg, rgb(78, 128, 243) 0%, rgb(255, 34, 34) 100%);
   margin-top: 200px;
   animation: 32s infinite linear animationCircle;
-  filter: blur(3.5rem);
 }
 
 .wave-button {
