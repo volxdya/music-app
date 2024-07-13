@@ -25,8 +25,8 @@
     background-color: rgb(248, 193, 57);
     background-position: 15px 0;
     border-radius: 100%;
-    box-shadow: -45px -100px 15px rgba(21, 199, 75, 0.82);
-    outline: 85px solid rgb(0, 255, 60);
+    box-shadow: -45px -100px 15px rgba(255, 120, 29, 0.82);
+    outline: 85px solid rgb(255, 0, 200);
   }
 
   50% {
@@ -34,15 +34,15 @@
     background-position: 15px 0;
     border-radius: 34%;
     box-shadow: -50px 105px 32px rgba(23, 19, 185, 0.86);
-    outline: 35px solid rgb(255, 255, 255);
+    outline: 35px solid rgb(243, 0, 211);
   }
 
   75% {
     background-color: rgb(248, 193, 57);
     background-position: 15px 0;
     border-radius: 100%;
-    box-shadow: 45px 70px 15px rgba(21, 199, 75, 0.82);
-    outline: 15px solid rgb(0, 255, 60);
+    box-shadow: 45px 70px 15px rgb(238, 151, 37);
+    outline: 15px solid rgb(255, 50, 255);
   }
 
   100% {
@@ -57,26 +57,26 @@
 @keyframes two {
 
   0% {
-    outline: 55px solid rgba(153, 7, 189, 0.51);
-    background: rgb(255, 68, 68);
+    outline: 55px solid rgb(208, 19, 255);
+    background: rgb(255, 0, 0);
     transform: translate(-230px, -180px);
   }
 
   25% {
-    outline: 95px solid rgba(153, 7, 189, 0.51);
-    background: rgb(47, 16, 255);
+    outline: 95px solid rgba(153, 7, 189, 0.979);
+    background: rgb(94, 69, 255);
     transform: translate(-200px, 150px);
   }
 
   50% {
     outline: 15px solid rgba(153, 7, 189, 0.42);
-    background: rgb(25, 255, 178);
+    background: rgb(255, 25, 167);
     transform: translate(-230px, 170px);
   }
 
   75% {
     outline: 45px solid rgba(153, 7, 189, 0.51);
-    background: rgb(16, 255, 136);
+    background: rgb(255, 251, 0);
     transform: translate(-200px, 190px);
   }
 
@@ -89,31 +89,31 @@
 
 @keyframes three {
   0% {
-    outline: 155px solid rgba(255, 0, 0, 0.43);
-    background: rgb(4, 205, 255);
+    outline: 155px solid rgba(255, 14, 14, 0.829);
+    background: rgb(255, 117, 4);
     transform: translate(200px, 200px);
   }
 
   25% {
-    outline: 98px solid rgba(161, 0, 255, 0.55);
-    background: rgb(255, 115, 0);
+    outline: 98px solid rgba(183, 59, 255, 0.55);
+    background: rgb(255, 30, 0);
     transform: translate(230px, -90px);
   }
 
   50% {
-    outline: 54px solid rgba(11, 227, 222, 0.49);
-    background: rgb(25, 255, 178);
+    outline: 54px solid rgb(255, 190, 12);
+    background: rgb(240, 255, 25);
     transform: translate(190px, -100px);
   }
 
   75% {
-    outline: 14px solid rgba(161, 0, 255, 0.55);
+    outline: 14px solid rgba(193, 85, 255, 0.76);
     background: rgb(255, 115, 0);
     transform: translate(230px, -90px);
   }
   100% {
-    outline: 91px solid rgba(255, 0, 0, 0.43);
-    background: rgb(4, 205, 255);
+    outline: 91px solid rgba(255, 62, 62, 0.781);
+    background: rgb(248, 209, 37);
     transform: translate(200px, 200px);
   }
 
@@ -121,8 +121,8 @@
 
 @keyframes four {
   0% {
-    outline: 205px solid rgba(255, 0, 0, 0.43);
-    background: rgb(4, 205, 255);
+    outline: 205px solid rgba(255, 158, 31, 0.918);
+    background: rgb(255, 4, 242);
     transform: translate(100px, -180px);
   }
 
@@ -133,19 +133,19 @@
   }
 
   50% {
-    outline: 35px solid rgba(255, 239, 68, 0.49);
-    background: rgb(25, 255, 178);
+    outline: 35px solid rgba(255, 239, 68, 0.938);
+    background: rgb(247, 25, 255);
     transform: translate(-150px, -120px);
   }
 
   75% {
-    outline: 155px solid rgba(161, 0, 255, 0.55);
+    outline: 155px solid rgb(255, 50, 118);
     background: rgb(255, 115, 0);
     transform: translate(-130px, -150px);
   }
   100% {
-    outline: 5px solid rgba(255, 0, 0, 0.43);
-    background: rgb(4, 205, 255);
+    outline: 5px solid rgba(255, 0, 0, 0.918);
+    background: rgb(255, 209, 4);
     transform: translate(100px, -180px);
   }
 
@@ -160,19 +160,19 @@
 
   25% {
     outline: 85px solid rgba(153, 7, 189, 0.51);
-    background: rgb(47, 16, 255);
+    background: rgb(255, 72, 16);
     transform: translate(190px, 230px);
   }
 
   50% {
     outline: 92px solid rgba(153, 7, 189, 0.42);
-    background: rgb(25, 255, 178);
+    background: rgb(255, 52, 25);
     transform: translate(200px, 300px);
   }
 
   75% {
     outline: 14px solid rgba(153, 7, 189, 0.51);
-    background: rgb(47, 16, 255);
+    background: rgb(247, 16, 255);
     transform: translate(190px, 230px);
   }
   100% {
@@ -185,20 +185,20 @@
 
 
 .c-2 {
-  animation: 20s infinite linear reverse two;
+  animation: 40s infinite linear reverse two;
 }
 
 .c-3 {
-  animation: 20s infinite linear three;
+  animation: 40s infinite linear three;
 }
 
 .c-4 {
   position: relative;
-  animation: 20s infinite linear four;
+  animation: 40s infinite linear four;
 }
 
 .c-5 {
-  animation: 20s infinite linear five;
+  animation: 40s infinite linear five;
 }
 
 .c-2,
@@ -207,39 +207,26 @@
 .c-5,
 .c-6 {
   box-shadow: 0px 0px 552px rgba(255, 0, 78, 0.8);
-  height: 520px;
-  width: 800px;
+  height: 600px;
+  width: 850px;
   position: absolute;
   background-color: black;
-  clip-path: polygon(50% 0%, 61% 25%, 98% 25%, 68% 40%, 79% 72%, 50% 55%, 21% 72%, 32% 40%, 2% 25%, 39% 25%
+  border-radius: 15px;
+  clip-path: polygon(
+    50% 0%, 55% 20%, 90% 25%, 60% 35%, 70% 65%, 
+    50% 45%, 30% 65%, 40% 35%, 10% 25%, 45% 20%
   );
 }
 
-.c-2  
-.c-3  
-.c-4  
-.c-5  
-.c-6::after{
-  content: '';
-  position: absolute;
-  top: 25px;
-  left: 65px;
-  background: #fff;
-  width: 10px;
-  height: 10px;
-  border-radius: 58% 42% 72% 28% / 37% 41% 59% 63%;
-}
 
 .circle {
-
-  height: 490px;
-  width: 550px;
-  filter: blur(3rem);
+  height: 450px;
+  width: 500px;
   background: rgb(179, 179, 179);
   background: linear-gradient(90deg, rgb(78, 128, 243) 0%, rgb(255, 34, 34) 100%);
   margin-top: 200px;
   animation: 32s infinite linear animationCircle;
-
+  filter: blur(3.5em);
 }
 
 .wave-button {
