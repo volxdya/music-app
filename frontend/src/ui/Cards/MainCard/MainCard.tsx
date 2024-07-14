@@ -1,5 +1,6 @@
 import './MainCard.scss';
 import {Heart} from "../../../icons/Hearts/Heart.tsx";
+import {NavigationText} from "../../Text/NavigationText/NavgiationText.tsx";
 
 export function MainCard() {
     return (
@@ -8,9 +9,11 @@ export function MainCard() {
                 <div className="image-card">
                     <Heart/>
                 </div>
-                <div>
-                    <h4 className="m-0 main-text">Мне нравится</h4>
-                    <p className="m-0 other-text">1160 треков</p>
+                <div className="d-flex align-items-center">
+                    <div>
+                        <NavigationText text="Мне нравится"/>
+                        <p className="m-0 other-text">1160 треков</p>
+                    </div>
                 </div>
             </div>
         </div>

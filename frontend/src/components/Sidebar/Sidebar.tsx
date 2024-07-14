@@ -33,7 +33,7 @@ export function Sidebar() {
     const mainClassesLink: string = "d-flex gap-3 link-sidebar my-4";
 
     return (
-        <div className="sidebar p-4">
+        <nav className="sidebar p-4">
             <h3>\\</h3>
             <div className="mt-4">
                 {sidebarItems.map((item: ISidebar) => (
@@ -61,6 +61,6 @@ export function Sidebar() {
                     </div>
                 </div>
             </div>
-        </div>
+        </nav>
     );
 }

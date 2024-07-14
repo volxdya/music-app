@@ -1,0 +1,22 @@
+.main-text {
+  font-weight: 600;
+}
+
+.other-text {
+  color: #838383;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.nav-text:hover {
+  cursor: pointer;
+
+  .right-like {
+    transform: translate(10px, 0);
+  }
+
+}
+
+.right-like {
+  transition: 0.4s;
+}

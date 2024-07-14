@@ -13,22 +13,9 @@
   background: rgba(45, 45, 45, 0.42);
   border-radius: 15px;
   height: 100%;
-  padding: 25px;
+  padding: 15px;
   width: 100%;
   @include center-only-y;
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  .main-text {
-    font-weight: 600;
-  }
-
-  .other-text {
-    color: #838383;
-    font-weight: 500;
-  }
 
   .image-card {
     background: rgba(44, 44, 44, 0.22);

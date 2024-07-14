@@ -2,6 +2,7 @@ import {Sidebar} from "../Sidebar/Sidebar.tsx";
 import {Routes, Route} from 'react-router-dom';
 import {MainScreen} from "../MainScreen/MainScreen.tsx";
 import {Search} from "../Search/Search.tsx";
+import {Collection} from "../Collection/Collection.tsx";
 
 export default function App() {
     return (
@@ -13,6 +14,7 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<MainScreen/>}/>
                     <Route path="/search" element={<Search/>}/>
+                    <Route path="/like" element={<Collection/>}/>
                 </Routes>
             </div>
         </div>

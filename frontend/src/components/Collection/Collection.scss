@@ -1,0 +1,37 @@
+.music-color {
+  margin-top: 10px;
+  color: gray;
+  font-weight: bold;
+  font-size: 13px;
+
+  span {
+    color: #c41e50;
+  }
+}
+
+.track-cards {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.nav-playlist-item {
+  font-weight: 600;
+  font-size: 14px;
+  color: #f1f1f1;
+  border-radius: 150px;
+  padding: 7px 15px;
+  transition: 0.2s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #333333;
+  }
+}
+
+.nav-playlist-active {
+  background: #252525;
+}
+
+.title-playlist:hover {
+  text-decoration: underline;
+}
