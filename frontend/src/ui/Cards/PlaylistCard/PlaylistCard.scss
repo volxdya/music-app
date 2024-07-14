@@ -1,12 +1,20 @@
-.playlist-image {
+.playlist-image, .playlist-container {
   height: 200px;
   width: 200px;
   border-radius: 5px;
+  transition: 0.2s;
+}
+
+.playlist-container {
+  background: #252525;
 
   &:hover {
     cursor: pointer;
-    filter: brightness(50%);
+    background: #313131;
   }
+}
 
-  transition: 0.2s;
+.playlist-image:hover {
+  cursor: pointer;
+  filter: brightness(50%);
 }
