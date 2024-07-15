@@ -1,0 +1,23 @@
+.collection-img {
+    height: 120px;
+    width: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.collection-card {
+    width: 230px;
+    height: 230px;
+    background: rgb(36, 36, 36);
+    border-radius: 15px;
+    transition: 0.4s;
+
+    h5 {
+        font-weight: bold;
+    }
+
+    &:hover {
+        cursor: pointer;
+        background: rgb(42, 42, 42);
+    }
+}
