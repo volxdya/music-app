@@ -1,6 +1,6 @@
 .player {
   background: rgb(42, 42, 42);
-  height: 95px;
+  height: 87px;
   width: calc(100% - 19%);
   border-radius: 15px;
   bottom: 10px;
@@ -9,9 +9,9 @@
 }
 
 .player-img {
-  height: 70px;
+  height: 65px;
   border-radius: 5px;
-  width: 70px;
+  width: 65px;
   transition: 0.2s;
   cursor: pointer;
 
@@ -25,6 +25,7 @@
   cursor: pointer;
   font-weight: 600;
   transition: 0.4s;
+  font-size: 15px;
 
   &:hover {
     color: white;
@@ -34,6 +35,7 @@
 
 .player-title {
   font-weight: 500;
+  font-size: 15px;
 
   &:hover {
     cursor: pointer;
@@ -68,5 +70,26 @@
       cursor: pointer;
       transform: scale(1.1);
     }
+  }
+}
+
+.controls-player {
+  svg {
+    fill: #9a9a9a;
+    height: 22px;
+    width: 22px;
+  }
+}
+
+.track-data-player, .player-data, .settings-player {
+  width: 100%;
+}
+
+.controls-player {
+  transition: 0.4s;
+
+  svg:hover {
+    cursor: pointer;
+    fill: #e0e0e0;
   }
 }
