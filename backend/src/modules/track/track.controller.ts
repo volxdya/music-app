@@ -21,4 +21,9 @@ export class TrackController {
     getById(@Param('trackId') id: number) {
         return this.trackService.getById(id);
     }
+
+    @Get(`/search/:title`)
+    search(@Param('title') title: string) {
+        return this.trackService.search(title);
+    }
 }
