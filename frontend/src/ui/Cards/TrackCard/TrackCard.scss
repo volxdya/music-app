@@ -9,7 +9,6 @@ $gray-color: #9a9a9a;
   &:hover {
     background: #1c1c1c;
     cursor: pointer;
-
   }
 
   img {
@@ -21,12 +20,12 @@ $gray-color: #9a9a9a;
   .author {
     color: $gray-color;
     font-weight: 600;
+    transition: 0.4s;
 
     &:hover {
       color: white;
     }
 
-    transition: 0.4s;
   }
 
   .title {
@@ -41,12 +40,12 @@ $gray-color: #9a9a9a;
 
   .icon-class {
     fill: $gray-color;
+    transition: 0.4s;
 
     &:hover {
       fill: white;
     }
 
-    transition: 0.4s;
   }
 
 }

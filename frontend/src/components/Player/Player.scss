@@ -1,0 +1,72 @@
+.player {
+  background: rgb(42, 42, 42);
+  height: 95px;
+  width: calc(100% - 19%);
+  border-radius: 15px;
+  bottom: 10px;
+  position: fixed;
+  padding: 0 20px 0 20px;
+}
+
+.player-img {
+  height: 70px;
+  border-radius: 5px;
+  width: 70px;
+  transition: 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(80%);
+  }
+}
+
+.player-author {
+  color: #9a9a9a;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.4s;
+
+  &:hover {
+    color: white;
+  }
+
+}
+
+.player-title {
+  font-weight: 500;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+.progress-bar-container {
+  background-color: rgba(121, 121, 121, 0.54);
+  width: 450px;
+  height: 5px;
+  border-radius: 5px;
+}
+
+.progress-bar-player {
+  background-color: rgb(255, 255, 255);
+  height: 5px;
+  border-radius: 5px;
+}
+
+.time-player {
+  color: #9a9a9a;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.controls-track-container {
+  svg {
+    transition: 0.2s;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+    }
+  }
+}

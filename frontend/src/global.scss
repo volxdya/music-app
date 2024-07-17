@@ -49,6 +49,7 @@ input {
   color: aliceblue;
   font-size: 14px;
   width: 100%;
+  transition: 0.5s;
 
   &::placeholder {
     color: #818181;
@@ -61,8 +62,6 @@ input {
   &:hover {
     outline: 1px solid #858585;
   }
-
-  transition: 0.5s
 }
 
 button {
