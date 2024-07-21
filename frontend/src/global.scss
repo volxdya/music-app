@@ -75,6 +75,7 @@ button {
 .main-screen {
   border-radius: 15px;
   height: 100vh;
+  padding: 2px;
   overflow-x: hidden;
 
   &::-webkit-scrollbar {
@@ -88,7 +89,10 @@ h3 {
 
 .main-wrapper {
   overflow: scroll;
-  height: calc(100vh - 15%);
+  height: calc(100vh - 12%);
+  outline: 1px solid #1c1c1c;
+  border-radius: 15px;
+  padding: 35px;
 
   &::-webkit-scrollbar {
     display: none;

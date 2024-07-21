@@ -36,8 +36,6 @@ export function Search() {
                     <CollectionCard />
                     <CollectionCard />
                     <CollectionCard />
-
-
                 </div>
             </div>
         </>

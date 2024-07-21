@@ -11,7 +11,7 @@ export default function App() {
             <div className="col-xl-2 col-12">
                 <Sidebar/>
             </div>
-            <div className="col-xl-10 col-12 main-screen p-4">
+            <div className="col-xl-10 col-12 main-screen">
                 <div className="main-wrapper">
                     <Routes>
                         <Route path="/" element={<MainScreen/>}/>
