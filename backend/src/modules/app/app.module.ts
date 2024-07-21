@@ -6,6 +6,7 @@ import {UserModule} from "../user/user.module";
 import {PlaylistModule} from "../playlist/playlist.module";
 import {TrackModule} from "../track/track.module";
 import {AuthorModule} from "../author/author.module";
+import {AuthModule} from "../auth/auth.module";
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import {AuthorModule} from "../author/author.module";
       UserModule,
       PlaylistModule,
       TrackModule,
-      AuthorModule
+      AuthorModule,
+      AuthModule
   ],
   controllers: [],
   providers: [],

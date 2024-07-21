@@ -13,6 +13,7 @@ import {PlaylistModule} from "../playlist/playlist.module";
     ],
     controllers: [UserController],
     providers: [UserService],
+    exports: [UserService]
 })
 export class UserModule {
 }
