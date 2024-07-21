@@ -12,11 +12,13 @@ export default function App() {
                 <Sidebar/>
             </div>
             <div className="col-xl-10 col-12 main-screen p-4">
-                <Routes>
-                    <Route path="/" element={<MainScreen/>}/>
-                    <Route path="/search" element={<Search/>}/>
-                    <Route path="/like" element={<Collection/>}/>
-                </Routes>
+                <div className="main-wrapper">
+                    <Routes>
+                        <Route path="/" element={<MainScreen/>}/>
+                        <Route path="/search" element={<Search/>}/>
+                        <Route path="/like" element={<Collection/>}/>
+                    </Routes>
+                </div>
                 <Player/>
             </div>
         </div>

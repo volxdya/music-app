@@ -23,6 +23,21 @@ export function Search() {
                     <CollectionCard />
                     <CollectionCard />
                     <CollectionCard />
+                    <CollectionCard />
+                    <CollectionCard />
+                    <CollectionCard />
+                    <CollectionCard />
+                    <CollectionCard />
+                    <CollectionCard />
+                    <CollectionCard />
+                    <CollectionCard />
+                    <CollectionCard />
+                    <CollectionCard />
+                    <CollectionCard />
+                    <CollectionCard />
+                    <CollectionCard />
+
+
                 </div>
             </div>
         </>
