@@ -1,4 +1,5 @@
-import {Column, DataType, Model, Table} from "sequelize-typescript";
+import {Column, DataType, HasMany, Model, Table} from "sequelize-typescript";
+import {Track} from "../track/track.model";
 
 interface IAuthor {
     login: string;
@@ -21,4 +22,7 @@ export class Author extends Model<Author, IAuthor> {
 
     @Column({type: DataType.STRING, allowNull: false})
     lastName: string;
+
+    @HasMany(() => Track)
+    tracks: Track[]
 }

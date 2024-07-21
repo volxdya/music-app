@@ -26,7 +26,7 @@ export class AuthorService {
     }
 
     async getAll() {
-        const authors: Author[] = await this.authorRepository.findAll();
+        const authors: Author[] = await this.authorRepository.findAll({include: {all: true}});
 
         return authors;
     }

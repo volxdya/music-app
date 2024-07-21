@@ -5,9 +5,10 @@ import {SequelizeModule} from "@nestjs/sequelize";
 import {Track} from "./track.model";
 import {Playlist} from "../playlist/playlist.model";
 import {PlaylistTracks} from "./playlist-tracks.model";
+import {Author} from "../author/author.model";
 
 @Module({
-  imports: [SequelizeModule.forFeature([Track, Playlist, PlaylistTracks])],
+  imports: [SequelizeModule.forFeature([Track, Playlist, PlaylistTracks, Author])],
   providers: [TrackService],
   controllers: [TrackController],
   exports: [TrackService]
