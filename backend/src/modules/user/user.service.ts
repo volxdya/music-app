@@ -3,6 +3,7 @@ import {InjectModel} from "@nestjs/sequelize";
 import {User} from "./user.model";
 import {CreateUserDto} from "./dto/createUserDto";
 import {PlaylistService} from "../playlist/playlist.service";
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -32,6 +33,10 @@ export class UserService {
 
         await user.$set("playlists", [playlist]);
         user.playlists = [playlist];
+
+        await user.update({
+            password: bcrypt.hashSync(user.password, 12),
+        });
 
         return user;
     }

@@ -15,4 +15,10 @@ export class Author extends Model<Author, IAuthor> {
 
     @Column({type: DataType.STRING, allowNull: false})
     password: string;
+
+    @Column({type: DataType.STRING, allowNull: false})
+    firstName: string;
+
+    @Column({type: DataType.STRING, allowNull: false})
+    lastName: string;
 }
