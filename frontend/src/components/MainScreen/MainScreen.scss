@@ -227,22 +227,20 @@
   animation: 32s infinite linear animationCircle;
 }
 
+
+.title-wave {
+  width: 100%;
+  position: relative;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  font-size: 25px;
+  top: -320px;
+}
+
 .wave-button {
   margin: 0;
   padding: 0;
-}
-
-.title-wave {
-  width: 20%;
-  top: -450px;
-  right: -650px;
-  position: relative;
-  font-weight: bold;
-  font-size: 25px;
-  height: 50px;
-}
-
-.wave-button {
   cursor: pointer;
 
   transition: 0.5s;

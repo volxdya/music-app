@@ -14,7 +14,7 @@ export function MainScreen() {
                 </div>
             </div>
             <button className="title-wave">
-                <div className="d-flex align-items-center gap-2 wave-button">
+                <div className="d-flex align-items-center gap-2 wave-button justify-content-center">
                     <Play />
                     Моя волна
                 </div>

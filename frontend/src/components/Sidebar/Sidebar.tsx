@@ -3,6 +3,14 @@ import {Search} from "../../icons/Search.tsx";
 import {Note} from "../../icons/Note.tsx";
 import {Heart} from "../../icons/Hearts/Heart.tsx";
 import {Link, useLocation} from "react-router-dom";
+import {Dropdown} from "../Dropdown/Dropdown.tsx";
+import {
+    DropdownMenu,
+    DropdownMenuContent, DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger
+} from "@radix-ui/react-dropdown-menu";
 
 interface ISidebar {
     component: React.ReactNode;
@@ -49,13 +57,28 @@ export function Sidebar() {
             </div>
             <div className="me">
                 <div className="d-flex gap-3">
-                    <div>
-                        <img
-                            src="https://i.pinimg.com/736x/45/4e/e6/454ee61e8e8ee73efa8623c2688d22d2.jpg"
-                            alt="Аватарка пользователя"
-                            className="avatar"
-                        />
-                    </div>
+
+
+
+                    <DropdownMenu>
+                        <DropdownMenuTrigger>
+                            <div>
+                                <img
+                                    src="https://i.pinimg.com/736x/45/4e/e6/454ee61e8e8ee73efa8623c2688d22d2.jpg"
+                                    alt="Аватарка пользователя"
+                                    className="avatar"
+                                />
+                            </div>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                            <DropdownMenuSeparator/>
+                            <DropdownMenuItem>Profile</DropdownMenuItem>
+                            <DropdownMenuItem>Billing</DropdownMenuItem>
+                            <DropdownMenuItem>Team</DropdownMenuItem>
+                            <DropdownMenuItem>Subscription</DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
                     <div>
                         <p>apathy</p>
                     </div>
