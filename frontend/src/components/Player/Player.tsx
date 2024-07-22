@@ -6,6 +6,7 @@ import {Dots} from "../../icons/Dots.tsx";
 import {SecondHeart} from "../../icons/Hearts/SecondHeart.tsx";
 import {Skip} from "@/icons/Player/Skip.tsx";
 import {SkipBack} from "@/icons/Player/SkipBack.tsx";
+import {Settings} from "@/icons/Settings.tsx";
 
 export function Player() {
     return (
@@ -49,7 +50,7 @@ export function Player() {
                     <p className="m-0 time-player">03:14</p>
                 </div>
             </div>
-            <div className="settings-player d-flex justify-content-end">Settings</div>
+            <div className="settings-player d-flex justify-content-end"><Settings/></div>
         </div>
     );
 }

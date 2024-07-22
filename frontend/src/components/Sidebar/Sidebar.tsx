@@ -83,13 +83,13 @@ export function Sidebar() {
                                     </div>
                                     <div className="mt-4">
                                         <div className="mt-1 menu-item">
-                                            <div className="d-flex align-items-center gap-2">
+                                            <div className="d-flex align-items-center gap-3">
                                                 <Settings/>
                                                 Настройки
                                             </div>
                                         </div>
                                         <div className="mt-1 menu-item">
-                                            <div className="d-flex align-items-center gap-2">
+                                            <div className="d-flex align-items-center gap-3">
                                                 <LogOut/>
                                                 Выйти
                                             </div>
