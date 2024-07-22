@@ -13,7 +13,12 @@ export function SidebarDropdown() {
         },
         {
             title: "Выйти",
-            component: <LogOut/>
+            component: <LogOut/>,
+            handleClick: () => {
+                console.log("Logout");
+
+                window.location.replace("/auth");
+            }
         }
     ];
 
@@ -45,7 +50,7 @@ export function SidebarDropdown() {
                         </div>
                         <div className="mt-4">
                             {dropdownItems.map((item: ISidebar) => (
-                                <div className="mt-1 menu-item">
+                                <div className="mt-1 menu-item" onClick={item.handleClick}>
                                     <div className="d-flex align-items-center gap-3">
                                         {item.component}
                                         {item.title}
