@@ -52,3 +52,26 @@
   display: flex;
   align-items: flex-end;
 }
+
+.test {
+  background: rgb(30, 30, 30);
+  position: relative;
+  top: -25px;
+  border-radius: 25px;
+  height: 500px;
+  width: 320px;
+}
+
+.name-user {
+  color: #9a9a9a;
+}
+.menu-item {
+  padding: 10px 10px 10px 15px;
+  border-radius: 15px;
+  transition: 0.2s;
+
+  &:hover {
+    cursor: pointer;
+    background: #383838;
+  }
+}
