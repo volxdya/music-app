@@ -1,8 +1,7 @@
-import './Authorization.scss';
 import {MainTitle} from "@/ui/Text/MainTitle/MainTitle.tsx";
 import {Link} from "react-router-dom";
 
-export function Authorization() {
+export function Registration() {
     return (
         <form className="form-auth">
             <div className="form-group">
@@ -15,11 +14,13 @@ export function Authorization() {
                     <div className="mt-4 inputs-container">
                         <div>
                             <input placeholder="Логин" className="mt-3" type="text"/>
+                            <input placeholder="Имя" className="mt-3" type="text"/>
+                            <input placeholder="Фамилия" className="mt-3" type="text"/>
                             <input placeholder="Пароль" className="mt-3" type="password"/>
                             <div className="mt-4">
-                                <button>Войти</button>
-                                <Link to="/register">
-                                    <button className="create-id-btn">Создать ID</button>
+                                <button>Продолжить</button>
+                                <Link to="/auth">
+                                    <button className="create-id-btn">У меня есть аккаунт</button>
                                 </Link>
                             </div>
                         </div>
@@ -27,5 +28,5 @@ export function Authorization() {
                 </div>
             </div>
         </form>
-    );
+    )
 }

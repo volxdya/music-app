@@ -1,22 +1,24 @@
 import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator, DropdownMenuTrigger
+    DropdownMenuTrigger
 } from "@radix-ui/react-dropdown-menu";
 
-export function Dropdown() {
+interface Props {
+    trigger: React.ReactNode;
+    content: React.ReactNode;
+}
+
+export function Dropdown({trigger, content}: Props) {
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+            <DropdownMenuTrigger>
+                {trigger}
+            </DropdownMenuTrigger>
             <DropdownMenuContent>
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Billing</DropdownMenuItem>
-                <DropdownMenuItem>Team</DropdownMenuItem>
-                <DropdownMenuItem>Subscription</DropdownMenuItem>
+                <div className="dropdown mx-4 p-3">
+                    {content}
+                </div>
             </DropdownMenuContent>
         </DropdownMenu>
     );

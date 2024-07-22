@@ -2,11 +2,11 @@ import './Player.scss';
 import {Play} from "../../icons/Player/Play.tsx";
 import {Random} from "../../icons/Player/Random.tsx";
 import {Repeat} from "../../icons/Player/Repeat.tsx";
-import {Dots} from "../../icons/Dots.tsx";
 import {SecondHeart} from "../../icons/Hearts/SecondHeart.tsx";
 import {Skip} from "@/icons/Player/Skip.tsx";
 import {SkipBack} from "@/icons/Player/SkipBack.tsx";
 import {Settings} from "@/icons/Settings.tsx";
+import {MainPlayerDropdown} from "@/components/Player/Dropdown/Dropdown.tsx";
 
 export function Player() {
     return (
@@ -25,7 +25,8 @@ export function Player() {
 
                     <div className="controls-player d-flex gap-4">
                         <SecondHeart/>
-                        <Dots/>
+
+                        <MainPlayerDropdown/>
                     </div>
                 </div>
             </div>

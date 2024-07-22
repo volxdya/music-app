@@ -5,12 +5,13 @@ import {Search} from "../Search/Search.tsx";
 import {Collection} from "../Collection/Collection.tsx";
 import {Player} from "../Player/Player.tsx";
 import {Authorization} from "@/components/Authorization/Authorization.tsx";
+import {Registration} from "@/components/Registration/Registration.tsx";
 
 export default function App() {
     const location = useLocation();
     // const locationsForValidate: string[] = ["/auth", "/register"];
 
-    const validateLocation: boolean = location.pathname !== "/auth";
+    const validateLocation: boolean = location.pathname !== "/auth" && location.pathname !== "/register";
 
     return (
         <div className="row g-0">
@@ -26,9 +27,10 @@ export default function App() {
                         <Route path="/search" element={<Search/>}/>
                         <Route path="/like" element={<Collection/>}/>
                         <Route path="/auth" element={<Authorization/>}/>
+                        <Route path="/register" element={<Registration/>}/>
                     </Routes>
                 </div>
-                {location.pathname !== "/auth" && (
+                {validateLocation && (
                     <Player/>
                 )}
             </div>
