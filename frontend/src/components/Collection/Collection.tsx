@@ -8,7 +8,7 @@ import {CreatePlaylistCard} from "../../ui/Cards/PlaylistCard/CreatePlaylistCard
 export function Collection() {
     return (
         <>
-            <h3>Коллекция</h3>
+            <h3 className="fs-5">Коллекция</h3>
             <p className="music-color">
                 У вашей музыки есть
                 <span className="mx-1">цвет</span>
@@ -28,7 +28,7 @@ export function Collection() {
             </div>
 
             <div className="mt-4">
-                <NavigationText text="Мои плейлисты"/>
+                <NavigationText text="Мои плейлисты" />
 
                 <nav className="nav-playlists d-flex gap-3 mt-4 align-items-center">
                     <p className="nav-playlist-item nav-playlist-active">Вы собрали</p>

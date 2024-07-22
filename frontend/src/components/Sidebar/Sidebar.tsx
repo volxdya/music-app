@@ -41,7 +41,7 @@ export function Sidebar() {
 
     return (
         <nav className="sidebar p-4">
-            <h3>\\</h3>
+            <h3 className="fs-3">\\</h3>
             <div className="mt-4">
                 {sidebarItems.map((item: ISidebar) => (
                     <Link

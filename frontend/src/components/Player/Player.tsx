@@ -4,6 +4,8 @@ import {Random} from "../../icons/Player/Random.tsx";
 import {Repeat} from "../../icons/Player/Repeat.tsx";
 import {Dots} from "../../icons/Dots.tsx";
 import {SecondHeart} from "../../icons/Hearts/SecondHeart.tsx";
+import {Skip} from "@/icons/Player/Skip.tsx";
+import {SkipBack} from "@/icons/Player/SkipBack.tsx";
 
 export function Player() {
     return (
@@ -27,10 +29,16 @@ export function Player() {
                 </div>
             </div>
             <div>
-                <div className="d-flex gap-5 mt-2 justify-content-center align-items-center controls-track-container">
-                    <Random/>
+                <div className="d-flex gap-4 mt-2 justify-content-center align-items-center controls-track-container">
+                    <div className="me-4">
+                        <Random/>
+                    </div>
+                    <SkipBack/>
                     <Play/>
-                    <Repeat/>
+                    <Skip/>
+                    <div className="mx-4">
+                        <Repeat/>
+                    </div>
                 </div>
 
                 <div className="d-flex align-items-center gap-3 mt-2 player-data">

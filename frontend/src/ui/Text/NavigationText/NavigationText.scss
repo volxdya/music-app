@@ -1,5 +1,6 @@
 .main-text {
   font-weight: 600;
+  display: flex;
 }
 
 .other-text {
@@ -8,13 +9,16 @@
   font-size: 14px;
 }
 
-.nav-text:hover {
-  cursor: pointer;
+.nav-text {
+  display: flex;
 
-  .right-like {
-    transform: translate(10px, 0);
+  &:hover {
+    cursor: pointer;
+
+    .right-like {
+      transform: translate(10px, 0);
+    }
   }
-
 }
 
 .right-like {
