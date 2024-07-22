@@ -30,4 +30,11 @@ export class AuthorService {
 
         return authors;
     }
+
+    async search(title: string){
+        const authors: Author[] = await this.authorRepository.findAll({include: {all: true}});
+
+        const filtredAuthors: Author[] = authors.filter((item) => item.login.toLowerCase().includes(title.toLowerCase()));
+        return filtredAuthors;
+    }
 }

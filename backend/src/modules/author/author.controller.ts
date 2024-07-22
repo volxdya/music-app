@@ -21,4 +21,9 @@ export class AuthorController {
     getOne(@Param('login') login: string) {
         return this.authorService.getOne(login);
     }
+
+    @Get(`/search/:login`)
+    search(@Param('login') login: string) {
+        return this.authorService.search(login);
+    }
 }

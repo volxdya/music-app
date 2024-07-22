@@ -23,9 +23,9 @@ export class TrackService {
     }
 
     async search(title: string){
-        const tracks = await this.trackRepository.findAll({include: {all: true}});
+        const tracks: Track[] = await this.trackRepository.findAll({include: {all: true}});
 
-        const filtredTracks = tracks.filter((item) => item.title.toLowerCase().includes(title.toLowerCase()));
+        const filtredTracks: Track[] = tracks.filter((item) => item.title.toLowerCase().includes(title.toLowerCase()));
         return filtredTracks;
     }
 }
