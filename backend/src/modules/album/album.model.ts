@@ -4,6 +4,7 @@ import {Author} from "../author/author.model";
 
 interface IAlbum {
     title: string;
+    avatarUrl: string;
 }
 
 @Table({tableName: 'album'})
@@ -13,6 +14,9 @@ export class Album extends Model<Album, IAlbum>{
 
     @Column({type: DataType.STRING, allowNull: false})
     title: string;
+
+    @Column({type: DataType.STRING, allowNull: false, defaultValue: ""})
+    avatarUrl: string;
 
     @HasMany(() => Track)
     tracks: Track[]
