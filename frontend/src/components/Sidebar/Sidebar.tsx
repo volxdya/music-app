@@ -10,6 +10,7 @@ import {
 } from "@radix-ui/react-dropdown-menu";
 import {Settings} from "@/icons/Settings.tsx";
 import {LogOut} from "@/icons/LogOut.tsx";
+import {MainTitle} from "@/ui/Text/MainTitle/MainTitle.tsx";
 
 interface ISidebar {
     component: React.ReactNode;
@@ -41,7 +42,7 @@ export function Sidebar() {
 
     return (
         <nav className="sidebar p-4">
-            <h3 className="fs-3">\\</h3>
+            <MainTitle/>
             <div className="mt-4">
                 {sidebarItems.map((item: ISidebar) => (
                     <Link

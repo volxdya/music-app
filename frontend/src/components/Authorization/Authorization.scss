@@ -1,0 +1,54 @@
+.form-auth {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+}
+
+.form-group {
+  height: 500px;
+  width: 25%;
+  display: flex;
+  border-radius: 35px;
+  background-color: #181818;
+  justify-content: center;
+
+  .text-auth {
+    font-size: 19px;
+  }
+}
+
+.inputs-container {
+  display: flex;
+  justify-content: center;
+  margin: 0 45px;
+
+  input {
+    font-size: 17px;
+  }
+
+  button {
+    background: #d7034d;
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 45px;
+    transition: 0.4s;
+
+
+    &:hover {
+      background: #da0060;
+    }
+  }
+
+  .create-id-btn {
+    background: none;
+    outline: 1px solid gray;
+    transition: 0.4s;
+
+    &:hover {
+      outline: 1px solid white;
+      background: none;
+    }
+  }
+}
