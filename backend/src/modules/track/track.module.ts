@@ -6,9 +6,10 @@ import {Track} from "./track.model";
 import {Playlist} from "../playlist/playlist.model";
 import {PlaylistTracks} from "./playlist-tracks.model";
 import {Author} from "../author/author.model";
+import {Album} from "../album/album.model";
 
 @Module({
-  imports: [SequelizeModule.forFeature([Track, Playlist, PlaylistTracks, Author])],
+  imports: [SequelizeModule.forFeature([Track, Playlist, PlaylistTracks, Author, Album])],
   providers: [TrackService],
   controllers: [TrackController],
   exports: [TrackService]

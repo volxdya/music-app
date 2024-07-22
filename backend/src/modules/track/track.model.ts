@@ -1,7 +1,8 @@
-import {BelongsToMany, Column, DataType, ForeignKey, HasOne, Model, Table} from "sequelize-typescript";
+import {BelongsToMany, Column, DataType, ForeignKey, HasMany, HasOne, Model, Table} from "sequelize-typescript";
 import {Playlist} from "../playlist/playlist.model";
 import {PlaylistTracks} from "./playlist-tracks.model";
 import {Author} from "../author/author.model";
+import {Album} from "../album/album.model";
 
 interface ITrack {
     title: string;
@@ -30,4 +31,8 @@ export class Track extends Model<Track, ITrack> {
     @ForeignKey(() => Author)
     @Column({type: DataType.INTEGER})
     authorId: number;
+
+    @ForeignKey(() => Album)
+    @Column({type: DataType.INTEGER})
+    albumId: number;
 }

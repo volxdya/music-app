@@ -1,5 +1,6 @@
 import {Column, DataType, HasMany, Model, Table} from "sequelize-typescript";
 import {Track} from "../track/track.model";
+import {Album} from "../album/album.model";
 
 interface IAuthor {
     login: string;
@@ -25,4 +26,7 @@ export class Author extends Model<Author, IAuthor> {
 
     @HasMany(() => Track)
     tracks: Track[]
+
+    @HasMany(() => Album)
+    albums: Album[]
 }

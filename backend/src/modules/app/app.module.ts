@@ -7,6 +7,7 @@ import {PlaylistModule} from "../playlist/playlist.module";
 import {TrackModule} from "../track/track.module";
 import {AuthorModule} from "../author/author.module";
 import {AuthModule} from "../auth/auth.module";
+import {AlbumModule} from "../album/album.module";
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import {AuthModule} from "../auth/auth.module";
       PlaylistModule,
       TrackModule,
       AuthorModule,
-      AuthModule
+      AuthModule,
+      AlbumModule
   ],
   controllers: [],
   providers: [],
