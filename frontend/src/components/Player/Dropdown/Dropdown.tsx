@@ -3,6 +3,7 @@ import {SecondHeart} from "@/icons/Hearts/SecondHeart.tsx";
 import {ISidebar} from "@/types/ISidebar.ts";
 import {Dropdown} from "@/components/Dropdown/Dropdown.tsx";
 import {BreakHeart} from "@/icons/Hearts/BreakHeart.tsx";
+import {Note} from "@/icons/Note.tsx";
 
 export function MainPlayerDropdown() {
 
@@ -10,6 +11,10 @@ export function MainPlayerDropdown() {
         {
             title: "Нравится",
             component: <SecondHeart/>
+        },
+        {
+            title: "Добавить в плейлист",
+            component: <Note/>
         },
         {
             title: "Не нравится",

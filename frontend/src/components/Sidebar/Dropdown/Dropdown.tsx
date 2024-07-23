@@ -3,6 +3,8 @@ import {LogOut} from "@/icons/LogOut.tsx";
 import './SidebarDropdown.scss';
 import {Dropdown} from "@/components/Dropdown/Dropdown.tsx";
 import {Link} from "react-router-dom";
+import {AppIcon} from "@/icons/AppIcon.tsx";
+import {PersonAdd} from "@/icons/Person/PersonAdd.tsx";
 
 
 export function SidebarDropdown() {
@@ -38,6 +40,18 @@ export function SidebarDropdown() {
                             <div className="d-flex align-items-center gap-3">
                                 <Settings/>
                                 Настройки
+                            </div>
+                        </div>
+                        <div className="mt-1 menu-item">
+                            <div className="d-flex align-items-center gap-3">
+                                <AppIcon/>
+                                Управление аккаунтом
+                            </div>
+                        </div>
+                        <div className="mt-1 menu-item">
+                            <div className="d-flex align-items-center gap-3">
+                                <PersonAdd/>
+                                Добавить аккаунт
                             </div>
                         </div>
                         <Link to="/auth">

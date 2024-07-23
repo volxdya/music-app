@@ -1,15 +1,15 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './modules/app/app.module';
-import {MicroserviceOptions} from "@nestjs/microservices";
-import {BROKER_CONFIG} from "./config/broker.config";
-import {SwaggerModule} from '@nestjs/swagger';
-import {SWAGGER_CONFIG} from "./config/swagger.config";
+import { MicroserviceOptions } from '@nestjs/microservices';
+import { BROKER_CONFIG } from './config/broker.config';
+import { SwaggerModule } from '@nestjs/swagger';
+import { SWAGGER_CONFIG } from './config/swagger.config';
 
 async function bootstrap() {
   const PORT = process.env.PORT || 8080;
 
   const app = await NestFactory.create(AppModule);
-
+  app.enableCors();
   app.connectMicroservice<MicroserviceOptions>(BROKER_CONFIG);
 
   const document = SwaggerModule.createDocument(app, SWAGGER_CONFIG);
