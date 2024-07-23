@@ -1,33 +1,18 @@
 import './Authorization.scss';
 import {MainTitle} from "@/ui/Text/MainTitle/MainTitle.tsx";
 import {Link} from "react-router-dom";
-import {FormEvent, useState} from "react";
+import {useState} from "react";
 import {onChange} from "@/utils/onChange.ts";
-import axios from 'axios';
-import {getItem, setItem} from "@/utils/localStorage.ts";
+import {useAuth} from "@/hooks/useAuth.ts";
 
 export function Authorization() {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleSubmit = async (e: FormEvent) => {
-        e.preventDefault();
-
-        await axios.post(`http://localhost:3010/auth/login`, {
-            login: login,
-            password: password,
-            isUser: true
-        }).then((res) => {
-            setItem("token", res.data.token);
-
-            console.log(getItem("token"));
-        }).catch((err) => {
-            console.log(err);
-        });
-    }
+    const {handleSubmit} = useAuth();
 
     return (
-        <form className="form-auth" onSubmit={handleSubmit}>
+        <form className="form-auth" onSubmit={(e) => handleSubmit(e, login, password)}>
             <div className="form-group">
                 <div className="mt-4">
                     <div className="d-flex justify-content-center">

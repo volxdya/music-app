@@ -1,12 +1,13 @@
-/*
-import {useEffect} from "react";
+import {FormEvent} from "react";
 import axios from "axios";
 import {getItem, setItem} from "@/utils/localStorage.ts";
+import {stopFormBehavior} from "@/utils/stopFormBehavior.ts";
 
-export function useAuth(login: string, password: string) {
-    useEffect(() => {
+export const useAuth = () => {
+    const handleSubmit = async (e: FormEvent, login: string, password: string) => {
+        stopFormBehavior(e);
 
-        axios.post(`http://localhost:3010/auth/login`, {
+        await axios.post(`http://localhost:3010/auth/login`, {
             login: login,
             password: password,
             isUser: true
@@ -17,7 +18,7 @@ export function useAuth(login: string, password: string) {
         }).catch((err) => {
             console.log(err);
         });
-    }, [login, password]);
+    }
 
-    return [getItem("token")];
-}*/
+    return {handleSubmit};
+}

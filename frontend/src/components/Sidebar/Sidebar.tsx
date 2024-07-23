@@ -5,6 +5,7 @@ import {Heart} from "../../icons/Hearts/Heart.tsx";
 import {Link, useLocation} from "react-router-dom";
 import {MainTitle} from "@/ui/Text/MainTitle/MainTitle.tsx";
 import {SidebarDropdown} from "@/components/Sidebar/Dropdown/Dropdown.tsx";
+import uniqid from "uniqid";
 
 interface ISidebar {
     component: React.ReactNode;
@@ -40,6 +41,7 @@ export function Sidebar() {
             <div className="mt-4">
                 {sidebarItems.map((item: ISidebar) => (
                     <Link
+                        key={uniqid()}
                         to={item.link}
                         className={location.pathname == item.link
                             ? `active ${mainClassesLink}` : mainClassesLink}

@@ -1,9 +1,20 @@
 import {MainTitle} from "@/ui/Text/MainTitle/MainTitle.tsx";
 import {Link} from "react-router-dom";
+import {useState} from "react";
+import {onChange} from "@/utils/onChange.ts";
+import {useRegister} from "@/hooks/useRegister.ts";
 
 export function Registration() {
+
+    const [login, setLogin] = useState("");
+    const [password, setPassword] = useState("");
+    const [firstName, setFisrtName] = useState("");
+    const [lastName, setLastName] = useState("");
+
+    const { handleSubmit } = useRegister();
+
     return (
-        <form className="form-auth">
+        <form className="form-auth" onSubmit={(e) => handleSubmit(e, login, password, firstName, lastName)}>
             <div className="form-group">
                 <div className="mt-4">
                     <div className="d-flex justify-content-center">
@@ -13,10 +24,11 @@ export function Registration() {
 
                     <div className="mt-4 inputs-container">
                         <div>
-                            <input placeholder="Логин" className="mt-3" type="text"/>
-                            <input placeholder="Имя" className="mt-3" type="text"/>
-                            <input placeholder="Фамилия" className="mt-3" type="text"/>
-                            <input placeholder="Пароль" className="mt-3" type="password"/>
+                            <input placeholder="Логин" className="mt-3" type="text" onChange={onChange(setLogin)}/>
+                            <input placeholder="Имя" className="mt-3" type="text" onChange={onChange(setFisrtName)}/>
+                            <input placeholder="Фамилия" className="mt-3" type="text" onChange={onChange(setLastName)}/>
+                            <input placeholder="Пароль" className="mt-3" type="password"
+                                   onChange={onChange(setPassword)}/>
                             <div className="mt-4">
                                 <button>Продолжить</button>
                                 <Link to="/auth">

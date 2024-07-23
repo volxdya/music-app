@@ -4,6 +4,7 @@ import {ISidebar} from "@/types/ISidebar.ts";
 import {Dropdown} from "@/components/Dropdown/Dropdown.tsx";
 import {BreakHeart} from "@/icons/Hearts/BreakHeart.tsx";
 import {Note} from "@/icons/Note.tsx";
+import uniqid from "uniqid";
 
 export function MainPlayerDropdown() {
 
@@ -30,7 +31,7 @@ export function MainPlayerDropdown() {
             content={
                 <div>
                     {sidebarItems.map((item: ISidebar) => (
-                        <div className="mt-1 menu-item">
+                        <div className="mt-1 menu-item" key={uniqid()}>
                             <div className="d-flex align-items-center gap-3">
                                 {item.component}
                                 {item.title}
