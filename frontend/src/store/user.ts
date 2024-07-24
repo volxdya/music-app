@@ -1,5 +1,4 @@
 import {makeAutoObservable} from "mobx";
-import axios from "axios";
 import {jwtDecode, JwtPayload} from "jwt-decode";
 import {getItem} from "@/utils/localStorage.ts";
 import {defaultValueUser} from "@/store/defaultValues/defaultValueUser.ts";
