@@ -11,7 +11,6 @@ export const useAuth = () => {
     const handleSubmit = async (e: FormEvent, login: string, password: string) => {
         stopFormBehavior(e);
 
-
         await axios.post(`http://localhost:3010/auth/login`, {
             login: login,
             password: password,

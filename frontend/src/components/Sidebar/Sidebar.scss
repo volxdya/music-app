@@ -26,7 +26,6 @@
   }
 }
 
-
 .text-link, .sidebar-svg {
   transition: 0.4s;
 }
@@ -46,4 +45,16 @@
   height: calc(100% - 200px);
   display: flex;
   align-items: flex-end;
+}
+
+.btn-auth {
+  background: #d7034d;
+  transition: 0.4s;
+  padding: 13px;
+  border-radius: 12px;
+  font-size: 15px;
+
+  &:hover {
+    background: #fc0e70;
+  }
 }

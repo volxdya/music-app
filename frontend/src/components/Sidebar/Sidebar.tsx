@@ -71,7 +71,7 @@ export const Sidebar = observer(() => {
                     </div>
                 ) : (
                     <Link to="/auth" className="w-100">
-                        <button className="btn btn-primary w-100">Войти</button>
+                        <button className="btn-auth w-100">Войти</button>
                     </Link>
                 )}
             </div>
