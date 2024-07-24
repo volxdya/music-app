@@ -7,10 +7,15 @@ import {AppIcon} from "@/icons/AppIcon.tsx";
 import {PersonAdd} from "@/icons/Person/PersonAdd.tsx";
 
 
-export function SidebarDropdown() {
+interface Props {
+    login: string;
+    firstName: string;
+    lastName: string;
+}
+
+export function SidebarDropdown({login, firstName, lastName}: Props) {
 
     return (
-
         <Dropdown
             trigger={
                 <div>
@@ -32,8 +37,8 @@ export function SidebarDropdown() {
                         />
                     </div>
                     <div className="mt-2">
-                        <p className="text-center">apathy</p>
-                        <p className="text-center name-user">Владимир Тестов</p>
+                        <p className="text-center">{login}</p>
+                        <p className="text-center name-user">{firstName} {lastName}</p>
                     </div>
                     <div className="mt-4">
                         <div className="mt-1 menu-item">
@@ -66,6 +71,5 @@ export function SidebarDropdown() {
                 </>
             }
         />
-
     );
 }

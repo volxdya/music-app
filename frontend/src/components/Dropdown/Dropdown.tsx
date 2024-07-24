@@ -3,6 +3,7 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger
 } from "@radix-ui/react-dropdown-menu";
+import './Dropdown.scss';
 
 interface Props {
     trigger: React.ReactNode;
@@ -16,7 +17,7 @@ export function Dropdown({trigger, content}: Props) {
                 {trigger}
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-                <div className="dropdown mx-4 p-3">
+                <div className= "mx-3 dropdown p-3">
                     {content}
                 </div>
             </DropdownMenuContent>

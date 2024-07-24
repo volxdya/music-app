@@ -5,8 +5,8 @@ import {Repeat} from "../../icons/Player/Repeat.tsx";
 import {SecondHeart} from "../../icons/Hearts/SecondHeart.tsx";
 import {Skip} from "@/icons/Player/Skip.tsx";
 import {SkipBack} from "@/icons/Player/SkipBack.tsx";
-import {Settings} from "@/icons/Settings.tsx";
-import {MainPlayerDropdown} from "@/components/Player/Dropdown/Dropdown.tsx";
+import {MainPlayerDropdown} from "@/components/Player/Dropdown/MainPlayerDropdown.tsx";
+import {SettingsPlayerDropdown} from "@/components/Player/Dropdown/SettingsPlayerDropdown.tsx";
 
 export function Player() {
     return (
@@ -25,7 +25,6 @@ export function Player() {
 
                     <div className="controls-player d-flex gap-4">
                         <SecondHeart/>
-
                         <MainPlayerDropdown/>
                     </div>
                 </div>
@@ -51,7 +50,9 @@ export function Player() {
                     <p className="m-0 time-player">03:14</p>
                 </div>
             </div>
-            <div className="settings-player d-flex justify-content-end"><Settings/></div>
+            <div className="settings-player d-flex justify-content-end">
+                <SettingsPlayerDropdown/>
+            </div>
         </div>
     );
 }

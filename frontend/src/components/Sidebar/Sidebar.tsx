@@ -6,6 +6,9 @@ import {Link, useLocation} from "react-router-dom";
 import {MainTitle} from "@/ui/Text/MainTitle/MainTitle.tsx";
 import {SidebarDropdown} from "@/components/Sidebar/Dropdown/Dropdown.tsx";
 import uniqid from "uniqid";
+import {observer} from "mobx-react-lite";
+import user from "@/store/user.ts";
+import {getItem} from "@/utils/localStorage.ts";
 
 interface ISidebar {
     component: React.ReactNode;
@@ -13,7 +16,7 @@ interface ISidebar {
     link: string;
 }
 
-export function Sidebar() {
+export const Sidebar = observer(() => {
     const sidebarItems: ISidebar[] = [
         {
             component: <Search/>,
@@ -35,6 +38,9 @@ export function Sidebar() {
     const location = useLocation();
     const mainClassesLink: string = "d-flex gap-3 link-sidebar my-4";
 
+    user.getUserData();
+    user.getMe();
+
     return (
         <nav className="sidebar p-4">
             <MainTitle/>
@@ -52,13 +58,23 @@ export function Sidebar() {
                 ))}
             </div>
             <div className="me">
-                <div className="d-flex gap-3">
-                    <SidebarDropdown/>
-                    <div>
-                        <p>apathy</p>
+                {getItem("token") ? (
+                    <div className="d-flex gap-3">
+                        <SidebarDropdown
+                            login={user.userData.login}
+                            firstName={user.userData.firstName}
+                            lastName={user.userData.lastName}
+                        />
+                        <div>
+                            <p>{user.userData.login}</p>
+                        </div>
                     </div>
-                </div>
+                ) : (
+                    <Link to="/auth" className="w-100">
+                        <button className="btn btn-primary w-100">Войти</button>
+                    </Link>
+                )}
             </div>
         </nav>
     );
-}
+});
