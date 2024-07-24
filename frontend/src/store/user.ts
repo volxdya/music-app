@@ -3,6 +3,7 @@ import axios from "axios";
 import {jwtDecode, JwtPayload} from "jwt-decode";
 import {getItem} from "@/utils/localStorage.ts";
 import {defaultValueUser} from "@/store/defaultValues/defaultValueUser.ts";
+import {getUserData} from "@/store/api/getUserData.ts";
 
 interface loginJwt extends JwtPayload {
     login: string;
@@ -38,13 +39,10 @@ class User {
 
     getMe() {
         if (getItem("token")) {
-            this.getUserData()
+            this.getUserData();
+            const {getUserDataFn} = getUserData();
 
-            axios.get(`http://localhost:3010/user/get_one/${this.userData.login}`).then((res) => {
-                this.me = res.data
-            }).catch((err) => {
-                console.log(err);
-            });
+            this.me = getUserDataFn(this.userData.login);
         }
     }
 }
