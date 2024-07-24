@@ -6,7 +6,7 @@
   "tailwind": {
     "config": "tailwind.config.js",
     "css": "src/global.scss",
-    "baseColor": "slate",
+    "baseColor": "neutral",
     "cssVariables": false,
     "prefix": ""
   },

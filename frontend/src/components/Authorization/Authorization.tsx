@@ -9,7 +9,7 @@ export function Authorization() {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
 
-    const {handleSubmit} = useAuth();
+    const {handleSubmit, isError, isSuccess} = useAuth();
 
     return (
         <form className="form-auth" onSubmit={(e) => handleSubmit(e, login, password)}>

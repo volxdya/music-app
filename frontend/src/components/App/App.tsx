@@ -6,7 +6,6 @@ import {Collection} from "../Collection/Collection.tsx";
 import {Player} from "../Player/Player.tsx";
 import {Authorization} from "@/components/Authorization/Authorization.tsx";
 import {Registration} from "@/components/Registration/Registration.tsx";
-
 export default function App() {
     const location = useLocation();
     // const locationsForValidate: string[] = ["/auth", "/register"];
