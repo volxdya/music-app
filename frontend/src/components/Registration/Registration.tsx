@@ -1,8 +1,9 @@
 import {MainTitle} from "@/ui/Text/MainTitle/MainTitle.tsx";
 import {Link} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {onChange} from "@/utils/onChange.ts";
 import {useRegister} from "@/hooks/useRegister.ts";
+import {Spinner} from "@/ui/Spinner/Spinner.tsx";
 
 export function Registration() {
 
@@ -11,7 +12,11 @@ export function Registration() {
     const [firstName, setFisrtName] = useState("");
     const [lastName, setLastName] = useState("");
 
-    const { handleSubmit } = useRegister();
+    const {
+        handleSubmit,
+        isSuccess,
+        isLoading
+    } = useRegister();
 
     return (
         <form className="form-auth" onSubmit={(e) => handleSubmit(e, login, password, firstName, lastName)}>
@@ -30,7 +35,11 @@ export function Registration() {
                             <input placeholder="Пароль" className="mt-3" type="password"
                                    onChange={onChange(setPassword)}/>
                             <div className="mt-4">
-                                <button>Продолжить</button>
+                                {isLoading ? (
+                                    <button disabled><Spinner/></button>
+                                ): (
+                                    <button disabled={isSuccess}>Продолжить</button>
+                                )}
                                 <Link to="/auth">
                                     <button className="create-id-btn">У меня есть аккаунт</button>
                                 </Link>

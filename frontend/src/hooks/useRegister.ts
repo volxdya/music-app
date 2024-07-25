@@ -1,21 +1,27 @@
-import {FormEvent} from "react";
+import {FormEvent, useState} from "react";
 import {stopFormBehavior} from "@/utils/stopFormBehavior.ts";
 import axios from "axios";
 import {useToast} from "@/components/ui/use-toast.ts";
 
 export const useRegister = () => {
+    const [isSuccess, setIsSuccess] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
     const {toast} = useToast();
 
     const handleSubmit = async (e: FormEvent, login: string, password: string, firstName: string, lastName: string) => {
         stopFormBehavior(e);
 
+        setIsLoading(true);
+        setIsSuccess(false);
         await axios.post(`http://localhost:3010/user/create`, {
             login: login,
             password: password,
             firstName: firstName,
             lastName: lastName,
-        }).then((res) => {
-            console.log(res.data);
+        }).then(() => {
+            setIsSuccess(true);
+            setIsLoading(false);
 
             toast({
                 title: "Вы успешно зарегистрировались!",
@@ -23,9 +29,15 @@ export const useRegister = () => {
             });
 
             setTimeout(() => {
-                window.location.replace("/");
-            }, 5000);
+                (e.target as HTMLFormElement).reset();
+
+               setIsSuccess(false);
+            }, 1500);
+
         }).catch((err) => {
+            setIsSuccess(false);
+            setIsLoading(false);
+
             console.log(err);
 
             toast({
@@ -35,5 +47,5 @@ export const useRegister = () => {
         });
     }
 
-    return {handleSubmit};
+    return {handleSubmit, isSuccess, isLoading};
 }

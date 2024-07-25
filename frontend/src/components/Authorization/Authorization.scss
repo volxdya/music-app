@@ -39,6 +39,11 @@
     &:hover {
       background: #fc0e70;
     }
+
+    &:disabled {
+      background: #484848;
+      color: gray;
+    }
   }
 
   .create-id-btn {
@@ -49,6 +54,23 @@
     &:hover {
       outline: 1px solid white;
       background: none;
+    }
+  }
+
+  .i-author {
+
+    background:
+            linear-gradient(rgb(24, 24, 24), rgb(24, 24, 24)) padding-box,
+            linear-gradient(60deg, #ff00f2, #ff3535, #4866ff) border-box;
+    color: #ffffff;
+    border: 1px solid transparent;
+    border-radius: 40px;
+
+    &:hover {
+      outline: none;
+      background:
+              linear-gradient(rgb(24, 24, 24), rgb(24, 24, 24)) padding-box,
+              linear-gradient(60deg, #b600ad, #ff0000, #0a2cc7) border-box;
     }
   }
 }

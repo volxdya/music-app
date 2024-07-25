@@ -4,12 +4,13 @@ import {Link} from "react-router-dom";
 import {useState} from "react";
 import {onChange} from "@/utils/onChange.ts";
 import {useAuth} from "@/hooks/useAuth.ts";
+import {Spinner} from "@/ui/Spinner/Spinner.tsx";
 
 export function Authorization() {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
 
-    const {handleSubmit} = useAuth();
+    const {handleSubmit, isSuccess, isLoading} = useAuth();
 
     return (
         <form className="form-auth" onSubmit={(e) => handleSubmit(e, login, password)}>
@@ -26,9 +27,16 @@ export function Authorization() {
                             <input placeholder="Пароль" className="mt-3" type="password"
                                    onChange={onChange(setPassword)}/>
                             <div className="mt-4">
-                                <button>Войти</button>
+                                {isLoading ? (
+                                    <button disabled><Spinner/></button>
+                                ): (
+                                    <button disabled={isSuccess}>Войти</button>
+                                )}
                                 <Link to="/register">
                                     <button className="create-id-btn">Создать ID</button>
+                                </Link>
+                                <Link to="/register">
+                                    <button className="i-author">Я исполнитель</button>
                                 </Link>
                             </div>
                         </div>
