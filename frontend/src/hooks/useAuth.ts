@@ -4,7 +4,7 @@ import {setItem} from "@/utils/localStorage.ts";
 import {stopFormBehavior} from "@/utils/stopFormBehavior.ts";
 import {useToast} from "@/components/ui/use-toast.ts";
 
-export const useAuth = () => {
+export const useAuth = (isAuthor: boolean) => {
 
     const [isSuccess, setIsSuccess] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -19,7 +19,7 @@ export const useAuth = () => {
         await axios.post(`http://localhost:3010/auth/login`, {
             login: login,
             password: password,
-            isUser: true
+            isUser: !isAuthor
         }).then((res) => {
             setIsSuccess(true);
             setIsLoading(false);
@@ -30,12 +30,12 @@ export const useAuth = () => {
 
             toast({
                 title: "Вы успешно авторизовались!",
-                description: "Через 5 секунд произойдет редирект на основную страницу",
+                description: "SUCCESS AUTHORIZATION",
             });
 
             setInterval(() => {
                 window.location.replace("/");
-            }, 5000);
+            }, 1500);
         }).catch((err) => {
             console.log(err);
             setIsLoading(false);

@@ -25,7 +25,8 @@ interface IUser {
     id: number;
     lastName: string;
     firstName: string;
-    playlists: Array<IPlaylist>
+    playlists: Array<IPlaylist>;
+    isUser: boolean;
 }
 
 

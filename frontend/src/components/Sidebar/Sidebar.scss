@@ -31,9 +31,10 @@
 }
 
 .avatar {
-  height: 50px;
-  width: 50px;
+  height: 55px;
+  width: 55px;
   border-radius: 50%;
+  object-fit: cover;
 
   &:hover {
     cursor: pointer;
@@ -57,4 +58,19 @@
   &:hover {
     background: #fc0e70;
   }
+}
+
+.author-block {
+  background-color: #FF3CAC;
+  background-image: linear-gradient(270deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+
+  border-radius: 55px;
+  font-size: 12px;
+  padding: 5px 15px;
+}
+
+.user-data-block {
+  height: 55px;
+  display: flex;
+  align-items: center;
 }

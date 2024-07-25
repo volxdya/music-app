@@ -11,5 +11,6 @@ export const defaultValueMe = {
     login: "",
     firstName: "",
     lastName: "",
+    isUser: false,
     playlists: []
 }

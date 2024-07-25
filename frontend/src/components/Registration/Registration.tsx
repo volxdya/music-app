@@ -11,12 +11,17 @@ export function Registration() {
     const [password, setPassword] = useState("");
     const [firstName, setFisrtName] = useState("");
     const [lastName, setLastName] = useState("");
+    const [isAuthor, setIsAuthor] = useState(false);
 
     const {
         handleSubmit,
         isSuccess,
         isLoading
-    } = useRegister();
+    } = useRegister(isAuthor);
+
+    useEffect(() => {
+        console.log(isAuthor);
+    });
 
     return (
         <form className="form-auth" onSubmit={(e) => handleSubmit(e, login, password, firstName, lastName)}>
@@ -34,10 +39,22 @@ export function Registration() {
                             <input placeholder="Фамилия" className="mt-3" type="text" onChange={onChange(setLastName)}/>
                             <input placeholder="Пароль" className="mt-3" type="password"
                                    onChange={onChange(setPassword)}/>
+                            <div className="form-check form-switch mt-3">
+                                <input className="form-check-input"
+                                       type="checkbox" role="switch"
+                                       id="flexSwitchCheckDefault"
+                                       onChange={() => {setIsAuthor(!isAuthor)}}
+                                />
+                                <label
+                                    className="form-check-label"
+                                    htmlFor="flexSwitchCheckDefault">
+                                    Автор
+                                </label>
+                            </div>
                             <div className="mt-4">
                                 {isLoading ? (
                                     <button disabled><Spinner/></button>
-                                ): (
+                                ) : (
                                     <button disabled={isSuccess}>Продолжить</button>
                                 )}
                                 <Link to="/auth">

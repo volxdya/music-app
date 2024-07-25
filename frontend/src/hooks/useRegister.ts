@@ -3,7 +3,7 @@ import {stopFormBehavior} from "@/utils/stopFormBehavior.ts";
 import axios from "axios";
 import {useToast} from "@/components/ui/use-toast.ts";
 
-export const useRegister = () => {
+export const useRegister = (isAuthor: boolean) => {
     const [isSuccess, setIsSuccess] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -14,11 +14,12 @@ export const useRegister = () => {
 
         setIsLoading(true);
         setIsSuccess(false);
-        await axios.post(`http://localhost:3010/user/create`, {
+        await axios.post(`http://localhost:3000/${isAuthor ? "author" : "user"}/create`, {
             login: login,
             password: password,
             firstName: firstName,
             lastName: lastName,
+            isUser: !isAuthor
         }).then(() => {
             setIsSuccess(true);
             setIsLoading(false);
@@ -31,7 +32,7 @@ export const useRegister = () => {
             setTimeout(() => {
                 (e.target as HTMLFormElement).reset();
 
-               setIsSuccess(false);
+                setIsSuccess(false);
             }, 1500);
 
         }).catch((err) => {
