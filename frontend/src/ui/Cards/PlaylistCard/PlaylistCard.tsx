@@ -1,17 +1,29 @@
 import './PlaylistCard.scss';
+import {Note} from "@/icons/Note.tsx";
 
-export function PlaylistCard() {
+interface Props {
+    imageUrl: string;
+    title: string;
+}
+
+export function PlaylistCard({imageUrl, title}: Props) {
     return (
         <div className="mt-4">
             <div>
-                <img
-                    src="https://i.pinimg.com/564x/30/e8/bf/30e8bfcf22a3769266547b7fe6d79fad.jpg"
-                    alt=""
-                    className="playlist-image"
-                />
+                {imageUrl === "" ? (
+                    <div className="d-flex justify-content-center align-items-center empty-image">
+                        <Note/>
+                    </div>
+                ): (
+                    <img
+                        src={imageUrl}
+                        alt={`Картинка плейлиста ${title}`}
+                        className="playlist-image"
+                    />
+                )}
             </div>
             <div className="mt-2">
-                <a href="#" className="title-playlist">coding</a>
+                <a href="#" className="title-playlist">{title}</a>
             </div>
         </div>
     );

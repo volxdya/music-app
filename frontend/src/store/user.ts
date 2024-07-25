@@ -1,8 +1,8 @@
 import {makeAutoObservable} from "mobx";
 import {jwtDecode, JwtPayload} from "jwt-decode";
 import {getItem} from "@/utils/localStorage.ts";
-import {defaultValueUser} from "@/store/defaultValues/defaultValueUser.ts";
-import {getUserData} from "@/store/api/getUserData.ts";
+import {defaultValueMe, defaultValueUser} from "@/store/defaultValues/defaultValueUser.ts";
+import axios from "axios";
 
 interface loginJwt extends JwtPayload {
     login: string;
@@ -11,13 +11,31 @@ interface loginJwt extends JwtPayload {
     firstName: string;
 }
 
+export interface IPlaylist {
+    description: string;
+    title: string;
+    userId: number;
+    avatarUrl: string;
+    likes: number;
+    id: number;
+}
+
+interface IUser {
+    login: string;
+    id: number;
+    lastName: string;
+    firstName: string;
+    playlists: Array<IPlaylist>
+}
+
+
 class User {
     constructor() {
         makeAutoObservable(this);
     }
 
     userData: loginJwt = defaultValueUser;
-    me = {};
+    me: IUser = defaultValueMe;
 
 
     getUserData() {
@@ -39,9 +57,13 @@ class User {
     getMe() {
         if (getItem("token")) {
             this.getUserData();
-            const {getUserDataFn} = getUserData();
 
-            this.me = getUserDataFn(this.userData.login);
+            axios.get(`http://localhost:3010/user/get_one/${this.userData.login}`).then((res) => {
+                this.me = res.data;
+            }).catch((err) => {
+                console.log(err);
+            });
+
         }
     }
 }
