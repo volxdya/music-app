@@ -46,6 +46,8 @@ export const useRegister = (isAuthor: boolean) => {
                     title: `${err.message}`,
                     description: `${err.response.status} HTTP STATUS CODE`,
                 });
+
+                (e.target as HTMLFormElement).reset();
             }
         });
     }
