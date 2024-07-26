@@ -34,6 +34,7 @@ export function Authorization() {
                                        onChange={() => {
                                            setIsAuthor(!isAuthor)
                                        }}
+                                       checked={isAuthor}
                                 />
                                 <label
                                     className="form-check-label"
@@ -51,9 +52,11 @@ export function Authorization() {
                                 <Link to="/register">
                                     <button className="create-id-btn">Создать ID</button>
                                 </Link>
-                                <Link to="/register">
-                                    <button className="i-author">Я исполнитель</button>
-                                </Link>
+                                {!isAuthor ? (
+                                    <button type="button" className="i-author" onClick={() => setIsAuthor(true)}>Я исполнитель</button>
+                                ): (
+                                    <button type="button" className="i-author" onClick={() => setIsAuthor(false)}>Я слушатель</button>
+                                )}
                             </div>
                         </div>
                     </div>

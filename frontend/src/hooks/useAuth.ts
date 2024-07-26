@@ -1,5 +1,5 @@
 import {FormEvent, useState} from "react";
-import axios from "axios";
+import axios, {AxiosError} from "axios";
 import {setItem} from "@/utils/localStorage.ts";
 import {stopFormBehavior} from "@/utils/stopFormBehavior.ts";
 import {useToast} from "@/components/ui/use-toast.ts";
@@ -36,15 +36,19 @@ export const useAuth = (isAuthor: boolean) => {
             setInterval(() => {
                 window.location.replace("/");
             }, 1500);
-        }).catch((err) => {
-            console.log(err);
-            setIsLoading(false);
-            setIsSuccess(false);
+        }).catch((error: AxiosError) => {
 
-            toast({
-                title: "ERROR",
-                description: "401 HTTP STATUS CODE",
-            });
+            if (error.response && error.response.data) {
+                console.log(error.response);
+
+                setIsLoading(false);
+                setIsSuccess(false);
+
+                toast({
+                    title: `${error.response.data.message}`,
+                    description: `${error.response.status} HTTP STATUS CODE`,
+                });
+            }
         });
     }
 

@@ -43,6 +43,7 @@ export function Registration() {
                                 <input className="form-check-input"
                                        type="checkbox" role="switch"
                                        id="flexSwitchCheckDefault"
+                                       checked={isAuthor}
                                        onChange={() => {setIsAuthor(!isAuthor)}}
                                 />
                                 <label

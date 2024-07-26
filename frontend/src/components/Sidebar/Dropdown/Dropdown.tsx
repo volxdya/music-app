@@ -21,12 +21,12 @@ export function SidebarDropdown({login, firstName, lastName}: Props) {
 
         toast({
             title: "Вы успешно вышли с аккаунта.",
-            description: "Редирект произойдет через 5 секунд.",
+            description: "Success log out!",
         })
 
         setTimeout(() => {
             window.location.replace("/auth");
-        }, 5000);
+        }, 1500);
     }
 
 

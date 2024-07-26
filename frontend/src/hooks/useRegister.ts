@@ -1,6 +1,6 @@
 import {FormEvent, useState} from "react";
 import {stopFormBehavior} from "@/utils/stopFormBehavior.ts";
-import axios from "axios";
+import axios, {AxiosError} from "axios";
 import {useToast} from "@/components/ui/use-toast.ts";
 
 export const useRegister = (isAuthor: boolean) => {
@@ -14,7 +14,7 @@ export const useRegister = (isAuthor: boolean) => {
 
         setIsLoading(true);
         setIsSuccess(false);
-        await axios.post(`http://localhost:3000/${isAuthor ? "author" : "user"}/create`, {
+        await axios.post(`http://localhost:3010/${isAuthor ? "author" : "user"}/create`, {
             login: login,
             password: password,
             firstName: firstName,
@@ -35,16 +35,18 @@ export const useRegister = (isAuthor: boolean) => {
                 setIsSuccess(false);
             }, 1500);
 
-        }).catch((err) => {
+        }).catch((err: AxiosError) => {
             setIsSuccess(false);
             setIsLoading(false);
 
             console.log(err);
 
-            toast({
-                title: "ERROR",
-                description: "500 HTTP STATUS CODE",
-            });
+            if (err.response) {
+                toast({
+                    title: `${err.message}`,
+                    description: `${err.response.status} HTTP STATUS CODE`,
+                });
+            }
         });
     }
 
