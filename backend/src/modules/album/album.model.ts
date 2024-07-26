@@ -1,8 +1,10 @@
 import {
+  BelongsTo,
   Column,
   DataType,
   ForeignKey,
   HasMany,
+  HasOne,
   Model,
   Table,
 } from 'sequelize-typescript';
@@ -37,4 +39,7 @@ export class Album extends Model<Album, IAlbum> {
   @ForeignKey(() => Author)
   @Column({ type: DataType.INTEGER })
   authorId: number;
+
+  @BelongsTo(() => Author)
+  author: Author;
 }

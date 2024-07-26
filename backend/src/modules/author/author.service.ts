@@ -1,40 +1,53 @@
-import {Injectable} from '@nestjs/common';
-import {InjectModel} from "@nestjs/sequelize";
-import {Author} from "./author.model";
-import {CreateUserDto} from "../user/dto/createUserDto";
-import * as bcrypt from "bcrypt";
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
+import { Author } from './author.model';
+import { CreateUserDto } from '../user/dto/createUserDto';
+import * as bcrypt from 'bcrypt';
+import { Track } from '../track/track.model';
+import { Album } from '../album/album.model';
 
 @Injectable()
 export class AuthorService {
-    constructor(@InjectModel(Author) private readonly authorRepository: typeof Author,) {
-    }
+  constructor(
+    @InjectModel(Author) private readonly authorRepository: typeof Author,
+  ) {}
 
-    async create(dto: CreateUserDto) {
-        const author = await this.authorRepository.create(dto);
+  async create(dto: CreateUserDto) {
+    const author = await this.authorRepository.create(dto);
 
-        await author.update({
-            password: bcrypt.hashSync(author.password, 12),
-        });
+    await author.update({
+      password: bcrypt.hashSync(author.password, 12),
+    });
 
-        return author;
-    }
+    return author;
+  }
 
-    async getOne(login: string) {
-        const author = await this.authorRepository.findOne({where: {login}});
+  async getOne(login: string) {
+    const author: Author = await this.authorRepository.findOne({
+      where: { login },
 
-        return author;
-    }
+      include: [Track, Album],
+    });
 
-    async getAll() {
-        const authors: Author[] = await this.authorRepository.findAll({include: {all: true}});
+    return author;
+  }
 
-        return authors;
-    }
+  async getAll() {
+    const authors: Author[] = await this.authorRepository.findAll({
+      include: { all: true },
+    });
 
-    async search(title: string){
-        const authors: Author[] = await this.authorRepository.findAll({include: {all: true}});
+    return authors;
+  }
 
-        const filtredAuthors: Author[] = authors.filter((item) => item.login.toLowerCase().includes(title.toLowerCase()));
-        return filtredAuthors;
-    }
+  async search(title: string) {
+    const authors: Author[] = await this.authorRepository.findAll({
+      include: { all: true },
+    });
+
+    const filtredAuthors: Author[] = authors.filter((item) =>
+      item.login.toLowerCase().includes(title.toLowerCase()),
+    );
+    return filtredAuthors;
+  }
 }

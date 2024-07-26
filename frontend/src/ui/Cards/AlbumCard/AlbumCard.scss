@@ -1,0 +1,38 @@
+.album-card {
+  .album-img {
+    height: 220px;
+    width: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: 0.4s;
+
+    &:hover {
+      cursor: pointer;
+      filter: brightness(50%);
+    }
+  }
+
+  .album-title, .album-author, .album-year {
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.4s;
+  }
+
+  .album-author, .album-title {
+    cursor: pointer;
+  }
+
+  .album-author, .album-year {
+    color: #818181;
+  }
+
+  .album-title:hover {
+    text-decoration: underline;
+  }
+
+  .album-author:hover {
+    color: #fff;
+  }
+}
+
+

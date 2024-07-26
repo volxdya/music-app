@@ -4,6 +4,7 @@ export const defaultValueUser = {
     login: "",
     firstName: "",
     lastName: "",
+    isUser: false
 }
 
 export const defaultValueMe = {
@@ -12,5 +13,7 @@ export const defaultValueMe = {
     firstName: "",
     lastName: "",
     isUser: false,
-    playlists: []
+    playlists: [],
+    tracks: [],
+    albums: []
 }

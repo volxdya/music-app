@@ -9,6 +9,7 @@ import uniqid from "uniqid";
 import {observer} from "mobx-react-lite";
 import user from "@/store/user.ts";
 import {getItem} from "@/utils/localStorage.ts";
+import {useEffect} from "react";
 
 interface ISidebar {
     component: React.ReactNode;
@@ -38,8 +39,10 @@ export const Sidebar = observer(() => {
     const location = useLocation();
     const mainClassesLink: string = "d-flex gap-3 link-sidebar my-4";
 
-    user.getUserData();
-    user.getMe();
+    useEffect(() => {
+        user.getUserData();
+        user.getMe();
+    }, []);
 
     return (
         <nav className="sidebar p-4">

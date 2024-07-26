@@ -16,7 +16,7 @@ export class AlbumService {
   }
 
   async getAll() {
-    const albums = await this.albumRepository.findAll({
+    const albums: Album[] = await this.albumRepository.findAll({
       include: { all: true },
     });
 

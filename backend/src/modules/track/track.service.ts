@@ -27,10 +27,13 @@ export class TrackService {
         albumId: newAlbum.id,
       });
 
+      track.albumId = newAlbum.id;
+
       return track;
     }
 
     const track: Track = await this.trackRepository.create(dto);
+
     return track;
   }
 

@@ -9,6 +9,7 @@ interface loginJwt extends JwtPayload {
     id: number;
     lastName: string;
     firstName: string;
+    isUser: boolean;
 }
 
 export interface IPlaylist {
@@ -20,12 +21,31 @@ export interface IPlaylist {
     id: number;
 }
 
-interface IUser {
+export interface IAlbum {
+    title: string;
+    avatarUrl: string;
+    likes: number;
+    authorId: number;
+    id: number;
+}
+
+export interface ITrack {
+    title: string;
+    avatarUrl: string;
+    trackUrl: string;
+    authorId: number;
+    isTrack: boolean;
+    id: number;
+}
+
+export interface IUser {
     login: string;
     id: number;
     lastName: string;
     firstName: string;
     playlists: Array<IPlaylist>;
+    albums: Array<IAlbum>;
+    tracks: Array<ITrack>;
     isUser: boolean;
 }
 
@@ -59,7 +79,7 @@ class User {
         if (getItem("token")) {
             this.getUserData();
 
-            axios.get(`http://localhost:3010/user/get_one/${this.userData.login}`).then((res) => {
+            axios.get(`http://localhost:3010/${this.userData.isUser ? "user" : "author"}/get_one/${this.userData.login}`).then((res) => {
                 this.me = res.data;
             }).catch((err) => {
                 console.log(err);
