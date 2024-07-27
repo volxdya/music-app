@@ -28,7 +28,7 @@ export default function App() {
                         <Route path="/like" element={<Collection/>}/>
                         <Route path="/auth" element={<Authorization/>}/>
                         <Route path="/register" element={<Registration/>}/>
-                        <Route path="/tracks" element={<TracksPage/>}/>
+                        <Route path="/tracks/:search/:bySearch" element={<TracksPage/>}/>
                     </Routes>
                 </div>
                 {validateLocation && (

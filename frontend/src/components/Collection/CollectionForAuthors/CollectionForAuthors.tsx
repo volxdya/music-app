@@ -30,7 +30,7 @@ export function CollectionForAuthors() {
 
     return (
         <>
-            <Link to="/tracks">
+            <Link to={`/tracks/get_by_authorId/${user.userData.id}`}>
                 <NavigationText text="Ваши популярные треки"/>
             </Link>
             <div className="mt-4 row g-0 d-flex">
@@ -131,5 +131,5 @@ export function CollectionForAuthors() {
                 </div>
             </div>
         </>
-    )
+    );
 }

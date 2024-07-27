@@ -59,4 +59,13 @@ export class TrackService {
     );
     return filtredTracks;
   }
+
+  async getTracksByAuthor(authorId: number) {
+    const tracks: Track[] = await this.trackRepository.findAll({
+      where: { authorId },
+      include: [Author, Album],
+    });
+
+    return tracks;
+  }
 }
