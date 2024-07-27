@@ -3,6 +3,7 @@ import {jwtDecode, JwtPayload} from "jwt-decode";
 import {getItem} from "@/utils/localStorage.ts";
 import {defaultValueMe, defaultValueUser} from "@/store/defaultValues/defaultValueUser.ts";
 import axios from "axios";
+import {IUser} from "@/types/IUser.ts";
 
 interface loginJwt extends JwtPayload {
     login: string;
@@ -12,42 +13,6 @@ interface loginJwt extends JwtPayload {
     isUser: boolean;
 }
 
-export interface IPlaylist {
-    description: string;
-    title: string;
-    userId: number;
-    avatarUrl: string;
-    likes: number;
-    id: number;
-}
-
-export interface IAlbum {
-    title: string;
-    avatarUrl: string;
-    likes: number;
-    authorId: number;
-    id: number;
-}
-
-export interface ITrack {
-    title: string;
-    avatarUrl: string;
-    trackUrl: string;
-    authorId: number;
-    isTrack: boolean;
-    id: number;
-}
-
-export interface IUser {
-    login: string;
-    id: number;
-    lastName: string;
-    firstName: string;
-    playlists: Array<IPlaylist>;
-    albums: Array<IAlbum>;
-    tracks: Array<ITrack>;
-    isUser: boolean;
-}
 
 
 class User {

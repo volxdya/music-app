@@ -6,11 +6,14 @@ import {useEffect, useState} from "react";
 import {onChange} from "@/utils/onChange.ts";
 import {useCreateTrack} from "@/hooks/useCreateTrack.ts";
 import {useCreateAlbum} from "@/hooks/useCreateAlbum.ts";
-import user, {IAlbum, ITrack} from "@/store/user.ts";
+import user from "@/store/user.ts";
 import {TrackCard} from "@/ui/Cards/TrackCard/TrackCard.tsx";
 import {CarouselItem} from "@/components/ui/carousel.tsx";
 import {CarouselScroll} from "@/components/CarouselScroll/CarouselScroll.tsx";
 import {CircleCard} from "@/ui/Cards/CircleCard/CircleCard.tsx";
+import {Link} from "react-router-dom";
+import {ITrack} from "@/types/ITrack.ts";
+import {IAlbum} from "@/types/IAlbum.ts";
 
 export function CollectionForAuthors() {
 
@@ -27,13 +30,15 @@ export function CollectionForAuthors() {
 
     return (
         <>
-            <NavigationText text="Ваши популярные треки"/>
+            <Link to="/tracks">
+                <NavigationText text="Ваши популярные треки"/>
+            </Link>
             <div className="mt-4 row g-0 d-flex">
                 <div className="col-8">
                     {user.me.tracks && (
                         <>
                             {user.me.tracks.slice(0, 5).map((item: ITrack) => (
-                                <TrackCard title={item.title}/>
+                                <TrackCard title={item.title} author={user.userData.login}/>
                             ))}
                         </>
                     )}
@@ -49,7 +54,7 @@ export function CollectionForAuthors() {
             <Modal
                 trigger={
                     <div className="d-flex justify-content-center">
-                        <button className="add-track mb-20 mt-20 w-25   ">Добавить трек</button>
+                        <button className="add-track mb-20 mt-20 w-25">Добавить трек</button>
                     </div>
                 }
                 content={
@@ -123,7 +128,6 @@ export function CollectionForAuthors() {
                             </CarouselItem>
                         </>
                     }/>
-
                 </div>
             </div>
         </>
