@@ -8,6 +8,9 @@ import {useCreateTrack} from "@/hooks/useCreateTrack.ts";
 import {useCreateAlbum} from "@/hooks/useCreateAlbum.ts";
 import user, {IAlbum, ITrack} from "@/store/user.ts";
 import {TrackCard} from "@/ui/Cards/TrackCard/TrackCard.tsx";
+import {CarouselItem} from "@/components/ui/carousel.tsx";
+import {CarouselScroll} from "@/components/CarouselScroll/CarouselScroll.tsx";
+import {CircleCard} from "@/ui/Cards/CircleCard/CircleCard.tsx";
 
 export function CollectionForAuthors() {
 
@@ -29,7 +32,7 @@ export function CollectionForAuthors() {
                 <div className="col-8">
                     {user.me.tracks && (
                         <>
-                            {user.me.tracks.map((item: ITrack) => (
+                            {user.me.tracks.slice(0, 5).map((item: ITrack) => (
                                 <TrackCard title={item.title}/>
                             ))}
                         </>
@@ -46,7 +49,7 @@ export function CollectionForAuthors() {
             <Modal
                 trigger={
                     <div className="d-flex justify-content-center">
-                        <button className="add-track mb-20 mt-20 w-25">Добавить трек</button>
+                        <button className="add-track mb-20 mt-20 w-25   ">Добавить трек</button>
                     </div>
                 }
                 content={
@@ -71,14 +74,19 @@ export function CollectionForAuthors() {
 
             <div className="mt-5">
                 <NavigationText text="Ваши популярные альбомы"/>
-                {user.me.albums && (
-                    <div className="d-flex gap-3 mt-4">
-                        {user.me.albums.map((item: IAlbum) => (
-                            <AlbumCard title={item.title} author={(item.authorId).toString()}/>
-                        ))}
-                    </div>
-                )}
-
+                <div className="mt-4">
+                    {user.me.albums && (
+                        <CarouselScroll content={
+                            <>
+                                {user.me.albums.map((item: IAlbum) => (
+                                    <CarouselItem className="basis-1/7">
+                                        <AlbumCard title={item.title} author={user.userData.login}/>
+                                    </CarouselItem>
+                                ))}
+                            </>
+                        }/>
+                    )}
+                </div>
                 <Modal
                     trigger={
                         <div className="d-flex justify-content-center">
@@ -87,7 +95,8 @@ export function CollectionForAuthors() {
                     }
                     content={
                         <form className="me-3 mx-3" onSubmit={(e) => handleSubmitAlbum(e, titleAlbum)}>
-                            <input type="text" placeholder="Название" className="mt-2" onChange={onChange(setTitleAlbum)} title={titleAlbum}/>
+                            <input type="text" placeholder="Название" className="mt-2"
+                                   onChange={onChange(setTitleAlbum)} title={titleAlbum}/>
 
                             <label className="input-file mt-3">
                                 <input type="file" name="file"/>
@@ -101,9 +110,21 @@ export function CollectionForAuthors() {
 
                             <button className="add-track w-100 mt-5">Добавить</button>
                         </form>
-
                     }
                 />
+
+                <NavigationText text="Похожие исполнители"/>
+
+                <div className="mt-4">
+                    <CarouselScroll content={
+                        <>
+                            <CarouselItem className="basis-1/7">
+                                <CircleCard title="Heronwater" otherText="Исполнитель"/>
+                            </CarouselItem>
+                        </>
+                    }/>
+
+                </div>
             </div>
         </>
     )
