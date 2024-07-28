@@ -4,7 +4,7 @@
     width: 220px;
     object-fit: cover;
     border-radius: 10px;
-    transition: 0.4s;
+    transition: 0.2s;
 
     &:hover {
       cursor: pointer;
@@ -15,7 +15,7 @@
   .album-title, .album-author, .album-year {
     font-size: 14px;
     font-weight: 500;
-    transition: 0.4s;
+    transition: 0.2s;
   }
 
   .album-author, .album-title {

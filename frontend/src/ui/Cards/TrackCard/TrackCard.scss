@@ -3,7 +3,7 @@ $gray-color: #9a9a9a;
 .track-card {
   border-radius: 10px;
   padding: 10px 10px;
-  transition: 0.4s;
+  transition: 0.2s;
   width: 100%;
 
   &:hover {
@@ -20,7 +20,7 @@ $gray-color: #9a9a9a;
   .author {
     color: $gray-color;
     font-weight: 600;
-    transition: 0.4s;
+    transition: 0.2s;
 
     &:hover {
       color: white;
@@ -40,7 +40,7 @@ $gray-color: #9a9a9a;
 
   .icon-class {
     fill: $gray-color;
-    transition: 0.4s;
+    transition: 0.2s;
 
     &:hover {
       fill: white;

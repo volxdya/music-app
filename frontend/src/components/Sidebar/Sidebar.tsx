@@ -32,7 +32,7 @@ export const Sidebar = observer(() => {
         {
             component: <Heart/>,
             title: "Моя коллекция",
-            link: "/like",
+            link: "/collection",
         }
     ];
 
@@ -42,6 +42,10 @@ export const Sidebar = observer(() => {
     useEffect(() => {
         user.getUserData();
         user.getMe();
+
+        if (!user.userData.isUser) {
+            console.log("исполнитель");
+        }
     }, []);
 
     return (
@@ -71,8 +75,10 @@ export const Sidebar = observer(() => {
                         <div className="user-data-block">
                             <div>
                                 <p>{user.userData.login}</p>
-                                {!user.me.isUser && (
+                                {!user.me.isUser ? (
                                     <div className="author-block mt-1">Исполнитель</div>
+                                ): (
+                                    <div className="author-block mt-1">Слушатель</div>
                                 )}
                             </div>
                         </div>

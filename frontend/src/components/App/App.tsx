@@ -7,6 +7,7 @@ import {Player} from "../Player/Player.tsx";
 import {Authorization} from "@/components/Authorization/Authorization.tsx";
 import {Registration} from "@/components/Registration/Registration.tsx";
 import {TracksPage} from "@/ui/TracksPage/TracksPage.tsx";
+import {Playlist} from "@/components/Playlist/Playlist.tsx";
 export default function App() {
     const location = useLocation();
     // const locationsForValidate: string[] = ["/auth", "/register"];
@@ -25,10 +26,11 @@ export default function App() {
                     <Routes>
                         <Route path="/" element={<MainScreen/>}/>
                         <Route path="/search" element={<Search/>}/>
-                        <Route path="/like" element={<Collection/>}/>
+                        <Route path="/collection" element={<Collection/>}/>
                         <Route path="/auth" element={<Authorization/>}/>
                         <Route path="/register" element={<Registration/>}/>
-                        <Route path="/tracks/:search/:bySearch" element={<TracksPage/>}/>
+                        <Route path="/like" element={<Playlist/>}/>
+                        <Route path="/tracks/:search/:bySearch/:isAuthor" element={<TracksPage/>}/>
                     </Routes>
                 </div>
                 {validateLocation && (

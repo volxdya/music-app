@@ -4,4 +4,5 @@ export interface IAlbum {
     likes: number;
     authorId: number;
     id: number;
+    createdAt: Date;
 }

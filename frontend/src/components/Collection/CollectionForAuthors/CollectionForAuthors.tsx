@@ -14,6 +14,7 @@ import {CircleCard} from "@/ui/Cards/CircleCard/CircleCard.tsx";
 import {Link} from "react-router-dom";
 import {ITrack} from "@/types/ITrack.ts";
 import {IAlbum} from "@/types/IAlbum.ts";
+import {getStringDate} from "@/utils/getStringDate.ts";
 
 export function CollectionForAuthors() {
 
@@ -30,7 +31,7 @@ export function CollectionForAuthors() {
 
     return (
         <>
-            <Link to={`/tracks/get_by_authorId/${user.userData.id}`}>
+            <Link to={`/tracks/get_by_authorId/${user.userData.id}/true`}>
                 <NavigationText text="Ваши популярные треки"/>
             </Link>
             <div className="mt-4 row g-0 d-flex">
@@ -46,7 +47,7 @@ export function CollectionForAuthors() {
                 <div className="col-4 px-5">
                     <h1 className="realese">Недавний релиз</h1>
                     <div className="mt-3">
-                        <AlbumCard author="whole" title="2 DAYS NO LEAN"/>
+                        <AlbumCard author="whole" title="2 DAYS NO LEAN" year="2021"/>
                     </div>
                 </div>
             </div>
@@ -85,7 +86,7 @@ export function CollectionForAuthors() {
                             <>
                                 {user.me.albums.map((item: IAlbum) => (
                                     <CarouselItem className="basis-1/7">
-                                        <AlbumCard title={item.title} author={user.userData.login}/>
+                                        <AlbumCard title={item.title} author={user.userData.login} year={getStringDate(item.createdAt, "YYYY")}/>
                                     </CarouselItem>
                                 ))}
                             </>

@@ -37,6 +37,7 @@ class User {
             this.userData.login = decoded.login;
             this.userData.firstName = decoded.firstName;
             this.userData.lastName = decoded.lastName;
+            this.userData.isUser = decoded.isUser;
         }
     }
 

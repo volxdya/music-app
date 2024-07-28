@@ -3,9 +3,10 @@ import './AlbumCard.scss';
 interface Props {
     title: string;
     author: string;
+    year: string;
 }
 
-export function AlbumCard({title, author}: Props) {
+export function AlbumCard({title, author, year}: Props) {
     return (
         <div className="album-card">
             <img
@@ -16,7 +17,7 @@ export function AlbumCard({title, author}: Props) {
             <div className="mt-1">
                 <p className="album-title">{title}</p>
                 <p className="album-author">{author}</p>
-                <p className="album-year">2021</p>
+                <p className="album-year">{year}</p>
             </div>
         </div>
     );
