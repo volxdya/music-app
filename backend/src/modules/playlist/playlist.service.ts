@@ -5,6 +5,7 @@ import { CreatePlaylistDto } from './dto/createPlaylistDto';
 import { TrackService } from '../track/track.service';
 import { AddToPlaylistDto } from './dto/addToPlaylistDto';
 import { Track } from '../track/track.model';
+import { CheckLikeDto } from './dto/checkLikeDto';
 
 @Injectable()
 export class PlaylistService {
@@ -37,5 +38,20 @@ export class PlaylistService {
     await playlist.$add('tracks', track);
 
     return playlist;
+  }
+
+  async checkTrackLike(dto: CheckLikeDto) {
+    const playlist = await this.playlistRepostitory.findOne({
+      where: { id: dto.playlistId },
+      include: [Track],
+    });
+
+    for (let i = 0; i < playlist.tracks.length; i++) {
+      if (dto.trackId === playlist.tracks[i].id) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }

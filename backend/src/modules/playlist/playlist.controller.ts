@@ -2,6 +2,7 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { PlaylistService } from './playlist.service';
 import { CreatePlaylistDto } from './dto/createPlaylistDto';
 import { AddToPlaylistDto } from './dto/addToPlaylistDto';
+import {CheckLikeDto} from "./dto/checkLikeDto";
 
 @Controller('playlist')
 export class PlaylistController {
@@ -20,5 +21,10 @@ export class PlaylistController {
   @Post(`/add_track`)
   addTrack(@Body() dto: AddToPlaylistDto) {
     return this.playlistService.addTrack(dto);
+  }
+
+  @Post(`/check_like`)
+  checkLike(@Body() dto: CheckLikeDto) {
+    return this.playlistService.checkTrackLike(dto);
   }
 }
