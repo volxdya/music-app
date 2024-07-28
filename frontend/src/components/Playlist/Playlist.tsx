@@ -6,7 +6,7 @@ export function Playlist() {
         <>
             <HeaderMusic/>
 
-            <div class="mt-5">
+            <div className="mt-5">
                 <TrackCard title="test" author="Heronwater"/>
                 <TrackCard title="test" author="Heronwater"/>
                 <TrackCard title="test" author="Heronwater"/>
