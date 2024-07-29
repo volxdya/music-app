@@ -25,7 +25,15 @@ export class AuthorService {
   async getOne(login: string) {
     const author: Author = await this.authorRepository.findOne({
       where: { login },
-      include: [Track, Album],
+      include: { all: true },
+    });
+
+    return author;
+  }
+
+  async getById(id: number) {
+    const author: Author = await this.authorRepository.findOne({
+      where: { id },
     });
 
     return author;

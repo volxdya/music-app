@@ -3,11 +3,12 @@ import {TrackCard} from "@/ui/Cards/TrackCard/TrackCard.tsx";
 import {NavigationText} from "@/ui/Text/NavigationText/NavgiationText.tsx";
 import {CreatePlaylistCard} from "@/ui/Cards/PlaylistCard/CreatePlaylistCard.tsx";
 import {getItem} from "@/utils/localStorage.ts";
-import user, {IPlaylist} from "@/store/user.ts";
+import user from "@/store/user.ts";
 import {PlaylistCard} from "@/ui/Cards/PlaylistCard/PlaylistCard.tsx";
 import axios from "axios";
 import {useEffect} from "react";
 import {observer} from "mobx-react-lite";
+import {IPlaylist} from "@/types/IPlaylist.ts";
 
 export const CollectionForUsers = observer(() => {
 
@@ -41,12 +42,11 @@ export const CollectionForUsers = observer(() => {
             </div>
 
             <div className="mt-4 d-flex flex-wrap gap-1 track-cards">
-                <TrackCard/>
-                <TrackCard/>
-                <TrackCard/>
-                <TrackCard/>
-                <TrackCard/>
-                <TrackCard/>
+                <TrackCard id={1} title="qwe" author="123"/>
+                <TrackCard id={1} title="qwe" author="123"/>
+                <TrackCard id={1} title="qwe" author="123"/>
+                <TrackCard id={1} title="qwe" author="123"/>
+                <TrackCard id={1} title="qwe" author="123"/>
             </div>
 
             <div className="mt-4">

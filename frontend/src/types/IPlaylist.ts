@@ -1,3 +1,5 @@
+import {ITrack} from "@/types/ITrack.ts";
+
 export interface IPlaylist {
     description: string;
     title: string;
@@ -5,4 +7,5 @@ export interface IPlaylist {
     avatarUrl: string;
     likes: number;
     id: number;
+    tracks: ITrack[]
 }

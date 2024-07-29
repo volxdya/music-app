@@ -25,4 +25,9 @@ export class AuthorController {
   search(@Param('login') login: string) {
     return this.authorService.search(login);
   }
+
+  @Get(`/get_by_id/:id`)
+  getById(@Param('id') id: number) {
+    return this.authorService.getById(id);
+  }
 }

@@ -8,6 +8,7 @@ import {Authorization} from "@/components/Authorization/Authorization.tsx";
 import {Registration} from "@/components/Registration/Registration.tsx";
 import {TracksPage} from "@/ui/TracksPage/TracksPage.tsx";
 import {Playlist} from "@/components/Playlist/Playlist.tsx";
+import {Tracks} from "@/components/Tracks/Tracks.tsx";
 export default function App() {
     const location = useLocation();
     // const locationsForValidate: string[] = ["/auth", "/register"];
@@ -30,6 +31,7 @@ export default function App() {
                         <Route path="/auth" element={<Authorization/>}/>
                         <Route path="/register" element={<Registration/>}/>
                         <Route path="/like" element={<Playlist/>}/>
+                        <Route path="/tracks" element={<Tracks/>}/>
                         <Route path="/tracks/:search/:bySearch/:isAuthor" element={<TracksPage/>}/>
                     </Routes>
                 </div>

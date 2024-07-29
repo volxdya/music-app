@@ -1,5 +1,5 @@
 
-export const defaultValueUser = {
+export const dfUser = {
     id: 0,
     login: "",
     firstName: "",
@@ -7,7 +7,7 @@ export const defaultValueUser = {
     isUser: false
 }
 
-export const defaultValueMe = {
+export const dfMe = {
     id: 0,
     login: "",
     firstName: "",

@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { PlaylistService } from './playlist.service';
 import { CreatePlaylistDto } from './dto/createPlaylistDto';
-import { AddToPlaylistDto } from './dto/addToPlaylistDto';
-import {CheckLikeDto} from "./dto/checkLikeDto";
+import { UsePlaylistDto } from './dto/usePlaylistDto';
+import { CheckLikeDto } from './dto/checkLikeDto';
 
 @Controller('playlist')
 export class PlaylistController {
@@ -19,12 +19,20 @@ export class PlaylistController {
   }
 
   @Post(`/add_track`)
-  addTrack(@Body() dto: AddToPlaylistDto) {
+  addTrack(@Body() dto: UsePlaylistDto) {
     return this.playlistService.addTrack(dto);
   }
 
   @Post(`/check_like`)
   checkLike(@Body() dto: CheckLikeDto) {
     return this.playlistService.checkTrackLike(dto);
+  }
+
+  @Delete(`/delete_track/:trackId/:playlistId`)
+  deleteTrack(
+    @Param('trackId') trackId: number,
+    @Param('playlistId') playlistId: number,
+  ) {
+    return this.playlistService.deleteTrack(trackId, playlistId);
   }
 }

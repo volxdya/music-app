@@ -42,8 +42,9 @@ export class TrackService {
   }
 
   async getById(trackId: number) {
-    const track = await this.trackRepository.findOne({
+    const track: Track = await this.trackRepository.findOne({
       where: { id: trackId },
+      include: { all: true },
     });
 
     return track;

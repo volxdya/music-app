@@ -3,9 +3,11 @@ import { InjectModel } from '@nestjs/sequelize';
 import { Playlist } from './playlist.model';
 import { CreatePlaylistDto } from './dto/createPlaylistDto';
 import { TrackService } from '../track/track.service';
-import { AddToPlaylistDto } from './dto/addToPlaylistDto';
+import { UsePlaylistDto } from './dto/usePlaylistDto';
 import { Track } from '../track/track.model';
 import { CheckLikeDto } from './dto/checkLikeDto';
+import {Album} from "../album/album.model";
+import {Author} from "../author/author.model";
 
 @Injectable()
 export class PlaylistService {
@@ -29,13 +31,22 @@ export class PlaylistService {
     return playlist;
   }
 
-  async addTrack(dto: AddToPlaylistDto) {
-    const { trackId, playlistId } = dto;
+  async addTrack(dto: UsePlaylistDto) {
+    const track = await this.trackService.getById(dto.trackId);
 
-    const track = await this.trackService.getById(trackId);
-
-    const playlist = await this.getById(playlistId);
+    const playlist = await this.getById(dto.playlistId);
     await playlist.$add('tracks', track);
+
+    return playlist;
+  }
+
+  async deleteTrack(trackId: number, playlistId: number) {
+    const track = await this.trackService.getById(trackId);
+    const playlist = await this.playlistRepostitory.findOne({
+      where: { id: playlistId },
+    });
+
+    await playlist.$remove('tracks', track);
 
     return playlist;
   }

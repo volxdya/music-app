@@ -1,7 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import {jwtDecode, JwtPayload} from "jwt-decode";
 import {getItem} from "@/utils/localStorage.ts";
-import {defaultValueMe, defaultValueUser} from "@/store/defaultValues/defaultValueUser.ts";
+import {dfMe, dfUser} from "@/store/defaultValues/dfUser.ts";
 import axios from "axios";
 import {IUser} from "@/types/IUser.ts";
 
@@ -20,8 +20,8 @@ class User {
         makeAutoObservable(this);
     }
 
-    userData: loginJwt = defaultValueUser;
-    me: IUser = defaultValueMe;
+    userData: loginJwt = dfUser;
+    me: IUser = dfMe;
 
 
     getUserData() {
