@@ -5,7 +5,6 @@ import {DropdownTrack} from "@/ui/Cards/TrackCard/Dropdown/DropdownTrack.tsx";
 import {Play} from "@/icons/Player/Play.tsx";
 import {useAddToPlaylist} from "@/hooks/useAddToPlaylist.ts";
 import {useEffect} from "react";
-import user from "@/store/user.ts";
 import {useCheckLike} from "@/hooks/useCheckLike.ts";
 import {FillHeart} from "@/icons/Hearts/FillHeart.tsx";
 
@@ -16,12 +15,12 @@ interface Props {
 }
 
 export function TrackCard({title, author, id}: Props) {
-    const {createLike} = useAddToPlaylist(id, user.me.playlists[0].id);
-    const {isLike, checkLike} = useCheckLike(user.me.playlists[0].id, id);
+    const {createLike} = useAddToPlaylist(id);
+    const {isLike, checkLike} = useCheckLike(id);
 
     useEffect(() => {
         checkLike();
-    });
+    }, []);
 
     return (
         <div className="d-flex track-card justify-content-between align-items-center">
@@ -50,7 +49,7 @@ export function TrackCard({title, author, id}: Props) {
                     </button>
                 )}
                 <BreakHeart/>
-                <DropdownTrack id={id} playlistId={user.me.playlists[0].id}/>
+                <DropdownTrack id={id}/>
                 <div className="time">03:36</div>
             </div>
         </div>

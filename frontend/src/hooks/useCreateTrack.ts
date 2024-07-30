@@ -11,13 +11,13 @@ export const useCreateTrack = () => {
         user.getUserData();
     }, []);
 
-    const handleSubmitTrack = async (e: FormEvent, title: string) => {
+    const handleSubmitTrack = async (e: FormEvent, title: string, avatarUrl: string) => {
         stopFormBehavior(e);
 
         await axios.post(`http://localhost:3010/track/create`, {
             title: title,
             trackUrl: "",
-            avatarUrl: "",
+            avatarUrl: avatarUrl,
             authorId: user.userData.id,
             isTrack: true
         }).then((resp) => {

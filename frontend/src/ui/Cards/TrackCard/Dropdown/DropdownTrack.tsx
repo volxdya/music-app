@@ -10,13 +10,12 @@ import {FillHeart} from "@/icons/Hearts/FillHeart.tsx";
 
 interface Props {
     id: number;
-    playlistId: number;
 }
 
-export function DropdownTrack({id, playlistId}: Props) {
+export function DropdownTrack({id}: Props) {
 
-    const {createLike} = useAddToPlaylist(id, playlistId);
-    const {isLike, checkLike} = useCheckLike(playlistId, id);
+    const {createLike} = useAddToPlaylist(id);
+    const {isLike, checkLike} = useCheckLike(id);
 
     useEffect(() => {
         checkLike();

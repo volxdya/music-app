@@ -11,13 +11,13 @@ export const useCreateAlbum = () => {
         user.getUserData();
     }, []);
 
-    const handleSubmitAlbum = async (e: FormEvent, title: string) => {
+    const handleSubmitAlbum = async (e: FormEvent, title: string, avatarUrl: string) => {
         stopFormBehavior(e);
 
         await axios.post(`http://localhost:3010/album/create`, {
             title: title,
             trackUrl: "",
-            avatarUrl: "",
+            avatarUrl: avatarUrl,
             authorId: user.userData.id,
             isTrack: true
         }).then((resp) => {

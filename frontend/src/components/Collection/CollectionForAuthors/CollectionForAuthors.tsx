@@ -15,11 +15,14 @@ import {Link} from "react-router-dom";
 import {ITrack} from "@/types/ITrack.ts";
 import {IAlbum} from "@/types/IAlbum.ts";
 import {getStringDate} from "@/utils/getStringDate.ts";
+import {UploadDropzone} from "@bytescale/upload-widget-react";
 
 export function CollectionForAuthors() {
 
     const [titleTrack, setTitleTrack] = useState("");
     const [titleAlbum, setTitleAlbum] = useState("");
+    const [avatarUrlTrack, setAvatarUrlTrack] = useState("");
+    const [avatarUrlAlbum, setAvatarUrlAlbum] = useState("");
 
     const {handleSubmitTrack} = useCreateTrack();
     const {handleSubmitAlbum} = useCreateAlbum();
@@ -28,6 +31,18 @@ export function CollectionForAuthors() {
         user.getUserData();
         user.getMe();
     }, []);
+
+
+    const options = {
+        apiKey: "public_W142iiV2YrUy17pt29Wuyzxdrpe6", // This is your API key.
+        maxFileCount: 1,
+        showFinishButton: true, // Note: You must use 'onUpdate' if you set 'showFinishButton: false' (default).
+        styles: {
+            colors: {
+                primary: "#bb0a39"
+            }
+        },
+    };
 
     return (
         <>
@@ -39,7 +54,7 @@ export function CollectionForAuthors() {
                     {user.me.tracks && (
                         <>
                             {user.me.tracks.slice(0, 5).map((item: ITrack) => (
-                                <TrackCard title={item.title} author={user.userData.login}/>
+                                <TrackCard title={item.title} author={user.userData.login} id={item.id}/>
                             ))}
                         </>
                     )}
@@ -59,20 +74,31 @@ export function CollectionForAuthors() {
                     </div>
                 }
                 content={
-                    <form className="me-3 mx-3" onSubmit={(e) => handleSubmitTrack(e, titleTrack)}>
-                        <input type="text" placeholder="Название" className="mt-2" onChange={onChange(setTitleTrack)}/>
+                    <form className="mx-3 me-3" onSubmit={(e) => {
+                        handleSubmitTrack(e, titleTrack, avatarUrlTrack);
+                        setAvatarUrlTrack("");
+                    }}>
+                        <div>
+                            <input type="text" placeholder="Название" className="mt-2"
+                                   onChange={onChange(setTitleTrack)}/>
 
-                        <label className="input-file mt-3">
-                            <input type="file" name="file"/>
-                            <span>Выберите картинку</span>
-                        </label>
 
-                        <label className="input-file mt-3">
-                            <input type="file" name="file"/>
-                            <span>Выберите трек</span>
-                        </label>
+                            <UploadDropzone
+                                options={options}
+                                onUpdate={({uploadedFiles}) => setAvatarUrlTrack(uploadedFiles.map(x => x.fileUrl).join("\n"))}
+                                onComplete={files => alert(files.map(x => x.fileUrl).join("\n"))}
+                                width="600px"
+                                height="375px"
+                            />
 
-                        <button className="add-track w-100 mt-5">Добавить</button>
+
+                            <label className="input-file mt-3">
+                                <input type="file" name="file"/>
+                                <span>Выберите трек</span>
+                            </label>
+
+                            <button className="add-track w-100 mt-5">Добавить</button>
+                        </div>
                     </form>
 
                 }
@@ -86,7 +112,8 @@ export function CollectionForAuthors() {
                             <>
                                 {user.me.albums.map((item: IAlbum) => (
                                     <CarouselItem className="basis-1/7">
-                                        <AlbumCard title={item.title} author={user.userData.login} year={getStringDate(item.createdAt, "YYYY")}/>
+                                        <AlbumCard title={item.title} author={user.userData.login}
+                                                   year={getStringDate(item.createdAt, "YYYY")}/>
                                     </CarouselItem>
                                 ))}
                             </>
@@ -100,14 +127,20 @@ export function CollectionForAuthors() {
                         </div>
                     }
                     content={
-                        <form className="me-3 mx-3" onSubmit={(e) => handleSubmitAlbum(e, titleAlbum)}>
+                        <form className="me-3 mx-3" onSubmit={(e) => {
+                            setAvatarUrlAlbum("");
+                            handleSubmitAlbum(e, titleAlbum, avatarUrlAlbum)}
+                        }>
                             <input type="text" placeholder="Название" className="mt-2"
                                    onChange={onChange(setTitleAlbum)} title={titleAlbum}/>
 
-                            <label className="input-file mt-3">
-                                <input type="file" name="file"/>
-                                <span>Выберите картинку</span>
-                            </label>
+                            <UploadDropzone
+                                options={options}
+                                onUpdate={({uploadedFiles}) => setAvatarUrlAlbum(uploadedFiles.map(x => x.fileUrl).join("\n"))}
+                                onComplete={files => alert(files.map(x => x.fileUrl).join("\n"))}
+                                width="600px"
+                                height="375px"
+                            />
 
                             <label className="input-file mt-3">
                                 <input type="file" name="file"/>

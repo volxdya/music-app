@@ -13,7 +13,7 @@ export default function App() {
     const location = useLocation();
     // const locationsForValidate: string[] = ["/auth", "/register"];
 
-    const validateLocation: boolean = location.pathname !== "/auth" && location.pathname !== "/register";
+    const validateLocation: boolean = location.pathname !== "/auth" && location.pathname !== "/register" && location.pathname !== "/test";
 
     return (
         <div className="row g-0">

@@ -57,6 +57,7 @@
   background-color: #eee;
 }
 
+
 .add-track {
   background: #bb0a39;
   padding: 10px;
@@ -67,4 +68,19 @@
     background: #9b0606;
   }
 
+}
+
+.upload-image-btn {
+  content: "qweqw";
+  width: 100%;
+  margin-top: 15px;
+  background: none;
+  border: 1px solid #bb0a39;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 15px;
+
+  &:hover {
+    outline: 1px solid #310000;
+  }
 }
