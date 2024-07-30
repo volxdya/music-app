@@ -15,7 +15,7 @@ import {Link} from "react-router-dom";
 import {ITrack} from "@/types/ITrack.ts";
 import {IAlbum} from "@/types/IAlbum.ts";
 import {getStringDate} from "@/utils/getStringDate.ts";
-import {UploadDropzone} from "@bytescale/upload-widget-react";
+import {UploadFiles} from "@/components/UploadFiles/UploadFiles.tsx";
 
 export function CollectionForAuthors() {
 
@@ -34,17 +34,8 @@ export function CollectionForAuthors() {
         user.getMe();
     }, []);
 
+    console.log(trackUrl);
 
-    const options = {
-        apiKey: "public_W142iiV2YrUy17pt29Wuyzxdrpe6", // This is your API key.
-        maxFileCount: 1,
-        showFinishButton: true, // Note: You must use 'onUpdate' if you set 'showFinishButton: false' (default).
-        styles: {
-            colors: {
-                primary: "#bb0a39"
-            }
-        },
-    };
 
     return (
         <>
@@ -85,25 +76,8 @@ export function CollectionForAuthors() {
                             <input type="text" placeholder="Название" className="mt-2"
                                    onChange={onChange(setTitleTrack)}/>
 
-
-                            <UploadDropzone
-                                options={options}
-                                onUpdate={({uploadedFiles}) => setAvatarUrlTrack(uploadedFiles.map(x => x.fileUrl).join("\n"))}
-                                onComplete={files => alert(files.map(x => x.fileUrl).join("\n"))}
-                                width="600px"
-                                height="375px"
-                            />
-
-
-                            <UploadDropzone
-                                options={options}
-                                onUpdate={({uploadedFiles}) => setTrackUrl(uploadedFiles.map(x => x.fileUrl).join("\n"))}
-                                onComplete={files => alert(files.map(x => x.fileUrl).join("\n"))}
-                                width="600px"
-                                height="375px"
-                            />
-
-                            {trackUrl}
+                            <UploadFiles setFn={setAvatarUrlTrack}/>
+                            <UploadFiles setFn={setTrackUrl}/>
 
                             <button className="add-track w-100 mt-5">Добавить</button>
                         </div>
@@ -143,13 +117,7 @@ export function CollectionForAuthors() {
                             <input type="text" placeholder="Название" className="mt-2"
                                    onChange={onChange(setTitleAlbum)} title={titleAlbum}/>
 
-                            <UploadDropzone
-                                options={options}
-                                onUpdate={({uploadedFiles}) => setAvatarUrlAlbum(uploadedFiles.map(x => x.fileUrl).join("\n"))}
-                                onComplete={files => alert(files.map(x => x.fileUrl).join("\n"))}
-                                width="600px"
-                                height="375px"
-                            />
+                            <UploadFiles setFn={setAvatarUrlAlbum}/>
 
                             <label className="input-file mt-3">
                                 <input type="file" name="file"/>
