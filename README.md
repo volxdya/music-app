@@ -24,6 +24,7 @@
 5. TailwindCSS / Bootstrap5.3 + shadcn/ui
 6. Vite
 7. Axios
+8. Bytescale API
 
 <h2>Backend: </h2>
 
