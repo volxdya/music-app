@@ -24,6 +24,8 @@ export function CollectionForAuthors() {
     const [avatarUrlTrack, setAvatarUrlTrack] = useState("");
     const [avatarUrlAlbum, setAvatarUrlAlbum] = useState("");
 
+    const [trackUrl, setTrackUrl] = useState("");
+
     const {handleSubmitTrack} = useCreateTrack();
     const {handleSubmitAlbum} = useCreateAlbum();
 
@@ -54,7 +56,8 @@ export function CollectionForAuthors() {
                     {user.me.tracks && (
                         <>
                             {user.me.tracks.slice(0, 5).map((item: ITrack) => (
-                                <TrackCard title={item.title} author={user.userData.login} id={item.id} img={item.avatarUrl}/>
+                                <TrackCard title={item.title} author={user.userData.login} id={item.id}
+                                           img={item.avatarUrl}/>
                             ))}
                         </>
                     )}
@@ -75,7 +78,7 @@ export function CollectionForAuthors() {
                 }
                 content={
                     <form className="mx-3 me-3" onSubmit={(e) => {
-                        handleSubmitTrack(e, titleTrack, avatarUrlTrack);
+                        handleSubmitTrack(e, titleTrack, avatarUrlTrack, trackUrl);
                         setAvatarUrlTrack("");
                     }}>
                         <div>
@@ -92,10 +95,15 @@ export function CollectionForAuthors() {
                             />
 
 
-                            <label className="input-file mt-3">
-                                <input type="file" name="file"/>
-                                <span>Выберите трек</span>
-                            </label>
+                            <UploadDropzone
+                                options={options}
+                                onUpdate={({uploadedFiles}) => setTrackUrl(uploadedFiles.map(x => x.fileUrl).join("\n"))}
+                                onComplete={files => alert(files.map(x => x.fileUrl).join("\n"))}
+                                width="600px"
+                                height="375px"
+                            />
+
+                            {trackUrl}
 
                             <button className="add-track w-100 mt-5">Добавить</button>
                         </div>
@@ -129,7 +137,8 @@ export function CollectionForAuthors() {
                     content={
                         <form className="me-3 mx-3" onSubmit={(e) => {
                             setAvatarUrlAlbum("");
-                            handleSubmitAlbum(e, titleAlbum, avatarUrlAlbum)}
+                            handleSubmitAlbum(e, titleAlbum, avatarUrlAlbum)
+                        }
                         }>
                             <input type="text" placeholder="Название" className="mt-2"
                                    onChange={onChange(setTitleAlbum)} title={titleAlbum}/>
