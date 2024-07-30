@@ -3,8 +3,6 @@ import { InjectModel } from '@nestjs/sequelize';
 import { Author } from './author.model';
 import { CreateUserDto } from '../user/dto/createUserDto';
 import * as bcrypt from 'bcrypt';
-import { Track } from '../track/track.model';
-import { Album } from '../album/album.model';
 
 @Injectable()
 export class AuthorService {

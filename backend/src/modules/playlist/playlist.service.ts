@@ -6,8 +6,6 @@ import { TrackService } from '../track/track.service';
 import { UsePlaylistDto } from './dto/usePlaylistDto';
 import { Track } from '../track/track.model';
 import { CheckLikeDto } from './dto/checkLikeDto';
-import {Album} from "../album/album.model";
-import {Author} from "../author/author.model";
 
 @Injectable()
 export class PlaylistService {
