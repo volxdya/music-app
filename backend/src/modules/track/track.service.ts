@@ -17,7 +17,7 @@ export class TrackService {
     if (dto.isTrack) {
       const newAlbum: Album = await this.albumService.create({
         title: dto.title,
-        avatarUrl: '',
+        avatarUrl: dto.avatarUrl,
         authorId: dto.authorId,
       });
 

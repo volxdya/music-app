@@ -4,13 +4,14 @@ interface Props {
     title: string;
     author: string;
     year: string;
+    img?: string;
 }
 
-export function AlbumCard({title, author, year}: Props) {
+export function AlbumCard({title, author, year, img}: Props) {
     return (
         <div className="album-card">
             <img
-                src="https://images.genius.com/78bad7a7b8c84b0dfb8db76ad2ffe8f9.1000x1000x1.png"
+                src={img !== "" && img ? img : "https://images.genius.com/78bad7a7b8c84b0dfb8db76ad2ffe8f9.1000x1000x1.png"}
                 alt={"Картинка альбома"}
                 className="album-img"
             />

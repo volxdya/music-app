@@ -94,8 +94,12 @@ export function CollectionForAuthors() {
                             <>
                                 {user.me.albums.map((item: IAlbum) => (
                                     <CarouselItem className="basis-1/7">
-                                        <AlbumCard title={item.title} author={user.userData.login}
-                                                   year={getStringDate(item.createdAt, "YYYY")}/>
+                                        <AlbumCard
+                                            title={item.title}
+                                            author={user.userData.login}
+                                            year={getStringDate(item.createdAt, "YYYY")}
+                                            img={item.avatarUrl}
+                                        />
                                     </CarouselItem>
                                 ))}
                             </>
