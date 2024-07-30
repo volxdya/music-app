@@ -12,9 +12,10 @@ interface Props {
     title: string;
     author: string;
     id: number;
+    img?: string;
 }
 
-export function TrackCard({title, author, id}: Props) {
+export function TrackCard({title, author, id, img}: Props) {
     const {createLike} = useAddToPlaylist(id);
     const {isLike, checkLike} = useCheckLike(id);
 
@@ -26,10 +27,11 @@ export function TrackCard({title, author, id}: Props) {
         <div className="d-flex track-card justify-content-between align-items-center">
             <div className="d-flex gap-3">
                 <div className="image-container">
-                    <img src="https://i.pinimg.com/736x/6e/85/cf/6e85cf5884fc21b1c2e0a42f9c10b00d.jpg" alt={`Картинка трека ${title}`}/>
+                        <img src={img !== "" && img ? img : "https://i.pinimg.com/736x/6e/85/cf/6e85cf5884fc21b1c2e0a42f9c10b00d.jpg"}
+                             alt={`Картинка трека ${title}`}/>
                     <div className="play-btn-container">
                         <button className="play-btn">
-                            <Play/>
+                        <Play/>
                         </button>
                     </div>
                 </div>

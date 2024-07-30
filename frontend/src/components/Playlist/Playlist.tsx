@@ -23,7 +23,12 @@ export function Playlist() {
                     <>
                         {playlist.tracks.reverse().map((item: ITrack) => (
                             <>
-                                <TrackCard id={item.id} author="test" title={item.title} key={uniqid()}/>
+                                <TrackCard
+                                    id={item.id} author="test"
+                                    title={item.title}
+                                    img={item.avatarUrl}
+                                    key={uniqid()}
+                                />
                             </>
                         ))}
                     </>

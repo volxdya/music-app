@@ -9,6 +9,7 @@ import axios from "axios";
 import {useEffect} from "react";
 import {observer} from "mobx-react-lite";
 import {IPlaylist} from "@/types/IPlaylist.ts";
+import uniqid from "uniqid";
 
 export const CollectionForUsers = observer(() => {
 
@@ -64,7 +65,11 @@ export const CollectionForUsers = observer(() => {
                     {getItem("token") && (
                         <>
                             {user.me.playlists.map((item: IPlaylist) => (
-                                <PlaylistCard title={item.title} imageUrl={item.avatarUrl}/>
+                                <PlaylistCard
+                                    title={item.title}
+                                    imageUrl={item.avatarUrl}
+                                    key={uniqid()}
+                                />
                             ))}
                         </>
                     )}
