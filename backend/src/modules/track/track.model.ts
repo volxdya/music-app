@@ -38,6 +38,9 @@ export class Track extends Model<Track, ITrack> {
   @Column({ type: DataType.STRING, defaultValue: '' })
   trackUrl: string;
 
+  @Column({ type: DataType.INTEGER, defaultValue: 0 })
+  auditions: number;
+
   @BelongsToMany(() => Playlist, () => PlaylistTracks)
   playlists: Playlist[];
 

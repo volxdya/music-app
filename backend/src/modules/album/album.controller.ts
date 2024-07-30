@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Post} from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { AlbumService } from './album.service';
 import { CreateAlbumDto } from './dto/createAlbumDto';
 
@@ -14,5 +14,15 @@ export class AlbumController {
   @Post(`/create`)
   create(@Body() dto: CreateAlbumDto) {
     return this.albumService.create(dto);
+  }
+
+  @Get(`/search/:title`)
+  search(@Param('title') title: string) {
+    return this.albumService.search(title);
+  }
+
+  @Get(`/get_by_id/:id`)
+  getById(@Param('id') id: number) {
+    return this.albumService.getById(id);
   }
 }

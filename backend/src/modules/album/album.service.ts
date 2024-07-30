@@ -10,16 +10,29 @@ export class AlbumService {
   ) {}
 
   async create(dto: CreateAlbumDto) {
-    const album: Album = await this.albumRepository.create(dto);
-
-    return album;
+    return await this.albumRepository.create(dto);
   }
 
   async getAll() {
+    return await this.albumRepository.findAll({
+      include: { all: true },
+    });
+  }
+
+  async getById(id: number) {
+    return await this.albumRepository.findOne({
+      where: { id },
+      include: { all: true },
+    });
+  }
+
+  async search(title: string) {
     const albums: Album[] = await this.albumRepository.findAll({
       include: { all: true },
     });
 
-    return albums;
+    return albums.filter((item) =>
+      item.title.toLowerCase().includes(title.toLowerCase()),
+    );
   }
 }

@@ -30,4 +30,9 @@ export class TrackController {
   getByAuthorId(@Param('authorId') authorId: number) {
     return this.trackService.getTracksByAuthor(authorId);
   }
+
+  @Get(`/get_chart`)
+  getChart() {
+    return this.trackService.getChart();
+  }
 }

@@ -69,4 +69,16 @@ export class TrackService {
 
     return tracks;
   }
+
+  async getChart() {
+    const tracks = this.trackRepository.findAll({
+      order: [
+        ['auditions', 'DESC'],
+        // ['createdAt', 'DESC'],
+      ],
+      limit: 3,
+    });
+
+    return tracks;
+  }
 }

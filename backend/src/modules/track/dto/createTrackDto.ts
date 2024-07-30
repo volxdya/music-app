@@ -4,4 +4,5 @@ export class CreateTrackDto {
   readonly trackUrl: string;
   readonly authorId: number;
   readonly isTrack: boolean;
+  readonly auditions: number;
 }
