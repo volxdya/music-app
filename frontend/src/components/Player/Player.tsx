@@ -8,7 +8,7 @@ import {SkipBack} from "@/icons/Player/SkipBack.tsx";
 import {MainPlayerDropdown} from "@/components/Player/Dropdown/MainPlayerDropdown.tsx";
 import {SettingsPlayerDropdown} from "@/components/Player/Dropdown/SettingsPlayerDropdown.tsx";
 import {observer} from "mobx-react-lite";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useRef} from "react";
 import {Pause} from "@/icons/Player/Pause.tsx";
 import player from "@/store/player.ts";
 import {useTrackInfo} from "@/hooks/useTrackInfo.ts";
@@ -16,29 +16,31 @@ import {useTrackInfo} from "@/hooks/useTrackInfo.ts";
 export const Player = observer(() => {
 
     const refAudio = useRef<HTMLMediaElement>();
-    const [isPlaying, setIsPlaying] = useState(true);
-    const [time, setTime] = useState(0);
+
+    const isPlaying: boolean = player.current.isPlay;
+    const time: number = player.current.time;
 
     const play = () => {
         refAudio.current?.play();
-        console.log("play")
-
-        setIsPlaying(true);
+        player.current.isPlay = true;
     }
 
     const pause = () => {
         refAudio.current?.pause();
-        console.log("pause")
-
-        setIsPlaying(false);
+        player.current.isPlay = false;
     }
 
+    useEffect(() => {
+        if (player.current.isPlay) {
+            refAudio.current?.play();
+        }
+    });
 
     useEffect(() => {
         const timer = setInterval(() => {
             if (refAudio.current) {
-                if (isPlaying && time < refAudio.current.duration) {
-                    setTime((time) => time + 1);
+                if (isPlaying && player.current.time < refAudio.current.duration) {
+                    player.current.time += 1;
                 }
             }
 
@@ -47,34 +49,36 @@ export const Player = observer(() => {
         if (refAudio.current) {
             if (time >= refAudio.current.duration) {
                 pause();
-
-                setIsPlaying(false);
-                setTime(0);
+                player.current.time = 0;
             }
         }
 
         return () => {
             clearInterval(timer);
         }
-    }, [time, isPlaying]);
+    }, [time, isPlaying, player.current.isPlay]);
 
 
-    function getPadTimeZero(time: any) {
+    function getPadTimeZero(time: number) {
         return time.toString().padStart(2, "0");
     }
 
+    // function getCorrect(minutesFn: string, secondsFn: string, timeFn: number): string[] {
+    //     minutesFn = getPadTimeZero(Math.floor(time / 60));
+    //     secondsFn = getPadTimeZero(timeFn - Number(minutesFn) * 60);
+    //
+    //     return [minutesFn, secondsFn];
+    // }
+
     const minutes = getPadTimeZero(Math.floor(time / 60));
-    const seconds = getPadTimeZero(time - minutes * 60);
+    const seconds = getPadTimeZero(time - Number(minutes) * 60);
 
     let durationMinutes;
     let durationSeconds;
 
     if (refAudio.current?.duration) {
         durationMinutes = getPadTimeZero(Math.floor(refAudio.current?.duration / 60));
-        durationSeconds = getPadTimeZero(Math.floor(refAudio.current?.duration - durationMinutes * 60));
-    } else {
-        durationMinutes = "XX";
-        durationSeconds = "XX";
+        durationSeconds = getPadTimeZero(Math.floor(refAudio.current?.duration - Number(durationMinutes) * 60));
     }
 
     const [track] = useTrackInfo(player.current.trackId);

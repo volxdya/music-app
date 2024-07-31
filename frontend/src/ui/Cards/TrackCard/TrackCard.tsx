@@ -5,31 +5,52 @@ import {DropdownTrack} from "@/ui/Cards/TrackCard/Dropdown/DropdownTrack.tsx";
 import {Play} from "@/icons/Player/Play.tsx";
 import {useAddToPlaylist} from "@/hooks/useAddToPlaylist.ts";
 import player from "@/store/player.ts";
+import {useEffect, useState} from "react";
+import {observer} from "mobx-react-lite";
+import track from "@/store/track.ts";
+import {Pause} from "@/icons/Player/Pause.tsx";
 
 interface Props {
     title: string;
     author: string;
     id: number;
     img?: string;
+    where: string;
+    byFind: string | number;
 }
 
-export function TrackCard({title, author, id, img}: Props) {
-    const {createLike} = useAddToPlaylist(id);
+export const TrackCard = observer(({title, author, id, img, where, byFind}: Props) => {
+    const { createLike } = useAddToPlaylist(id);
+    const [isCurrent, setIsCurrent] = useState(false);
 
     function set() {
-        console.log(player.current.trackId);
-
         player.setCurrent({
             trackId: id,
             play: {
                 next: [""],
                 whatPlay: {
-                    title: "test",
-                    byFind: "test"
+                    title: where,
+                    byFind: byFind
                 }
             },
-        })
+            isPlay: true,
+            time: 0
+        });
     }
+
+    function pause() {
+        console.log("pause");
+
+        player.current.isPlay = false;
+    }
+
+    useEffect(() => {
+        if (id === player.current.trackId && player.current.isPlay) {
+            setIsCurrent(true);
+        } else {
+            setIsCurrent(false);
+        }
+    }, [player.current.trackId, id, player.current.isPlay]);
 
     return (
         <div className="d-flex track-card justify-content-between align-items-center">
@@ -37,12 +58,27 @@ export function TrackCard({title, author, id, img}: Props) {
                 <div className="image-container">
                     <img
                         src={img !== "" && img ? img : "https://i.pinimg.com/736x/6e/85/cf/6e85cf5884fc21b1c2e0a42f9c10b00d.jpg"}
+                        className={isCurrent ? "dark" : ""}
                         alt={`Картинка трека ${title}`}
                     />
                     <div className="play-btn-container">
-                        <button className="play-btn" onClick={set}>
-                            <Play/>
-                        </button>
+                        {isCurrent && (
+                            <>
+                                {player.current.isPlay && (
+                                    <div className="circle-play"></div>
+                                )}
+                            </>
+                        )}
+                        {isCurrent ? (
+                            <button className="play-btn" onClick={pause}>
+                                <Pause/>
+                            </button>
+                        ): (
+                                <button className="play-btn" onClick={set}>
+                                <Play/>
+                            </button>
+                        )}
+
                     </div>
                 </div>
                 <div>
@@ -61,4 +97,4 @@ export function TrackCard({title, author, id, img}: Props) {
             </div>
         </div>
     )
-}
+});

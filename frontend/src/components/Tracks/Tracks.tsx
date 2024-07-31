@@ -13,18 +13,13 @@ export const Tracks = observer(() => {
         <>
             {track.tracks.map((item: ITrack) => (
                 <>
-                    {item.author ? (
+                    {item.author && (
                         <TrackCard
                             author={item.author.login}
                             title={item.title} id={item.id}
                             img={item.avatarUrl}
-                        />
-                    ) : (
-                        <TrackCard
-                            author="Неизвестный автор"
-                            title={item.title}
-                            id={item.id}
-                            img={item.avatarUrl}
+                            where="track"
+                            byFind="all"
                         />
                     )}
                 </>

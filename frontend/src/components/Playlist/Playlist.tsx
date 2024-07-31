@@ -29,6 +29,8 @@ export function Playlist() {
                                     title={item.title}
                                     img={item.avatarUrl}
                                     key={uniqid()}
+                                    where="playlist"
+                                    byFind={user.me.playlists[0].id}
                                 />
                             </>
                         ))}

@@ -49,8 +49,14 @@ export function CollectionForAuthors() {
                     {user.me.tracks && (
                         <>
                             {user.me.tracks.slice(0, 5).map((item: ITrack) => (
-                                <TrackCard title={item.title} author={user.userData.login} id={item.id}
-                                           img={item.avatarUrl}/>
+                                <TrackCard
+                                    title={item.title}
+                                    author={user.userData.login}
+                                    id={item.id}
+                                    img={item.avatarUrl}
+                                    byFind={user.userData.login}
+                                    where="author"
+                                />
                             ))}
                         </>
                     )}

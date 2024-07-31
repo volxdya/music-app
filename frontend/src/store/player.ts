@@ -9,7 +9,9 @@ interface ICurrent {
             byFind: string | number;
         }; // playlist, author, track, search;
         next: Array<string>;
-    }
+    },
+    isPlay: boolean,
+    time: number
 }
 
 class Player {

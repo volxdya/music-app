@@ -1,5 +1,4 @@
 import {MainCard} from "@/ui/Cards/MainCard/MainCard.tsx";
-import {TrackCard} from "@/ui/Cards/TrackCard/TrackCard.tsx";
 import {NavigationText} from "@/ui/Text/NavigationText/NavgiationText.tsx";
 import {CreatePlaylistCard} from "@/ui/Cards/PlaylistCard/CreatePlaylistCard.tsx";
 import {getItem} from "@/utils/localStorage.ts";
@@ -48,11 +47,7 @@ export const CollectionForUsers = observer(() => {
             </div>
 
             <div className="mt-4 d-flex flex-wrap gap-1 track-cards">
-                <TrackCard id={1} title="qwe" author="123"/>
-                <TrackCard id={1} title="qwe" author="123"/>
-                <TrackCard id={1} title="qwe" author="123"/>
-                <TrackCard id={1} title="qwe" author="123"/>
-                <TrackCard id={1} title="qwe" author="123"/>
+
             </div>
 
             <div className="mt-4">

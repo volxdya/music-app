@@ -6,5 +6,7 @@ export const dfPlayer = {
             title: ""
         },
         next: []
-    }
+    },
+    isPlay: false,
+    time: 0
 }

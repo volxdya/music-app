@@ -6,6 +6,9 @@ $gray-color: #9a9a9a;
   transition: 0.2s;
   width: 100%;
 
+  .dark {
+    filter: brightness(50%);
+  }
 
   &:hover {
     background: #1c1c1c;
@@ -16,19 +19,23 @@ $gray-color: #9a9a9a;
       transition: 0.3s;
     }
 
-    .play-btn-container {
+    .play-btn {
       opacity: 1;
     }
   }
 
+  .play-btn {
+    opacity: 0;
+  }
+
   .play-btn-container {
     display: flex;
-    opacity: 0;
     width: 50px;
     height: 50px;
     position: absolute;
     top: 0;
     justify-content: center;
+    align-items: center;
     transition: 0.3s;
 
     svg {
@@ -89,5 +96,28 @@ $gray-color: #9a9a9a;
     svg {
       fill: #c41e50;
     }
+  }
+}
+
+.circle-play {
+  height: 15px;
+  width: 15px;
+  background: #c41e50;
+  border-radius: 50%;
+  position: absolute;
+  animation: animationCircle infinite 0.8s linear;
+}
+
+@keyframes animationCircle {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.3);
+  }
+
+  100% {
+    transform: scale(1);
   }
 }
