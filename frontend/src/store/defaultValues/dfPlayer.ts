@@ -8,5 +8,6 @@ export const dfPlayer = {
         next: []
     },
     isPlay: false,
-    time: 0
+    time: 0,
+    previousVolume: 1
 }

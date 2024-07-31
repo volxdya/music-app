@@ -11,7 +11,8 @@ interface ICurrent {
         next: Array<string>;
     },
     isPlay: boolean,
-    time: number
+    time: number,
+    previousVolume: number;
 }
 
 class Player {

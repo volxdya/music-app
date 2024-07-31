@@ -34,7 +34,8 @@ export const TrackCard = observer(({title, author, id, img, where, byFind}: Prop
                 }
             },
             isPlay: true,
-            time: 0
+            time: 0,
+            previousVolume: player.current.previousVolume
         });
     }
 

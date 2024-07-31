@@ -8,10 +8,13 @@ import {SkipBack} from "@/icons/Player/SkipBack.tsx";
 import {MainPlayerDropdown} from "@/components/Player/Dropdown/MainPlayerDropdown.tsx";
 import {SettingsPlayerDropdown} from "@/components/Player/Dropdown/SettingsPlayerDropdown.tsx";
 import {observer} from "mobx-react-lite";
-import {useEffect, useRef} from "react";
+import {ChangeEvent, useEffect, useRef} from "react";
 import {Pause} from "@/icons/Player/Pause.tsx";
 import player from "@/store/player.ts";
 import {useTrackInfo} from "@/hooks/useTrackInfo.ts";
+import {VolumeUp} from "@/icons/Volume/VolumeUp.tsx";
+import {VolumeDown} from "@/icons/Volume/VolumeDown.tsx";
+import {VolumeOff} from "@/icons/Volume/VolumeOff.tsx";
 
 export const Player = observer(() => {
 
@@ -19,6 +22,7 @@ export const Player = observer(() => {
 
     const isPlaying: boolean = player.current.isPlay;
     const time: number = player.current.time;
+    const prevVolume: number = player.current.previousVolume;
 
     const play = () => {
         refAudio.current?.play();
@@ -28,6 +32,26 @@ export const Player = observer(() => {
     const pause = () => {
         refAudio.current?.pause();
         player.current.isPlay = false;
+    }
+
+    const handleChangeVolume = (e: ChangeEvent<HTMLInputElement>) => {
+        if (refAudio.current) {
+            refAudio.current.volume = Number(e.target.value / 100);
+
+            player.current.previousVolume = Number(e.target.value / 100);
+        }
+    }
+
+    const offMusic = () => {
+        if (refAudio.current) {
+            refAudio.current.volume = 0;
+        }
+    }
+
+    const onMusic = () => {
+        if (refAudio.current) {
+            refAudio.current.volume = player.current.previousVolume
+        }
     }
 
     useEffect(() => {
@@ -79,6 +103,8 @@ export const Player = observer(() => {
     if (refAudio.current?.duration) {
         durationMinutes = getPadTimeZero(Math.floor(refAudio.current?.duration / 60));
         durationSeconds = getPadTimeZero(Math.floor(refAudio.current?.duration - Number(durationMinutes) * 60));
+
+        console.log(refAudio.current?.volume * 100);
     }
 
     const [track] = useTrackInfo(player.current.trackId);
@@ -146,8 +172,35 @@ export const Player = observer(() => {
                     <p className="m-0 time-player">{durationMinutes}:{durationSeconds}</p>
                 </div>
             </div>
-            <div className="settings-player d-flex justify-content-end">
-                <SettingsPlayerDropdown/>
+            <div className="settings-player d-flex justify-content-end gap-4">
+                <div className="d-flex align-items-center gap-3">
+                    <SettingsPlayerDropdown/>
+
+                    {refAudio.current && (
+                        <>
+                            {prevVolume === 0 && (
+                                <button onClick={onMusic}>
+                                    <VolumeOff/>
+                                </button>
+                            )}
+
+                            {prevVolume * 100 < 50 && prevVolume > 0 && (
+                                <button onClick={offMusic}>
+                                    <VolumeDown/>
+                                </button>
+                            )}
+
+                            {prevVolume * 100 >= 50 && (
+                                <button onClick={offMusic}>
+                                    <VolumeUp/>
+                                </button>
+                            )}
+                        </>
+                    )}
+                    <input type="range" className="form-range" min="0" max="100" id="customRange2"
+                           onChange={handleChangeVolume}/>
+                    <div></div>
+                </div>
             </div>
         </div>
     );
