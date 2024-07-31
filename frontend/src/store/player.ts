@@ -13,6 +13,7 @@ interface ICurrent {
     isPlay: boolean,
     time: number,
     previousVolume: number;
+    currentVolume: number;
 }
 
 class Player {

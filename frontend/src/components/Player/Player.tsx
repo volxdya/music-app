@@ -23,6 +23,7 @@ export const Player = observer(() => {
     const isPlaying: boolean = player.current.isPlay;
     const time: number = player.current.time;
     const prevVolume: number = player.current.previousVolume;
+    const currentVolume: number = player.current.currentVolume;
 
     const play = () => {
         refAudio.current?.play();
@@ -38,6 +39,7 @@ export const Player = observer(() => {
         if (refAudio.current) {
             refAudio.current.volume = Number(e.target.value / 100);
 
+            player.current.currentVolume = Number(e.target.value / 100);
             player.current.previousVolume = Number(e.target.value / 100);
         }
     }
@@ -45,14 +47,16 @@ export const Player = observer(() => {
     const offMusic = () => {
         if (refAudio.current) {
             refAudio.current.volume = 0;
+            player.current.currentVolume = 0;
         }
     }
 
     const onMusic = () => {
         if (refAudio.current) {
-            refAudio.current.volume = player.current.previousVolume
+            refAudio.current.volume = player.current.previousVolume;
+            player.current.currentVolume = player.current.previousVolume;
         }
-    }
+        }
 
     useEffect(() => {
         if (player.current.isPlay) {
@@ -178,26 +182,26 @@ export const Player = observer(() => {
 
                     {refAudio.current && (
                         <>
-                            {prevVolume === 0 && (
+                            {currentVolume === 0 && (
                                 <button onClick={onMusic}>
                                     <VolumeOff/>
                                 </button>
                             )}
 
-                            {prevVolume * 100 < 50 && prevVolume > 0 && (
+                            {currentVolume * 100 < 50 && currentVolume > 0 && (
                                 <button onClick={offMusic}>
                                     <VolumeDown/>
                                 </button>
                             )}
 
-                            {prevVolume * 100 >= 50 && (
+                            {currentVolume * 100 >= 50 && (
                                 <button onClick={offMusic}>
                                     <VolumeUp/>
                                 </button>
                             )}
                         </>
                     )}
-                    <input type="range" className="form-range" min="0" max="100" id="customRange2"
+                    <input type="range" className="form-range volume-container" min="0" max="100" id="customRange2"
                            onChange={handleChangeVolume}/>
                     <div></div>
                 </div>

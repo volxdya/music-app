@@ -7,7 +7,6 @@ import {useAddToPlaylist} from "@/hooks/useAddToPlaylist.ts";
 import player from "@/store/player.ts";
 import {useEffect, useState} from "react";
 import {observer} from "mobx-react-lite";
-import track from "@/store/track.ts";
 import {Pause} from "@/icons/Player/Pause.tsx";
 
 interface Props {
@@ -35,7 +34,8 @@ export const TrackCard = observer(({title, author, id, img, where, byFind}: Prop
             },
             isPlay: true,
             time: 0,
-            previousVolume: player.current.previousVolume
+            previousVolume: player.current.previousVolume,
+            currentVolume: player.current.currentVolume
         });
     }
 
