@@ -9,6 +9,7 @@ import uniqid from "uniqid";
 export function Playlist() {
     useEffect(() => {
         user.getMe();
+        console.log("use");
     }, []);
 
     const {playlist} = usePlaylistInfo();

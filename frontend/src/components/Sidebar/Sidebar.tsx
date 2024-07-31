@@ -43,9 +43,7 @@ export const Sidebar = observer(() => {
         user.getUserData();
         user.getMe();
 
-        if (!user.userData.isUser) {
-            console.log("исполнитель");
-        }
+        console.log("use");
     }, []);
 
     return (

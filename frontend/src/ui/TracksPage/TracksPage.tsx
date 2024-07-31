@@ -22,6 +22,9 @@ export function TracksPage() {
     useEffect(() => {
         user.getUserData();
         user.getMe();
+
+
+        console.log("use");
     }, []);
 
     return (

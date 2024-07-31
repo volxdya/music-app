@@ -32,6 +32,8 @@ export function CollectionForAuthors() {
     useEffect(() => {
         user.getUserData();
         user.getMe();
+
+        console.log("use");
     }, []);
 
     console.log(trackUrl);

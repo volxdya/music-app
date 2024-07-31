@@ -1,12 +1,14 @@
 import {makeAutoObservable} from "mobx";
-import {ITrack} from "@/types/ITrack.ts";
 import {dfPlayer} from "@/store/defaultValues/dfPlayer.ts";
 
 interface ICurrent {
     trackId: number;
     play: {
-        whatPlay: string; // playlist, author, track, search;
-        next: Array<ITrack>
+        whatPlay: {
+            title: string;
+            byFind: string | number;
+        }; // playlist, author, track, search;
+        next: Array<string>;
     }
 }
 
@@ -18,6 +20,10 @@ class Player {
 
     current: ICurrent = dfPlayer;
 
+
+    setCurrent(current: ICurrent) {
+        this.current = current;
+    }
 }
 
 export default new Player();

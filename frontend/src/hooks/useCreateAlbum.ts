@@ -9,6 +9,8 @@ export const useCreateAlbum = () => {
 
     useEffect(() => {
         user.getUserData();
+
+        console.log("use");
     }, []);
 
     const handleSubmitAlbum = async (e: FormEvent, title: string, avatarUrl: string) => {
@@ -29,6 +31,8 @@ export const useCreateAlbum = () => {
             });
 
             user.getMe();
+
+            console.log("use");
 
             (e.target as HTMLFormElement).reset();
         }).catch((err: AxiosError) => {

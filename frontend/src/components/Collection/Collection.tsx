@@ -10,6 +10,8 @@ export const Collection = observer(() => {
     useEffect(() => {
         user.getUserData();
         user.getMe();
+
+        console.log("use");
     }, []);
 
     if (user.me.isUser) {

@@ -11,7 +11,7 @@ export const useTrackInfo = (trackId: number) => {
         }).catch((err) => {
             console.log(err);
         });
-    }, []);
+    }, [trackId]);
 
     return [track];
 }

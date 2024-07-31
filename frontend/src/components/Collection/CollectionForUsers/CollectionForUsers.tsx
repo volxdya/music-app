@@ -16,6 +16,9 @@ export const CollectionForUsers = observer(() => {
     useEffect(() => {
         user.getUserData();
         user.getMe();
+
+
+        console.log("use");
     }, []);
 
     async function createPlaylist() {
@@ -24,6 +27,8 @@ export const CollectionForUsers = observer(() => {
             userId: user.userData.id,
         }).then((resp) => {
             console.log(resp.data);
+
+            console.log("use");
             user.getMe();
         }).catch((err) => {
             console.log(err);

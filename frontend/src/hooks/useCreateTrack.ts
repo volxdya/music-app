@@ -9,6 +9,9 @@ export const useCreateTrack = () => {
 
     useEffect(() => {
         user.getUserData();
+
+
+        console.log("use");
     }, []);
 
     const handleSubmitTrack = async (e: FormEvent, title: string, avatarUrl: string, trackUrl: string) => {
@@ -31,6 +34,8 @@ export const useCreateTrack = () => {
             (e.target as HTMLFormElement).reset();
 
             user.getMe();
+
+            console.log("use");
         }).catch((err: AxiosError) => {
             console.log(err);
 

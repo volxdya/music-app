@@ -4,9 +4,6 @@ import {SecondHeart} from "@/icons/Hearts/SecondHeart.tsx";
 import {BreakHeart} from "@/icons/Hearts/BreakHeart.tsx";
 import './DropdownTrack.scss';
 import {useAddToPlaylist} from "@/hooks/useAddToPlaylist.ts";
-import {useCheckLike} from "@/hooks/useCheckLike.ts";
-import {useEffect} from "react";
-import {FillHeart} from "@/icons/Hearts/FillHeart.tsx";
 
 interface Props {
     id: number;
@@ -15,11 +12,7 @@ interface Props {
 export function DropdownTrack({id}: Props) {
 
     const {createLike} = useAddToPlaylist(id);
-    const {isLike, checkLike} = useCheckLike(id);
 
-    useEffect(() => {
-        checkLike();
-    });
 
     return (
         <Dropdown
@@ -30,11 +23,9 @@ export function DropdownTrack({id}: Props) {
                 <div>
                     <div className="mt-1 menu-item" onClick={createLike}>
                         <div className="d-flex align-items-center gap-3 text-[13px]">
-                            {isLike ? (
-                                <FillHeart/>
-                            ): (
-                                <SecondHeart/>
-                            )}
+
+                            <SecondHeart/>
+
                             Нравится
                         </div>
                     </div>
