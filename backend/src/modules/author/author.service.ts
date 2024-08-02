@@ -11,7 +11,7 @@ export class AuthorService {
   ) {}
 
   async create(dto: CreateUserDto) {
-    const author = await this.authorRepository.create(dto);
+    const author: Author = await this.authorRepository.create(dto);
 
     await author.update({
       password: bcrypt.hashSync(author.password, 12),
@@ -44,7 +44,7 @@ export class AuthorService {
       include: { all: true },
     });
 
-    return authors.filter((item) =>
+    return authors.filter((item: Author) =>
       item.login.toLowerCase().includes(title.toLowerCase()),
     );
   }
