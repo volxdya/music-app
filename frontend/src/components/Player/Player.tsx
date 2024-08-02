@@ -15,15 +15,17 @@ import {useTrackInfo} from "@/hooks/useTrackInfo.ts";
 import {VolumeUp} from "@/icons/Volume/VolumeUp.tsx";
 import {VolumeDown} from "@/icons/Volume/VolumeDown.tsx";
 import {VolumeOff} from "@/icons/Volume/VolumeOff.tsx";
+import {useListen} from "@/hooks/useListen.ts";
 
 export const Player = observer(() => {
 
     const refAudio = useRef<HTMLMediaElement>();
+    const [listen] = useListen();
 
     const isPlaying: boolean = player.current.isPlay;
     const time: number = player.current.time;
-    const prevVolume: number = player.current.previousVolume;
     const currentVolume: number = player.current.currentVolume;
+    const trackId: number = player.current.trackId;
 
     const play = () => {
         refAudio.current?.play();
@@ -56,13 +58,21 @@ export const Player = observer(() => {
             refAudio.current.volume = player.current.previousVolume;
             player.current.currentVolume = player.current.previousVolume;
         }
-        }
+    }
 
     useEffect(() => {
-        if (player.current.isPlay) {
+        if (isPlaying) {
             refAudio.current?.play();
         }
     });
+
+    useEffect(() => {
+        if (isPlaying && refAudio.current) {
+            setTimeout(async () => {
+                await listen(player.current.trackId);
+            }, 30000);
+        }
+    }, [trackId]);
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -84,7 +94,7 @@ export const Player = observer(() => {
         return () => {
             clearInterval(timer);
         }
-    }, [time, isPlaying, player.current.isPlay]);
+    }, [time, isPlaying]);
 
 
     function getPadTimeZero(time: number) {
@@ -107,8 +117,6 @@ export const Player = observer(() => {
     if (refAudio.current?.duration) {
         durationMinutes = getPadTimeZero(Math.floor(refAudio.current?.duration / 60));
         durationSeconds = getPadTimeZero(Math.floor(refAudio.current?.duration - Number(durationMinutes) * 60));
-
-        console.log(refAudio.current?.volume * 100);
     }
 
     const [track] = useTrackInfo(player.current.trackId);

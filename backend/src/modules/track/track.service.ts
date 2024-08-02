@@ -81,4 +81,14 @@ export class TrackService {
 
     return tracks;
   }
+
+  async listen(trackId: number) {
+    const track = await this.getById(trackId);
+
+    await track.update({
+      auditions: track.auditions + 1,
+    });
+
+    return track;
+  }
 }

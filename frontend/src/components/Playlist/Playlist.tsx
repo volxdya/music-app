@@ -23,16 +23,14 @@ export function Playlist() {
                 {user.me.playlists && playlist && (
                     <>
                         {playlist.tracks.reverse().map((item: ITrack) => (
-                            <>
-                                <TrackCard
-                                    id={item.id} author="test"
-                                    title={item.title}
-                                    img={item.avatarUrl}
-                                    key={uniqid()}
-                                    where="playlist"
-                                    byFind={user.me.playlists[0].id}
-                                />
-                            </>
+                            <TrackCard
+                                id={item.id} author="test"
+                                title={item.title}
+                                img={item.avatarUrl}
+                                key={uniqid()}
+                                where="playlist"
+                                byFind={user.me.playlists[0].id}
+                            />
                         ))}
                     </>
                 )}

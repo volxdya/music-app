@@ -30,14 +30,8 @@ class User {
         const token = getItem("token");
 
         if (token) {
-
             decoded = jwtDecode(token);
-
-            this.userData.id = decoded.id;
-            this.userData.login = decoded.login;
-            this.userData.firstName = decoded.firstName;
-            this.userData.lastName = decoded.lastName;
-            this.userData.isUser = decoded.isUser;
+            Object.assign(this.userData, decoded);
         }
     }
 

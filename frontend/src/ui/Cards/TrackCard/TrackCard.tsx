@@ -19,7 +19,7 @@ interface Props {
 }
 
 export const TrackCard = observer(({title, author, id, img, where, byFind}: Props) => {
-    const { createLike } = useAddToPlaylist(id);
+    const {createLike} = useAddToPlaylist(id);
     const [isCurrent, setIsCurrent] = useState(false);
 
     function set() {
@@ -33,7 +33,7 @@ export const TrackCard = observer(({title, author, id, img, where, byFind}: Prop
                 }
             },
             isPlay: true,
-            time: 0,
+            time: id === player.current.trackId ? player.current.time : 0,
             previousVolume: player.current.previousVolume,
             currentVolume: player.current.currentVolume
         });
@@ -74,12 +74,18 @@ export const TrackCard = observer(({title, author, id, img, where, byFind}: Prop
                             <button className="play-btn" onClick={pause}>
                                 <Pause/>
                             </button>
-                        ): (
-                                <button className="play-btn" onClick={set}>
+                        ) : (
+                            <button className="play-btn" onClick={set}>
                                 <Play/>
                             </button>
                         )}
 
+                        {/*
+                        {id === player.current.trackId && !player.current.isPlay && (
+                            <button className="play" onClick={set}>
+                                <Play/>
+                            </button>
+                        )}*/}
                     </div>
                 </div>
                 <div>

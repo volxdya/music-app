@@ -35,4 +35,9 @@ export class TrackController {
   getChart() {
     return this.trackService.getChart();
   }
+
+  @Post(`/listen/:trackId`)
+  listen(@Param('trackId') trackId: number) {
+    return this.trackService.listen(trackId);
+  }
 }
