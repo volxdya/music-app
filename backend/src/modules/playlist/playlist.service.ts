@@ -16,17 +16,14 @@ export class PlaylistService {
   ) {}
 
   async create(dto: CreatePlaylistDto) {
-    const playlist: Playlist = await this.playlistRepostitory.create(dto);
-    return playlist;
+    return await this.playlistRepostitory.create(dto);
   }
 
   async getById(playlistId: number) {
-    const playlist = await this.playlistRepostitory.findOne({
+    return await this.playlistRepostitory.findOne({
       include: [Track],
       where: { id: playlistId },
     });
-
-    return playlist;
   }
 
   async addTrack(dto: UsePlaylistDto) {

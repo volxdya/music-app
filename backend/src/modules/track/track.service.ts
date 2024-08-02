@@ -32,9 +32,7 @@ export class TrackService {
       return track;
     }
 
-    const track: Track = await this.trackRepository.create(dto);
-
-    return track;
+    return await this.trackRepository.create(dto);
   }
 
   async getAll() {
@@ -62,24 +60,20 @@ export class TrackService {
   }
 
   async getTracksByAuthor(authorId: number) {
-    const tracks: Track[] = await this.trackRepository.findAll({
+    return await this.trackRepository.findAll({
       where: { authorId },
       include: [Author, Album],
     });
-
-    return tracks;
   }
 
   async getChart() {
-    const tracks = this.trackRepository.findAll({
+    return this.trackRepository.findAll({
       order: [
         ['auditions', 'DESC'],
         // ['createdAt', 'DESC'],
       ],
-      limit: 3,
+      limit: 50,
     });
-
-    return tracks;
   }
 
   async listen(trackId: number) {

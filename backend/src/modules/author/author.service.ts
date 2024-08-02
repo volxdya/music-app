@@ -21,28 +21,22 @@ export class AuthorService {
   }
 
   async getOne(login: string) {
-    const author: Author = await this.authorRepository.findOne({
+    return await this.authorRepository.findOne({
       where: { login },
       include: { all: true },
     });
-
-    return author;
   }
 
   async getById(id: number) {
-    const author: Author = await this.authorRepository.findOne({
+    return await this.authorRepository.findOne({
       where: { id },
     });
-
-    return author;
   }
 
   async getAll() {
-    const authors: Author[] = await this.authorRepository.findAll({
+    return await this.authorRepository.findAll({
       include: { all: true },
     });
-
-    return authors;
   }
 
   async search(title: string) {
@@ -53,6 +47,7 @@ export class AuthorService {
     const filtredAuthors: Author[] = authors.filter((item) =>
       item.login.toLowerCase().includes(title.toLowerCase()),
     );
+
     return filtredAuthors;
   }
 }
