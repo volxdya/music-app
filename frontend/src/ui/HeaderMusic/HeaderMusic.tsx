@@ -9,15 +9,17 @@ interface Props {
     whatIs: string;
     author: string;
     title: string;
+    isCircle: boolean;
 }
 
-export function HeaderMusic({whatIs, author, title}: Props) {
+export function HeaderMusic({whatIs, author, title, isCircle}: Props) {
     return (
         <div className="d-flex header-music gap-5">
             <div>
                 <img
                     src="https://avatars.dzeninfra.ru/get-zen_doc/9716076/pub_644517496bd5324872213267_64451add0c190e4a11bc9554/scale_1200"
-                    alt=""/>
+                    className={isCircle ? "rounded-full" : "rounded-[10px]"}
+                    alt={`${whatIs} ${author}`}/>
             </div>
             <div>
                 <p className="text-neutral-400 font-medium text-[14px]">{whatIs}</p>

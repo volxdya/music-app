@@ -17,7 +17,12 @@ export function Playlist() {
 
     return (
         <>
-            <HeaderMusic whatIs="Плейлист" author={user.userData.login} title="Мне нравится"/>
+            <HeaderMusic
+                author={user.userData.login}
+                isCircle={false}
+                whatIs="Плейлист"
+                title="Мне нравится"
+            />
 
             <div className="mt-5">
                 {user.me.playlists && playlist && (
