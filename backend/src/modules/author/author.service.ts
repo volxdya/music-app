@@ -44,10 +44,8 @@ export class AuthorService {
       include: { all: true },
     });
 
-    const filtredAuthors: Author[] = authors.filter((item) =>
+    return authors.filter((item) =>
       item.login.toLowerCase().includes(title.toLowerCase()),
     );
-
-    return filtredAuthors;
   }
 }
