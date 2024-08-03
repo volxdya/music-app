@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { AlbumService } from './album.service';
 import { CreateAlbumDto } from './dto/createAlbumDto';
 
@@ -24,5 +24,10 @@ export class AlbumController {
   @Get(`/get_by_id/:id`)
   getById(@Param('id') id: number) {
     return this.albumService.getById(id);
+  }
+
+  @Delete(`/delete`)
+  delete(@Param('albumId') albumId: number) {
+    return this.albumService.delete(albumId);
   }
 }

@@ -35,4 +35,8 @@ export class AlbumService {
       item.title.toLowerCase().includes(title.toLowerCase()),
     );
   }
+
+  async delete(albumId: number) {
+    return await this.albumRepository.destroy({ where: { id: albumId } });
+  }
 }

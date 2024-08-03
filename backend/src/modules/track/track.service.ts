@@ -5,6 +5,8 @@ import { CreateTrackDto } from './dto/createTrackDto';
 import { AlbumService } from '../album/album.service';
 import { Album } from '../album/album.model';
 import { Author } from '../author/author.model';
+import axios, { AxiosRequestConfig } from 'axios';
+import * as process from 'node:process';
 
 @Injectable()
 export class TrackService {
@@ -40,12 +42,10 @@ export class TrackService {
   }
 
   async getById(trackId: number) {
-    const track: Track = await this.trackRepository.findOne({
+    return await this.trackRepository.findOne({
       where: { id: trackId },
       include: { all: true },
     });
-
-    return track;
   }
 
   async search(title: string) {
@@ -82,6 +82,28 @@ export class TrackService {
     await track.update({
       auditions: track.auditions + 1,
     });
+
+    return track;
+  }
+
+  async delete(trackId: number) {
+    const track: Track = await this.trackRepository.findOne({
+      where: { id: trackId },
+    });
+
+    const config: AxiosRequestConfig = {
+      headers: {
+        Authorization: `Bearer ${process.env.BYTESCALE_API_KEY}`,
+      },
+    };
+
+    const url: string = `https://api.bytescale.com/v2/accounts/${track.trackData.accountId}/files?filePath=`;
+
+    await axios.delete(`${url}${track.trackData.filePathAvatar}`, config);
+    await axios.delete(`${url}${track.trackData.filePathMP3}`, config);
+    await this.albumService.delete(track.albumId);
+
+    await track.destroy();
 
     return track;
   }

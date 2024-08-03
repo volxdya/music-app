@@ -31,7 +31,7 @@ export function Playlist() {
                             <TrackCard
                                 id={item.id} author="test"
                                 title={item.title}
-                                img={item.avatarUrl}
+                                img={item.trackData.fileUrlAvatar}
                                 key={uniqid()}
                                 where="playlist"
                                 byFind={user.me.playlists[0].id}

@@ -3,6 +3,7 @@ import {FormEvent, useEffect} from "react";
 import {stopFormBehavior} from "@/utils/stopFormBehavior.ts";
 import axios, {AxiosError} from "axios";
 import user from "@/store/user.ts";
+import {IUploadFile} from "@/types/IUploadFile.ts";
 
 export const useCreateTrack = () => {
     const {toast} = useToast();
@@ -14,15 +15,20 @@ export const useCreateTrack = () => {
         console.log("use");
     }, []);
 
-    const handleSubmitTrack = async (e: FormEvent, title: string, avatarUrl: string, trackUrl: string) => {
+    const handleSubmitTrack = async (e: FormEvent, title: string, avatarUrl: IUploadFile[], trackUrl: IUploadFile[]) => {
         stopFormBehavior(e);
 
         await axios.post(`http://localhost:3010/track/create`, {
             title: title,
-            avatarUrl: avatarUrl,
             authorId: user.userData.id,
-            trackUrl: trackUrl,
-            isTrack: true
+            isTrack: true,
+            trackData: {
+                accountId: avatarUrl[0].accountId,
+                filePathAvatar: avatarUrl[0].filePath,
+                fileUrlAvatar: avatarUrl[0].fileUrl,
+                filePathMP3: trackUrl[0].filePath,
+                fileUrlMP3: trackUrl[0].fileUrl,
+            }
         }).then((resp) => {
             console.log(resp.data);
 

@@ -1,7 +1,8 @@
 import {UploadDropzone} from "@bytescale/upload-widget-react";
+import {IUploadFile} from "@/types/IUploadFile.ts";
 
 interface Props {
-    setFn: React.Dispatch<React.SetStateAction<string>>;
+    setFn: React.Dispatch<React.SetStateAction<IUploadFile[]>>;
 }
 
 export function UploadFiles({setFn}: Props) {
@@ -19,7 +20,9 @@ export function UploadFiles({setFn}: Props) {
     return (
         <UploadDropzone
             options={options}
-            onUpdate={({uploadedFiles}) => setFn(uploadedFiles.map(x => x.fileUrl).join("\n"))}
+            onUpdate={({uploadedFiles}) => {
+                setFn(uploadedFiles);
+            }}
             onComplete={files => alert(files.map(x => x.fileUrl).join("\n"))}
             width="600px"
             height="375px"

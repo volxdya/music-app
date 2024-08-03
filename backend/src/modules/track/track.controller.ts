@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { TrackService } from './track.service';
 import { CreateTrackDto } from './dto/createTrackDto';
 
@@ -39,5 +39,10 @@ export class TrackController {
   @Post(`/listen/:trackId`)
   listen(@Param('trackId') trackId: number) {
     return this.trackService.listen(trackId);
+  }
+
+  @Delete(`/delete/:trackId`)
+  delete(@Param(`trackId`) trackId: number) {
+    return this.trackService.delete(trackId);
   }
 }

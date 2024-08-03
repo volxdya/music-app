@@ -20,7 +20,7 @@ import {useListen} from "@/hooks/useListen.ts";
 export const Player = observer(() => {
 
     const refAudio = useRef<HTMLMediaElement>();
-    const [listen] = useListen();
+    const [ listen ] = useListen();
 
     const isPlaying: boolean = player.current.isPlay;
     const time: number = player.current.time;
@@ -126,7 +126,7 @@ export const Player = observer(() => {
             <div className="d-flex gap-3 track-data-player">
                 {track && (
                     <img
-                        src={track.avatarUrl}
+                        src={track.trackData.fileUrlAvatar}
                         alt="Картинка трека"
                         className="player-img"
                     />
@@ -150,7 +150,7 @@ export const Player = observer(() => {
                 <div className="d-flex gap-4 mt-2 justify-content-center align-items-center controls-track-container">
                     {track && (
                         <audio
-                            src={track?.trackUrl}
+                            src={track?.trackData.fileUrlMP3}
                             controls
                             ref={refAudio}
                             className="d-none"

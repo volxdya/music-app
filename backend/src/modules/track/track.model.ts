@@ -14,8 +14,13 @@ import { Album } from '../album/album.model';
 
 interface ITrack {
   title: string;
-  avatarUrl: string;
-  trackUrl: string;
+  trackData: {
+    accountId: string;
+    filePathAvatar: string;
+    fileUrlAvatar: string;
+    filePathMP3: string;
+    fileUrlMP3: string;
+  };
   // НАСТРОЕНИЕ ТРЕКА
 }
 
@@ -32,11 +37,14 @@ export class Track extends Model<Track, ITrack> {
   @Column({ type: DataType.STRING, allowNull: false })
   title: string;
 
-  @Column({ type: DataType.STRING, defaultValue: '' })
-  avatarUrl: string;
-
-  @Column({ type: DataType.STRING, defaultValue: '' })
-  trackUrl: string;
+  @Column({ type: DataType.JSON, allowNull: false })
+  trackData: {
+    accountId: string;
+    filePathAvatar: string;
+    fileUrlAvatar: string;
+    filePathMP3: string;
+    fileUrlMP3: string;
+  };
 
   @Column({ type: DataType.INTEGER, defaultValue: 0 })
   auditions: number;
