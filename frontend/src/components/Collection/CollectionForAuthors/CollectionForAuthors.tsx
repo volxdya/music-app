@@ -52,7 +52,7 @@ export function CollectionForAuthors() {
                                     id={item.id}
                                     img={item.trackData.fileUrlAvatar}
                                     byFind={user.userData.login}
-                                    where="author"
+                                    where={user.userData.login}
                                 />
                             ))}
                         </>
@@ -61,7 +61,11 @@ export function CollectionForAuthors() {
                 <div className="col-4 px-5">
                     <h1 className="realese">Недавний релиз</h1>
                     <div className="mt-3">
-                        <AlbumCard author="whole" title="2 DAYS NO LEAN" year="2021"/>
+                        <AlbumCard
+                            author={user.userData.login}
+                            title={user.me.albums[0].title}
+                            year={getStringDate(user.me.albums[0].createdAt, "YYYY")}
+                        />
                     </div>
                 </div>
             </div>

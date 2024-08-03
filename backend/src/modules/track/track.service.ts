@@ -17,13 +17,13 @@ export class TrackService {
 
   async create(dto: CreateTrackDto) {
     if (dto.isTrack) {
+      const track: Track = await this.trackRepository.create(dto);
+
       const newAlbum: Album = await this.albumService.create({
         title: dto.title,
         avatarUrl: dto.avatarUrl,
         authorId: dto.authorId,
       });
-
-      const track: Track = await this.trackRepository.create(dto);
 
       await track.update({
         albumId: newAlbum.id,
