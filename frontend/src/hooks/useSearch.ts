@@ -1,6 +1,6 @@
 import { ISearch } from "@/types/ISearch";
 import axios from "axios"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export const useSearch = () => {
     const [array, setArray] = useState<ISearch[]>([]);
@@ -18,7 +18,7 @@ export const useSearch = () => {
                             return { source: paramSearch, album: item };
                     }
                 });
-                setArray(prevArray => [...prevArray, ...dataWithSource]);
+                setArray(prevArray => [...prevArray.concat(...dataWithSource)]);
             });
     }
 

@@ -20,7 +20,7 @@ export function Search() {
 
     const handleSubmit = (e: FormEvent) => {
         stopFormBehavior(e);
-        console.log(array);
+        setValue("");
         setIsSearched(true);
         search(value);
     }
@@ -57,7 +57,7 @@ export function Search() {
                                 {item.source === "track" && item.track && (
                                     <TrackCard
                                         title={item.track.title}
-                                        author={"СУКО НЕ РАБОТАЕТ НАХУЙ SEARCH.TSX"}
+                                        author={item.track.author.login}
                                         id={item.track.id}
                                         img={item.track.trackData.fileUrlAvatar}
                                         where="search"
