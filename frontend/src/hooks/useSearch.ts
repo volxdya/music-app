@@ -8,8 +8,17 @@ export const useSearch = () => {
     const fetch = async (paramSearch: string, value: string) => {
         await axios.get(`http://localhost:3010/${paramSearch}/search/${value}`)
             .then((resp) => {
-                const dataWithSource = resp.data.map((item: ISearch) => ({ ...item, source: paramSearch }));
-                setArray(dataWithSource);
+                const dataWithSource = resp.data.map((item: any) => {
+                    switch (paramSearch) {
+                        case "author":
+                            return { source: paramSearch, executor: item };
+                        case "track":
+                            return { source: paramSearch, track: item };
+                        case "album":
+                            return { source: paramSearch, album: item };
+                    }
+                });
+                setArray(prevArray => [...prevArray, ...dataWithSource]);
             });
     }
 

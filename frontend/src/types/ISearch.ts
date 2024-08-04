@@ -4,4 +4,7 @@ import { IUser } from "./IUser";
 
 export interface ISearch extends IUser, IAlbum, ITrack {
     source: string;
+    executor?: IUser;
+    track?: ITrack;
+    album?: IAlbum;
 };
