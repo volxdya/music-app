@@ -1,26 +1,26 @@
 import './Player.scss';
-import {Play} from "../../icons/Player/Play.tsx";
-import {Random} from "../../icons/Player/Random.tsx";
-import {Repeat} from "../../icons/Player/Repeat.tsx";
-import {SecondHeart} from "../../icons/Hearts/SecondHeart.tsx";
-import {Skip} from "@/icons/Player/Skip.tsx";
-import {SkipBack} from "@/icons/Player/SkipBack.tsx";
-import {MainPlayerDropdown} from "@/components/Player/Dropdown/MainPlayerDropdown.tsx";
-import {SettingsPlayerDropdown} from "@/components/Player/Dropdown/SettingsPlayerDropdown.tsx";
-import {observer} from "mobx-react-lite";
-import {ChangeEvent, useEffect, useRef} from "react";
-import {Pause} from "@/icons/Player/Pause.tsx";
+import { Play } from "../../icons/Player/Play.tsx";
+import { Random } from "../../icons/Player/Random.tsx";
+import { Repeat } from "../../icons/Player/Repeat.tsx";
+import { SecondHeart } from "../../icons/Hearts/SecondHeart.tsx";
+import { Skip } from "@/icons/Player/Skip.tsx";
+import { SkipBack } from "@/icons/Player/SkipBack.tsx";
+import { MainPlayerDropdown } from "@/components/Player/Dropdown/MainPlayerDropdown.tsx";
+import { SettingsPlayerDropdown } from "@/components/Player/Dropdown/SettingsPlayerDropdown.tsx";
+import { observer } from "mobx-react-lite";
+import { ChangeEvent, useEffect, useRef } from "react";
+import { Pause } from "@/icons/Player/Pause.tsx";
 import player from "@/store/player.ts";
-import {useTrackInfo} from "@/hooks/useTrackInfo.ts";
-import {VolumeUp} from "@/icons/Volume/VolumeUp.tsx";
-import {VolumeDown} from "@/icons/Volume/VolumeDown.tsx";
-import {VolumeOff} from "@/icons/Volume/VolumeOff.tsx";
-import {useListen} from "@/hooks/useListen.ts";
+import { useTrackInfo } from "@/hooks/useTrackInfo.ts";
+import { VolumeUp } from "@/icons/Volume/VolumeUp.tsx";
+import { VolumeDown } from "@/icons/Volume/VolumeDown.tsx";
+import { VolumeOff } from "@/icons/Volume/VolumeOff.tsx";
+import { useListen } from "@/hooks/useListen.ts";
 
 export const Player = observer(() => {
 
     const refAudio = useRef<HTMLMediaElement>();
-    const [ listen ] = useListen();
+    const [listen] = useListen();
 
     const isPlaying: boolean = player.current.isPlay;
     const time: number = player.current.time;
@@ -141,8 +141,8 @@ export const Player = observer(() => {
                     )}
 
                     <div className="controls-player d-flex gap-4">
-                        <SecondHeart/>
-                        <MainPlayerDropdown/>
+                        <SecondHeart />
+                        <MainPlayerDropdown />
                     </div>
                 </div>
             </div>
@@ -157,21 +157,21 @@ export const Player = observer(() => {
                         />
                     )}
                     <div className="me-4">
-                        <Random/>
+                        <Random />
                     </div>
-                    <SkipBack/>
+                    <SkipBack />
                     {isPlaying ? (
                         <button onClick={pause}>
-                            <Pause/>
+                            <Pause />
                         </button>
                     ) : (
                         <button onClick={play}>
-                            <Play/>
+                            <Play />
                         </button>
                     )}
-                    <Skip/>
+                    <Skip />
                     <div className="mx-4">
-                        <Repeat/>
+                        <Repeat />
                     </div>
                 </div>
 
@@ -179,39 +179,39 @@ export const Player = observer(() => {
                     <p className="m-0 time-player">{minutes}:{seconds}</p>
                     <div className="progress-bar-container">
                         <div className="progress-bar-player"
-                             style={{width: (time / refAudio.current?.duration) * 100 + "%"}}/>
+                            style={{ width: (time / refAudio.current?.duration) * 100 + "%" }} />
                     </div>
                     <p className="m-0 time-player">{durationMinutes}:{durationSeconds}</p>
                 </div>
             </div>
             <div className="settings-player d-flex justify-content-end gap-4">
                 <div className="d-flex align-items-center gap-3">
-                    <SettingsPlayerDropdown/>
+                    <SettingsPlayerDropdown />
 
                     {refAudio.current && (
                         <>
                             {currentVolume === 0 && (
                                 <button onClick={onMusic}>
-                                    <VolumeOff/>
+                                    <VolumeOff />
                                 </button>
                             )}
 
                             {currentVolume * 100 < 50 && currentVolume > 0 && (
                                 <button onClick={offMusic}>
-                                    <VolumeDown/>
+                                    <VolumeDown />
                                 </button>
                             )}
 
                             {currentVolume * 100 >= 50 && (
                                 <button onClick={offMusic}>
-                                    <VolumeUp/>
+                                    <VolumeUp />
                                 </button>
                             )}
                         </>
                     )}
-                    <input type="range" className="form-range volume-container" min="0" max="100" id="customRange2"
-                           onChange={handleChangeVolume}/>
-                    <div></div>
+                    <input type="range"
+                        onChange={handleChangeVolume} />
+
                 </div>
             </div>
         </div>
