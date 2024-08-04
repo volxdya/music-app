@@ -1,6 +1,6 @@
-import {ITrack} from "@/store/user.ts";
-import {IAlbum} from "@/types/IAlbum.ts";
-import {IPlaylist} from "@/types/IPlaylist.ts";
+import { IAlbum } from "@/types/IAlbum.ts";
+import { IPlaylist } from "@/types/IPlaylist.ts";
+import { ITrack } from "./ITrack";
 
 export interface IUser {
     login: string;
@@ -9,6 +9,6 @@ export interface IUser {
     firstName: string;
     playlists: Array<IPlaylist>;
     albums: Array<IAlbum>;
-    tracks: Array<ITrack>;
+    tracks: ITrack[];
     isUser: boolean;
 }

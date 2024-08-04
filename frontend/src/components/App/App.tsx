@@ -9,6 +9,7 @@ import {Registration} from "@/components/Registration/Registration.tsx";
 import {TracksPage} from "@/ui/TracksPage/TracksPage.tsx";
 import {Playlist} from "@/components/Playlist/Playlist.tsx";
 import {Tracks} from "@/components/Tracks/Tracks.tsx";
+import { Album } from "../Album/Album.tsx";
 export default function App() {
     const location = useLocation();
     // const locationsForValidate: string[] = ["/auth", "/register"];
@@ -33,6 +34,7 @@ export default function App() {
                         <Route path="/like" element={<Playlist/>}/>
                         <Route path="/tracks" element={<Tracks/>}/>
                         <Route path="/tracks/:search/:bySearch/:isAuthor" element={<TracksPage/>}/>
+                        <Route path="/album/:albumId" element={<Album/>}/>
                     </Routes>
                 </div>
                 {validateLocation && (

@@ -25,6 +25,8 @@ export class TrackService {
         authorId: dto.authorId,
       });
 
+      await newAlbum.$set("tracks", track);
+
       await track.update({
         albumId: newAlbum.id,
       });

@@ -7,5 +7,5 @@ export interface IPlaylist {
     avatarUrl: string;
     likes: number;
     id: number;
-    tracks: ITrack[]
+    tracks: Array<ITrack>
 }

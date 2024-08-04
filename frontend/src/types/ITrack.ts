@@ -3,6 +3,7 @@ import {IUser} from "@/types/IUser.ts";
 export interface ITrack {
     title: string;
     authorId: number;
+    albumId: number;
     isTrack: boolean;
     id: number;
     trackData: {

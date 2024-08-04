@@ -1,22 +1,22 @@
-import {NavigationText} from "@/ui/Text/NavigationText/NavgiationText.tsx";
+import { NavigationText } from "@/ui/Text/NavigationText/NavgiationText.tsx";
 import './CollectionForAuthors.scss';
-import {AlbumCard} from "@/ui/Cards/AlbumCard/AlbumCard.tsx";
-import {Modal} from "@/components/Modal/Modal.tsx";
-import {useEffect, useState} from "react";
-import {onChange} from "@/utils/onChange.ts";
-import {useCreateTrack} from "@/hooks/useCreateTrack.ts";
-import {useCreateAlbum} from "@/hooks/useCreateAlbum.ts";
+import { AlbumCard } from "@/ui/Cards/AlbumCard/AlbumCard.tsx";
+import { Modal } from "@/components/Modal/Modal.tsx";
+import { useEffect, useState } from "react";
+import { onChange } from "@/utils/onChange.ts";
+import { useCreateTrack } from "@/hooks/useCreateTrack.ts";
+import { useCreateAlbum } from "@/hooks/useCreateAlbum.ts";
 import user from "@/store/user.ts";
-import {TrackCard} from "@/ui/Cards/TrackCard/TrackCard.tsx";
-import {CarouselItem} from "@/components/ui/carousel.tsx";
-import {CarouselScroll} from "@/components/CarouselScroll/CarouselScroll.tsx";
-import {CircleCard} from "@/ui/Cards/CircleCard/CircleCard.tsx";
-import {Link} from "react-router-dom";
-import {ITrack} from "@/types/ITrack.ts";
-import {IAlbum} from "@/types/IAlbum.ts";
-import {getStringDate} from "@/utils/getStringDate.ts";
-import {UploadFiles} from "@/components/UploadFiles/UploadFiles.tsx";
-import {IUploadFile} from "@/types/IUploadFile.ts";
+import { TrackCard } from "@/ui/Cards/TrackCard/TrackCard.tsx";
+import { CarouselItem } from "@/components/ui/carousel.tsx";
+import { CarouselScroll } from "@/components/CarouselScroll/CarouselScroll.tsx";
+import { CircleCard } from "@/ui/Cards/CircleCard/CircleCard.tsx";
+import { Link } from "react-router-dom";
+import { ITrack } from "@/types/ITrack.ts";
+import { IAlbum } from "@/types/IAlbum.ts";
+import { getStringDate } from "@/utils/getStringDate.ts";
+import { UploadFiles } from "@/components/UploadFiles/UploadFiles.tsx";
+import { IUploadFile } from "@/types/IUploadFile.ts";
 
 export function CollectionForAuthors() {
 
@@ -27,8 +27,8 @@ export function CollectionForAuthors() {
 
     const [trackUrl, setTrackUrl] = useState<IUploadFile[]>([]);
 
-    const {handleSubmitTrack} = useCreateTrack();
-    const {handleSubmitAlbum} = useCreateAlbum();
+    const { handleSubmitTrack } = useCreateTrack();
+    const { handleSubmitAlbum } = useCreateAlbum();
 
     useEffect(() => {
         user.getUserData();
@@ -39,7 +39,7 @@ export function CollectionForAuthors() {
     return (
         <>
             <Link to={`/tracks/get_by_authorId/${user.userData.id}/true`}>
-                <NavigationText text="Ваши популярные треки"/>
+                <NavigationText text="Ваши популярные треки" />
             </Link>
             <div className="mt-4 row g-0 d-flex">
                 <div className="col-8">
@@ -53,6 +53,7 @@ export function CollectionForAuthors() {
                                     img={item.trackData.fileUrlAvatar}
                                     byFind={user.userData.login}
                                     where={user.userData.login}
+                                    isAlbum={false}
                                 />
                             ))}
                         </>
@@ -62,6 +63,7 @@ export function CollectionForAuthors() {
                     <h1 className="realese">Недавний релиз</h1>
                     <div className="mt-3">
                         <AlbumCard
+                            id={user.me.albums[0].id}
                             author={user.userData.login}
                             title={user.me.albums[0].title}
                             year={getStringDate(user.me.albums[0].createdAt, "YYYY")}
@@ -83,10 +85,10 @@ export function CollectionForAuthors() {
                     }}>
                         <div>
                             <input type="text" placeholder="Название" className="mt-2"
-                                   onChange={onChange(setTitleTrack)}/>
+                                onChange={onChange(setTitleTrack)} />
 
-                            <UploadFiles setFn={setAvatarUrlTrack}/>
-                            <UploadFiles setFn={setTrackUrl}/>
+                            <UploadFiles setFn={setAvatarUrlTrack} />
+                            <UploadFiles setFn={setTrackUrl} />
 
                             <button className="add-track w-100 mt-5">Добавить</button>
                         </div>
@@ -96,7 +98,7 @@ export function CollectionForAuthors() {
             />
 
             <div className="mt-5">
-                <NavigationText text="Ваши популярные альбомы"/>
+                <NavigationText text="Ваши популярные альбомы" />
                 <div className="mt-4">
                     {user.me.albums && (
                         <CarouselScroll content={
@@ -104,6 +106,7 @@ export function CollectionForAuthors() {
                                 {user.me.albums.map((item: IAlbum) => (
                                     <CarouselItem className="basis-1/7">
                                         <AlbumCard
+                                            id={item.id}
                                             title={item.title}
                                             author={user.userData.login}
                                             year={getStringDate(item.createdAt, "YYYY")}
@@ -112,7 +115,7 @@ export function CollectionForAuthors() {
                                     </CarouselItem>
                                 ))}
                             </>
-                        }/>
+                        } />
                     )}
                 </div>
                 <Modal
@@ -128,12 +131,12 @@ export function CollectionForAuthors() {
                         }
                         }>
                             <input type="text" placeholder="Название" className="mt-2"
-                                   onChange={onChange(setTitleAlbum)} title={titleAlbum}/>
+                                onChange={onChange(setTitleAlbum)} title={titleAlbum} />
 
-                            <UploadFiles setFn={setAvatarUrlAlbum}/>
+                            <UploadFiles setFn={setAvatarUrlAlbum} />
 
                             <label className="input-file mt-3">
-                                <input type="file" name="file"/>
+                                <input type="file" name="file" />
                                 <span>Выберите треки</span>
                             </label>
 
@@ -142,16 +145,16 @@ export function CollectionForAuthors() {
                     }
                 />
 
-                <NavigationText text="Похожие исполнители"/>
+                <NavigationText text="Похожие исполнители" />
 
                 <div className="mt-4">
                     <CarouselScroll content={
                         <>
                             <CarouselItem className="basis-1/7">
-                                <CircleCard title="Heronwater" otherText="Исполнитель"/>
+                                <CircleCard title="Heronwater" otherText="Исполнитель" />
                             </CarouselItem>
                         </>
-                    }/>
+                    } />
                 </div>
             </div>
         </>

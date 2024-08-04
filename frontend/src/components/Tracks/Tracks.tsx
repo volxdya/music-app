@@ -17,9 +17,10 @@ export const Tracks = observer(() => {
                         <TrackCard
                             author={item.author.login}
                             title={item.title} id={item.id}
-                            img={item.avatarUrl}
+                            img={item.trackData.fileUrlAvatar}
                             where="track"
                             byFind="all"
+                            isAlbum={false}
                         />
                     )}
                 </>

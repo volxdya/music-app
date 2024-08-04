@@ -7,8 +7,6 @@ export const usePlaylistInfo = () => {
     const [playlist, setPlaylist] = useState<IPlaylist>();
     useEffect(() => {
         user.getMe();
-
-        console.log("use");
     });
 
     useEffect(() => {
