@@ -4,10 +4,11 @@ import { useSearch } from "@/hooks/useSearch.ts";
 import { stopFormBehavior } from "@/utils/stopFormBehavior.ts";
 import { ISearch } from "@/types/ISearch.ts";
 import { CircleCard } from "@/ui/Cards/CircleCard/CircleCard.tsx";
-import { TrackCard } from "@/ui/Cards/TrackCard/TrackCard.tsx";
 import { AlbumCard } from "@/ui/Cards/AlbumCard/AlbumCard.tsx";
 import { getStringDate } from "@/utils/getStringDate.ts";
 import { NoSearch } from "@/icons/NoSearch.tsx";
+import { CarouselScroll } from "../CarouselScroll/CarouselScroll.tsx";
+import { CarouselItem } from "../ui/carousel.tsx";
 
 export function Search() {
     const [value, setValue] = useState("");
@@ -35,38 +36,83 @@ export function Search() {
                     value={value}
                 />
 
-                {array && (
-                    <div className="d-flex gap-2 mt-4 flex-wrap">
-                        {array.map((item: ISearch) => (
-                            <>
+                {array && array.length > 0 && (
+                    <div className="mt-3">
+                        <h1 className="text-[20px] font-medium mt-5">Лучшие результаты</h1>
+                        <div className="mt-5">
+                            <CarouselScroll content={
+                                <>
+                                    {array.map((item: ISearch) => (
+                                        <>
 
-                                {item.source === "author" && item.executor && (
-                                    <CircleCard title={item.executor.login} otherText="Исполнитель" />
-                                )}
+                                            {item.source === "author" && item.executor && (
+                                                <CarouselItem className="basis-1/7">
+                                                    <CircleCard title={item.executor.login} otherText="Исполнитель" />
+                                                </CarouselItem>
 
-                                {item.source === "album" && item.album && (
-                                    <AlbumCard
-                                        title={item.album.title}
-                                        author={item.album.author.login}
-                                        year={getStringDate(item.createdAt, "YYYY")}
-                                        img={item.album.avatarUrl}
-                                        id={item.album.id}
-                                    />
-                                )}
+                                            )}
 
-                                {item.source === "track" && item.track && (
-                                    <TrackCard
-                                        title={item.track.title}
-                                        author={item.track.author.login}
-                                        id={item.track.id}
-                                        img={item.track.trackData.fileUrlAvatar}
-                                        where="search"
-                                        byFind={item.title}
-                                        isAlbum={false}
-                                    />
-                                )}
-                            </>
-                        ))}
+                                            {item.source === "album" && item.album && (
+                                                <CarouselItem className="basis-1/7">
+                                                    <AlbumCard
+                                                        title={item.album.title}
+                                                        author={item.album.author.login}
+                                                        year={getStringDate(item.createdAt, "YYYY")}
+                                                        img={item.album.avatarUrl}
+                                                        id={item.album.id}
+                                                    />
+                                                </CarouselItem>
+                                            )}
+                                        </>
+                                    ))}
+                                </>
+                            } />
+
+                            <h1 className="mt-5 text-[20px] font-medium">Исполнители</h1>
+                            <div className="mt-5">
+                                <CarouselScroll content={
+                                    <>
+                                        {array.map((item: ISearch) => (
+                                            <>
+
+                                                {item.source === "author" && item.executor && (
+                                                    <CarouselItem className="basis-1/7">
+                                                        <CircleCard title={item.executor.login} otherText="Исполнитель" />
+                                                    </CarouselItem>
+
+                                                )}
+                                            </>
+                                        ))}
+                                    </>
+                                } />
+                            </div>
+
+                            <h1 className="mt-5 text-[20px] font-medium">Альбомы</h1>
+
+                            <div className="mt-5">
+                                <CarouselScroll content={
+                                    <>
+                                        {array.map((item: ISearch) => (
+                                            <>
+
+                                                {item.source === "album" && item.album && (
+                                                    <CarouselItem className="basis-1/7">
+                                                        <AlbumCard
+                                                            title={item.album.title}
+                                                            author={item.album.author.login}
+                                                            year={getStringDate(item.createdAt, "YYYY")}
+                                                            img={item.album.avatarUrl}
+                                                            id={item.album.id}
+                                                        />
+                                                    </CarouselItem>
+                                                )}
+                                            </>
+                                        ))}
+                                    </>
+                                } />
+                            </div>
+
+                        </div>
                     </div>
                 )}
 
