@@ -8,7 +8,7 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { Track } from '../track/track.model';
-import { Author } from '../author/author.model';
+import { User } from '../user/user.model';
 
 interface IAlbum {
   title: string;
@@ -35,12 +35,12 @@ export class Album extends Model<Album, IAlbum> {
   @HasMany(() => Track)
   tracks: Track[];
 
-  @ForeignKey(() => Author)
+  @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER })
   authorId: number;
 
-  @BelongsTo(() => Author)
-  author: Author;
+  @BelongsTo(() => User)
+  author: User;
 
   @Column({ type: DataType.STRING, defaultValue: 'album' })
   type: string;

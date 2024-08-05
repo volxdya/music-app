@@ -1,5 +1,7 @@
 import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
 import { Playlist } from '../playlist/playlist.model';
+import { Album } from '../album/album.model';
+import { Track } from '../track/track.model';
 
 interface IUser {
   firstName: string;
@@ -40,4 +42,13 @@ export class User extends Model<User, IUser> {
 
   @HasMany(() => Playlist)
   playlists: Playlist[];
+
+  @HasMany(() => Track)
+  tracks: Track[];
+
+  @HasMany(() => Album)
+  albums: Album[];
+
+  @Column({ type: DataType.STRING, defaultValue: 'user' })
+  type: string;
 }

@@ -3,8 +3,6 @@ import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';
 import { CreateUserDto } from '../user/dto/createUserDto';
 import { User } from '../user/user.model';
-import { AuthorService } from '../author/author.service';
-import { Author } from '../author/author.model';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -12,8 +10,7 @@ export class AuthService {
   constructor(
     private readonly UserService: UserService,
     private readonly jwtService: JwtService,
-    private AuthorService: AuthorService,
-  ) {}
+  ) { }
 
   private validatePassword(password: string, hash: string): Promise<boolean> {
     return bcrypt.compare(password, hash);
@@ -22,22 +19,12 @@ export class AuthService {
   // function for examination user data's (really data and data, which come from frontend)
 
   private async validateUser(dto: CreateUserDto) {
-    if (dto.isUser) {
-      const user: User = await this.UserService.getOne(dto.login);
+    const user: User = await this.UserService.getOne(dto.login);
 
-      if (user && (await this.validatePassword(dto.password, user.password))) {
-        return user;
-      }
-    } else {
-      const author: Author = await this.AuthorService.getOne(dto.login);
-
-      if (
-        author &&
-        (await this.validatePassword(dto.password, author.password))
-      ) {
-        return author;
-      }
+    if (user && (await this.validatePassword(dto.password, user.password))) {
+      return user;
     }
+
 
     throw new UnauthorizedException({
       message: 'Некорректный email или пароль',
@@ -46,7 +33,7 @@ export class AuthService {
 
   // function which generate token
 
-  private async generateToken(user: User | Author) {
+  private async generateToken(user: User) {
     // payload - data which need return in auth
     const payload = {
       login: user.login,
@@ -62,7 +49,7 @@ export class AuthService {
   }
 
   async login(userDto: CreateUserDto) {
-    const user: User | Author = await this.validateUser(userDto);
+    const user: User = await this.validateUser(userDto);
 
     return this.generateToken(user);
   }

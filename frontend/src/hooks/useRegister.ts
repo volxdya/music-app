@@ -1,20 +1,20 @@
-import {FormEvent, useState} from "react";
-import {stopFormBehavior} from "@/utils/stopFormBehavior.ts";
-import axios, {AxiosError} from "axios";
-import {useToast} from "@/components/ui/use-toast.ts";
+import { FormEvent, useState } from "react";
+import { stopFormBehavior } from "@/utils/stopFormBehavior.ts";
+import axios, { AxiosError } from "axios";
+import { useToast } from "@/components/ui/use-toast.ts";
 
 export const useRegister = (isAuthor: boolean) => {
     const [isSuccess, setIsSuccess] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const {toast} = useToast();
+    const { toast } = useToast();
 
     const handleSubmit = async (e: FormEvent, login: string, password: string, firstName: string, lastName: string) => {
         stopFormBehavior(e);
 
         setIsLoading(true);
         setIsSuccess(false);
-        await axios.post(`http://localhost:3010/${isAuthor ? "author" : "user"}/create`, {
+        await axios.post(`http://localhost:3010/user/create`, {
             login: login,
             password: password,
             firstName: firstName,
@@ -52,5 +52,5 @@ export const useRegister = (isAuthor: boolean) => {
         });
     }
 
-    return {handleSubmit, isSuccess, isLoading};
+    return { handleSubmit, isSuccess, isLoading };
 }

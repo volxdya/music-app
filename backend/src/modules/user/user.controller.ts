@@ -11,6 +11,11 @@ export class UserController {
     return this.userService.getAll();
   }
 
+  @Get(`/get_authors`)
+  getAuthors() {
+    return this.userService.getAllAuthors();
+  }
+
   @Post(`/create`)
   create(@Body() dto: CreateUserDto) {
     return this.userService.create(dto);

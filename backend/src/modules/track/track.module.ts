@@ -5,9 +5,9 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { Track } from './track.model';
 import { Playlist } from '../playlist/playlist.model';
 import { PlaylistTracks } from './playlist-tracks.model';
-import { Author } from '../author/author.model';
 import { Album } from '../album/album.model';
 import { AlbumModule } from '../album/album.module';
+import { User } from '../user/user.model';
 
 @Module({
   imports: [
@@ -15,8 +15,8 @@ import { AlbumModule } from '../album/album.module';
       Track,
       Playlist,
       PlaylistTracks,
-      Author,
       Album,
+      User
     ]),
     AlbumModule,
   ],

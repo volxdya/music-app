@@ -9,8 +9,8 @@ import {
 } from 'sequelize-typescript';
 import { Playlist } from '../playlist/playlist.model';
 import { PlaylistTracks } from './playlist-tracks.model';
-import { Author } from '../author/author.model';
 import { Album } from '../album/album.model';
+import { User } from '../user/user.model';
 
 interface ITrack {
   title: string;
@@ -52,12 +52,12 @@ export class Track extends Model<Track, ITrack> {
   @BelongsToMany(() => Playlist, () => PlaylistTracks)
   playlists: Playlist[];
 
-  @ForeignKey(() => Author)
+  @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER })
   authorId: number;
 
-  @BelongsTo(() => Author)
-  author: Author;
+  @BelongsTo(() => User)
+  author: User;
 
   @ForeignKey(() => Album)
   @Column({ type: DataType.INTEGER })

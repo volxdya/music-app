@@ -39,7 +39,7 @@ class User {
         if (getItem("token")) {
             this.getUserData();
 
-            axios.get(`http://localhost:3010/${this.userData.isUser ? "user" : "author"}/get_one/${this.userData.login}`).then((res) => {
+            axios.get(`http://localhost:3010/user/get_one/${this.userData.login}`).then((res) => {
                 this.me = res.data;
             }).catch((err) => {
                 console.log(err);

@@ -15,5 +15,6 @@ export const dfMe = {
     isUser: false,
     playlists: [],
     tracks: [],
-    albums: []
+    albums: [],
+    type: "user"
 }

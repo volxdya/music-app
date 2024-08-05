@@ -1,5 +1,4 @@
 import { ISearch } from "@/types/ISearch";
-import { IUser } from "@/types/IUser";
 import axios from "axios"
 import { useState } from "react"
 

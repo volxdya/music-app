@@ -20,6 +20,12 @@ export class UserService {
     return users;
   }
 
+  async getAllAuthors() {
+    const authors: User[] = await this.userRepository.findAll({where: {isUser: false}});
+
+    return authors;
+  }
+
   async create(dto: CreateUserDto) {
     const user = await this.userRepository.create(dto);
     const playlist = await this.playlistService.create({

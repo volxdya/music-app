@@ -2,7 +2,12 @@ import './MainCard.scss';
 import {Heart} from "../../../icons/Hearts/Heart.tsx";
 import {NavigationText} from "../../Text/NavigationText/NavgiationText.tsx";
 
-export function MainCard() {
+interface Props {
+    title: string;
+    info: string;
+}
+
+export function MainCard({title, info}: Props) {
     return (
         <div className="d-flex justify-content-between main-card">
             <div className="d-flex gap-3">
@@ -11,8 +16,8 @@ export function MainCard() {
                 </div>
                 <div className="d-flex align-items-center">
                     <div>
-                        <NavigationText text="Мне нравится"/>
-                        <p className="m-0 other-text">1160 треков</p>
+                        <NavigationText text={title}/>
+                        <p className="m-0 other-text">{info}</p>
                     </div>
                 </div>
             </div>

@@ -5,6 +5,7 @@ import user from "@/store/user.ts";
 
 export const usePlaylistInfo = () => {
     const [playlist, setPlaylist] = useState<IPlaylist>();
+    
     useEffect(() => {
         user.getMe();
     });

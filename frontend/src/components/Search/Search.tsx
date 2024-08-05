@@ -46,7 +46,7 @@ export function Search() {
                                     {search.map((item: ISearch) => (
                                         <>
 
-                                            {item.type === "author" && (
+                                            {item.type === "user" && !item.isUser && (
                                                 <CarouselItem className="basis-1/7">
                                                     <CircleCard title={item.login} otherText="Исполнитель" />
                                                 </CarouselItem>
@@ -76,7 +76,7 @@ export function Search() {
                                         {search.map((item: ISearch) => (
                                             <>
 
-                                                {item.type === "author" && (
+                                                {item.type === "user" && !item.isUser && (
                                                     <CarouselItem className="basis-1/7">
                                                         <CircleCard title={item.login} otherText="Исполнитель" />
                                                     </CarouselItem>

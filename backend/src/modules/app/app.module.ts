@@ -5,7 +5,6 @@ import { DB_CONFIG } from '../../config/db.config';
 import { UserModule } from '../user/user.module';
 import { PlaylistModule } from '../playlist/playlist.module';
 import { TrackModule } from '../track/track.module';
-import { AuthorModule } from '../author/author.module';
 import { AuthModule } from '../auth/auth.module';
 import { AlbumModule } from '../album/album.module';
 import { SearchModule } from '../search/search.module';
@@ -20,7 +19,6 @@ import { SearchModule } from '../search/search.module';
     UserModule,
     PlaylistModule,
     TrackModule,
-    AuthorModule,
     AuthModule,
     AlbumModule,
     SearchModule,

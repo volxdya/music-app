@@ -4,9 +4,9 @@ import { Track } from './track.model';
 import { CreateTrackDto } from './dto/createTrackDto';
 import { AlbumService } from '../album/album.service';
 import { Album } from '../album/album.model';
-import { Author } from '../author/author.model';
 import axios, { AxiosRequestConfig } from 'axios';
 import * as process from 'node:process';
+import { User } from '../user/user.model';
 
 @Injectable()
 export class TrackService {
@@ -25,7 +25,11 @@ export class TrackService {
         authorId: dto.authorId,
       });
 
-      await newAlbum.$set("tracks", track);
+      await newAlbum.$set('tracks', track);
+
+      await newAlbum.update({
+        avatarUrl: dto.avatarUrl,
+      });
 
       await track.update({
         albumId: newAlbum.id,
@@ -40,7 +44,7 @@ export class TrackService {
   }
 
   async getAll() {
-    return this.trackRepository.findAll({ include: [Album, Author] });
+    return this.trackRepository.findAll({ include: [Album, User] });
   }
 
   async getById(trackId: number) {
@@ -64,7 +68,7 @@ export class TrackService {
   async getTracksByAuthor(authorId: number) {
     return await this.trackRepository.findAll({
       where: { authorId },
-      include: [Author, Album],
+      include: [User, Album],
     });
   }
 

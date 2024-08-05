@@ -70,7 +70,7 @@ export function CollectionForAuthors() {
                                 year={getStringDate(user.me.albums[0].createdAt, "YYYY")}
                             />
                         </div>
-                    ): (
+                    ) : (
                         <div>Пока что тут ничего нет =D</div>
                     )}
                 </div>
@@ -78,9 +78,7 @@ export function CollectionForAuthors() {
 
             <Modal
                 trigger={
-                    <div className="d-flex justify-content-center">
-                        <button className="add-track mb-20 mt-20 w-25">Добавить трек</button>
-                    </div>
+                    <button className="add-track mb-20 mt-20 w-25">Добавить трек</button>
                 }
                 content={
                     <form className="mx-3 me-3" onSubmit={(e) => {
@@ -91,10 +89,13 @@ export function CollectionForAuthors() {
                             <input type="text" placeholder="Название" className="mt-2"
                                 onChange={onChange(setTitleTrack)} />
 
+                            <h1 className="fs-5 text-center mt-3">Обложка</h1>
                             <UploadFiles setFn={setAvatarUrlTrack} />
+
+                            <h1 className="fs-5 text-center">Запись</h1>
                             <UploadFiles setFn={setTrackUrl} />
 
-                            <button className="add-track w-100 mt-5">Добавить</button>
+                            <button className="add-track w-100 mt-1">Добавить</button>
                         </div>
                     </form>
 
@@ -124,9 +125,7 @@ export function CollectionForAuthors() {
                 </div>
                 <Modal
                     trigger={
-                        <div className="d-flex justify-content-center">
-                            <button className="add-track mt-20 mb-20 w-25">Добавить альбом</button>
-                        </div>
+                        <button className="add-track mt-20 mb-20 w-25">Добавить альбом</button>
                     }
                     content={
                         <form className="me-3 mx-3" onSubmit={(e) => {

@@ -1,15 +1,11 @@
-import axios, {AxiosError} from "axios";
-import {useToast} from "@/components/ui/use-toast.ts";
+import axios, { AxiosError } from "axios";
+import { useToast } from "@/components/ui/use-toast.ts";
 import user from "@/store/user.ts";
 
 export const useAddToPlaylist = (trackId: number) => {
-    let playlistId: number;
+    const playlistId: number = user.me.playlists[0].id;;
 
-    if (user.userData.isUser) {
-        playlistId = user.me.playlists[0].id;
-    }
-
-    const {toast} = useToast();
+    const { toast } = useToast();
 
 
     const createLike = async () => {
@@ -37,22 +33,20 @@ export const useAddToPlaylist = (trackId: number) => {
         //     });
         // }
 
-        if (user.userData.isUser) {
-            await axios.post(`http://localhost:3010/playlist/add_track`, {
-                playlistId: playlistId,
-                trackId: trackId
-            }).then((resp) => {
-                console.log(resp.data);
-                toast({
-                    title: `Трек ${trackId} добавлен в плейлист "Мне нравится"`,
-                })
-            }).catch((err: AxiosError) => {
-                console.log(err);
-            });
-        }
+        await axios.post(`http://localhost:3010/playlist/add_track`, {
+            playlistId: playlistId,
+            trackId: trackId
+        }).then((resp) => {
+            console.log(resp.data);
+            toast({
+                title: `Трек ${trackId} добавлен в плейлист "Мне нравится"`,
+            })
+        }).catch((err: AxiosError) => {
+            console.log(err);
+        });
     };
 
-    return {createLike};
+    return { createLike };
 
 
 }
