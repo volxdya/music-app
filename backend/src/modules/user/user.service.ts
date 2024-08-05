@@ -1,16 +1,19 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from './user.model';
 import { CreateUserDto } from './dto/createUserDto';
 import { PlaylistService } from '../playlist/playlist.service';
 import * as bcrypt from 'bcrypt';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Cache } from 'cache-manager';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel(User) private readonly userRepository: typeof User,
+    @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
     private readonly playlistService: PlaylistService,
-  ) {}
+  ) { }
 
   async getAll() {
     const users: User[] = await this.userRepository.findAll({
@@ -21,7 +24,16 @@ export class UserService {
   }
 
   async getAllAuthors() {
-    const authors: User[] = await this.userRepository.findAll({where: {isUser: false}});
+    const authors: User[] = await this.cacheManager.get('authors');
+
+    if (!authors) {
+      const authors: User[] = await this.userRepository.findAll({
+        where: { isUser: false }
+      });
+
+      await this.cacheManager.set('authors', authors);
+      return authors;
+    }
 
     return authors;
   }

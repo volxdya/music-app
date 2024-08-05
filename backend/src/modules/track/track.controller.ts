@@ -21,11 +21,6 @@ export class TrackController {
     return this.trackService.getById(id);
   }
 
-  @Get(`/search/:title`)
-  search(@Param('title') title: string) {
-    return this.trackService.search(title);
-  }
-
   @Get(`/get_by_authorId/:authorId`)
   getByAuthorId(@Param('authorId') authorId: number) {
     return this.trackService.getTracksByAuthor(authorId);

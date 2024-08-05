@@ -45,10 +45,18 @@ export function MainScreen() {
             <div className="container-playlists d-flex gap-3 mt-5">
                 {playlist && (
                     <>
-                        <Link to="/like" className="w-100">
-                            <MainCard title="Мне нравится" info={`${playlist?.tracks.length} ${title}`} />
-                        </Link>
-                        <MainCard title="Мне нравится" info={`${playlist?.tracks.length} ${title}`} />
+                        <MainCard
+                            title="Мне нравится"
+                            info={`${playlist?.tracks.length} ${title}`}
+                            link="/like"
+                        />
+
+                        <MainCard
+                            title="Мне нравится"
+                            info={`${playlist?.tracks.length} ${title}`}
+                            link="/like"
+                        />
+
                     </>
                 )}
             </div>

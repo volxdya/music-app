@@ -8,6 +8,8 @@ import { TrackModule } from '../track/track.module';
 import { AuthModule } from '../auth/auth.module';
 import { AlbumModule } from '../album/album.module';
 import { SearchModule } from '../search/search.module';
+import { CacheModule } from '@nestjs/cache-manager';
+import { REDIS_CONFIG } from 'src/config/redis.config';
 
 @Module({
   imports: [
@@ -16,6 +18,7 @@ import { SearchModule } from '../search/search.module';
       isGlobal: true,
     }),
     SequelizeModule.forRoot(DB_CONFIG),
+    CacheModule.register(REDIS_CONFIG),
     UserModule,
     PlaylistModule,
     TrackModule,

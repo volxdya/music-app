@@ -73,7 +73,7 @@ export const Sidebar = observer(() => {
                         <div className="user-data-block">
                             <div>
                                 <p>{user.userData.login}</p>
-                                {!user.me.isUser ? (
+                                {!user.userData.isUser ? (
                                     <div className="author-block mt-1">Исполнитель</div>
                                 ): (
                                     <div className="author-block mt-1">Слушатель</div>

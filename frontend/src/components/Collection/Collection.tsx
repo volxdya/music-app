@@ -9,18 +9,18 @@ export const Collection = observer(() => {
 
     useEffect(() => {
         user.getUserData();
-        user.getMe();
-
-        console.log("use");
     }, []);
 
-    if (user.me.isUser) {
+    if (user.userData.isUser) {
         return (
             <CollectionForUsers/>
         );
     }
 
     return (
-        <CollectionForAuthors/>
+        <>
+            <CollectionForAuthors/>
+            <CollectionForUsers/>
+        </>
     )
 });

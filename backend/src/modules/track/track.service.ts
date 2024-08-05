@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Track } from './track.model';
 import { CreateTrackDto } from './dto/createTrackDto';
@@ -7,13 +7,16 @@ import { Album } from '../album/album.model';
 import axios, { AxiosRequestConfig } from 'axios';
 import * as process from 'node:process';
 import { User } from '../user/user.model';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Cache } from 'cache-manager';
 
 @Injectable()
 export class TrackService {
   constructor(
     @InjectModel(Track) private readonly trackRepository: typeof Track,
     private readonly albumService: AlbumService,
-  ) {}
+    @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
+  ) { }
 
   async create(dto: CreateTrackDto) {
     if (dto.isTrack) {
@@ -44,7 +47,16 @@ export class TrackService {
   }
 
   async getAll() {
-    return this.trackRepository.findAll({ include: [Album, User] });
+    const tracks: Track[] = await this.cacheManager.get('tracks');
+
+    if (!tracks) {
+      const tracks: Track[] = await this.trackRepository.findAll({ include: [Album, User] });
+      await this.cacheManager.set('tracks', tracks);
+
+      return tracks;
+    }
+
+    return tracks;
   }
 
   async getById(trackId: number) {
@@ -52,17 +64,6 @@ export class TrackService {
       where: { id: trackId },
       include: { all: true },
     });
-  }
-
-  async search(title: string) {
-    const tracks: Track[] = await this.trackRepository.findAll({
-      include: { all: true },
-    });
-
-    const filtredTracks: Track[] = tracks.filter((item) =>
-      item.title.toLowerCase().includes(title.toLowerCase()),
-    );
-    return filtredTracks;
   }
 
   async getTracksByAuthor(authorId: number) {

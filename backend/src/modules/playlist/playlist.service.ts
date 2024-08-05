@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Playlist } from './playlist.model';
 import { CreatePlaylistDto } from './dto/createPlaylistDto';
