@@ -12,7 +12,7 @@ import { CarouselItem } from "../ui/carousel.tsx";
 
 export function Search() {
     const [value, setValue] = useState("");
-    const [search, array] = useSearch();
+    const [search, searchFn] = useSearch();
     const [isSearched, setIsSearched] = useState(false);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +23,7 @@ export function Search() {
         stopFormBehavior(e);
         setValue("");
         setIsSearched(true);
-        search(value);
+        searchFn(value);
     }
 
     return (
@@ -36,30 +36,30 @@ export function Search() {
                     value={value}
                 />
 
-                {array && array.length > 0 && (
+                {search && search.length > 0 && (
                     <div className="mt-3">
                         <h1 className="text-[20px] font-medium mt-5">Лучшие результаты</h1>
                         <div className="mt-5">
                             <CarouselScroll content={
                                 <>
-                                    {array.map((item: ISearch) => (
+                                    {search.map((item: ISearch) => (
                                         <>
 
-                                            {item.source === "author" && item.executor && (
+                                            {item.type === "author" && (
                                                 <CarouselItem className="basis-1/7">
-                                                    <CircleCard title={item.executor.login} otherText="Исполнитель" />
+                                                    <CircleCard title={item.login} otherText="Исполнитель" />
                                                 </CarouselItem>
 
                                             )}
 
-                                            {item.source === "album" && item.album && (
+                                            {item.type === "album" && (
                                                 <CarouselItem className="basis-1/7">
                                                     <AlbumCard
-                                                        title={item.album.title}
-                                                        author={item.album.author.login}
+                                                        title={item.title}
+                                                        author={item.author.login}
                                                         year={getStringDate(item.createdAt, "YYYY")}
-                                                        img={item.album.avatarUrl}
-                                                        id={item.album.id}
+                                                        img={item.avatarUrl}
+                                                        id={item.id}
                                                     />
                                                 </CarouselItem>
                                             )}
@@ -67,17 +67,17 @@ export function Search() {
                                     ))}
                                 </>
                             } />
-
+                            
                             <h1 className="mt-5 text-[20px] font-medium">Исполнители</h1>
                             <div className="mt-5">
                                 <CarouselScroll content={
                                     <>
-                                        {array.map((item: ISearch) => (
+                                        {search.map((item: ISearch) => (
                                             <>
 
-                                                {item.source === "author" && item.executor && (
+                                                {item.type === "author" && (
                                                     <CarouselItem className="basis-1/7">
-                                                        <CircleCard title={item.executor.login} otherText="Исполнитель" />
+                                                        <CircleCard title={item.login} otherText="Исполнитель" />
                                                     </CarouselItem>
 
                                                 )}
@@ -86,23 +86,24 @@ export function Search() {
                                     </>
                                 } />
                             </div>
+                            
 
                             <h1 className="mt-5 text-[20px] font-medium">Альбомы</h1>
 
                             <div className="mt-5">
                                 <CarouselScroll content={
                                     <>
-                                        {array.map((item: ISearch) => (
+                                        {search.map((item: ISearch) => (
                                             <>
 
-                                                {item.source === "album" && item.album && (
+                                                {item.type === "album" && (
                                                     <CarouselItem className="basis-1/7">
                                                         <AlbumCard
-                                                            title={item.album.title}
-                                                            author={item.album.author.login}
+                                                            title={item.title}
+                                                            author={item.author.login}
                                                             year={getStringDate(item.createdAt, "YYYY")}
-                                                            img={item.album.avatarUrl}
-                                                            id={item.album.id}
+                                                            img={item.avatarUrl}
+                                                            id={item.id}
                                                         />
                                                     </CarouselItem>
                                                 )}
@@ -116,7 +117,7 @@ export function Search() {
                     </div>
                 )}
 
-                {isSearched && array.length === 0 && (
+                {isSearched && search.length === 0 && (
                     <div className="d-flex justify-content-center mt-5">
                         <div>
                             <div className="d-flex justify-content-center">

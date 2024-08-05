@@ -11,4 +11,5 @@ export interface IUser {
     albums: Array<IAlbum>;
     tracks: ITrack[];
     isUser: boolean;
+    type: string;
 }

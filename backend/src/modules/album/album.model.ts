@@ -41,4 +41,7 @@ export class Album extends Model<Album, IAlbum> {
 
   @BelongsTo(() => Author)
   author: Author;
+
+  @Column({ type: DataType.STRING, defaultValue: 'album' })
+  type: string;
 }

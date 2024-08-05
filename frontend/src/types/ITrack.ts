@@ -6,6 +6,7 @@ export interface ITrack {
     albumId: number;
     isTrack: boolean;
     id: number;
+    type: string;
     trackData: {
         accountId: string;
         filePathAvatar: string;

@@ -65,4 +65,7 @@ export class Track extends Model<Track, ITrack> {
 
   @BelongsTo(() => Album)
   album: Album;
+
+  @Column({ type: DataType.STRING, defaultValue: 'track' })
+  type: string;
 }

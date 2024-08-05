@@ -8,6 +8,7 @@ import { TrackModule } from '../track/track.module';
 import { AuthorModule } from '../author/author.module';
 import { AuthModule } from '../auth/auth.module';
 import { AlbumModule } from '../album/album.module';
+import { SearchModule } from '../search/search.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { AlbumModule } from '../album/album.module';
     AuthorModule,
     AuthModule,
     AlbumModule,
+    SearchModule,
   ],
   controllers: [],
   providers: [],

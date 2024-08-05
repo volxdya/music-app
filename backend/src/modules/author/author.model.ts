@@ -38,4 +38,7 @@ export class Author extends Model<Author, IAuthor> {
 
   @HasMany(() => Album)
   albums: Album[];
+
+  @Column({ type: DataType.STRING, defaultValue: 'author' })
+  type: string;
 }

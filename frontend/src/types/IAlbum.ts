@@ -10,5 +10,5 @@ export interface IAlbum {
     createdAt: Date;
     tracks: ITrack[];
     author: IUser;
-
+    type: string;
 }
