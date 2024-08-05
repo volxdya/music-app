@@ -61,14 +61,18 @@ export function CollectionForAuthors() {
                 </div>
                 <div className="col-4 px-5">
                     <h1 className="realese">Недавний релиз</h1>
-                    <div className="mt-3">
-                        <AlbumCard
-                            id={user.me.albums[0].id}
-                            author={user.userData.login}
-                            title={user.me.albums[0].title}
-                            year={getStringDate(user.me.albums[0].createdAt, "YYYY")}
-                        />
-                    </div>
+                    {user.me.albums[0] ? (
+                        <div className="mt-3">
+                            <AlbumCard
+                                id={user.me.albums[0].id}
+                                author={user.userData.login}
+                                title={user.me.albums[0].title}
+                                year={getStringDate(user.me.albums[0].createdAt, "YYYY")}
+                            />
+                        </div>
+                    ): (
+                        <div>Пока что тут ничего нет =D</div>
+                    )}
                 </div>
             </div>
 

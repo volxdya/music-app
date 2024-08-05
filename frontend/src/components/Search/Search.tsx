@@ -9,6 +9,7 @@ import { getStringDate } from "@/utils/getStringDate.ts";
 import { NoSearch } from "@/icons/NoSearch.tsx";
 import { CarouselScroll } from "../CarouselScroll/CarouselScroll.tsx";
 import { CarouselItem } from "../ui/carousel.tsx";
+import { TrackCard } from "@/ui/Cards/TrackCard/TrackCard.tsx";
 
 export function Search() {
     const [value, setValue] = useState("");
@@ -67,7 +68,7 @@ export function Search() {
                                     ))}
                                 </>
                             } />
-                            
+
                             <h1 className="mt-5 text-[20px] font-medium">Исполнители</h1>
                             <div className="mt-5">
                                 <CarouselScroll content={
@@ -86,7 +87,7 @@ export function Search() {
                                     </>
                                 } />
                             </div>
-                            
+
 
                             <h1 className="mt-5 text-[20px] font-medium">Альбомы</h1>
 
@@ -111,6 +112,30 @@ export function Search() {
                                         ))}
                                     </>
                                 } />
+                            </div>
+
+
+                            <h1 className="mt-5 text-[20px] font-medium">Треки</h1>
+
+                            <div className="mt-5">
+                                <>
+                                    {search.map((item: ISearch) => (
+                                        <>
+
+                                            {item.type === "track" && (
+                                                <TrackCard
+                                                    title={item.title}
+                                                    author={item.author.login}
+                                                    img={item.avatarUrl}
+                                                    id={item.id}
+                                                    where="search"
+                                                    byFind={item.title}
+                                                    isAlbum={false}
+                                                />
+                                            )}
+                                        </>
+                                    ))}
+                                </>
                             </div>
 
                         </div>
