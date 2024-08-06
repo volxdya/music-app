@@ -28,7 +28,7 @@ export class UserService {
 
     if (!authors) {
       const authors: User[] = await this.userRepository.findAll({
-        where: { isUser: false }
+        where: { isUser: false },
       });
 
       await this.cacheManager.set('authors', authors);
@@ -61,6 +61,15 @@ export class UserService {
   async getOne(login: string) {
     const user = await this.userRepository.findOne({
       where: { login },
+      include: { all: true },
+    });
+
+    return user;
+  }
+
+  async getById(userId: number) {
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
       include: { all: true },
     });
 

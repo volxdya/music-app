@@ -17,24 +17,24 @@ import { IAlbum } from "@/types/IAlbum.ts";
 import { getStringDate } from "@/utils/getStringDate.ts";
 import { UploadFiles } from "@/components/UploadFiles/UploadFiles.tsx";
 import { IUploadFile } from "@/types/IUploadFile.ts";
+import { useAllAuthors } from "@/hooks/useAllAuthors";
+import { IUser } from "@/types/IUser";
 
 export function CollectionForAuthors() {
+
+    useEffect(() => {
+        user.getMe();
+    }, []);
 
     const [titleTrack, setTitleTrack] = useState("");
     const [titleAlbum, setTitleAlbum] = useState("");
     const [avatarUrlTrack, setAvatarUrlTrack] = useState<IUploadFile[]>([]);
     const [avatarUrlAlbum, setAvatarUrlAlbum] = useState<IUploadFile[]>([]);
-
     const [trackUrl, setTrackUrl] = useState<IUploadFile[]>([]);
 
     const { handleSubmitTrack } = useCreateTrack();
     const { handleSubmitAlbum } = useCreateAlbum();
-
-    useEffect(() => {
-        user.getUserData();
-        user.getMe();
-    }, []);
-
+    const [authors] = useAllAuthors();
 
     return (
         <>
@@ -45,7 +45,7 @@ export function CollectionForAuthors() {
                 <div className="col-8">
                     {user.me.tracks && (
                         <>
-                            {user.me.tracks.slice(0, 5).map((item: ITrack) => (
+                            {user.me?.tracks.slice(0, 5).map((item: ITrack) => (
                                 <TrackCard
                                     title={item.title}
                                     author={user.userData.login}
@@ -61,7 +61,7 @@ export function CollectionForAuthors() {
                 </div>
                 <div className="col-4 px-5">
                     <h1 className="realese">Недавний релиз</h1>
-                    {user.me.albums[0] ? (
+                    {user.me?.albums.length > 0 ? (
                         <div className="mt-3">
                             <AlbumCard
                                 id={user.me.albums[0].id}
@@ -153,9 +153,11 @@ export function CollectionForAuthors() {
                 <div className="mt-4">
                     <CarouselScroll content={
                         <>
-                            <CarouselItem className="basis-1/7">
-                                <CircleCard title="Heronwater" otherText="Исполнитель" />
-                            </CarouselItem>
+                            {authors.map((item: IUser) => (
+                                <CarouselItem className="basis-1/7">
+                                    <CircleCard title={item.login} otherText="Исполнитель" link={`/author/${item.id}`} />
+                                </CarouselItem>
+                            ))}
                         </>
                     } />
                 </div>

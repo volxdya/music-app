@@ -1,5 +1,4 @@
 import { HeaderMusic } from "@/ui/HeaderMusic/HeaderMusic.tsx";
-import { useEffect } from "react";
 import user from "@/store/user.ts";
 import { usePlaylistInfo } from "@/hooks/usePlaylistInfo.ts";
 import { ITrack } from "@/types/ITrack.ts";
@@ -7,10 +6,6 @@ import { TrackCard } from "@/ui/Cards/TrackCard/TrackCard.tsx";
 import uniqid from "uniqid";
 
 export function Playlist() {
-    useEffect(() => {
-        user.getMe();
-    }, []);
-
     const { playlist } = usePlaylistInfo();
 
 

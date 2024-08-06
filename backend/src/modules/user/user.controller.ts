@@ -25,4 +25,9 @@ export class UserController {
   getOne(@Param('login') login: string) {
     return this.userService.getOne(login);
   }
+
+  @Get(`/get_by_id/:userId`)
+  getById(@Param('userId') userId: number) {
+    return this.userService.getById(userId);
+  }
 }

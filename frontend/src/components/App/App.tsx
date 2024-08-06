@@ -10,11 +10,18 @@ import {TracksPage} from "@/ui/TracksPage/TracksPage.tsx";
 import {Playlist} from "@/components/Playlist/Playlist.tsx";
 import {Tracks} from "@/components/Tracks/Tracks.tsx";
 import { Album } from "../Album/Album.tsx";
+import { useEffect } from "react";
+import user from "@/store/user.ts";
+import { Author } from "../Author/Author.tsx";
 export default function App() {
     const location = useLocation();
     // const locationsForValidate: string[] = ["/auth", "/register"];
 
     const validateLocation: boolean = location.pathname !== "/auth" && location.pathname !== "/register" && location.pathname !== "/test";
+    
+    useEffect(() => {
+        user.getMe();
+    }, []);
 
     return (
         <div className="row g-0">
@@ -35,6 +42,7 @@ export default function App() {
                         <Route path="/tracks" element={<Tracks/>}/>
                         <Route path="/tracks/:search/:bySearch/:isAuthor" element={<TracksPage/>}/>
                         <Route path="/album/:albumId" element={<Album/>}/>
+                        <Route path="/author/:authorId" element={<Author/>}/>
                     </Routes>
                 </div>
                 {validateLocation && (

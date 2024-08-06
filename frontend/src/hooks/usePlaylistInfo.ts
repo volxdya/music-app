@@ -8,7 +8,7 @@ export const usePlaylistInfo = () => {
     
     useEffect(() => {
         user.getMe();
-    });
+    }, []);
 
     useEffect(() => {
         if (user.me.playlists[0]) {

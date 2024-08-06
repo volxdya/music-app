@@ -1,7 +1,6 @@
 import './MainScreen.scss';
 import { Play } from "../../icons/Play.tsx";
 import { MainCard } from "../../ui/Cards/MainCard/MainCard.tsx";
-import { Link } from "react-router-dom";
 import { usePlaylistInfo } from '@/hooks/usePlaylistInfo.ts';
 
 export function MainScreen() {

@@ -4,24 +4,15 @@ import { CreatePlaylistCard } from "@/ui/Cards/PlaylistCard/CreatePlaylistCard.t
 import { getItem } from "@/utils/localStorage.ts";
 import user from "@/store/user.ts";
 import { PlaylistCard } from "@/ui/Cards/PlaylistCard/PlaylistCard.tsx";
-import axios from "axios";
-import { useEffect } from "react";
+
 import { observer } from "mobx-react-lite";
 import { IPlaylist } from "@/types/IPlaylist.ts";
 import uniqid from "uniqid";
 import { usePlaylistInfo } from "@/hooks/usePlaylistInfo";
-import { Link } from "react-router-dom";
+import { useCreatePlaylist } from "@/hooks/useCreatePlaylist";
 
 export const CollectionForUsers = observer(() => {
-
-    useEffect(() => {
-        user.getUserData();
-        user.getMe();
-
-
-        console.log("use");
-    }, []);
-
+    const { createPlaylist } = useCreatePlaylist(user.userData.id);
     const { playlist } = usePlaylistInfo();
     let title = "треков";
 
@@ -43,16 +34,6 @@ export const CollectionForUsers = observer(() => {
     getTitle(1, 10, "трек");
     getTitle(2, 5, "трека");
 
-    async function createPlaylist() {
-        await axios.post(`http://localhost:3010/playlist/create`, {
-            title: "Новый плейлист",
-            userId: user.userData.id,
-        }).then(() => {
-            user.getMe();
-        }).catch((err) => {
-            console.log(err);
-        })
-    }
 
     return (
         <>
@@ -68,10 +49,6 @@ export const CollectionForUsers = observer(() => {
                     info={playlist ? `${playlist?.tracks.length} ${title}` : `=D`}
                     link="/like"
                 />
-            </div>
-
-            <div className="mt-4 d-flex flex-wrap gap-1 track-cards">
-
             </div>
 
             <div className="mt-4">

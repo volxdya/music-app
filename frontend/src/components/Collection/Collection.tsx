@@ -1,9 +1,9 @@
 import './Collection.scss';
 import user from "@/store/user.ts";
-import {observer} from "mobx-react-lite";
-import {useEffect} from "react";
-import {CollectionForAuthors} from "@/components/Collection/CollectionForAuthors/CollectionForAuthors.tsx";
-import {CollectionForUsers} from "@/components/Collection/CollectionForUsers/CollectionForUsers.tsx";
+import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
+import { CollectionForAuthors } from "@/components/Collection/CollectionForAuthors/CollectionForAuthors.tsx";
+import { CollectionForUsers } from "@/components/Collection/CollectionForUsers/CollectionForUsers.tsx";
 
 export const Collection = observer(() => {
 
@@ -13,14 +13,16 @@ export const Collection = observer(() => {
 
     if (user.userData.isUser) {
         return (
-            <CollectionForUsers/>
+            <CollectionForUsers />
         );
     }
 
     return (
         <>
-            <CollectionForAuthors/>
-            <CollectionForUsers/>
+            <CollectionForAuthors />
+            <div className='mt-5'>
+                <CollectionForUsers />
+            </div>
         </>
     )
 });
