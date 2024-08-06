@@ -8,6 +8,8 @@ import player from "@/store/player.ts";
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Pause } from "@/icons/Player/Pause.tsx";
+import { useGetIsLike } from '@/hooks/useGetIsLike.ts';
+import { usePlaylistInfo } from '@/hooks/usePlaylistInfo.ts';
 
 interface Props {
     title: string;
@@ -33,6 +35,7 @@ export const TrackCard = observer((props: Props) => {
     } = props;
 
     const { createLike } = useAddToPlaylist(id);
+
     const [isCurrent, setIsCurrent] = useState(false);
 
     function set() {

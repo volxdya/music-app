@@ -16,6 +16,7 @@ export function TracksPage() {
 
     const { handleSubmitTrack } = useCreateTrack();
     const { tracks } = useGetTracks();
+
     const params = useParams();
 
     useEffect(() => {
