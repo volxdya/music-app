@@ -23,11 +23,6 @@ export class PlaylistController {
     return this.playlistService.addTrack(dto);
   }
 
-  @Post(`/check_like`)
-  checkLike(@Body() dto: CheckLikeDto) {
-    return this.playlistService.checkTrackLike(dto);
-  }
-
   @Delete(`/delete_track/:trackId/:playlistId`)
   deleteTrack(
     @Param('trackId') trackId: number,

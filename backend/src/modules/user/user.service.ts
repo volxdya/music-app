@@ -59,20 +59,43 @@ export class UserService {
   }
 
   async getOne(login: string) {
-    const user = await this.userRepository.findOne({
-      where: { login },
-      include: { all: true },
-    });
+    const user: User = await this.cacheManager.get(`user/${login}`);
+
+    if (!user) {
+
+      const user: User = await this.userRepository.findOne({
+        where: { login },
+        include: { all: true },
+      });
+
+      if (user) {
+        await this.cacheManager.set(`user/${login}`, user);
+      }
+      return user;
+    }
 
     return user;
   }
 
   async getById(userId: number) {
-    const user = await this.userRepository.findOne({
-      where: { id: userId },
-      include: { all: true },
-    });
+
+    const user: User = await this.cacheManager.get(`user/${userId}`);
+
+    if (!user) {
+
+      const user = await this.userRepository.findOne({
+        where: { id: userId },
+        include: { all: true },
+      });
+
+      if (user) {
+        await this.cacheManager.set(`user/${userId}`, user);
+      }
+      
+      return user;
+    }
 
     return user;
+
   }
 }

@@ -31,13 +31,25 @@ export class AlbumService {
   }
 
   async getById(id: number) {
-    return await this.albumRepository.findOne({
-      where: { id },
-      include: { all: true },
-    });
+    const album: Album = await this.cacheManager.get(`album/${id}`);
+
+    if (!album) {
+      const album: Album = await this.albumRepository.findOne({
+        where: { id },
+        include: { all: true },
+      });
+
+      await this.cacheManager.set(`album/${id}`, album);
+
+      return album;
+    }
+
+    return album;
   }
 
   async delete(albumId: number) {
+    await this.cacheManager.del(`album/${albumId}`);
+
     return await this.albumRepository.destroy({ where: { id: albumId } });
   }
 }

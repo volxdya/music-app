@@ -40,6 +40,8 @@ export class TrackService {
 
       track.albumId = newAlbum.id;
 
+      await this.cacheManager.set(`track/${track.id}`, track);
+
       return track;
     }
 
@@ -60,10 +62,19 @@ export class TrackService {
   }
 
   async getById(trackId: number) {
-    return await this.trackRepository.findOne({
-      where: { id: trackId },
-      include: { all: true },
-    });
+    const track: Track = await this.cacheManager.get(`track/${trackId}`);
+
+    if (!track) {
+      const track = await this.trackRepository.findOne({
+        where: { id: trackId },
+        include: { all: true },
+      });
+
+      await this.cacheManager.set(`track/${trackId}`, track);
+      return track;
+    }
+
+    return track;
   }
 
   async getTracksByAuthor(authorId: number) {
@@ -74,13 +85,21 @@ export class TrackService {
   }
 
   async getChart() {
-    return this.trackRepository.findAll({
-      order: [
-        ['auditions', 'DESC'],
-        // ['createdAt', 'DESC'],
-      ],
-      limit: 50,
-    });
+    const chart: Track[] = await this.cacheManager.get(`chart`);
+
+    if (!chart) {
+      const chart = this.trackRepository.findAll({
+        order: [
+          ['auditions', 'DESC'],
+          // ['createdAt', 'DESC'],
+        ],
+        limit: 50,
+      });
+
+      await this.cacheManager.set(`chart`, chart);
+    }
+
+    return chart;
   }
 
   async listen(trackId: number) {
@@ -109,6 +128,8 @@ export class TrackService {
     await axios.delete(`${url}${track.trackData.filePathAvatar}`, config);
     await axios.delete(`${url}${track.trackData.filePathMP3}`, config);
     await this.albumService.delete(track.albumId);
+    
+    await this.cacheManager.del(`track/${trackId}`);
 
     await track.destroy();
 

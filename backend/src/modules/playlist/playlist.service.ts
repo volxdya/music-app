@@ -6,6 +6,8 @@ import { TrackService } from '../track/track.service';
 import { UsePlaylistDto } from './dto/usePlaylistDto';
 import { Track } from '../track/track.model';
 import { CheckLikeDto } from './dto/checkLikeDto';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Cache } from 'cache-manager';
 
 @Injectable()
 export class PlaylistService {
@@ -13,24 +15,34 @@ export class PlaylistService {
     @InjectModel(Playlist)
     private readonly playlistRepostitory: typeof Playlist,
     private readonly trackService: TrackService,
-  ) {}
+    @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
+  ) { }
 
   async create(dto: CreatePlaylistDto) {
     return await this.playlistRepostitory.create(dto);
   }
 
   async getById(playlistId: number) {
-    return await this.playlistRepostitory.findOne({
-      include: [Track],
-      where: { id: playlistId },
-    });
+    const playlist: Playlist = await this.cacheManager.get(`playlist/${playlistId}`);
+
+    if (!playlist) {
+      const playlist = await this.playlistRepostitory.findOne({
+        include: [Track],
+        where: { id: playlistId },
+      });
+
+      await this.cacheManager.set(`playlist/${playlistId}`, playlist);
+      return playlist;
+    }
+
+    return playlist;
   }
 
   async addTrack(dto: UsePlaylistDto) {
     const track = await this.trackService.getById(dto.trackId);
 
     const playlist = await this.getById(dto.playlistId);
-    await playlist.$add('tracks', track);
+    await playlist.$add('tracks', [track]);
 
     return playlist;
   }
@@ -44,20 +56,5 @@ export class PlaylistService {
     await playlist.$remove('tracks', track);
 
     return playlist;
-  }
-
-  async checkTrackLike(dto: CheckLikeDto) {
-    const playlist = await this.playlistRepostitory.findOne({
-      where: { id: dto.playlistId },
-      include: [Track],
-    });
-
-    for (let i = 0; i < playlist.tracks.length; i++) {
-      if (dto.trackId === playlist.tracks[i].id) {
-        return true;
-      }
-    }
-
-    return false;
   }
 }
