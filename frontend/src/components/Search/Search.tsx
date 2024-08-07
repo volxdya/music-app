@@ -48,7 +48,11 @@ export function Search() {
 
                                             {item.type === "user" && !item.isUser && (
                                                 <CarouselItem className="basis-1/7">
-                                                    <CircleCard title={item.login} otherText="Исполнитель" />
+                                                    <CircleCard
+                                                        title={item.login}
+                                                        otherText="Исполнитель"
+                                                        link={`/author/${item.id}`}
+                                                    />
                                                 </CarouselItem>
 
                                             )}
@@ -78,7 +82,11 @@ export function Search() {
 
                                                 {item.type === "user" && !item.isUser && (
                                                     <CarouselItem className="basis-1/7">
-                                                        <CircleCard title={item.login} otherText="Исполнитель" />
+                                                        <CircleCard
+                                                            title={item.login}
+                                                            otherText="Исполнитель"
+                                                            link={`/author/${item.id}`}
+                                                        />
                                                     </CarouselItem>
 
                                                 )}

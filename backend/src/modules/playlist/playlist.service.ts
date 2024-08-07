@@ -5,7 +5,6 @@ import { CreatePlaylistDto } from './dto/createPlaylistDto';
 import { TrackService } from '../track/track.service';
 import { UsePlaylistDto } from './dto/usePlaylistDto';
 import { Track } from '../track/track.model';
-import { CheckLikeDto } from './dto/checkLikeDto';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
 
@@ -26,12 +25,13 @@ export class PlaylistService {
     const playlist: Playlist = await this.cacheManager.get(`playlist/${playlistId}`);
 
     if (!playlist) {
-      const playlist = await this.playlistRepostitory.findOne({
+      const playlist: Playlist = await this.playlistRepostitory.findOne({
         include: [Track],
         where: { id: playlistId },
       });
 
       await this.cacheManager.set(`playlist/${playlistId}`, playlist);
+
       return playlist;
     }
 
@@ -41,8 +41,12 @@ export class PlaylistService {
   async addTrack(dto: UsePlaylistDto) {
     const track = await this.trackService.getById(dto.trackId);
 
-    const playlist = await this.getById(dto.playlistId);
-    await playlist.$add('tracks', [track]);
+    const playlist = await this.playlistRepostitory.findOne({
+      include: [Track],
+      where: { id: dto.playlistId },
+    });
+    await playlist.$add('tracks', track);
+    await this.cacheManager.set(`playlist/${dto.playlistId}`, playlist);
 
     return playlist;
   }
