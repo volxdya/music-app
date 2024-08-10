@@ -2,6 +2,9 @@ import './MainScreen.scss';
 import { Play } from "../../icons/Play.tsx";
 import { MainCard } from "../../ui/Cards/MainCard/MainCard.tsx";
 import { usePlaylistInfo } from '@/hooks/usePlaylistInfo.ts';
+import {useGenresData} from "@/hooks/useGenresData.ts";
+import {IGenre} from "@/types/IGenre.ts";
+import {GenreCard} from "@/ui/Cards/GenreCard/GenreCard.tsx";
 
 export function MainScreen() {
     const { playlist } = usePlaylistInfo();
@@ -25,6 +28,8 @@ export function MainScreen() {
     getTitle(1, 10, "трек");
     getTitle(2, 5, "трека");
 
+    const [genres] = useGenresData();
+
     return (
         <>
             <div className="d-flex justify-content-center circle-container">
@@ -44,20 +49,37 @@ export function MainScreen() {
             <div className="container-playlists d-flex gap-3 mt-5">
                 {playlist && (
                     <>
-                        <MainCard
-                            title="Мне нравится"
-                            info={`${playlist?.tracks.length} ${title}`}
-                            link="/like"
-                        />
+                        <div className="w-50">
+                            <MainCard
+                                title="Мне нравится"
+                                info={`${playlist?.tracks.length} ${title}`}
+                                link="/like"
+                            />
+                        </div>
 
-                        <MainCard
-                            title="Мне нравится"
-                            info={`${playlist?.tracks.length} ${title}`}
-                            link="/like"
-                        />
-
+                        <div className="w-50">
+                            <MainCard
+                                title="Мне нравится"
+                                info={`${playlist?.tracks.length} ${title}`}
+                                link="/like"
+                            />
+                        </div>
                     </>
                 )}
+            </div>
+
+            <div className="mt-5">
+                <h3 className="fs-4">Исследуйте жанр</h3>
+                <p className="music-color">
+                   Откройте для себя новое
+                </p>
+
+                <div className="mt-4">
+                    {genres.map((item: IGenre) => (
+                        <GenreCard title={item.title}/>
+                    ))}
+                </div>
+
             </div>
         </>
 
