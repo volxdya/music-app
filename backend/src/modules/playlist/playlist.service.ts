@@ -15,14 +15,16 @@ export class PlaylistService {
     private readonly playlistRepostitory: typeof Playlist,
     private readonly trackService: TrackService,
     @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
-  ) { }
+  ) {}
 
   async create(dto: CreatePlaylistDto) {
     return await this.playlistRepostitory.create(dto);
   }
 
   async getById(playlistId: number) {
-    const playlist: Playlist = await this.cacheManager.get(`playlist/${playlistId}`);
+    const playlist: Playlist = await this.cacheManager.get(
+      `playlist/${playlistId}`,
+    );
 
     if (!playlist) {
       const playlist: Playlist = await this.playlistRepostitory.findOne({
