@@ -1,4 +1,5 @@
 import {IUser} from "@/types/IUser.ts";
+import {IGenre} from "@/types/IGenre.ts";
 
 export interface ITrack {
     title: string;
@@ -7,6 +8,7 @@ export interface ITrack {
     isTrack: boolean;
     id: number;
     type: string;
+    genre: IGenre;
     trackData: {
         accountId: string;
         filePathAvatar: string;
