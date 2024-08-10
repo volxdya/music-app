@@ -5,8 +5,9 @@ import {IPlaylist} from "@/types/IPlaylist.ts";
 import {PlaylistCard} from "@/ui/Cards/PlaylistCard/PlaylistCard.tsx";
 import uniqid from "uniqid";
 import {useCreatePlaylist} from "@/hooks/useCreatePlaylist.ts";
+import {observer} from "mobx-react-lite";
 
-export function PlaylistsCollection() {
+export const PlaylistsCollection = observer(() => {
     const { createPlaylist } = useCreatePlaylist(user.userData.id);
 
     return (
@@ -27,4 +28,4 @@ export function PlaylistsCollection() {
             )}
         </div>
     );
-}
+});

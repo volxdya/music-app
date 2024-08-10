@@ -1,7 +1,7 @@
 import { MainCard } from "@/ui/Cards/MainCard/MainCard.tsx";
 import { usePlaylistInfo } from "@/hooks/usePlaylistInfo.ts";
 
-export function CardsMainScreen() {
+export const CardsMainScreen = () => {
   const { playlist } = usePlaylistInfo();
   let title = "треков";
 
@@ -46,4 +46,4 @@ export function CardsMainScreen() {
       )}
     </div>
   );
-}
+};

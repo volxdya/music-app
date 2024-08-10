@@ -1,211 +1,31 @@
-import { NavigationText } from "@/ui/Text/NavigationText/NavgiationText.tsx";
 import "./CollectionForAuthors.scss";
-import { AlbumCard } from "@/ui/Cards/AlbumCard/AlbumCard.tsx";
-import { Modal } from "@/components/Modal/Modal.tsx";
-import { useEffect, useState } from "react";
-import { onChange } from "@/utils/onChange.ts";
-import { useCreateTrack } from "@/hooks/useCreateTrack.ts";
-import { useCreateAlbum } from "@/hooks/useCreateAlbum.ts";
+import { useEffect } from "react";
 import user from "@/store/user.ts";
-import { TrackCard } from "@/ui/Cards/TrackCard/TrackCard.tsx";
-import { CarouselItem } from "@/components/ui/carousel.tsx";
-import { CarouselScroll } from "@/components/CarouselScroll/CarouselScroll.tsx";
-import { CircleCard } from "@/ui/Cards/CircleCard/CircleCard.tsx";
-import { Link } from "react-router-dom";
-import { ITrack } from "@/types/ITrack.ts";
-import { IAlbum } from "@/types/IAlbum.ts";
-import { getStringDate } from "@/utils/getStringDate.ts";
-import { UploadFiles } from "@/components/UploadFiles/UploadFiles.tsx";
-import { IUploadFile } from "@/types/IUploadFile.ts";
-import { useAllAuthors } from "@/hooks/useAllAuthors";
-import { IUser } from "@/types/IUser";
-import { useGenresData } from "@/hooks/useGenresData.ts";
-import { IGenre } from "@/types/IGenre.ts";
+import { TracksAuthor } from "@/components/Collection/CollectionForAuthors/Tracks/TracksAuthor.tsx";
+import { LastRelease } from "@/components/Collection/CollectionForAuthors/LastRelease/LastRelease.tsx";
+import { AddTrack } from "@/components/Collection/CollectionForAuthors/Add/AddTrack.tsx";
+import { AlbumsAuthor } from "@/components/Collection/CollectionForAuthors/Albums/AlbumsAuthor.tsx";
+import { SimilarAuthors } from "@/components/Collection/CollectionForAuthors/SimilarAuthors/SimilarAuthors.tsx";
+import { AddAlbum } from "@/components/Collection/CollectionForAuthors/Add/AddAlbum.tsx";
 
 export function CollectionForAuthors() {
   useEffect(() => {
     user.getMe();
   }, []);
 
-  const [titleTrack, setTitleTrack] = useState("");
-  const [titleAlbum, setTitleAlbum] = useState("");
-  const [genre, setGenre] = useState("");
-  const [avatarUrlTrack, setAvatarUrlTrack] = useState<IUploadFile[]>([]);
-  const [avatarUrlAlbum, setAvatarUrlAlbum] = useState<IUploadFile[]>([]);
-  const [trackUrl, setTrackUrl] = useState<IUploadFile[]>([]);
-
-  const { handleSubmitTrack } = useCreateTrack();
-  const { handleSubmitAlbum } = useCreateAlbum();
-  const [authors] = useAllAuthors();
-  const [genres] = useGenresData();
-
   return (
     <>
-      <Link to={`/tracks/get_by_authorId/${user.userData.id}/true`}>
-        <NavigationText text="Ваши популярные треки" />
-      </Link>
-      <div className="mt-4 row g-0 d-flex">
-        <div className="col-8">
-          {user.me.tracks && (
-            <>
-              {user.me?.tracks
-                .slice(0, 5)
-                .map((item: ITrack) => (
-                  <TrackCard
-                    title={item.title}
-                    author={user.userData.login}
-                    id={item.id}
-                    img={item.trackData.fileUrlAvatar}
-                    byFind={user.userData.login}
-                    where={user.userData.login}
-                    isAlbum={false}
-                  />
-                ))}
-            </>
-          )}
-        </div>
-        <div className="col-4 px-5">
-          <h1 className="realese">Недавний релиз</h1>
-          {user.me?.albums.length > 0 ? (
-            <div className="mt-3">
-              <AlbumCard
-                id={user.me.albums[0].id}
-                author={user.userData.login}
-                title={user.me.albums[0].title}
-                year={getStringDate(user.me.albums[0].createdAt, "YYYY")}
-              />
-            </div>
-          ) : (
-            <div>Пока что тут ничего нет =D</div>
-          )}
-        </div>
+      <div className="row g-0 d-flex">
+        <TracksAuthor />
+        <LastRelease />
       </div>
 
-      <Modal
-        trigger={
-          <button className="add-track mb-20 mt-20 w-25">Добавить трек</button>
-        }
-        content={
-          <form
-            className="mx-3 me-3"
-            onSubmit={(e) => {
-              handleSubmitTrack(
-                e,
-                titleTrack,
-                avatarUrlTrack,
-                trackUrl,
-                Number(genre),
-              );
-              setAvatarUrlTrack([]);
-            }}
-          >
-            <div>
-              <input
-                type="text"
-                placeholder="Название"
-                className="mt-2"
-                onChange={onChange(setTitleTrack)}
-              />
+      <AddTrack />
 
-              <h1 className="fs-5 text-center mt-3">Обложка</h1>
-              <UploadFiles setFn={setAvatarUrlTrack} />
+      <AlbumsAuthor />
+      <AddAlbum />
 
-              <h1 className="fs-5 text-center">Запись</h1>
-              <UploadFiles setFn={setTrackUrl} />
-
-              <select
-                className="form-select"
-                aria-label="Default select example"
-                onChange={onChange(setGenre)}
-              >
-                {genres.map((item: IGenre) => (
-                  <option value={item.id}>{item.title}</option>
-                ))}
-              </select>
-
-              <button className="add-track w-100 mt-1">Добавить</button>
-            </div>
-          </form>
-        }
-      />
-
-      <div className="mt-5">
-        <NavigationText text="Ваши популярные альбомы" />
-        <div className="mt-4">
-          {user.me.albums && (
-            <CarouselScroll
-              content={
-                <>
-                  {user.me.albums.map((item: IAlbum) => (
-                    <CarouselItem className="basis-1/7">
-                      <AlbumCard
-                        id={item.id}
-                        title={item.title}
-                        author={user.userData.login}
-                        year={getStringDate(item.createdAt, "YYYY")}
-                        img={item.avatarUrl}
-                      />
-                    </CarouselItem>
-                  ))}
-                </>
-              }
-            />
-          )}
-        </div>
-        <Modal
-          trigger={
-            <button className="add-track mt-20 mb-20 w-25">
-              Добавить альбом
-            </button>
-          }
-          content={
-            <form
-              className="me-3 mx-3"
-              onSubmit={(e) => {
-                setAvatarUrlAlbum([]);
-                handleSubmitAlbum(e, titleAlbum, avatarUrlAlbum[0].fileUrl);
-              }}
-            >
-              <input
-                type="text"
-                placeholder="Название"
-                className="mt-2"
-                onChange={onChange(setTitleAlbum)}
-                title={titleAlbum}
-              />
-
-              <UploadFiles setFn={setAvatarUrlAlbum} />
-
-              <label className="input-file mt-3">
-                <input type="file" name="file" />
-                <span>Выберите треки</span>
-              </label>
-
-              <button className="add-track w-100 mt-5">Добавить</button>
-            </form>
-          }
-        />
-
-        <NavigationText text="Похожие исполнители" />
-
-        <div className="mt-4">
-          <CarouselScroll
-            content={
-              <>
-                {authors.map((item: IUser) => (
-                  <CarouselItem className="basis-1/7">
-                    <CircleCard
-                      title={item.login}
-                      otherText="Исполнитель"
-                      link={`/author/${item.id}`}
-                    />
-                  </CarouselItem>
-                ))}
-              </>
-            }
-          />
-        </div>
-      </div>
+      <SimilarAuthors />
     </>
   );
 }
