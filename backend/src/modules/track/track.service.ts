@@ -9,7 +9,7 @@ import * as process from 'node:process';
 import { User } from '../user/user.model';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
-import {Genre} from "../genre/genre.model";
+import { Genre } from '../genre/genre.model';
 
 @Injectable()
 export class TrackService {
