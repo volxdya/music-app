@@ -7,10 +7,9 @@ import uniqid from "uniqid";
 
 export function Playlist() {
     const { playlist } = usePlaylistInfo();
-
-
     return (
         <>
+            <div>123</div>
             {playlist && (
                 <>
                     <HeaderMusic

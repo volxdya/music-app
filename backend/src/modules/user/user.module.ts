@@ -12,4 +12,4 @@ import { PlaylistModule } from '../playlist/playlist.module';
   providers: [UserService],
   exports: [UserService],
 })
-export class UserModule { }
+export class UserModule {}

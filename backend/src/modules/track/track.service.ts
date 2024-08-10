@@ -9,6 +9,7 @@ import * as process from 'node:process';
 import { User } from '../user/user.model';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
+import {Genre} from "../genre/genre.model";
 
 @Injectable()
 export class TrackService {
@@ -16,7 +17,7 @@ export class TrackService {
     @InjectModel(Track) private readonly trackRepository: typeof Track,
     private readonly albumService: AlbumService,
     @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
-  ) { }
+  ) {}
 
   async create(dto: CreateTrackDto) {
     if (dto.isTrack) {
@@ -52,7 +53,9 @@ export class TrackService {
     const tracks: Track[] = await this.cacheManager.get('tracks');
 
     if (!tracks) {
-      const tracks: Track[] = await this.trackRepository.findAll({ include: [Album, User] });
+      const tracks: Track[] = await this.trackRepository.findAll({
+        include: [Album, User, Genre],
+      });
       await this.cacheManager.set('tracks', tracks);
 
       return tracks;
@@ -128,7 +131,7 @@ export class TrackService {
     await axios.delete(`${url}${track.trackData.filePathAvatar}`, config);
     await axios.delete(`${url}${track.trackData.filePathMP3}`, config);
     await this.albumService.delete(track.albumId);
-    
+
     await this.cacheManager.del(`track/${trackId}`);
 
     await track.destroy();

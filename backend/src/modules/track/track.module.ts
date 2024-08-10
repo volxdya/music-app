@@ -8,6 +8,7 @@ import { PlaylistTracks } from './playlist-tracks.model';
 import { Album } from '../album/album.model';
 import { AlbumModule } from '../album/album.module';
 import { User } from '../user/user.model';
+import { Genre } from '../genre/genre.model';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { User } from '../user/user.model';
       Playlist,
       PlaylistTracks,
       Album,
-      User
+      User,
+      Genre,
     ]),
     AlbumModule,
   ],

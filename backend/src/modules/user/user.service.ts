@@ -13,7 +13,7 @@ export class UserService {
     @InjectModel(User) private readonly userRepository: typeof User,
     @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
     private readonly playlistService: PlaylistService,
-  ) { }
+  ) {}
 
   async getAll() {
     const users: User[] = await this.userRepository.findAll({
@@ -62,7 +62,6 @@ export class UserService {
     const user: User = await this.cacheManager.get(`user/${login}`);
 
     if (!user) {
-
       const user: User = await this.userRepository.findOne({
         where: { login },
         include: { all: true },
@@ -78,11 +77,9 @@ export class UserService {
   }
 
   async getById(userId: number) {
-
     const user: User = await this.cacheManager.get(`user/${userId}`);
 
     if (!user) {
-
       const user = await this.userRepository.findOne({
         where: { id: userId },
         include: { all: true },
@@ -91,11 +88,10 @@ export class UserService {
       if (user) {
         await this.cacheManager.set(`user/${userId}`, user);
       }
-      
+
       return user;
     }
 
     return user;
-
   }
 }

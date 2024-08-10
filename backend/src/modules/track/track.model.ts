@@ -11,6 +11,7 @@ import { Playlist } from '../playlist/playlist.model';
 import { PlaylistTracks } from './playlist-tracks.model';
 import { Album } from '../album/album.model';
 import { User } from '../user/user.model';
+import { Genre } from '../genre/genre.model';
 
 interface ITrack {
   title: string;
@@ -58,6 +59,13 @@ export class Track extends Model<Track, ITrack> {
 
   @BelongsTo(() => User)
   author: User;
+
+  @ForeignKey(() => Genre)
+  @Column({ type: DataType.INTEGER })
+  genreId: number;
+
+  @BelongsTo(() => Genre)
+  genre: Genre;
 
   @ForeignKey(() => Album)
   @Column({ type: DataType.INTEGER })
