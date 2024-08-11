@@ -10,7 +10,7 @@ export class AlbumService {
   constructor(
     @InjectModel(Album) private readonly albumRepository: typeof Album,
     @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
-  ) { }
+  ) {}
 
   async create(dto: CreateAlbumDto) {
     return await this.albumRepository.create(dto);
@@ -39,7 +39,9 @@ export class AlbumService {
         include: { all: true },
       });
 
-      await this.cacheManager.set(`album/${id}`, album);
+      if (album) {
+        await this.cacheManager.set(`album/${id}`, album);
+      }
 
       return album;
     }

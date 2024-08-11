@@ -32,7 +32,8 @@ export class TrackService {
       await newAlbum.$set('tracks', track);
 
       await newAlbum.update({
-        avatarUrl: dto.avatarUrl,
+        avatarUrl: track.trackData.fileUrlAvatar,
+        genreId: track.genreId,
       });
 
       await track.update({
