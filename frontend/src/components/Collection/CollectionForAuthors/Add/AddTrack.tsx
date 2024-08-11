@@ -44,10 +44,12 @@ export function AddTrack() {
                         />
 
                         <h1 className="fs-5 text-center mt-3">Обложка</h1>
-                        <UploadFiles setFn={setAvatarUrlTrack} />
+                        <p className="text-center text-[12px] text-neutral-300">GIF, JPG, PNG</p>
+                        <UploadFiles setFn={setAvatarUrlTrack}/>
 
                         <h1 className="fs-5 text-center">Запись</h1>
-                        <UploadFiles setFn={setTrackUrl} />
+                        <p className="text-center text-[12px] text-neutral-300">MP3, DEM</p>
+                        <UploadFiles setFn={setTrackUrl}/>
 
                         <select
                             className="form-select"

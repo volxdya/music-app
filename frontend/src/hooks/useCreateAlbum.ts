@@ -5,49 +5,58 @@ import axios, { AxiosError } from "axios";
 import user from "@/store/user.ts";
 
 export const useCreateAlbum = () => {
-    const { toast } = useToast();
+  const { toast } = useToast();
 
-    useEffect(() => {
-        user.getUserData();
+  useEffect(() => {
+    user.getUserData();
 
-        console.log("use");
-    }, []);
+    console.log("use");
+  }, []);
 
-    const handleSubmitAlbum = async (e: FormEvent, title: string, avatarUrl: string) => {
-        stopFormBehavior(e);
+  const handleSubmitAlbum = async (
+    e: FormEvent,
+    title: string,
+    avatarUrl: string,
+    genreId: number,
+  ) => {
+    stopFormBehavior(e);
 
-        if (!user.userData.isUser) {
-            await axios.post(`http://localhost:3010/album/create`, {
-                title: title,
-                avatarUrl: avatarUrl,
-                authorId: user.userData.id,
-            }).then((resp) => {
-                console.log(resp);
+    if (!user.userData.isUser) {
+      await axios
+        .post(`http://localhost:3010/album/create`, {
+          title: title,
+          avatarUrl: avatarUrl,
+          authorId: user.userData.id,
+          genreId: genreId
+        })
+        .then((resp) => {
+          console.log(resp);
 
-                toast({
-                    title: "Вы успешно создали альбом",
-                    description: `${resp.statusText} ${resp.status} HTTP REQUEST`,
-                });
+          toast({
+            title: "Вы успешно создали альбом",
+            description: `${resp.statusText} ${resp.status} HTTP REQUEST`,
+          });
 
-                user.getMe();
+          user.getMe();
 
-                console.log("use");
+          console.log("use");
 
-                (e.target as HTMLFormElement).reset();
-            }).catch((err: AxiosError) => {
-                console.log(err);
+          (e.target as HTMLFormElement).reset();
+        })
+        .catch((err: AxiosError) => {
+          console.log(err);
 
-                if (err.response) {
-                    toast({
-                        title: `${err.message}`,
-                        description: `${err.message} ${err.status} HTTP REQUEST`,
-                    });
-                }
-
-                (e.target as HTMLFormElement).reset();
+          if (err.response) {
+            toast({
+              title: `${err.message}`,
+              description: `${err.message} ${err.status} HTTP REQUEST`,
             });
-        }
-    }
+          }
 
-    return { handleSubmitAlbum }
-}
+          (e.target as HTMLFormElement).reset();
+        });
+    }
+  };
+
+  return { handleSubmitAlbum };
+};
