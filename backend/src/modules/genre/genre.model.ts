@@ -1,5 +1,6 @@
 import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
 import { Track } from '../track/track.model';
+import { Album } from '../album/album.model';
 
 interface IGenre {
   title: string;
@@ -20,4 +21,7 @@ export class Genre extends Model<Genre, IGenre> {
 
   @HasMany(() => Track)
   tracks: Track[];
+
+  @HasMany(() => Album)
+  albums: Album[];
 }

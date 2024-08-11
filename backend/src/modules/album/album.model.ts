@@ -9,6 +9,7 @@ import {
 } from 'sequelize-typescript';
 import { Track } from '../track/track.model';
 import { User } from '../user/user.model';
+import { Genre } from '../genre/genre.model';
 
 interface IAlbum {
   title: string;
@@ -38,6 +39,13 @@ export class Album extends Model<Album, IAlbum> {
   @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER })
   authorId: number;
+
+  @ForeignKey(() => Genre)
+  @Column({ type: DataType.INTEGER })
+  genreId: number;
+
+  @BelongsTo(() => Genre)
+  genre: Genre;
 
   @BelongsTo(() => User)
   author: User;
