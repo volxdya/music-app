@@ -1,11 +1,27 @@
 .genre-card {
-  background: #262626;
-  padding: 15px;
+  background: #008ec0;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
   border-radius: 15px;
-  transition: 0.4s;
+  font-size: 17 px;
+  font-weight: 500;
+
+  svg {
+    height: 35px;
+  }
 
   &:hover {
     cursor: pointer;
-    background: #424242;
+
+    .genre-card-wrapper {
+      transform: scale(1.1);
+    }
+  }
+
+  .genre-card-wrapper {
+    transition: 0.4s;
   }
 }
