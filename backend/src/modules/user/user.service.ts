@@ -7,6 +7,7 @@ import * as bcrypt from 'bcrypt';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
 import { Genre } from '../genre/genre.model';
+import { Track } from '../track/track.model';
 
 @Injectable()
 export class UserService {
@@ -30,6 +31,7 @@ export class UserService {
     if (!authors) {
       const authors: User[] = await this.userRepository.findAll({
         where: { isUser: false },
+        include: [Track]
       });
 
       await this.cacheManager.set('authors', authors);
@@ -111,12 +113,10 @@ export class UserService {
       const finishAuthors: User[] = [];
 
       for (let i = 0; i < authors.length; i++) {
-        if (authors[i].tracks) {
-          for (let j = 0; j < authors[i].tracks.length; j++) {
-            for (let k = 0; k < genreIds.length; k++) {
-              if (authors[i].tracks[j].genreId === genreIds[k]) {
-                finishAuthors.push(authors[i]);
-              }
+        for (let j = 0; j < authors[i].tracks.length; j++) {
+          for (let k = 0; k < uniqueGenres.length; k++) {
+            if (authors[i].tracks[j].genreId === uniqueGenres[k]) {
+              finishAuthors.push(authors[i]);
             }
           }
         }
