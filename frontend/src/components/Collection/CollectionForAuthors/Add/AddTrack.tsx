@@ -28,6 +28,8 @@ export function AddTrack() {
                         handleSubmitTrack(
                             e,
                             titleTrack,
+                            avatarUrlTrack,
+                            trackUrl,
                             Number(genre),
                         );
                         setAvatarUrlTrack([]);

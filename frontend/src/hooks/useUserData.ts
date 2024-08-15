@@ -1,4 +1,3 @@
-import user from "@/store/user";
 import { IUser } from "@/types/IUser";
 import { getItem } from "@/utils/localStorage";
 import axios from "axios";
