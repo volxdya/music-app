@@ -98,6 +98,8 @@ export class UserService {
     return user;
   }
 
+
+  // Алгоритм поиска похожих авторов, чуть позже будет кэширование
   async getSimilarAuthors(authorId: number) {
     const user: User = await this.getById(authorId);
 
