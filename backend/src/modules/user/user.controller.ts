@@ -30,4 +30,9 @@ export class UserController {
   getById(@Param('userId') userId: number) {
     return this.userService.getById(userId);
   }
+
+  @Get(`/get_similar_authors/:userId`)
+  getSimilarAuthors(@Param('userId') userId: number) {
+    return this.userService.getSimilarAuthors(userId);
+  }
 }

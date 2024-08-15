@@ -84,7 +84,7 @@ export class TrackService {
   async getTracksByAuthor(authorId: number) {
     return await this.trackRepository.findAll({
       where: { authorId },
-      include: [User, Album],
+      include: [User, Album, Genre],
     });
   }
 

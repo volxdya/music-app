@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from './user.model';
 import { CreateUserDto } from './dto/createUserDto';
@@ -6,6 +6,7 @@ import { PlaylistService } from '../playlist/playlist.service';
 import * as bcrypt from 'bcrypt';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
+import { Genre } from '../genre/genre.model';
 
 @Injectable()
 export class UserService {
@@ -13,7 +14,7 @@ export class UserService {
     @InjectModel(User) private readonly userRepository: typeof User,
     @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
     private readonly playlistService: PlaylistService,
-  ) {}
+  ) { }
 
   async getAll() {
     const users: User[] = await this.userRepository.findAll({
@@ -93,5 +94,37 @@ export class UserService {
     }
 
     return user;
+  }
+
+  async getSimilarAuthors(authorId: number) {
+    const user: User = await this.getById(authorId);
+
+    if (!user.isUser) {
+      const genreIds: number[] = [];
+
+      for (let i = 0; i < user.tracks.length; i++) {
+        genreIds.push(user.tracks[i].genreId);
+      }
+
+      const uniqueGenres = [...new Set(genreIds)];
+      const authors: User[] = await this.getAllAuthors();
+      const finishAuthors: User[] = [];
+
+      for (let i = 0; i < authors.length; i++) {
+        if (authors[i].tracks) {
+          for (let j = 0; j < authors[i].tracks.length; j++) {
+            for (let k = 0; k < genreIds.length; k++) {
+              if (authors[i].tracks[j].genreId === genreIds[k]) {
+                finishAuthors.push(authors[i]);
+              }
+            }
+          }
+        }
+      }
+
+      return [...new Set(finishAuthors)];
+    }
+
+    return new HttpException("Вы пытаетесь найти не автора, а обычного пользователя", HttpStatus.BAD_REQUEST);
   }
 }

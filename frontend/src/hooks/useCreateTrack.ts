@@ -17,8 +17,6 @@ export const useCreateTrack = () => {
   const handleSubmitTrack = async (
     e: FormEvent,
     title: string,
-    avatarUrl: IUploadFile[],
-    trackUrl: IUploadFile[],
     genreId: number,
   ) => {
     stopFormBehavior(e);
@@ -30,11 +28,11 @@ export const useCreateTrack = () => {
           authorId: user.userData.id,
           isTrack: true,
           trackData: {
-            accountId: avatarUrl[0].accountId,
-            filePathAvatar: avatarUrl[0].filePath,
-            fileUrlAvatar: avatarUrl[0].fileUrl,
-            filePathMP3: trackUrl[0].filePath,
-            fileUrlMP3: trackUrl[0].fileUrl,
+            accountId: "avatarUrl[0].accountId",
+            filePathAvatar: " avatarUrl[0].filePath,",
+            fileUrlAvatar: "avatarUrl[0].fileUrl",
+            filePathMP3: "trackUrl[0].filePath",
+            fileUrlMP3: "trackUrl[0].fileUrl",
           },
           genreId: genreId,
         })
