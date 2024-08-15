@@ -114,10 +114,8 @@ export class UserService {
 
       for (let i = 0; i < authors.length; i++) {
         for (let j = 0; j < authors[i].tracks.length; j++) {
-          for (let k = 0; k < uniqueGenres.length; k++) {
-            if (authors[i].tracks[j].genreId === uniqueGenres[k]) {
-              finishAuthors.push(authors[i]);
-            }
+          if (uniqueGenres.some(genre => genre === authors[i].tracks[j].genreId)) {
+            finishAuthors.push(authors[i]);
           }
         }
       }
