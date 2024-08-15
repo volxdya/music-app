@@ -12,7 +12,7 @@ export function CollectionForAuthors() {
   useEffect(() => {
     user.getMe();
   }, []);
-
+  
   return (
     <>
       <div className="row g-0 d-flex">

@@ -11,14 +11,14 @@ import { getStringDate } from "@/utils/getStringDate";
 import { Link, useParams } from "react-router-dom";
 import { CarouselScroll } from "../CarouselScroll/CarouselScroll";
 import { CarouselItem } from "../ui/carousel";
-import { useAllAuthors } from "@/hooks/useAllAuthors";
 import { IUser } from "@/types/IUser";
+import { useSimilarAuthors } from "@/hooks/useSimilarAuthors";
 
 export function Author() {
 
     const params = useParams();
     const [userData] = useUserData(Number(params.authorId));
-    const [authors] = useAllAuthors();
+    const [authors] = useSimilarAuthors(Number(params.authorId));
 
     return (
         <>
@@ -74,7 +74,7 @@ export function Author() {
 
 
                 <div className="mt-5">
-                    <NavigationText text="Ваши популярные альбомы" />
+                    <NavigationText text="Популярные альбомы" />
                     <div className="mt-4">
                         {userData?.albums && (
                             <CarouselScroll content={

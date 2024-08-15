@@ -15,7 +15,7 @@ export const useUserData = (userId: number) => {
                 console.log(err);
             });
         }
-    }, []);
+    }, [userId]);
 
     return [userData];
 }
