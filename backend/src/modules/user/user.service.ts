@@ -99,7 +99,7 @@ export class UserService {
   }
 
 
-  // Алгоритм поиска похожих авторов, чуть позже будет кэширование
+  // Алгоритм поиска похожих авторов
   async getSimilarAuthors(authorId: number) {
     const user: User = await this.getById(authorId);
 
@@ -132,8 +132,6 @@ export class UserService {
       }
 
       return similarAuthors;
-
-
     }
 
     return new HttpException("Вы пытаетесь найти не автора, а обычного пользователя", HttpStatus.BAD_REQUEST);
