@@ -104,25 +104,36 @@ export class UserService {
     const user: User = await this.getById(authorId);
 
     if (!user.isUser) {
-      const genreIds: number[] = [];
+      const similarAuthors: User[] = await this.cacheManager.get(`similar/${authorId}`);
 
-      for (let i = 0; i < user.tracks.length; i++) {
-        genreIds.push(user.tracks[i].genreId);
-      }
+      if (!similarAuthors) {
+        const genreIds: number[] = [];
 
-      const uniqueGenres = [...new Set(genreIds)];
-      const authors: User[] = await this.getAllAuthors();
-      const finishAuthors: User[] = [];
+        for (let i = 0; i < user.tracks.length; i++) {
+          genreIds.push(user.tracks[i].genreId);
+        }
 
-      for (let i = 0; i < authors.length; i++) {
-        for (let j = 0; j < authors[i].tracks.length; j++) {
-          if (uniqueGenres.some(genre => genre === authors[i].tracks[j].genreId)) {
-            finishAuthors.push(authors[i]);
+        const uniqueGenres = [...new Set(genreIds)];
+        const authors: User[] = await this.getAllAuthors();
+        const finishAuthors: User[] = [];
+
+        for (let i = 0; i < authors.length; i++) {
+          for (let j = 0; j < authors[i].tracks.length; j++) {
+            if (uniqueGenres.some(genre => genre === authors[i].tracks[j].genreId)) {
+              finishAuthors.push(authors[i]);
+            }
           }
         }
+
+        const uniqueAuthors: User[] = [... new Set(finishAuthors)];
+        await this.cacheManager.set(`similar/${authorId}`, uniqueAuthors);
+
+        return uniqueAuthors;
       }
 
-      return [...new Set(finishAuthors)];
+      return similarAuthors;
+
+
     }
 
     return new HttpException("Вы пытаетесь найти не автора, а обычного пользователя", HttpStatus.BAD_REQUEST);
