@@ -1,8 +1,8 @@
 import { DocumentBuilder } from '@nestjs/swagger';
 
 export const SWAGGER_CONFIG = new DocumentBuilder()
-  .setTitle('template nestjs application')
-  .setDescription('The template API description')
+  .setTitle('music application')
+  .setDescription('Документация API Music app (клон YXDNEX MXS!C)')
   .setVersion('1.0')
-  .addTag('template')
+  .addTag('Описание API')
   .build();
