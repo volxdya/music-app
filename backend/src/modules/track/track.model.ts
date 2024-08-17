@@ -55,6 +55,10 @@ export class Track extends Model<Track, ITrack> {
   @Column({ type: DataType.INTEGER, defaultValue: 0 })
   auditions: number;
 
+  @ApiProperty({ example: 'true', description: 'Трек или нет, это для того, чтобы при создании чистого трека создавался к нему альбом' })
+  @Column({ type: DataType.BOOLEAN })
+  isTrack: boolean;
+
   @ApiProperty({ example: '[...]', description: 'Массив плейлистов, в которых находится данный трек' })
   @BelongsToMany(() => Playlist, () => PlaylistTracks)
   playlists: Playlist[];
@@ -86,7 +90,6 @@ export class Track extends Model<Track, ITrack> {
   @BelongsTo(() => Album)
   album: Album;
 
-  
   @ApiProperty({
     example: 'ALWAYS TRACK',
     description: 'Данное поле используется исключительно на фронтенде, для поиска.',

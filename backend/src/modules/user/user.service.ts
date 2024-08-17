@@ -11,12 +11,14 @@ import { Track } from '../track/track.model';
 
 @Injectable()
 export class UserService {
+  // Инициализация зависимостей
   constructor(
     @InjectModel(User) private readonly userRepository: typeof User,
     @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
     private readonly playlistService: PlaylistService,
   ) { }
 
+  // Получение всех пользователей
   async getAll() {
     const users: User[] = await this.userRepository.findAll({
       include: { all: true },
@@ -25,6 +27,7 @@ export class UserService {
     return users;
   }
 
+  // Получение всех авторов
   async getAllAuthors() {
     const authors: User[] = await this.cacheManager.get('authors');
 
@@ -41,8 +44,11 @@ export class UserService {
     return authors;
   }
 
+  // Создание пользователя
   async create(dto: CreateUserDto) {
     const user = await this.userRepository.create(dto);
+
+    // При регистрации сразу создаем новый плейлист, чтобы пользователь сразу мог куда-то добавлять понравившиейся треки
     const playlist = await this.playlistService.create({
       userId: user.id,
       title: 'Мне нравится',
@@ -54,6 +60,7 @@ export class UserService {
     await user.$set('playlists', [playlist]);
     user.playlists = [playlist];
 
+    // Шифрование пароля через bcrypt
     await user.update({
       password: bcrypt.hashSync(user.password, 12),
     });
@@ -61,6 +68,7 @@ export class UserService {
     return user;
   }
 
+  // Получение одного пользователя по логину
   async getOne(login: string) {
     const user: User = await this.cacheManager.get(`user/${login}`);
 
@@ -79,6 +87,7 @@ export class UserService {
     return user;
   }
 
+  // Получение одного пользователя по ID
   async getById(userId: number) {
     const user: User = await this.cacheManager.get(`user/${userId}`);
 
@@ -103,19 +112,31 @@ export class UserService {
   async getSimilarAuthors(authorId: number) {
     const user: User = await this.getById(authorId);
 
+    // Проверка на то, что мы получили именно автора
     if (!user.isUser) {
       const similarAuthors: User[] = await this.cacheManager.get(`similar/${authorId}`);
 
       if (!similarAuthors) {
         const genreIds: number[] = [];
 
+        // Получаем все жанры, которые есть у автора
         for (let i = 0; i < user.tracks.length; i++) {
           genreIds.push(user.tracks[i].genreId);
         }
 
+        // Делаем уникальный массив
         const uniqueGenres = [...new Set(genreIds)];
         const authors: User[] = await this.getAllAuthors();
         const finishAuthors: User[] = [];
+
+        /*
+          Алгоритм:
+          1. Проходимся по всем авторам
+          2. Дальше на каждого автора делаем итерации по трекам
+          3. Проверяем, совпадаеют ли жанры с кем-то
+          4. Если да, то пушим в похожих авторов
+          5. Возвращаем уникальный массив
+        */
 
         for (let i = 0; i < authors.length; i++) {
           for (let j = 0; j < authors[i].tracks.length; j++) {
@@ -133,6 +154,8 @@ export class UserService {
 
       return similarAuthors;
     }
+
+    // Если был передан не автор, то выбрасиваем HTTP ошибка
 
     return new HttpException("Вы пытаетесь найти не автора, а обычного пользователя", HttpStatus.BAD_REQUEST);
   }

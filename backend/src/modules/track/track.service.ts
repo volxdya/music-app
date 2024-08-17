@@ -13,13 +13,21 @@ import { Genre } from '../genre/genre.model';
 
 @Injectable()
 export class TrackService {
+  // Инициализация зависимостей
   constructor(
     @InjectModel(Track) private readonly trackRepository: typeof Track,
     private readonly albumService: AlbumService,
     @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
-  ) {}
+  ) { }
 
+  // Создание трека
   async create(dto: CreateTrackDto) {
+
+    /* 
+      Проверка, приходит ли нам трек или нет
+      Сделано для того, чтобы при создании 1 трека создавался 1 альбом для этого трека
+      Если нет, то просто пушим в альбом
+    */
     if (dto.isTrack) {
       const track: Track = await this.trackRepository.create(dto);
 
@@ -50,6 +58,7 @@ export class TrackService {
     return await this.trackRepository.create(dto);
   }
 
+  // Получение всех треков
   async getAll() {
     const tracks: Track[] = await this.cacheManager.get('tracks');
 
@@ -65,6 +74,7 @@ export class TrackService {
     return tracks;
   }
 
+  // Получение трека по ID
   async getById(trackId: number) {
     const track: Track = await this.cacheManager.get(`track/${trackId}`);
 
@@ -81,6 +91,7 @@ export class TrackService {
     return track;
   }
 
+  // Получение трека по ID автора
   async getTracksByAuthor(authorId: number) {
     return await this.trackRepository.findAll({
       where: { authorId },
@@ -88,6 +99,7 @@ export class TrackService {
     });
   }
 
+  // Получение самых популярных треклов за последнее время
   async getChart() {
     const chart: Track[] = await this.cacheManager.get(`chart`);
 
@@ -106,6 +118,12 @@ export class TrackService {
     return chart;
   }
 
+
+  /* 
+    Прослушивание трека
+    На фронтенде логика, по которой в течении прослушивания 30 секунд трека, отправляется запрос на прослушивание
+    Сам по себе запрос добавляет к прослушиваниям трека +1
+  */
   async listen(trackId: number) {
     const track = await this.getById(trackId);
 
@@ -116,7 +134,10 @@ export class TrackService {
     return track;
   }
 
+  // Удаление трека
   async delete(trackId: number) {
+    // Получаем 1 трек по ID
+
     const track: Track = await this.trackRepository.findOne({
       where: { id: trackId },
     });
@@ -129,12 +150,23 @@ export class TrackService {
 
     const url: string = `https://api.bytescale.com/v2/accounts/${track.trackData.accountId}/files?filePath=`;
 
+    // Отправляем запрос на ByteScale API, чтобы удалить аватарку трека и MP3 файл
+
     await axios.delete(`${url}${track.trackData.filePathAvatar}`, config);
     await axios.delete(`${url}${track.trackData.filePathMP3}`, config);
-    await this.albumService.delete(track.albumId);
 
+    // Проверяем трек это, или нет
+
+    if (track.isTrack) {
+      // Удаляем альбом к этому треку
+
+      await this.albumService.delete(track.albumId);
+    }
+
+    // Удаляем трек из кэшей
     await this.cacheManager.del(`track/${trackId}`);
 
+    // Удаляем запись из БД
     await track.destroy();
 
     return track;
