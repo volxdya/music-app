@@ -7,17 +7,19 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
+  // Инициализация зависимостей
+
   constructor(
     private readonly UserService: UserService,
     private readonly jwtService: JwtService,
-  ) { }
+  ) {}
 
+  // Функция, которая проверяет приходящий пароль и ХЭШ пароль
   private validatePassword(password: string, hash: string): Promise<boolean> {
     return bcrypt.compare(password, hash);
   }
 
-  // function for examination user data's (really data and data, which come from frontend)
-
+  // Функция, которая проверяет пользователя
   private async validateUser(dto: CreateUserDto) {
     const user: User = await this.UserService.getOne(dto.login);
 
@@ -25,16 +27,15 @@ export class AuthService {
       return user;
     }
 
-
     throw new UnauthorizedException({
       message: 'Некорректный email или пароль',
     });
   }
 
-  // function which generate token
-
+  // Функция, в которую мы попадаем, если все проверки были пройдены
   private async generateToken(user: User) {
     // payload - data which need return in auth
+
     const payload = {
       login: user.login,
       firstName: user.firstName,

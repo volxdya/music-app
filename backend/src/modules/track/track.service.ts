@@ -14,20 +14,20 @@ import { Genre } from '../genre/genre.model';
 @Injectable()
 export class TrackService {
   // Инициализация зависимостей
+
   constructor(
     @InjectModel(Track) private readonly trackRepository: typeof Track,
     private readonly albumService: AlbumService,
     @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
-  ) { }
+  ) {}
 
   // Создание трека
   async create(dto: CreateTrackDto) {
-
     /* 
-      Проверка, приходит ли нам трек или нет
-      Сделано для того, чтобы при создании 1 трека создавался 1 альбом для этого трека
-      Если нет, то просто пушим в альбом
-    */
+              Проверка, приходит ли нам трек или нет
+              Сделано для того, чтобы при создании 1 трека создавался 1 альбом для этого трека
+              Если нет, то просто пушим в альбом
+            */
     if (dto.isTrack) {
       const track: Track = await this.trackRepository.create(dto);
 
@@ -118,12 +118,11 @@ export class TrackService {
     return chart;
   }
 
-
   /* 
-    Прослушивание трека
-    На фронтенде логика, по которой в течении прослушивания 30 секунд трека, отправляется запрос на прослушивание
-    Сам по себе запрос добавляет к прослушиваниям трека +1
-  */
+        Прослушивание трека
+        На фронтенде логика, по которой в течении прослушивания 30 секунд трека, отправляется запрос на прослушивание
+        Сам по себе запрос добавляет к прослушиваниям трека +1
+      */
   async listen(trackId: number) {
     const track = await this.getById(trackId);
 

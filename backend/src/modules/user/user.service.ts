@@ -6,17 +6,17 @@ import { PlaylistService } from '../playlist/playlist.service';
 import * as bcrypt from 'bcrypt';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
-import { Genre } from '../genre/genre.model';
 import { Track } from '../track/track.model';
 
 @Injectable()
 export class UserService {
   // Инициализация зависимостей
+
   constructor(
     @InjectModel(User) private readonly userRepository: typeof User,
     @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
     private readonly playlistService: PlaylistService,
-  ) { }
+  ) {}
 
   // Получение всех пользователей
   async getAll() {
@@ -34,7 +34,7 @@ export class UserService {
     if (!authors) {
       const authors: User[] = await this.userRepository.findAll({
         where: { isUser: false },
-        include: [Track]
+        include: [Track],
       });
 
       await this.cacheManager.set('authors', authors);
@@ -107,14 +107,15 @@ export class UserService {
     return user;
   }
 
-
   // Алгоритм поиска похожих авторов
   async getSimilarAuthors(authorId: number) {
     const user: User = await this.getById(authorId);
 
     // Проверка на то, что мы получили именно автора
     if (!user.isUser) {
-      const similarAuthors: User[] = await this.cacheManager.get(`similar/${authorId}`);
+      const similarAuthors: User[] = await this.cacheManager.get(
+        `similar/${authorId}`,
+      );
 
       if (!similarAuthors) {
         const genreIds: number[] = [];
@@ -140,13 +141,17 @@ export class UserService {
 
         for (let i = 0; i < authors.length; i++) {
           for (let j = 0; j < authors[i].tracks.length; j++) {
-            if (uniqueGenres.filter(genre => genre === authors[i].tracks[j].genreId)) {
+            if (
+              uniqueGenres.filter(
+                (genre) => genre === authors[i].tracks[j].genreId,
+              )
+            ) {
               finishAuthors.push(authors[i]);
             }
           }
         }
 
-        const uniqueAuthors: User[] = [... new Set(finishAuthors)];
+        const uniqueAuthors: User[] = [...new Set(finishAuthors)];
         await this.cacheManager.set(`similar/${authorId}`, uniqueAuthors);
 
         return uniqueAuthors;
@@ -156,7 +161,9 @@ export class UserService {
     }
 
     // Если был передан не автор, то выбрасиваем HTTP ошибка
-
-    return new HttpException("Вы пытаетесь найти не автора, а обычного пользователя", HttpStatus.BAD_REQUEST);
+    return new HttpException(
+      'Вы пытаетесь найти не автора, а обычного пользователя',
+      HttpStatus.BAD_REQUEST,
+    );
   }
 }
