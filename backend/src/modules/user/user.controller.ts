@@ -47,8 +47,8 @@ export class UserController {
   }
 
   @ApiOperation({ summary: 'Покупка подписки' })
-  @Post(`/buy_subscription`)
-  buySubscription(@Body() userId: number) {
+  @Post(`/buy_subscription/userId=:userId`)
+  buySubscription(@Param('userId') userId: number) {
     return this.userService.buySubscription(userId);
   }
 }

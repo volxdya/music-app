@@ -7,6 +7,7 @@ import * as bcrypt from 'bcrypt';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
 import { Track } from '../track/track.model';
+import * as dayjs from 'dayjs';
 
 @Injectable()
 export class UserService {
@@ -131,13 +132,13 @@ export class UserService {
         const finishAuthors: User[] = [];
 
         /*
-                  Алгоритм:
-                  1. Проходимся по всем авторам
-                  2. Дальше на каждого автора делаем итерации по трекам
-                  3. Проверяем, совпадаеют ли жанры с кем-то
-                  4. Если да, то пушим в похожих авторов
-                  5. Возвращаем уникальный массив
-                */
+                                                                          Алгоритм:
+                                                                          1. Проходимся по всем авторам
+                                                                          2. Дальше на каждого автора делаем итерации по трекам
+                                                                          3. Проверяем, совпадаеют ли жанры с кем-то
+                                                                          4. Если да, то пушим в похожих авторов
+                                                                          5. Возвращаем уникальный массив
+                                                                        */
 
         for (let i = 0; i < authors.length; i++) {
           for (let j = 0; j < authors[i].tracks.length; j++) {
@@ -171,8 +172,17 @@ export class UserService {
   async buySubscription(userId: number) {
     const user: User = await this.getById(userId);
 
+    const nowData = dayjs();
+    const stringDay: string = dayjs().format('DD');
+
+    dayjs.locale('ru');
+    const finishData: string = `${nowData.year()}-0${nowData.month() + 2}-${stringDay}`;
+
+    const toDb: string = dayjs(finishData).toISOString();
+
     await user.update({
       isSubscribed: true,
+      finishSubscribe: toDb,
     });
 
     return user;

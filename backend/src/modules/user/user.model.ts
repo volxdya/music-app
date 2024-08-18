@@ -40,7 +40,10 @@ export class User extends Model<User, IUser> {
   @Column({ type: DataType.STRING, allowNull: false })
   password: string;
 
-  @ApiProperty({ example: 'true', description: 'Пользователь подписан или нет?' })
+  @ApiProperty({
+    example: 'true',
+    description: 'Пользователь подписан или нет?',
+  })
   @Column({ type: DataType.BOOLEAN, defaultValue: false })
   isSubscribed: boolean;
 
@@ -48,7 +51,10 @@ export class User extends Model<User, IUser> {
   @Column({ type: DataType.BOOLEAN, defaultValue: false })
   isUser: boolean;
 
-  @ApiProperty({ example: '[...]', description: 'Массив плейлистов пользователя' })
+  @ApiProperty({
+    example: '[...]',
+    description: 'Массив плейлистов пользователя',
+  })
   @HasMany(() => Playlist)
   playlists: Playlist[];
 
@@ -56,15 +62,26 @@ export class User extends Model<User, IUser> {
   @HasMany(() => Track)
   tracks: Track[];
 
-  @ApiProperty({ example: '[...]', description: 'Массив альбомов пользователя' })
+  @ApiProperty({
+    example: '[...]',
+    description: 'Массив альбомов пользователя',
+  })
   @HasMany(() => Album)
   albums: Album[];
-  
+
   @ApiProperty({
     example: 'ALWAYS USER',
-    description: 'Данное поле используется исключительно на фронтенде, для поиска.',
-    default: 'user'
+    description:
+      'Данное поле используется исключительно на фронтенде, для поиска.',
+    default: 'user',
   })
   @Column({ type: DataType.STRING, defaultValue: 'user' })
   type: string;
+
+  @ApiProperty({
+    example: '12 06 2024',
+    description: 'Дата окончания подписки',
+  })
+  @Column({ type: DataType.STRING, defaultValue: null })
+  finishSubscribe: string;
 }
