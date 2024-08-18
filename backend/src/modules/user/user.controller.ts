@@ -6,7 +6,7 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 @ApiTags('User')
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) { }
+  constructor(private readonly userService: UserService) {}
 
   @ApiOperation({ summary: 'Получение массива всех пользователей' })
   @Get(`/get_all`)
@@ -38,9 +38,17 @@ export class UserController {
     return this.userService.getById(userId);
   }
 
-  @ApiOperation({ summary: 'Получение похожих исполнителей, отталкиваясь от одного автора' })
+  @ApiOperation({
+    summary: 'Получение похожих исполнителей, отталкиваясь от одного автора',
+  })
   @Get(`/get_similar_authors/:userId`)
   getSimilarAuthors(@Param('userId') userId: number) {
     return this.userService.getSimilarAuthors(userId);
+  }
+
+  @ApiOperation({ summary: 'Покупка подписки' })
+  @Post(`/buy_subscription`)
+  buySubscription(@Body() userId: number) {
+    return this.userService.buySubscription(userId);
   }
 }
