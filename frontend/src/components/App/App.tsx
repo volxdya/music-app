@@ -13,20 +13,16 @@ import { Album } from "../Album/Album.tsx";
 import { useEffect } from "react";
 import user from "@/store/user.ts";
 import { Author } from "../Author/Author.tsx";
-import {useGenresData} from "@/hooks/useGenresData.ts";
+import { validateFn } from "@/utils/validate.ts";
 
 export default function App() {
   const location = useLocation();
-  // const locationsForValidate: string[] = ["/auth", "/register"];
+  const locationsForValidate: string[] = ["/auth", "/register"];
 
-  const validateLocation: boolean =
-    location.pathname !== "/auth" &&
-    location.pathname !== "/register" &&
-    location.pathname !== "/test";
-
-  const [genres] = useGenresData();
-
-  console.log(genres);
+  const validateLocation: boolean = validateFn<string>(
+    locationsForValidate,
+    location.pathname,
+  );
 
   useEffect(() => {
     user.getMe();
