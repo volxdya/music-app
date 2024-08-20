@@ -12,8 +12,10 @@ interface loginJwt extends JwtPayload {
   firstName: string;
   isUser: boolean;
   isSubscribed: boolean;
-  finishSubscribe: Date;
-  createdAt: Date;
+  finishSubscribe: {
+    date: Date;
+    indexMonth: number;
+  }
 }
 
 class User {
@@ -40,7 +42,7 @@ class User {
       this.getUserData();
 
       axios
-        .get(`http://localhost:3010/user/get_one/${this.userData.login}`)
+        .get(`http://localhost:3010/user/get_by_id/${this.userData.id}`)
         .then((res) => {
           this.me = res.data;
         })

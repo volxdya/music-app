@@ -6,8 +6,10 @@ export const dfUser = {
     lastName: "",
     isUser: false,
     isSubscribed: false,
-    finishSubscribe: new Date(),
-    createdAt: new Date(),
+    finishSubscribe: {
+        date: new Date(),
+        indexMonth: 0,
+    }
 }
 
 export const dfMe = {
@@ -21,6 +23,8 @@ export const dfMe = {
     albums: [],
     type: "user",
     isSubscribed: false,
-    finishSubscribe: new Date(),
-    createdAt: new Date(),
+    finishSubscribe: {
+        date: new Date(),
+        indexMonth: 0,
+    }
 }

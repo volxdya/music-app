@@ -31,7 +31,6 @@ export const useRegister = (isAuthor: boolean) => {
 
             setTimeout(() => {
                 (e.target as HTMLFormElement).reset();
-
                 setIsSuccess(false);
             }, 1500);
 

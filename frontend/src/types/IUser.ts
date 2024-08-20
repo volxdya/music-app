@@ -13,6 +13,8 @@ export interface IUser {
     isUser: boolean;
     type: string;
     isSubscribed: boolean,
-    finishSubscribe: Date,
-    createdAt: Date,
+    finishSubscribe: {
+        date: Date;
+        indexMonth: number;
+    }
 }

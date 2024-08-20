@@ -12,6 +12,11 @@ interface IUser {
   isSubscribed: boolean;
 }
 
+interface IFinishSubscibe {
+  date: string;
+  indexMonth: number;
+}
+
 @Table({ tableName: 'user' })
 export class User extends Model<User, IUser> {
   @ApiProperty({ example: '1', description: 'ID пользователя' })
@@ -82,6 +87,6 @@ export class User extends Model<User, IUser> {
     example: '12 06 2024',
     description: 'Дата окончания подписки',
   })
-  @Column({ type: DataType.STRING, defaultValue: null })
-  finishSubscribe: string;
+  @Column({ type: DataType.JSON, defaultValue: null })
+  finishSubscribe: IFinishSubscibe;
 }
