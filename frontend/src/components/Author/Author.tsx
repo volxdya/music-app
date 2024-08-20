@@ -14,7 +14,7 @@ import { CarouselItem } from "../ui/carousel";
 import { IUser } from "@/types/IUser";
 import { useSimilarAuthors } from "@/hooks/useSimilarAuthors";
 
-export function Author() {
+export default function Author() {
 
     const params = useParams();
     const [userData] = useUserData(Number(params.authorId));

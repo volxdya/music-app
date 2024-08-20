@@ -51,4 +51,10 @@ export class UserController {
   buySubscription(@Param('userId') userId: number) {
     return this.userService.buySubscription(userId);
   }
+
+  @ApiOperation({ summary: 'Отмена подписки' })
+  @Post(`/delete_subscription/userId=:userId`)
+  deleteSubscription(@Param('userId') userId: number) {
+    return this.userService.deleteSubscription(userId);
+  }
 }

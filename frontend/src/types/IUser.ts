@@ -12,4 +12,7 @@ export interface IUser {
     tracks: ITrack[];
     isUser: boolean;
     type: string;
+    isSubscribed: boolean,
+    finishSubscribe: Date,
+    createdAt: Date,
 }

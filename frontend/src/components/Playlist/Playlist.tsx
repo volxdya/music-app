@@ -4,8 +4,9 @@ import { usePlaylistInfo } from "@/hooks/usePlaylistInfo.ts";
 import { ITrack } from "@/types/ITrack.ts";
 import { TrackCard } from "@/ui/Cards/TrackCard/TrackCard.tsx";
 import uniqid from "uniqid";
+import {observer} from "mobx-react-lite";
 
-export function Playlist() {
+const Playlist = observer(() => {
     const { playlist } = usePlaylistInfo();
     return (
         <>
@@ -39,4 +40,6 @@ export function Playlist() {
             )}
         </>
     );
-}
+});
+
+export default Playlist;

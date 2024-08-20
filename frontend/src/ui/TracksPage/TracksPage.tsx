@@ -9,7 +9,7 @@ import user from "@/store/user.ts";
 import { UploadFiles } from "@/components/UploadFiles/UploadFiles.tsx";
 import { IUploadFile } from "@/types/IUploadFile";
 
-export function TracksPage() {
+export default function TracksPage() {
     const [titleTrack, setTitleTrack] = useState("");
     const [avatarUrlTrack, setAvatarUrlTrack] = useState<IUploadFile[]>([]);
     const [trackUrl, setTrackUrl] = useState<IUploadFile[]>([]);

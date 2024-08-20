@@ -4,7 +4,10 @@ export const dfUser = {
     login: "",
     firstName: "",
     lastName: "",
-    isUser: false
+    isUser: false,
+    isSubscribed: false,
+    finishSubscribe: new Date(),
+    createdAt: new Date(),
 }
 
 export const dfMe = {
@@ -16,5 +19,8 @@ export const dfMe = {
     playlists: [],
     tracks: [],
     albums: [],
-    type: "user"
+    type: "user",
+    isSubscribed: false,
+    finishSubscribe: new Date(),
+    createdAt: new Date(),
 }

@@ -11,7 +11,6 @@ export const useCreateTrack = () => {
   useEffect(() => {
     user.getUserData();
 
-    console.log("use");
   }, []);
 
   const handleSubmitTrack = async (
@@ -39,7 +38,6 @@ export const useCreateTrack = () => {
           genreId: genreId,
         })
         .then((resp) => {
-          console.log(resp.data);
 
           toast({
             title: "Вы успешно создали трек",
@@ -50,7 +48,6 @@ export const useCreateTrack = () => {
 
           user.getMe();
 
-          console.log("use");
         })
         .catch((err: AxiosError) => {
           console.log(err);

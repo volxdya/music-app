@@ -42,6 +42,9 @@ export class AuthService {
       lastName: user.lastName,
       id: user.id,
       isUser: user.isUser,
+      isSubscribed: user.isSubscribed,
+      finishSubscribe: user.finishSubscribe,
+      createdAt: user.createdAt,
     };
 
     return {

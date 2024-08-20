@@ -1,4 +1,4 @@
-import './TrackCard.scss';
+import "./TrackCard.scss";
 import { SecondHeart } from "../../../icons/Hearts/SecondHeart.tsx";
 import { BreakHeart } from "../../../icons/Hearts/BreakHeart.tsx";
 import { DropdownTrack } from "@/ui/Cards/TrackCard/Dropdown/DropdownTrack.tsx";
@@ -8,8 +8,6 @@ import player from "@/store/player.ts";
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Pause } from "@/icons/Player/Pause.tsx";
-import { useGetIsLike } from '@/hooks/useGetIsLike.ts';
-import { usePlaylistInfo } from '@/hooks/usePlaylistInfo.ts';
 
 interface Props {
     title: string;
@@ -56,8 +54,6 @@ export const TrackCard = observer((props: Props) => {
     }
 
     function pause() {
-        console.log("pause");
-
         player.current.isPlay = false;
     }
 

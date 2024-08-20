@@ -17,7 +17,7 @@ import { VolumeDown } from "@/icons/Volume/VolumeDown.tsx";
 import { VolumeOff } from "@/icons/Volume/VolumeOff.tsx";
 import { useListen } from "@/hooks/useListen.ts";
 
-export const Player = observer(() => {
+const Player = observer(() => {
 
     const refAudio = useRef<HTMLMediaElement>();
     const [listen] = useListen();
@@ -217,3 +217,5 @@ export const Player = observer(() => {
         </div>
     );
 });
+
+export default Player;

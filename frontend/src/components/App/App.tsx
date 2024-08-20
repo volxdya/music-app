@@ -1,23 +1,27 @@
 import { Sidebar } from "../Sidebar/Sidebar.tsx";
-import { Routes, Route, useLocation } from "react-router-dom";
-import { MainScreen } from "../MainScreen/MainScreen.tsx";
-import { Search } from "../Search/Search.tsx";
-import { Collection } from "../Collection/Collection.tsx";
-import { Player } from "../Player/Player.tsx";
-import { Authorization } from "@/components/Authorization/Authorization.tsx";
-import { Registration } from "@/components/Registration/Registration.tsx";
-import { TracksPage } from "@/ui/TracksPage/TracksPage.tsx";
-import { Playlist } from "@/components/Playlist/Playlist.tsx";
-import { Tracks } from "@/components/Tracks/Tracks.tsx";
-import { Album } from "../Album/Album.tsx";
-import { useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { lazy, Suspense, useEffect } from "react";
 import user from "@/store/user.ts";
-import { Author } from "../Author/Author.tsx";
 import { validateFn } from "@/utils/validate.ts";
 
 export default function App() {
+  const MainPage = lazy(() => import("../MainScreen/MainScreen.tsx"));
+  const Search = lazy(() => import("../Search/Search.tsx"));
+  const Collection = lazy(() => import("../Collection/Collection.tsx"));
+  const Authorization = lazy(
+    () => import("../Authorization/Authorization.tsx"),
+  );
+  const Registration = lazy(() => import("../Registration/Registration.tsx"));
+  const Playlist = lazy(() => import("../Playlist/Playlist.tsx"));
+  const Tracks = lazy(() => import("../Tracks/Tracks.tsx"));
+  const TracksPage = lazy(() => import("@/ui/TracksPage/TracksPage.tsx"));
+  const Album = lazy(() => import("../Album/Album.tsx"));
+  const Author = lazy(() => import("../Author/Author.tsx"));
+  const Player = lazy(() => import("../Player/Player.tsx"));
+  const Plus = lazy(() => import("../Plus/Plus.tsx"));
+
   const location = useLocation();
-  const locationsForValidate: string[] = ["/auth", "/register"];
+  const locationsForValidate: string[] = ["/auth", "/register", "/plus"];
 
   const validateLocation: boolean = validateFn<string>(
     locationsForValidate,
@@ -29,34 +33,39 @@ export default function App() {
   }, []);
 
   return (
-    <div className="row g-0">
-      {validateLocation && (
-        <div className="col-xl-2 col-12">
-          <Sidebar />
+    <Suspense fallback={<div>loading...</div>}>
+      <div className="row g-0">
+        {validateLocation && (
+          <div className="col-xl-2 col-12">
+            <Sidebar />
+          </div>
+        )}
+        <div
+          className={
+            validateLocation ? "col-xl-10 col-12 main-screen" : "col-12"
+          }
+        >
+          <div className={validateLocation ? "main-wrapper" : ""}>
+            <Routes>
+              <Route path="/" element={<MainPage />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/collection" element={<Collection />} />
+              <Route path="/auth" element={<Authorization />} />
+              <Route path="/register" element={<Registration />} />
+              <Route path="/like" element={<Playlist />} />
+              <Route path="/tracks" element={<Tracks />} />
+              <Route path="/plus" element={<Plus />} />
+              <Route
+                path="/tracks/:search/:bySearch/:isAuthor"
+                element={<TracksPage />}
+              />
+              <Route path="/album/:albumId" element={<Album />} />
+              <Route path="/author/:authorId" element={<Author />} />
+            </Routes>
+          </div>
+          {validateLocation && <Player />}
         </div>
-      )}
-      <div
-        className={validateLocation ? "col-xl-10 col-12 main-screen" : "col-12"}
-      >
-        <div className={validateLocation ? "main-wrapper" : ""}>
-          <Routes>
-            <Route path="/" element={<MainScreen />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/collection" element={<Collection />} />
-            <Route path="/auth" element={<Authorization />} />
-            <Route path="/register" element={<Registration />} />
-            <Route path="/like" element={<Playlist />} />
-            <Route path="/tracks" element={<Tracks />} />
-            <Route
-              path="/tracks/:search/:bySearch/:isAuthor"
-              element={<TracksPage />}
-            />
-            <Route path="/album/:albumId" element={<Album />} />
-            <Route path="/author/:authorId" element={<Author />} />
-          </Routes>
-        </div>
-        {validateLocation && <Player />}
       </div>
-    </div>
+    </Suspense>
   );
 }

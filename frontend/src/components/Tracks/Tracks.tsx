@@ -4,7 +4,7 @@ import track from "@/store/track.ts";
 import {ITrack} from "@/types/ITrack.ts";
 import {TrackCard} from "@/ui/Cards/TrackCard/TrackCard.tsx";
 
-export const Tracks = observer(() => {
+const Tracks = observer(() => {
     useEffect(() => {
         track.getAllTracks();
     }, []);
@@ -28,3 +28,5 @@ export const Tracks = observer(() => {
         </>
     );
 });
+
+export default Tracks;

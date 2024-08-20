@@ -1,0 +1,51 @@
+.plus-wrapper {
+  width: 50%;
+  border-radius: 25px;
+}
+
+.plus-data {
+  background: #1f1f1f;
+  border-radius: 25px;
+
+  .plus-main-data {
+    padding: 25px;
+  }
+}
+
+.links-plus {
+  .link-plus {
+    width: 100%;
+    text-align: center;
+    padding: 15px 0;
+    border-top: 2px solid #505050;
+  }
+
+  .active {
+    border-top: 2px solid #008cff;
+  }
+}
+
+.stop-subscription {
+  width: 100%;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.plus-title {
+  svg {
+    height: 20px;
+    width: 20px;
+  }
+
+  .check {
+    svg {
+      fill: #00b21e;
+    }
+  }
+
+  .x {
+    svg {
+      fill: red;
+    }
+  }
+}

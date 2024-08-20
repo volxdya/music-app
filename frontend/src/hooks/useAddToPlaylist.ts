@@ -3,7 +3,7 @@ import { useToast } from "@/components/ui/use-toast.ts";
 import user from "@/store/user.ts";
 
 export const useAddToPlaylist = (trackId: number) => {
-    const playlistId: number = user.me.playlists[0].id;;
+    const playlistId: number = user.me.playlists[0].id;
 
     const { toast } = useToast();
 
@@ -12,7 +12,6 @@ export const useAddToPlaylist = (trackId: number) => {
         // if (user.userData.isUser && isLike) {
         //     await axios.delete(`http://localhost:3010/playlist/delete_track/${trackId}/${playlistId}`)
         //         .then((resp) => {
-        //             console.log(resp.data);
         //             toast({
         //                 title: `Трек ${trackId} удален из плейлиста "Мне нравится"`,
         //             })
@@ -24,7 +23,6 @@ export const useAddToPlaylist = (trackId: number) => {
         //         playlistId: playlistId,
         //         trackId: trackId
         //     }).then((resp) => {
-        //         console.log(resp.data);
         //         toast({
         //             title: `Трек ${trackId} добавлен в плейлист "Мне нравится"`,
         //         })
@@ -36,8 +34,7 @@ export const useAddToPlaylist = (trackId: number) => {
         await axios.post(`http://localhost:3010/playlist/add_track`, {
             playlistId: playlistId,
             trackId: trackId
-        }).then((resp) => {
-            console.log(resp.data);
+        }).then(() => {
             toast({
                 title: `Трек ${trackId} добавлен в плейлист "Мне нравится"`,
             })

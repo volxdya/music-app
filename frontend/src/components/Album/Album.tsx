@@ -4,7 +4,7 @@ import { TrackCard } from "@/ui/Cards/TrackCard/TrackCard";
 import { HeaderMusic } from "@/ui/HeaderMusic/HeaderMusic";
 import { useParams } from "react-router-dom";
 
-export function Album() {
+export default function Album() {
     const params = useParams();
     let albumId;
 

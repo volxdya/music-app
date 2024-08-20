@@ -10,7 +10,6 @@ export const useAlbumData = (albumId: number | undefined) => {
             axios.get(`http://localhost:3010/album/get_by_id/${albumId}`)
                 .then((resp) => {
                     setAlbumData(resp.data);
-                    console.log(resp.data);
                 }).catch((err) => {
                     console.log(err);
                 });

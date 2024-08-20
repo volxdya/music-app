@@ -132,13 +132,13 @@ export class UserService {
         const finishAuthors: User[] = [];
 
         /*
-                                                                          Алгоритм:
-                                                                          1. Проходимся по всем авторам
-                                                                          2. Дальше на каждого автора делаем итерации по трекам
-                                                                          3. Проверяем, совпадаеют ли жанры с кем-то
-                                                                          4. Если да, то пушим в похожих авторов
-                                                                          5. Возвращаем уникальный массив
-                                                                        */
+              Алгоритм:
+                1. Проходимся по всем авторам
+                2. Дальше на каждого автора делаем итерации по трекам
+                3. Проверяем, совпадаеют ли жанры с кем-то
+                4. Если да, то пушим в похожих авторов
+                5. Возвращаем уникальный массиа 
+       */
 
         for (let i = 0; i < authors.length; i++) {
           for (let j = 0; j < authors[i].tracks.length; j++) {
@@ -183,6 +183,17 @@ export class UserService {
     await user.update({
       isSubscribed: true,
       finishSubscribe: toDb,
+    });
+
+    return user;
+  }
+
+  // Конец подписки
+  async deleteSubscription(userId: number) {
+    const user: User = await this.getById(userId);
+
+    await user.update({
+      isSubscribed: false,
     });
 
     return user;

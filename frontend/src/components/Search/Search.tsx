@@ -8,7 +8,7 @@ import {AuthorsSearch} from "@/components/Search/Authors/AuthorsSearch.tsx";
 import {AlbumsSearch} from "@/components/Search/Albums/AlbumsSearch.tsx";
 import {TracksSearch} from "@/components/Search/Tracks/TracksSearch.tsx";
 
-export function Search() {
+export default function Search() {
     const [value, setValue] = useState("");
     const [search, searchFn] = useSearch();
     const [isSearched, setIsSearched] = useState(false);

@@ -1,92 +1,98 @@
-import './Sidebar.scss';
-import {Search} from "../../icons/Search.tsx";
-import {Note} from "../../icons/Note.tsx";
-import {Heart} from "../../icons/Hearts/Heart.tsx";
-import {Link, useLocation} from "react-router-dom";
-import {MainTitle} from "@/ui/Text/MainTitle/MainTitle.tsx";
-import {SidebarDropdown} from "@/components/Sidebar/Dropdown/Dropdown.tsx";
+import "./Sidebar.scss";
+import { Search } from "../../icons/Search.tsx";
+import { Note } from "../../icons/Note.tsx";
+import { Heart } from "../../icons/Hearts/Heart.tsx";
+import { Link, useLocation } from "react-router-dom";
+import { MainTitle } from "@/ui/Text/MainTitle/MainTitle.tsx";
+import { SidebarDropdown } from "@/components/Sidebar/Dropdown/Dropdown.tsx";
 import uniqid from "uniqid";
-import {observer} from "mobx-react-lite";
+import { observer } from "mobx-react-lite";
 import user from "@/store/user.ts";
-import {getItem} from "@/utils/localStorage.ts";
-import {useEffect} from "react";
+import { getItem } from "@/utils/localStorage.ts";
+import { useEffect } from "react";
 
 interface ISidebar {
-    component: React.ReactNode;
-    title: string;
-    link: string;
+  component: React.ReactNode;
+  title: string;
+  link: string;
 }
 
 export const Sidebar = observer(() => {
-    const sidebarItems: ISidebar[] = [
-        {
-            component: <Search/>,
-            title: "Поиск",
-            link: "/search",
-        },
-        {
-            component: <Note/>,
-            title: "Главная",
-            link: "/",
-        },
-        {
-            component: <Heart/>,
-            title: "Моя коллекция",
-            link: "/collection",
-        }
-    ];
+  const sidebarItems: ISidebar[] = [
+    {
+      component: <Search />,
+      title: "Поиск",
+      link: "/search",
+    },
+    {
+      component: <Note />,
+      title: "Главная",
+      link: "/",
+    },
+    {
+      component: <Heart />,
+      title: "Моя коллекция",
+      link: "/collection",
+    },
+  ];
 
-    const location = useLocation();
-    const mainClassesLink: string = "d-flex gap-3 link-sidebar my-4";
+  const location = useLocation();
+  const mainClassesLink: string = "d-flex gap-3 link-sidebar my-4";
 
-    useEffect(() => {
-        user.getUserData();
-        user.getMe();
+  useEffect(() => {
+    user.getUserData();
+    user.getMe();
+  }, []);
 
-        console.log("use");
-    }, []);
-
-    return (
-        <nav className="sidebar p-4">
-            <MainTitle/>
-            <div className="mt-4">
-                {sidebarItems.map((item: ISidebar) => (
-                    <Link
-                        key={uniqid()}
-                        to={item.link}
-                        className={location.pathname == item.link
-                            ? `active ${mainClassesLink}` : mainClassesLink}
-                    >
-                        {item.component}
-                        <span className="text-link align-items-center">{item.title}</span>
-                    </Link>
-                ))}
-            </div>
-            <div className="me">
-                {getItem("token") ? (
-                    <div className="d-flex gap-3">
-                        <SidebarDropdown
-                            login={user.userData.login}
-                            firstName={user.userData.firstName}
-                            lastName={user.userData.lastName}
-                        />
-                        <div className="user-data-block">
-                            <div>
-                                <p>{user.userData.login}</p>
-                                {!user.userData.isUser ? (
-                                    <div className="author-block mt-1">Исполнитель</div>
-                                ): (
-                                    <div className="author-block mt-1">Слушатель</div>
-                                )}
-                            </div>
-                        </div>
-                    </div>
+  return (
+    <nav className="sidebar p-4">
+      <MainTitle />
+      <div className="mt-4">
+        {sidebarItems.map((item: ISidebar) => (
+          <Link
+            key={uniqid()}
+            to={item.link}
+            className={
+              location.pathname == item.link
+                ? `active ${mainClassesLink}`
+                : mainClassesLink
+            }
+          >
+            {item.component}
+            <span className="text-link align-items-center">{item.title}</span>
+          </Link>
+        ))}
+      </div>
+      <div className="me">
+        {getItem("token") ? (
+          <div className="d-flex gap-3">
+            <SidebarDropdown
+              login={user.userData.login}
+              firstName={user.userData.firstName}
+              lastName={user.userData.lastName}
+            />
+            <div className="user-data-block">
+              <div>
+                <p>{user.userData.login}</p>
+                {!user.userData.isUser ? (
+                  <div className="author-block mt-1">Исполнитель</div>
                 ) : (
-                    <Link to="/auth" className="w-100">
-                        <button className="btn-auth w-100">Войти</button>
-                    </Link>
+                  <Link to="/plus">
+                    <div className="author-block d-flex gap-2 mt-1">
+                      Слушатель
+                      {user.me.isSubscribed && <span>+</span>}
+                    </div>
+                  </Link>
                 )}
+              </div>
             </div>
-        </nav>
-    );
+          </div>
+        ) : (
+          <Link to="/auth" className="w-100">
+            <button className="btn-auth w-100">Войти</button>
+          </Link>
+        )}
+      </div>
+    </nav>
+  );
 });

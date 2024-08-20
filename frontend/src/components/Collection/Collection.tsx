@@ -6,7 +6,7 @@ import { CollectionForAuthors } from "@/components/Collection/CollectionForAutho
 import { CollectionForUsers } from "@/components/Collection/CollectionForUsers/CollectionForUsers.tsx";
 import { getItem } from "@/utils/localStorage.ts";
 
-export const Collection = observer(() => {
+const Collection = observer(() => {
   useEffect(() => {
     user.getUserData();
   }, []);
@@ -30,3 +30,5 @@ export const Collection = observer(() => {
       <div>Нет токена!</div>
   )
 });
+
+export default Collection;
