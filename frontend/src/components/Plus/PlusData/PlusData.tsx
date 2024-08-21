@@ -7,10 +7,33 @@ import { useDeleteSubscription } from "@/hooks/useDeleteSubscription.ts";
 import { useBuySubscription } from "@/hooks/useBuySubscription.ts";
 import { getStringDate } from "@/utils/getStringDate.ts";
 import { getMonthByIndex } from "@/utils/getMonthByIndex.ts";
+import { Link, useParams } from "react-router-dom";
+
+interface IPlus {
+  param: string;
+  title: string;
+}
 
 export const PlusData = observer(() => {
   const [deleteSubscription] = useDeleteSubscription(user.userData.id);
   const [buy] = useBuySubscription(user.userData.id);
+
+  const params = useParams();
+
+  const plusItems: IPlus[] = [
+    {
+      title: "Сменить план",
+      param: "change_plan",
+    },
+    {
+      title: "Последние списания",
+      param: "last_spending",
+    },
+    {
+      title: "Способы оплаты",
+      param: "payment_methods",
+    },
+  ];
 
   return (
     <div className="d-flex justify-content-center">
@@ -53,15 +76,16 @@ export const PlusData = observer(() => {
               )}
             </div>
             <div className="d-flex justify-content-between mt-3 links-plus">
-              <a href="#" className="link-plus active">
-                Сменить план
-              </a>
-              <a href="#" className="link-plus">
-                Последние списания
-              </a>
-              <a href="#" className="link-plus">
-                Способы оплаты
-              </a>
+              {plusItems.map((item: IPlus) => (
+                <Link
+                  to={`/plus/${item.param}`}
+                  className={
+                    item.param === params.item ? "active link-plus" : "link-plus"
+                  }
+                >
+                  {item.title}
+                </Link>
+              ))}
             </div>
           </div>
 

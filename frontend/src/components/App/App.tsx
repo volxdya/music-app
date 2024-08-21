@@ -54,7 +54,7 @@ export default function App() {
               <Route path="/register" element={<Registration />} />
               <Route path="/like" element={<Playlist />} />
               <Route path="/tracks" element={<Tracks />} />
-              <Route path="/plus" element={<Plus />} />
+              <Route path="/plus/:item" element={<Plus />} />
               <Route
                 path="/tracks/:search/:bySearch/:isAuthor"
                 element={<TracksPage />}
