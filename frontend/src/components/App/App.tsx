@@ -21,7 +21,15 @@ export default function App() {
   const Plus = lazy(() => import("../Plus/Plus.tsx"));
 
   const location = useLocation();
-  const locationsForValidate: string[] = ["/auth", "/register", "/plus"];
+  const locationsForValidate: string[] = [
+    "/auth",
+    "/register",
+    "/plus/change_plan",
+    "/plus/last_spending",
+    "/plus/payment_methods",
+  ];
+
+  console.log(location);
 
   const validateLocation: boolean = validateFn<string>(
     locationsForValidate,

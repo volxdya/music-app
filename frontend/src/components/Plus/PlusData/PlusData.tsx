@@ -8,6 +8,7 @@ import { useBuySubscription } from "@/hooks/useBuySubscription.ts";
 import { getStringDate } from "@/utils/getStringDate.ts";
 import { getMonthByIndex } from "@/utils/getMonthByIndex.ts";
 import { Link, useParams } from "react-router-dom";
+import plus from "@/store/plus.ts";
 
 interface IPlus {
   param: string;
@@ -34,6 +35,7 @@ export const PlusData = observer(() => {
       param: "payment_methods",
     },
   ];
+
 
   return (
     <div className="d-flex justify-content-center">
@@ -79,6 +81,7 @@ export const PlusData = observer(() => {
               {plusItems.map((item: IPlus) => (
                 <Link
                   to={`/plus/${item.param}`}
+                  onClick={() => plus.setCurrent(item.param)}
                   className={
                     item.param === params.item ? "active link-plus" : "link-plus"
                   }
