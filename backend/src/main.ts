@@ -4,6 +4,7 @@ import { MicroserviceOptions } from '@nestjs/microservices';
 import { BROKER_CONFIG } from './config/broker.config';
 import { SwaggerModule } from '@nestjs/swagger';
 import { SWAGGER_CONFIG } from './config/swagger.config';
+import { HttpExceptionFilter } from './filters/http-exeption';
 
 async function bootstrap() {
   const PORT = process.env.PORT || 8080;
@@ -11,6 +12,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
   app.connectMicroservice<MicroserviceOptions>(BROKER_CONFIG);
+  app.useGlobalFilters(new HttpExceptionFilter());
 
   const document = SwaggerModule.createDocument(app, SWAGGER_CONFIG);
   SwaggerModule.setup('/api/docs', app, document);
