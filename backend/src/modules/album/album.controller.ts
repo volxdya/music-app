@@ -4,6 +4,7 @@ import { CreateAlbumDto } from './dto/createAlbumDto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import {AuthGuard} from "../../guards/auth.guard";
 import {IsAuthorGuard} from "../../guards/author.guard";
+import {CheckUserGuard} from "../../guards/check-user.guard";
 
 @ApiTags('Album')
 @Controller('album')
@@ -17,7 +18,7 @@ export class AlbumController {
   }
 
   @ApiOperation({ summary: 'Создание альбома' })
-  @UseGuards(AuthGuard, IsAuthorGuard)
+  @UseGuards(AuthGuard, IsAuthorGuard, CheckUserGuard)
   @Post(`/create`)
   create(@Body() dto: CreateAlbumDto) {
     return this.albumService.create(dto);

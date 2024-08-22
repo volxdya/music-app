@@ -34,7 +34,7 @@ export class TrackService {
       const newAlbum: Album = await this.albumService.create({
         title: dto.title,
         avatarUrl: dto.avatarUrl,
-        authorId: dto.authorId,
+        userId: dto.userId,
       });
 
       await newAlbum.$set('tracks', track);

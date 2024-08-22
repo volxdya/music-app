@@ -17,5 +17,5 @@ export class CreateAlbumDto {
     description: 'ID Автора, владелец альбома',
     example: '1',
   })
-  readonly authorId: number;
+  readonly userId: number;
 }

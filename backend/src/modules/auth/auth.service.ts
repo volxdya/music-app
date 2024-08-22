@@ -45,6 +45,7 @@ export class AuthService {
       isSubscribed: user.isSubscribed,
       finishSubscribe: user.finishSubscribe,
       createdAt: user.createdAt,
+      playlists: user.playlists,
     };
 
     return {

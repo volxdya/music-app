@@ -13,6 +13,7 @@ import { UsePlaylistDto } from './dto/usePlaylistDto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../../guards/auth.guard';
 import { CheckUserGuard } from '../../guards/check-user.guard';
+import {PlaylistGuard} from "../../guards/playlist.guard";
 
 @ApiTags('Playlist')
 @Controller('playlist')
@@ -34,7 +35,7 @@ export class PlaylistController {
 
   @ApiOperation({ summary: 'Добавление трека в плейлист' })
   @Post(`/add_track`)
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, PlaylistGuard)
   addTrack(@Body() dto: UsePlaylistDto) {
     return this.playlistService.addTrack(dto);
   }

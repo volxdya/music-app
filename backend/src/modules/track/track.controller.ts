@@ -12,6 +12,7 @@ import { CreateTrackDto } from './dto/createTrackDto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../../guards/auth.guard';
 import { IsAuthorGuard } from '../../guards/author.guard';
+import {CheckUserGuard} from "../../guards/check-user.guard";
 
 @ApiTags('Track')
 @Controller('track')
@@ -26,7 +27,7 @@ export class TrackController {
 
   @ApiOperation({ summary: 'Создание трека' })
   @Post(`/create`)
-  @UseGuards(AuthGuard, IsAuthorGuard)
+  @UseGuards(AuthGuard, IsAuthorGuard, CheckUserGuard)
   create(@Body() dto: CreateTrackDto) {
     return this.trackService.create(dto);
   }
