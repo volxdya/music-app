@@ -3,6 +3,7 @@ import { FormEvent, useEffect } from "react";
 import { stopFormBehavior } from "@/utils/stopFormBehavior.ts";
 import axios, { AxiosError } from "axios";
 import user from "@/store/user.ts";
+import { getItem } from "@/utils/localStorage.ts";
 
 export const useCreateAlbum = () => {
   const { toast } = useToast();
@@ -21,12 +22,20 @@ export const useCreateAlbum = () => {
 
     if (!user.userData.isUser) {
       await axios
-        .post(`http://localhost:3010/album/create`, {
-          title: title,
-          avatarUrl: avatarUrl,
-          authorId: user.userData.id,
-          genreId: genreId
-        })
+        .post(
+          `http://localhost:3010/album/create`,
+          {
+            title: title,
+            avatarUrl: avatarUrl,
+            authorId: user.userData.id,
+            genreId: genreId,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${getItem("token")}`,
+            },
+          },
+        )
         .then((resp) => {
           console.log(resp);
 

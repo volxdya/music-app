@@ -41,7 +41,10 @@ export class Track extends Model<Track, ITrack> {
   @Column({ type: DataType.STRING, allowNull: false })
   title: string;
 
-  @ApiProperty({ example: '{...}', description: 'Данные трека для ByteScale API' })
+  @ApiProperty({
+    example: '{...}',
+    description: 'Данные трека для ByteScale API',
+  })
   @Column({ type: DataType.JSON, allowNull: false })
   trackData: {
     accountId: string;
@@ -55,11 +58,18 @@ export class Track extends Model<Track, ITrack> {
   @Column({ type: DataType.INTEGER, defaultValue: 0 })
   auditions: number;
 
-  @ApiProperty({ example: 'true', description: 'Трек или нет, это для того, чтобы при создании чистого трека создавался к нему альбом' })
+  @ApiProperty({
+    example: 'true',
+    description:
+      'Трек или нет, это для того, чтобы при создании чистого трека создавался к нему альбом',
+  })
   @Column({ type: DataType.BOOLEAN })
   isTrack: boolean;
 
-  @ApiProperty({ example: '[...]', description: 'Массив плейлистов, в которых находится данный трек' })
+  @ApiProperty({
+    example: '[...]',
+    description: 'Массив плейлистов, в которых находится данный трек',
+  })
   @BelongsToMany(() => Playlist, () => PlaylistTracks)
   playlists: Playlist[];
 
@@ -92,8 +102,9 @@ export class Track extends Model<Track, ITrack> {
 
   @ApiProperty({
     example: 'ALWAYS TRACK',
-    description: 'Данное поле используется исключительно на фронтенде, для поиска.',
-    default: 'track'
+    description:
+      'Данное поле используется исключительно на фронтенде, для поиска.',
+    default: 'track',
   })
   @Column({ type: DataType.STRING, defaultValue: 'track' })
   type: string;

@@ -4,6 +4,7 @@ import { stopFormBehavior } from "@/utils/stopFormBehavior.ts";
 import axios, { AxiosError } from "axios";
 import user from "@/store/user.ts";
 import { IUploadFile } from "@/types/IUploadFile.ts";
+import {getItem} from "@/utils/localStorage.ts";
 
 export const useCreateTrack = () => {
   const { toast } = useToast();
@@ -36,6 +37,10 @@ export const useCreateTrack = () => {
             fileUrlMP3: trackUrl[0].fileUrl,
           },
           genreId: genreId,
+        }, {
+          headers: {
+            Authorization: `Bearer ${getItem("token")}`
+          }
         })
         .then((resp) => {
 
