@@ -6,7 +6,7 @@ import { Playlist } from '../modules/playlist/playlist.model';
 import { PlaylistTracks } from '../modules/track/playlist-tracks.model';
 import { Track } from '../modules/track/track.model';
 import { Album } from '../modules/album/album.model';
-import {Genre} from "../modules/genre/genre.model";
+import { Genre } from '../modules/genre/genre.model';
 
 dotenv.config();
 

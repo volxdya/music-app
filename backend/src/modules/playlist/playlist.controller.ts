@@ -1,34 +1,38 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, UseGuards} from '@nestjs/common';
 import { PlaylistService } from './playlist.service';
 import { CreatePlaylistDto } from './dto/createPlaylistDto';
 import { UsePlaylistDto } from './dto/usePlaylistDto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from "../../guards/auth.guard";
 
 @ApiTags('Playlist')
 @Controller('playlist')
 export class PlaylistController {
   constructor(private readonly playlistService: PlaylistService) {}
 
-  @ApiOperation({summary: 'Создание плейлиста'})
+  @ApiOperation({ summary: 'Создание плейлиста' })
   @Post(`/create`)
+  @UseGuards(AuthGuard)
   async createPlaylist(@Body() dto: CreatePlaylistDto) {
     return this.playlistService.create(dto);
   }
 
-  @ApiOperation({summary: 'Получение плейлиста по ID'})
+  @ApiOperation({ summary: 'Получение плейлиста по ID' })
   @Get(`/get_by_id/:playlistId`)
   getBy_id(@Param('playlistId') id: number) {
     return this.playlistService.getById(id);
   }
 
-  @ApiOperation({summary: 'Добавление трека в плейлист'})
+  @ApiOperation({ summary: 'Добавление трека в плейлист' })
   @Post(`/add_track`)
+  @UseGuards(AuthGuard)
   addTrack(@Body() dto: UsePlaylistDto) {
     return this.playlistService.addTrack(dto);
   }
 
-  @ApiOperation({summary: 'Удаление трека из плейлиста'})
+  @ApiOperation({ summary: 'Удаление трека из плейлиста' })
   @Delete(`/delete_track/:trackId/:playlistId`)
+  @UseGuards(AuthGuard)
   deleteTrack(
     @Param('trackId') trackId: number,
     @Param('playlistId') playlistId: number,

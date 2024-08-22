@@ -3,7 +3,7 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/createUserDto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../../guards/auth.guard';
-import { IsAuthorGuard } from '../../guards/author.guard';
+import {IsAuthorGuard} from "../../guards/author.guard";
 
 @ApiTags('User')
 @Controller('user')
@@ -12,8 +12,7 @@ export class UserController {
 
   @ApiOperation({ summary: 'Получение массива всех пользователей' })
   @Get(`/get_all`)
-  @UseGuards(AuthGuard)
-  @UseGuards(IsAuthorGuard)
+  @UseGuards(AuthGuard, IsAuthorGuard)
   getAll() {
     return this.userService.getAll();
   }
@@ -52,12 +51,14 @@ export class UserController {
 
   @ApiOperation({ summary: 'Покупка подписки' })
   @Post(`/buy_subscription/userId=:userId`)
+  @UseGuards(AuthGuard)
   buySubscription(@Param('userId') userId: number) {
     return this.userService.buySubscription(userId);
   }
 
   @ApiOperation({ summary: 'Отмена подписки' })
   @Post(`/delete_subscription/userId=:userId`)
+  @UseGuards(AuthGuard)
   deleteSubscription(@Param('userId') userId: number) {
     return this.userService.deleteSubscription(userId);
   }

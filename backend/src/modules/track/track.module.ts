@@ -9,6 +9,8 @@ import { Album } from '../album/album.model';
 import { AlbumModule } from '../album/album.module';
 import { User } from '../user/user.model';
 import { Genre } from '../genre/genre.model';
+import { JwtModule } from '@nestjs/jwt';
+import { JWT_CONFIG } from '../../config/jwt.config';
 
 @Module({
   imports: [
@@ -20,6 +22,7 @@ import { Genre } from '../genre/genre.model';
       User,
       Genre,
     ]),
+    JwtModule.register(JWT_CONFIG),
     AlbumModule,
   ],
   providers: [TrackService],
