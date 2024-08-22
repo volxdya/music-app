@@ -5,6 +5,7 @@ import { BROKER_CONFIG } from './config/broker.config';
 import { SwaggerModule } from '@nestjs/swagger';
 import { SWAGGER_CONFIG } from './config/swagger.config';
 import { HttpExceptionFilter } from './filters/http-exeption';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const PORT = process.env.PORT || 8080;
@@ -13,6 +14,7 @@ async function bootstrap() {
   app.enableCors();
   app.connectMicroservice<MicroserviceOptions>(BROKER_CONFIG);
   app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalPipes(new ValidationPipe());
 
   const document = SwaggerModule.createDocument(app, SWAGGER_CONFIG);
   SwaggerModule.setup('/api/docs', app, document);

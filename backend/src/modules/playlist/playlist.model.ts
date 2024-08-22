@@ -35,7 +35,10 @@ export class Playlist extends Model<Playlist, IPlaylist> {
   @Column({ type: DataType.STRING, allowNull: false })
   title: string;
 
-  @ApiProperty({ example: 'Крутое описание', description: 'Описание плейлиста' })
+  @ApiProperty({
+    example: 'Крутое описание',
+    description: 'Описание плейлиста',
+  })
   @Column({ type: DataType.STRING, defaultValue: '' })
   description: string;
 
@@ -64,7 +67,10 @@ export class Playlist extends Model<Playlist, IPlaylist> {
   @BelongsTo(() => User)
   user: User;
 
-  @ApiProperty({ example: '[{...}, {...}]', description: 'Массив треков, добавленных в плейлист' })
+  @ApiProperty({
+    example: '[{...}, {...}]',
+    description: 'Массив треков, добавленных в плейлист',
+  })
   @BelongsToMany(() => Track, () => PlaylistTracks)
   tracks: Track[];
 }
