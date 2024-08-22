@@ -42,7 +42,7 @@ export class Playlist extends Model<Playlist, IPlaylist> {
   @ApiProperty({
     example: 'http://imagehost/playlistId=123',
     description: 'Ссылка на картинку плейлиста',
-    default: ''
+    default: '',
   })
   @Column({ type: DataType.STRING, defaultValue: '' })
   avatarUrl: string;
@@ -50,7 +50,7 @@ export class Playlist extends Model<Playlist, IPlaylist> {
   @ApiProperty({
     example: '123',
     description: 'Количество лайков плейлиста',
-    default: '0'
+    default: '0',
   })
   @Column({ type: DataType.INTEGER, defaultValue: 0 })
   likes: number;

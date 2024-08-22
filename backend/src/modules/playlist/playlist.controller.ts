@@ -42,7 +42,7 @@ export class PlaylistController {
 
   @ApiOperation({ summary: 'Удаление трека из плейлиста' })
   @Delete(`/delete_track/:trackId/:playlistId`)
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, PlaylistGuard)
   deleteTrack(
     @Param('trackId') trackId: number,
     @Param('playlistId') playlistId: number,
