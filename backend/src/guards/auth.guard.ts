@@ -4,11 +4,8 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { AuthService } from '../modules/auth/auth.service';
 
 export class AuthGuard implements CanActivate {
-  constructor(private readonly authService: AuthService) {}
-
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
