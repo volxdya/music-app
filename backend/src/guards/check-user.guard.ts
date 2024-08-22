@@ -6,20 +6,18 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { User } from '../modules/user/user.model';
-import { Request } from 'express';
 import { guardToken } from '../utils/guardToken';
 
 @Injectable()
-export class IsAuthorGuard implements CanActivate {
+export class CheckUserGuard implements CanActivate {
   constructor(private jwtService: JwtService) {}
 
   canActivate(context: ExecutionContext): boolean {
     try {
-      const req: Request = context.switchToHttp().getRequest();
+      const req = context.switchToHttp().getRequest();
       const user = this.jwtService.verify(guardToken(req));
 
-      if (!user.isUser) {
+      if (user.id === req.body.userId) {
         return true;
       } else {
         throw new HttpException('Нет доступа', HttpStatus.FORBIDDEN);

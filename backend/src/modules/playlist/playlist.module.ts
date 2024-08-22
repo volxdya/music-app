@@ -6,11 +6,13 @@ import { Playlist } from './playlist.model';
 import { User } from '../user/user.model';
 import { PlaylistTracks } from '../track/playlist-tracks.model';
 import { TrackModule } from '../track/track.module';
-
+import { JwtModule } from '@nestjs/jwt';
+import { JWT_CONFIG } from '../../config/jwt.config';
 
 @Module({
   imports: [
     SequelizeModule.forFeature([Playlist, User, PlaylistTracks]),
+    JwtModule.register(JWT_CONFIG),
     TrackModule,
   ],
   controllers: [PlaylistController],

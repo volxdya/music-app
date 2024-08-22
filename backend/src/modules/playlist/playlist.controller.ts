@@ -1,9 +1,18 @@
-import {Body, Controller, Delete, Get, Param, Post, UseGuards} from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { PlaylistService } from './playlist.service';
 import { CreatePlaylistDto } from './dto/createPlaylistDto';
 import { UsePlaylistDto } from './dto/usePlaylistDto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from "../../guards/auth.guard";
+import { AuthGuard } from '../../guards/auth.guard';
+import { CheckUserGuard } from '../../guards/check-user.guard';
 
 @ApiTags('Playlist')
 @Controller('playlist')
@@ -12,7 +21,7 @@ export class PlaylistController {
 
   @ApiOperation({ summary: 'Создание плейлиста' })
   @Post(`/create`)
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard, CheckUserGuard)
   async createPlaylist(@Body() dto: CreatePlaylistDto) {
     return this.playlistService.create(dto);
   }
