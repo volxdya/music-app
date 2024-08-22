@@ -44,7 +44,7 @@ export class Album extends Model<Album, IAlbum> {
   @ApiProperty({ example: '1', description: 'ID владельца альбома' })
   @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER })
-  authorId: number;
+  userId: number;
 
   @ApiProperty({ example: '1', description: 'ID жанра альбома' })
   @ForeignKey(() => Genre)

@@ -21,9 +21,8 @@ export class IsAuthorGuard implements CanActivate {
 
       if (!user.isUser) {
         return true;
-      } else {
-        throw new HttpException('Нет доступа', HttpStatus.FORBIDDEN);
       }
+      throw new HttpException('Нет доступа', HttpStatus.FORBIDDEN);
     } catch (err) {
       throw new HttpException('Нет доступа', HttpStatus.FORBIDDEN);
     }

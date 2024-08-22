@@ -76,7 +76,7 @@ export class Track extends Model<Track, ITrack> {
   @ApiProperty({ example: '1', description: 'ID автора' })
   @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER })
-  authorId: number;
+  userId: number;
 
   @ApiProperty({ example: '{...}', description: 'Автор трека' })
   @BelongsTo(() => User)

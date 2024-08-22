@@ -23,9 +23,8 @@ export class PlaylistGuard implements CanActivate {
         user.playlists[0].id === req.param.playlistId
       ) {
         return true;
-      } else {
-        throw new HttpException('Нет доступа', HttpStatus.FORBIDDEN);
       }
+      throw new HttpException('Нет доступа', HttpStatus.FORBIDDEN);
     } catch (err) {
       throw new HttpException('Нет доступа', HttpStatus.FORBIDDEN);
     }

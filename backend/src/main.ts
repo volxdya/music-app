@@ -14,7 +14,7 @@ async function bootstrap() {
   app.enableCors();
   app.connectMicroservice<MicroserviceOptions>(BROKER_CONFIG);
   app.useGlobalFilters(new HttpExceptionFilter());
-  app.useGlobalPipes(new ValidationPipe());
+  // app.useGlobalPipes(new ValidationPipe());
 
   const document = SwaggerModule.createDocument(app, SWAGGER_CONFIG);
   SwaggerModule.setup('/api/docs', app, document);

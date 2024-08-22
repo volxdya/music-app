@@ -13,6 +13,7 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../../guards/auth.guard';
 import { IsAuthorGuard } from '../../guards/author.guard';
 import {CheckUserGuard} from "../../guards/check-user.guard";
+import {CheckExecutionGuard} from "../../guards/check-execution.guard";
 
 @ApiTags('Track')
 @Controller('track')
@@ -58,6 +59,7 @@ export class TrackController {
 
   @ApiOperation({ summary: 'Удаление трека по ID' })
   @Delete(`/delete/:trackId`)
+  @UseGuards(AuthGuard, IsAuthorGuard)
   delete(@Param(`trackId`) trackId: number) {
     return this.trackService.delete(trackId);
   }

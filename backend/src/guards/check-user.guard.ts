@@ -19,9 +19,9 @@ export class CheckUserGuard implements CanActivate {
 
       if (user.id === req.body.userId) {
         return true;
-      } else {
-        throw new HttpException('Нет доступа', HttpStatus.FORBIDDEN);
       }
+
+      throw new HttpException('Нет доступа', HttpStatus.FORBIDDEN);
     } catch (err) {
       throw new HttpException('Нет доступа', HttpStatus.FORBIDDEN);
     }
