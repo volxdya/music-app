@@ -14,20 +14,16 @@ export class FilesService {
       const fileName: string = uuid.v4() + '.jpg';
       const pathName: string = path.resolve(__dirname, '..', 'src', 'static');
 
-      // Проверка существования директории и её создание, если необходимо
       if (!fs.existsSync(pathName)) {
         fs.mkdirSync(pathName, { recursive: true });
       }
 
       // Запись файла в директорию
-      fs.writeFileSync(
-        path.join(pathName, fileName),
-        file.buffer, // Предполагаем, что file содержит buffer
-      );
+      fs.writeFileSync(path.join(pathName, fileName), file.buffer);
 
       return fileName;
     } catch (err) {
-      console.error(err); // Исправлено: используем console.error для ошибок
+      console.error(err);
 
       throw new HttpException('Server error', HttpStatus.INTERNAL_SERVER_ERROR);
     }
