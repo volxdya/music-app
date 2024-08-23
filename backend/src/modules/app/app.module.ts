@@ -11,6 +11,7 @@ import { SearchModule } from '../search/search.module';
 import { CacheModule } from '@nestjs/cache-manager';
 import { REDIS_CONFIG } from 'src/config/redis.config';
 import { GenreModule } from '../genre/genre.module';
+import { FilesModule } from '../files/files.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { GenreModule } from '../genre/genre.module';
     AlbumModule,
     SearchModule,
     GenreModule,
+    FilesModule,
   ],
   controllers: [],
   providers: [],
