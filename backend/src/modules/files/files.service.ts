@@ -2,22 +2,21 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as uuid from 'uuid';
+import { Buffer } from 'node:buffer';
 
 @Injectable()
 export class FilesService {
-  async upload(file): Promise<string> {
+  async upload(file: File): Promise<string> {
     try {
-      const fileName: string = uuid.v4() + '.jpg'; // Используем оригинальное расширение файла
-      const pathName: string = path.resolve(__dirname, '..', 'uploads'); // Корректный путь для сохранения файла
+      const fileName: string = file ? file.name : 'grewgegrgergergergreg';
+      const pathName: string = path.resolve(__dirname, '..', 'static');
 
       if (!fs.existsSync(pathName)) {
         fs.mkdirSync(pathName, { recursive: true });
       }
 
-      const arrayBuffer = await file.arrayBuffer();
-      const buffer = Buffer.from(arrayBuffer);
-
-      fs.writeFileSync(path.join(pathName, fileName), buffer); // Сохраняем файл
+      const data = new Uint8Array(Buffer.from(fileName));
+      fs.writeFileSync(path.join(pathName, fileName), data); // Сохраняем файл
 
       return fileName;
     } catch (err) {
