@@ -12,12 +12,18 @@ import { CacheModule } from '@nestjs/cache-manager';
 import { REDIS_CONFIG } from 'src/config/redis.config';
 import { GenreModule } from '../genre/genre.module';
 import { FilesModule } from '../files/files.module';
+import { STATIC_CONFIG } from '../../config/static.config';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env',
       isGlobal: true,
+    }),
+    STATIC_CONFIG,
+    MulterModule.register({
+      dest: '../../static',
     }),
     SequelizeModule.forRoot(DB_CONFIG),
     CacheModule.register(REDIS_CONFIG),
