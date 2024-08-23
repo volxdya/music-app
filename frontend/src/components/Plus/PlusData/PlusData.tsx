@@ -9,6 +9,9 @@ import { getStringDate } from "@/utils/getStringDate.ts";
 import { getMonthByIndex } from "@/utils/getMonthByIndex.ts";
 import { Link, useParams } from "react-router-dom";
 import plus from "@/store/plus.ts";
+import { ChangePlan } from "@/components/Plus/ChangePlan/ChangePlan.tsx";
+import { StopModal } from "@/components/Plus/Modals/Stop/Stop.tsx";
+import { BuyModal } from "@/components/Plus/Modals/Buy/Buy.tsx";
 
 interface IPlus {
   param: string;
@@ -16,7 +19,6 @@ interface IPlus {
 }
 
 export const PlusData = observer(() => {
-  const [deleteSubscription] = useDeleteSubscription(user.userData.id);
   const [buy] = useBuySubscription(user.userData.id);
 
   const params = useParams();
@@ -36,7 +38,6 @@ export const PlusData = observer(() => {
     },
   ];
 
-
   return (
     <div className="d-flex justify-content-center">
       <div className="plus-wrapper p-4">
@@ -55,9 +56,13 @@ export const PlusData = observer(() => {
               )}
             </div>
             {user.me.isSubscribed ? (
-              <button className="btn btn-primary" onClick={deleteSubscription}>
-                Приостановить подписку
-              </button>
+              <StopModal
+                buttonStop={
+                  <button className="btn btn-primary">
+                    Приостановить подписку
+                  </button>
+                }
+              />
             ) : (
               <button className="btn btn-primary" onClick={buy}>
                 Получить плюс
@@ -83,13 +88,19 @@ export const PlusData = observer(() => {
                   to={`/plus/${item.param}`}
                   onClick={() => plus.setCurrent(item.param)}
                   className={
-                    item.param === params.item ? "active link-plus" : "link-plus"
+                    item.param === params.item
+                      ? "active link-plus"
+                      : "link-plus"
                   }
                 >
                   {item.title}
                 </Link>
               ))}
             </div>
+          </div>
+
+          <div className="container-of-choise-item mt-4 px-4 py-3">
+            {plus.current === "change_plan" && <ChangePlan />}
           </div>
 
           <div className="plus-data mt-4 p-[25px]">
@@ -99,19 +110,21 @@ export const PlusData = observer(() => {
           </div>
 
           {user.me.isSubscribed ? (
-            <button
-              className="btn-subscription mt-5 btn-primary btn"
-              onClick={deleteSubscription}
-            >
-              Остановить подписку
-            </button>
+            <StopModal
+              buttonStop={
+                <button className="btn-subscription mt-5 btn-primary btn">
+                  Остановить подписку
+                </button>
+              }
+            />
           ) : (
-            <button
-              className="btn-subscription mt-5 btn-primary btn"
-              onClick={buy}
-            >
-              Купить подписку
-            </button>
+            <BuyModal
+              buyButton={
+                <button className="btn-subscription mt-5 btn-primary btn">
+                  Купить подписку
+                </button>
+              }
+            />
           )}
         </div>
       </div>

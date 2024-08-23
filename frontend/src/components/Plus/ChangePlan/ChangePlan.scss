@@ -1,0 +1,29 @@
+.change-plan-card {
+  background-color: #282828;
+  padding: 10px;
+  border-radius: 15px;
+
+  svg {
+    height: 30px;
+    width: 30px;
+  }
+
+  .data-plan {
+    .active-plan {
+      background-color: #8098d3;
+      padding: 1px 5px;
+      color: #0000c5;
+      border-radius: 5px;
+    }
+  }
+
+  .change-plan-btn {
+    font-weight: 600;
+    height: 40px;
+    width: 25%;
+    border-radius: 10px;
+    position: relative;
+    transition: 0.3s;
+
+  }
+}

@@ -10,6 +10,7 @@ import { observer } from "mobx-react-lite";
 import user from "@/store/user.ts";
 import { getItem } from "@/utils/localStorage.ts";
 import { useEffect } from "react";
+import plus from "@/store/plus.ts";
 
 interface ISidebar {
   component: React.ReactNode;
@@ -77,7 +78,7 @@ export const Sidebar = observer(() => {
                 {!user.userData.isUser ? (
                   <div className="author-block mt-1">Исполнитель</div>
                 ) : (
-                  <Link to="/plus">
+                  <Link to={`/plus/${plus.current}`}>
                     <div className="author-block d-flex gap-2 mt-1">
                       Слушатель
                       {user.me.isSubscribed && <span>+</span>}

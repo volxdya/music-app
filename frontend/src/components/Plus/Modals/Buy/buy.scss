@@ -1,0 +1,50 @@
+.buy-modal {
+  input {
+    padding: 18px;
+    background: #282828;
+    transition: 0s;
+    font-size: 17px;
+
+    &::placeholder {
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    &:focus {
+      outline: 1px solid #008cff;
+    }
+  }
+
+  .card-number {
+    border-radius: 10px 10px 0 0;
+  }
+
+  .mm-input {
+    border-radius: 0 0 0 10px;
+  }
+
+  .cvv-input {
+    border-radius: 0 0 10px 0;
+  }
+
+  .buy-button, .other-button {
+    padding: 13px;
+    font-size: 17px;
+    border-radius: 10px;
+    font-weight: 500;
+  }
+
+  .buy-button {
+    background: #3d3d3d;
+
+    &:disabled {
+      background: #858585;
+    }
+  }
+
+  .other-button {
+    background: #ffb700;
+    color: black;
+  }
+
+}

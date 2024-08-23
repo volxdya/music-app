@@ -5,7 +5,7 @@ class Plus {
         makeAutoObservable(this);
     }
 
-    current: string = "";
+    current: string = "change_plan";
 
     setCurrent(current: string) {
         this.current = current;
