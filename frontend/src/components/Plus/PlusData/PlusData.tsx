@@ -3,7 +3,6 @@ import { Check } from "@/icons/Check.tsx";
 import { X } from "@/icons/X.tsx";
 import user from "@/store/user.ts";
 import { observer } from "mobx-react-lite";
-import { useDeleteSubscription } from "@/hooks/useDeleteSubscription.ts";
 import { useBuySubscription } from "@/hooks/useBuySubscription.ts";
 import { getStringDate } from "@/utils/getStringDate.ts";
 import { getMonthByIndex } from "@/utils/getMonthByIndex.ts";
