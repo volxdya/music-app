@@ -5,7 +5,8 @@ import { BROKER_CONFIG } from './config/broker.config';
 import { SwaggerModule } from '@nestjs/swagger';
 import { SWAGGER_CONFIG } from './config/swagger.config';
 import { HttpExceptionFilter } from './filters/http-exeption';
-import { ValidationPipe } from '@nestjs/common';
+
+declare const module: any;
 
 async function bootstrap() {
   const PORT = process.env.PORT || 8080;
@@ -25,6 +26,11 @@ async function bootstrap() {
     console.log(`microservice -> http://localhost:${PORT}`);
     console.log(`documentation api -> http://localhost:${PORT}/api/docs`);
   });
+
+  if (module.hot) {
+    module.hot.accept();
+    module.hot.dispose(() => app.close());
+  }
 }
 
 bootstrap();
