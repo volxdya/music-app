@@ -1,13 +1,12 @@
 .settings-card {
   width: 30%;
 
+  transition: 0.4s;
   &:hover {
-    transition: 0.1s;
     cursor: pointer;
 
     svg {
       transform: translate(15px, 0);
-
       fill: white;
     }
   }
