@@ -19,6 +19,7 @@ export default function App() {
   const Author = lazy(() => import("../Author/Author.tsx"));
   const Player = lazy(() => import("../Player/Player.tsx"));
   const Plus = lazy(() => import("../Plus/Plus.tsx"));
+  const Settings = lazy(() => import("../Settings/Settings.tsx"));
 
   const location = useLocation();
   const locationsForValidate: string[] = [
@@ -63,6 +64,7 @@ export default function App() {
               <Route path="/like" element={<Playlist />} />
               <Route path="/tracks" element={<Tracks />} />
               <Route path="/plus/:item" element={<Plus />} />
+              <Route path="/settings" element={<Settings />} />
               <Route
                 path="/tracks/:search/:bySearch/:isAuthor"
                 element={<TracksPage />}

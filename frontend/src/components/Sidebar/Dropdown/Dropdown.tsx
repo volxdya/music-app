@@ -5,6 +5,7 @@ import { AppIcon } from "@/icons/AppIcon.tsx";
 import { PersonAdd } from "@/icons/Person/PersonAdd.tsx";
 import { removeItem } from "@/utils/localStorage.ts";
 import { useToast } from "@/components/ui/use-toast.ts";
+import {Link} from "react-router-dom";
 
 interface Props {
   login: string;
@@ -55,12 +56,14 @@ export function SidebarDropdown({ login, firstName, lastName }: Props) {
             </p>
           </div>
           <div className="mt-4">
-            <div className="mt-1 menu-item">
-              <div className="d-flex align-items-center gap-3">
-                <Settings />
-                Настройки
+            <Link to="/settings">
+              <div className="mt-1 menu-item">
+                <div className="d-flex align-items-center gap-3">
+                  <Settings />
+                  Настройки
+                </div>
               </div>
-            </div>
+            </Link>
             <div className="mt-1 menu-item">
               <div className="d-flex align-items-center gap-3">
                 <AppIcon />

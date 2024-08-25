@@ -1,0 +1,14 @@
+.settings-card {
+  width: 30%;
+
+  &:hover {
+    transition: 0.1s;
+    cursor: pointer;
+
+    svg {
+      transform: translate(15px, 0);
+
+      fill: white;
+    }
+  }
+}
