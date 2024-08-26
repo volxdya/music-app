@@ -13,14 +13,15 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
   app.enableCors();
-  app.connectMicroservice<MicroserviceOptions>(BROKER_CONFIG);
   app.useGlobalFilters(new HttpExceptionFilter());
+  app.connectMicroservice<MicroserviceOptions>(BROKER_CONFIG);
+
   // app.useGlobalPipes(new ValidationPipe());
 
   const document = SwaggerModule.createDocument(app, SWAGGER_CONFIG);
   SwaggerModule.setup('/api/docs', app, document);
 
-  await app.startAllMicroservices();
+  app.startAllMicroservices();
 
   await app.listen(PORT, () => {
     console.log(`microservice -> http://localhost:${PORT}`);
