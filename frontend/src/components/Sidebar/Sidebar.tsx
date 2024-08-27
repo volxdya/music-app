@@ -68,13 +68,13 @@ export const Sidebar = observer(() => {
         {getItem("token") ? (
           <div className="flex gap-3">
             <SidebarDropdown
-              login={user.userData.login}
-              firstName={user.userData.firstName}
-              lastName={user.userData.lastName}
+              login={user.me.login}
+              firstName={user.me.firstName}
+              lastName={user.me.lastName}
             />
             <div className="user-data-block">
               <div>
-                <p>{user.userData.login}</p>
+                <p>{user.me.login}</p>
                 {!user.userData.isUser ? (
                   <div className="author-block mt-1">Исполнитель</div>
                 ) : (

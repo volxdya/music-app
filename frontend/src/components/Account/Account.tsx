@@ -29,11 +29,11 @@ const Account = () => {
           <div className="text-center mt-3">
             <h2 className="text-[24px] font-semibold">
               <span className="flex align-items-center gap-2 user-data">
-                {user.userData.firstName} {user.userData.lastName}
+                {user.me.firstName} {user.me.lastName}
                 <AccountModal />
               </span>
             </h2>
-            <p className="mt-2">{user.userData.login}</p>
+            <p className="mt-2">{user.me.login}</p>
             {user.me.isSubscribed ? (
               <p className="text-[15px]">Плюс активен</p>
             ) : (

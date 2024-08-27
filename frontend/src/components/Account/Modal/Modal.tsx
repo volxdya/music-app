@@ -3,12 +3,14 @@ import { Pencil } from "@/icons/Pencil.tsx";
 import "./Modal.scss";
 import { useState } from "react";
 import user from "@/store/user.ts";
-import {onChange} from "@/utils/onChange.ts";
+import { onChange } from "@/utils/onChange.ts";
+import { useUpdateUser } from "@/hooks/useUpdateUser.ts";
 
 export function AccountModal() {
   const [login, setLogin] = useState(user.userData.login);
   const [firstName, setFirstName] = useState(user.userData.firstName);
   const [lastName, setLastName] = useState(user.userData.lastName);
+  const [handleSubmit] = useUpdateUser();
 
   return (
     <Modal
@@ -20,7 +22,10 @@ export function AccountModal() {
       content={
         <div>
           <h2 className="text-[23px] font-medium">Ваши данные</h2>
-          <form className="flex justify-center align-items-center account mt-5">
+          <form
+            className="flex justify-center align-items-center account mt-5"
+            onSubmit={(e) => handleSubmit(e, login, firstName, lastName)}
+          >
             <div className="w-full">
               <div className="flex justify-center">
                 <img
@@ -61,7 +66,9 @@ export function AccountModal() {
                   />
                 </div>
               </div>
-              <button className="mt-5 save-button mx-[30.5px]">Сохранить</button>
+              <button className="mt-5 save-button mx-[30.5px]">
+                Сохранить
+              </button>
             </div>
           </form>
         </div>

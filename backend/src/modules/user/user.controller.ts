@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   UseGuards,
@@ -11,8 +12,7 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/createUserDto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../../guards/auth.guard';
-import { IsAuthorGuard } from '../../guards/author.guard';
-import { IUpdate } from '../../types/IUpdate';
+import { UpdateUser } from './dto/updateUser';
 
 @ApiTags('User')
 @Controller('user')
@@ -71,8 +71,8 @@ export class UserController {
     return this.userService.deleteSubscription(userId);
   }
 
-  @Put(`/update/:userId`)
-  update(@Body() args: IUpdate[], @Param('userId') userId: number) {
-    return this.userService.update(args, userId);
+  @Patch(`/update/:userId`)
+  update(@Body() fields: UpdateUser, @Param('userId') userId: number) {
+    return this.userService.update(fields, userId);
   }
 }
