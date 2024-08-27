@@ -43,7 +43,7 @@ export function BuyModal({ buyButton }: Props) {
               maxLength={16}
               onChange={onChange(setCard)}
             />
-            <div className="d-flex">
+            <div className="flex">
               <input
                 type="text"
                 placeholder="ММ / ГГ"

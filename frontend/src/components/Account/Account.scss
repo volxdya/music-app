@@ -1,0 +1,23 @@
+.account {
+  .avatar-account {
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .user-data {
+    svg {
+      height: 13px;
+      width: 13px;
+    }
+
+    svg:hover {
+      cursor: pointer;
+    }
+  }
+}

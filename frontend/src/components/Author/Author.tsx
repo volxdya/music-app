@@ -38,7 +38,7 @@ export default function Author() {
                     <NavigationText text="Популярные треки" />
                 </Link>
             </div >
-            <div className="mt-4 row g-0 d-flex">
+            <div className="mt-4 row g-0 flex">
                 <div className="col-8">
                     {userData?.tracks && (
                         <>

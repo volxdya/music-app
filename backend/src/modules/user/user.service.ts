@@ -8,6 +8,7 @@ import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
 import { Track } from '../track/track.model';
 import * as dayjs from 'dayjs';
+import { IUpdate } from '../../types/IUpdate';
 
 @Injectable()
 export class UserService {
@@ -140,13 +141,13 @@ export class UserService {
         const finishAuthors: User[] = [];
 
         /*
-                                                                  Алгоритм:
-                                                                    1. Проходимся по всем авторам
-                                                                    2. Дальше на каждого автора делаем итерации по трекам
-                                                                    3. Проверяем, совпадаеют ли жанры с кем-то
-                                                                    4. Если да, то пушим в похожих авторов
-                                                                    5. Возвращаем уникальный массиа
-                                                                */
+                                                                                                  Алгоритм:
+                                                                                                    1. Проходимся по всем авторам
+                                                                                                    2. Дальше на каждого автора делаем итерации по трекам
+                                                                                                    3. Проверяем, совпадаеют ли жанры с кем-то
+                                                                                                    4. Если да, то пушим в похожих авторов
+                                                                                                    5. Возвращаем уникальный массиа
+                                                                                                */
 
         for (let i = 0; i < authors.length; i++) {
           for (let j = 0; j < authors[i].tracks.length; j++) {
@@ -210,6 +211,17 @@ export class UserService {
     await user.update({
       isSubscribed: false,
       finishSubscribe: null,
+    });
+
+    return user;
+  }
+
+  // Обновление пользователя
+  async update(args: IUpdate[], userId: number) {
+    const user: User = await this.getById(userId);
+
+    args.forEach((arg: IUpdate) => {
+      user.update(arg.key, arg.value);
     });
 
     return user;

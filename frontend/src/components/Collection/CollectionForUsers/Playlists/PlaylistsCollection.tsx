@@ -11,7 +11,7 @@ export const PlaylistsCollection = observer(() => {
     const { createPlaylist } = useCreatePlaylist(user.userData.id);
 
     return (
-        <div className="d-flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-3">
             <div onClick={createPlaylist}>
                 <CreatePlaylistCard/>
             </div>

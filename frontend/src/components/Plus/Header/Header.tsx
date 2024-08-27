@@ -9,8 +9,8 @@ import user from "@/store/user.ts";
 import {Link} from "react-router-dom";
 
 export const HeaderPlus = observer(() => (
-  <header className="d-flex justify-content-between">
-    <div className="d-flex align-items-center gap-3">
+  <header className="flex justify-content-between">
+    <div className="flex align-items-center gap-3">
       <Link to="/">
         <MainTitle />
       </Link>
@@ -29,7 +29,7 @@ export const HeaderPlus = observer(() => (
         }
         content={
           <>
-            <div className="d-flex justify-content-center mt-2">
+            <div className="flex justify-center mt-2">
               <img
                 src="https://i.pinimg.com/736x/45/4e/e6/454ee61e8e8ee73efa8623c2688d22d2.jpg"
                 alt="Аватарка пользователя"
@@ -44,20 +44,20 @@ export const HeaderPlus = observer(() => (
             </div>
             <div className="mt-4">
               <div className="mt-1 menu-item">
-                <div className="d-flex align-items-center gap-3">
+                <div className="flex align-items-center gap-3">
                   <AppIcon />
                   Управление аккаунтом
                 </div>
               </div>
               <div className="mt-1 menu-item">
-                <div className="d-flex align-items-center gap-3">
+                <div className="flex align-items-center gap-3">
                   <PersonAdd />
                   Добавить аккаунт
                 </div>
               </div>
 
               <div className="mt-1 menu-item">
-                <div className="d-flex align-items-center gap-3">
+                <div className="flex align-items-center gap-3">
                   <LogOut />
                   Выйти
                 </div>

@@ -15,7 +15,7 @@ export function CollectionForAuthors() {
   
   return (
     <>
-      <div className="row g-0 d-flex">
+      <div className="row g-0 flex">
         <TracksAuthor />
         <LastRelease />
       </div>

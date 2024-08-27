@@ -24,7 +24,7 @@ export const CardsMainScreen = () => {
   getTitle(2, 5, "трека");
 
   return (
-    <div className="container-playlists d-flex gap-3 mt-5">
+    <div className="container-playlists flex gap-3 mt-5">
       {playlist && (
         <>
           <div className="w-50">

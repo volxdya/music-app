@@ -20,7 +20,7 @@ export default function Authorization() {
     >
       <div className="form-group">
         <div className="mt-4">
-          <div className="d-flex justify-content-center">
+          <div className="flex justify-center">
             <MainTitle />
           </div>
           <h2 className="mt-3 text-auth text-center">

@@ -38,7 +38,7 @@ export const Sidebar = observer(() => {
   ];
 
   const location = useLocation();
-  const mainClassesLink: string = "d-flex gap-3 link-sidebar my-4";
+  const mainClassesLink: string = "flex gap-3 link-sidebar my-4";
 
   useEffect(() => {
     user.getUserData();
@@ -66,7 +66,7 @@ export const Sidebar = observer(() => {
       </div>
       <div className="me">
         {getItem("token") ? (
-          <div className="d-flex gap-3">
+          <div className="flex gap-3">
             <SidebarDropdown
               login={user.userData.login}
               firstName={user.userData.firstName}
@@ -79,7 +79,7 @@ export const Sidebar = observer(() => {
                   <div className="author-block mt-1">Исполнитель</div>
                 ) : (
                   <Link to={`/plus/${plus.current}`}>
-                    <div className="author-block d-flex gap-2 mt-1">
+                    <div className="author-block flex gap-2 mt-1">
                       Слушатель
                       {user.me.isSubscribed && <span>+</span>}
                     </div>

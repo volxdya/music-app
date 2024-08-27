@@ -14,7 +14,7 @@ export function StopModal({ buttonStop }: IProps) {
     <Modal
       trigger={buttonStop}
       content={
-        <div className="stop-modal d-flex justify-content-center align-items-center">
+        <div className="stop-modal flex justify-center align-items-center">
           <div>
             <img src="https://vk.com/sticker/1-88385-512" alt="" />
             <p className="text-center text-[25px]">Вы уверены?</p>

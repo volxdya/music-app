@@ -9,7 +9,7 @@ interface Props {
 export function SettingsCard({ text, otherText }: Props) {
 
   return (
-    <div className="d-flex align-items-center mt-2 settings-card py-2.5 justify-content-between">
+    <div className="flex align-items-center mt-2 settings-card py-2.5 justify-content-between">
       <div>
         <h2 className="font-medium text-[15px]">{text}</h2>
         {otherText && (

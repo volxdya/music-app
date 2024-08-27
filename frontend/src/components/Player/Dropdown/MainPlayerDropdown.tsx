@@ -32,7 +32,7 @@ export function MainPlayerDropdown() {
                 <div>
                     {sidebarItems.map((item: ISidebar) => (
                         <div className="mt-1 menu-item" key={uniqid()}>
-                            <div className="d-flex align-items-center gap-3">
+                            <div className="flex align-items-center gap-3">
                                 {item.component}
                                 {item.title}
                             </div>

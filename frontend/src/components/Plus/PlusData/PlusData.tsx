@@ -38,11 +38,11 @@ export const PlusData = observer(() => {
   ];
 
   return (
-    <div className="d-flex justify-content-center">
+    <div className="flex justify-center">
       <div className="plus-wrapper p-4">
         <div className="plus-container">
-          <div className="d-flex justify-content-between align-items-center">
-            <div className="d-flex gap-3 align-items-center plus-title">
+          <div className="flex justify-content-between align-items-center">
+            <div className="flex gap-3 align-items-center plus-title">
               <h2 className="fs-5">Плюс</h2>
               {user.me.isSubscribed ? (
                 <div className="check">
@@ -81,7 +81,7 @@ export const PlusData = observer(() => {
                 <p className="mt-2 text-neutral-300">У вас нет подписки =(</p>
               )}
             </div>
-            <div className="d-flex justify-content-between mt-3 links-plus">
+            <div className="flex justify-content-between mt-3 links-plus">
               {plusItems.map((item: IPlus) => (
                 <Link
                   to={`/plus/${item.param}`}

@@ -124,8 +124,8 @@ const Player = observer(() => {
   const [track] = useTrackInfo(player.current.trackId);
 
   return (
-    <div className="player d-flex justify-content-between align-items-center">
-      <div className="d-flex gap-3 track-data-player">
+    <div className="player flex justify-content-between align-items-center">
+      <div className="flex gap-3 track-data-player">
         {track && (
           <img
             src={track.trackData.fileUrlAvatar}
@@ -133,7 +133,7 @@ const Player = observer(() => {
             className="player-img"
           />
         )}
-        <div className="d-flex align-items-center gap-5">
+        <div className="flex align-items-center gap-5">
           {track && (
             <div>
               <p className="m-0 player-title">{track?.title}</p>
@@ -142,7 +142,7 @@ const Player = observer(() => {
           )}
 
           {isHaveTrack && (
-            <div className="controls-player d-flex gap-4">
+            <div className="controls-player flex gap-4">
               <SecondHeart />
               <MainPlayerDropdown />
             </div>
@@ -150,7 +150,7 @@ const Player = observer(() => {
         </div>
       </div>
       <div>
-        <div className="d-flex gap-4 mt-2 justify-content-center align-items-center controls-track-container">
+        <div className="flex gap-4 mt-2 justify-center align-items-center controls-track-container">
           {track && (
             <audio
               src={track?.trackData.fileUrlMP3}
@@ -182,7 +182,7 @@ const Player = observer(() => {
           </button>
         </div>
 
-        <div className="d-flex align-items-center gap-3 mt-2 player-data">
+        <div className="flex align-items-center gap-3 mt-2 player-data">
           <p className="m-0 time-player">
             {minutes}:{seconds}
           </p>
@@ -205,8 +205,8 @@ const Player = observer(() => {
           )}
         </div>
       </div>
-      <div className="settings-player d-flex justify-content-end gap-4">
-        <div className="d-flex align-items-center gap-3">
+      <div className="settings-player flex justify-content-end gap-4">
+        <div className="flex align-items-center gap-3">
           <SettingsPlayerDropdown />
 
           {refAudio.current && (

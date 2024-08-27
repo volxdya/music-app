@@ -1,9 +1,18 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/createUserDto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../../guards/auth.guard';
 import { IsAuthorGuard } from '../../guards/author.guard';
+import { IUpdate } from '../../types/IUpdate';
 
 @ApiTags('User')
 @Controller('user')
@@ -12,7 +21,6 @@ export class UserController {
 
   @ApiOperation({ summary: 'Получение массива всех пользователей' })
   @Get(`/get_all`)
-  @UseGuards(AuthGuard, IsAuthorGuard)
   getAll() {
     return this.userService.getAll();
   }
@@ -61,5 +69,10 @@ export class UserController {
   @UseGuards(AuthGuard)
   deleteSubscription(@Param('userId') userId: number) {
     return this.userService.deleteSubscription(userId);
+  }
+
+  @Put(`/update/:userId`)
+  update(@Body() args: IUpdate[], @Param('userId') userId: number) {
+    return this.userService.update(args, userId);
   }
 }

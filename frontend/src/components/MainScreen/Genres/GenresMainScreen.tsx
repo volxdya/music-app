@@ -12,7 +12,7 @@ export function GenresMainScreen() {
                 Откройте для себя новое
             </p>
 
-            <div className="mt-4 d-flex gap-4 flex-wrap">
+            <div className="mt-4 flex gap-4 flex-wrap">
                 {genres.map((item: IGenre) => (
                     <GenreCard title={item.title}/>
                 ))}

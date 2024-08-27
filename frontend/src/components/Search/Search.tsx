@@ -52,7 +52,7 @@ export default function Search() {
 
             <div className="mt-5">
                 <h4>Подборки</h4>
-                <div className="d-flex gap-4 flex-wrap  mt-4">
+                <div className="flex gap-4 flex-wrap  mt-4">
                     <CollectionCard/>
                 </div>
             </div>

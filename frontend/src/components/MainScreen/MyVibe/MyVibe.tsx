@@ -3,8 +3,8 @@ import {Play} from "@/icons/Play.tsx";
 export function MyVibe() {
     return (
         <>
-            <div className="d-flex justify-content-center circle-container">
-                <div className="circle d-flex justify-content-center">
+            <div className="flex justify-center circle-container">
+                <div className="circle flex justify-center">
                     <div className='c-2'></div>
                     <div className='c-3'></div>
                     <div className='c-4'></div>
@@ -12,7 +12,7 @@ export function MyVibe() {
                 </div>
             </div>
             <button className="title-wave">
-                <div className="d-flex align-items-center gap-2 wave-button justify-content-center">
+                <div className="flex align-items-center gap-2 wave-button justify-center">
                     <Play/>
                     Моя волна
                 </div>
