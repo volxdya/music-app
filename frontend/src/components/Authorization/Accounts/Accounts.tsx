@@ -6,6 +6,7 @@ import uniqid from "uniqid";
 import { AccountCard } from "@/ui/Cards/AccountCard/AccountCard.tsx";
 import { CarouselItem } from "@/components/ui/carousel.tsx";
 import { CarouselScroll } from "@/components/CarouselScroll/CarouselScroll.tsx";
+import {Link} from "react-router-dom";
 
 const Accounts = observer(() => {
   useEffect(() => {
@@ -33,10 +34,20 @@ const Accounts = observer(() => {
                         />
                       </CarouselItem>
                     ))}
+                    <CarouselItem className="basis-1/7 text-[50px]">
+                      +
+                    </CarouselItem>
                   </>
                 }
               />
             </div>
+            <Link to="/auth/login">
+              <div className="flex justify-center">
+                <button className="mt-[45px] add-account-btn">
+                  Добавить аккаунт
+                </button>
+              </div>
+            </Link>
           </div>
         </div>
       </div>

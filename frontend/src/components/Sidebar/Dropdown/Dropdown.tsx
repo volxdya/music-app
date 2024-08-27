@@ -3,9 +3,8 @@ import { LogOut } from "@/icons/LogOut.tsx";
 import { Dropdown } from "@/components/Dropdown/Dropdown.tsx";
 import { AppIcon } from "@/icons/AppIcon.tsx";
 import { PersonAdd } from "@/icons/Person/PersonAdd.tsx";
-import { removeItem } from "@/utils/localStorage.ts";
-import { useToast } from "@/components/ui/use-toast.ts";
 import { Link } from "react-router-dom";
+import { logOut } from "@/utils/logOut.ts";
 
 interface Props {
   login: string;
@@ -14,21 +13,6 @@ interface Props {
 }
 
 export function SidebarDropdown({ login, firstName, lastName }: Props) {
-  const { toast } = useToast();
-
-  function logOut() {
-    removeItem("token");
-
-    toast({
-      title: "Вы успешно вышли с аккаунта.",
-      description: "Success log out!",
-    });
-
-    setTimeout(() => {
-      window.location.replace("/auth");
-    }, 1500);
-  }
-
   return (
     <Dropdown
       trigger={

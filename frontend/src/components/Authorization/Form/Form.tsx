@@ -10,7 +10,7 @@ export function Form() {
   const [password, setPassword] = useState("");
   const [isAuthor, setIsAuthor] = useState(false);
 
-  const { handleSubmit, isSuccess, isLoading } = useAuth(isAuthor);
+  const { handleSubmit, isLoading } = useAuth(isAuthor);
 
   return (
     <form

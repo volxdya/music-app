@@ -8,7 +8,7 @@ import { SidebarDropdown } from "@/components/Sidebar/Dropdown/Dropdown.tsx";
 import uniqid from "uniqid";
 import { observer } from "mobx-react-lite";
 import user from "@/store/user.ts";
-import { getItem } from "@/utils/localStorage.ts";
+import { getItem, getItems } from "@/utils/localStorage.ts";
 import { useEffect } from "react";
 import plus from "@/store/plus.ts";
 
@@ -89,9 +89,17 @@ export const Sidebar = observer(() => {
             </div>
           </div>
         ) : (
-          <Link to="/auth" className="w-100">
-            <button className="btn-auth w-100">Войти</button>
-          </Link>
+          <>
+            {getItems("all_tokens").length > 0 ? (
+              <Link to="/auth/selectAccount" className="w-100">
+                <button className="btn-auth w-100">Войти</button>
+              </Link>
+            ) : (
+              <Link to="/auth/login" className="w-100">
+                <button className="btn-auth w-100">Войти</button>
+              </Link>
+            )}
+          </>
         )}
       </div>
     </nav>
