@@ -11,7 +11,6 @@ import {Link} from "react-router-dom";
 const Accounts = observer(() => {
   useEffect(() => {
     user.getAllUsers();
-    console.log(user.users);
   }, []);
 
   return (

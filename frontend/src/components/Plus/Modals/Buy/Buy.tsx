@@ -26,7 +26,7 @@ export function BuyModal({ buyButton }: Props) {
       setIsDisalbe(false);
     }
 
-    console.log(isDisable);
+    isDisable);
   }, [card, mm, CVV]);
 
   return (

@@ -67,9 +67,15 @@ export function Form() {
                 ) : (
                   <button>Войти</button>
                 )}
+
+                <Link to="/auth/selectAccount">
+                  <button className="create-id-btn">Мои учетные записи</button>
+                </Link>
+
                 <Link to="/register">
                   <button className="create-id-btn">Создать ID</button>
                 </Link>
+
                 {!isAuthor ? (
                   <button
                     type="button"

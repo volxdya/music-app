@@ -57,12 +57,14 @@ export function SidebarDropdown({ login, firstName, lastName }: Props) {
               </div>
             </Link>
 
-            <div className="mt-1 menu-item">
-              <div className="flex align-items-center gap-3">
-                <PersonAdd />
-                Добавить аккаунт
+            <Link to="/auth/selectAccount">
+              <div className="mt-1 menu-item">
+                <div className="flex align-items-center gap-3">
+                  <PersonAdd />
+                  Добавить аккаунт
+                </div>
               </div>
-            </div>
+            </Link>
 
             <div className="mt-1 menu-item" onClick={logOut}>
               <div className="flex align-items-center gap-3">

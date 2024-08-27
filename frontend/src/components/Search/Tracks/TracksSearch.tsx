@@ -1,5 +1,6 @@
 import {ISearch} from "@/types/ISearch.ts";
 import { TrackCard } from "@/ui/Cards/TrackCard/TrackCard.tsx";
+import uniqid from "uniqid";
 
 interface Props {
     search: ISearch[];
@@ -23,6 +24,7 @@ export function TracksSearch({search}: Props) {
                                     where="search"
                                     byFind={item.title}
                                     isAlbum={false}
+                                    key={uniqid()}
                                 />
                             )}
                         </>
