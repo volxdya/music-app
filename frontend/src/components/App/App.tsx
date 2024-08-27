@@ -24,7 +24,8 @@ export default function App() {
 
   const location = useLocation();
   const locationsForValidate: string[] = [
-    "/auth",
+    "/auth/login",
+    "/auth/selectAccount",
     "/register",
     "/plus/change_plan",
     "/plus/last_spending",
@@ -61,7 +62,7 @@ export default function App() {
               <Route path="/" element={<MainPage />} />
               <Route path="/search" element={<Search />} />
               <Route path="/collection" element={<Collection />} />
-              <Route path="/auth" element={<Authorization />} />
+              <Route path="/auth/:select" element={<Authorization />} />
               <Route path="/register" element={<Registration />} />
               <Route path="/like" element={<Playlist />} />
               <Route path="/tracks" element={<Tracks />} />

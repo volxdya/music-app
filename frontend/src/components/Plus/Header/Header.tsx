@@ -7,6 +7,7 @@ import "./Header.scss";
 import { observer } from "mobx-react-lite";
 import user from "@/store/user.ts";
 import {Link} from "react-router-dom";
+import {logOut} from "@/utils/logOut.ts";
 
 export const HeaderPlus = observer(() => (
   <header className="flex justify-content-between">
@@ -37,9 +38,9 @@ export const HeaderPlus = observer(() => (
               />
             </div>
             <div className="mt-2">
-              <p className="text-center">{user.userData.login}</p>
+              <p className="text-center">{user.me.login}</p>
               <p className="text-center name-user">
-                {user.userData.firstName} {user.userData.lastName}
+                {user.me.firstName} {user.me.lastName}
               </p>
             </div>
             <div className="mt-4">
@@ -49,14 +50,14 @@ export const HeaderPlus = observer(() => (
                   Управление аккаунтом
                 </div>
               </div>
-              <div className="mt-1 menu-item">
+              <button  className="mt-1 menu-item">
                 <div className="flex align-items-center gap-3">
                   <PersonAdd />
                   Добавить аккаунт
                 </div>
-              </div>
+              </button>
 
-              <div className="mt-1 menu-item">
+              <div className="mt-1 menu-item" onClick={logOut}>
                 <div className="flex align-items-center gap-3">
                   <LogOut />
                   Выйти

@@ -1,11 +1,11 @@
 import { makeAutoObservable } from "mobx";
 import { jwtDecode, JwtPayload } from "jwt-decode";
-import { getItem } from "@/utils/localStorage.ts";
+import { getItem, getItems } from "@/utils/localStorage.ts";
 import { dfMe, dfUser } from "@/store/defaultValues/dfUser.ts";
 import axios from "axios";
 import { IUser } from "@/types/IUser.ts";
 
-interface loginJwt extends JwtPayload {
+export interface loginJwt extends JwtPayload {
   login: string;
   id: number;
   lastName: string;
@@ -15,7 +15,7 @@ interface loginJwt extends JwtPayload {
   finishSubscribe: {
     date: Date;
     indexMonth: number;
-  }
+  };
 }
 
 class User {
@@ -24,6 +24,7 @@ class User {
   }
 
   userData: loginJwt = dfUser;
+  users: loginJwt[] = [];
   me: IUser = dfMe;
 
   getUserData() {
@@ -34,6 +35,21 @@ class User {
     if (token) {
       decoded = jwtDecode(token);
       Object.assign(this.userData, decoded);
+    }
+  }
+
+  getAllUsers() {
+    const tokens: string[] = getItems("all_tokens");
+
+    if (tokens.length > 0) {
+      tokens.forEach((token: string) => {
+        try {
+          const decoded: loginJwt = jwtDecode(token);
+          this.users.push(decoded);
+        } catch (error) {
+          console.error(`Ошибка декодирования токена: ${token}`, error);
+        }
+      });
     }
   }
 

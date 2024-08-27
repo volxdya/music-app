@@ -8,7 +8,7 @@ import {useCreatePlaylist} from "@/hooks/useCreatePlaylist.ts";
 import {observer} from "mobx-react-lite";
 
 export const PlaylistsCollection = observer(() => {
-    const { createPlaylist } = useCreatePlaylist(user.userData.id);
+    const { createPlaylist } = useCreatePlaylist();
 
     return (
         <div className="flex flex-wrap gap-3">

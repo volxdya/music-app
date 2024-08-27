@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import axios, { AxiosError } from "axios";
-import { setItem } from "@/utils/localStorage.ts";
+import { getItems, setItem, setItems } from "@/utils/localStorage.ts";
 import { stopFormBehavior } from "@/utils/stopFormBehavior.ts";
 import { useToast } from "@/components/ui/use-toast.ts";
 
@@ -30,6 +30,14 @@ export const useAuth = (isAuthor: boolean) => {
         setIsLoading(false);
 
         setItem("token", res.data.token);
+        const existingTokens = getItems("all_tokens") || [];
+
+        // Добавляем новый токен к существующим
+        const allTokens = [...existingTokens, res.data.token];
+
+        // Сохраняем обновленный массив токенов
+        setItems("all_tokens", allTokens);
+
 
         (e.target as HTMLFormElement).reset();
 
@@ -38,9 +46,7 @@ export const useAuth = (isAuthor: boolean) => {
           description: "SUCCESS AUTHORIZATION",
         });
 
-        setInterval(() => {
-          window.location.replace("/");
-        }, 1500);
+        window.location.replace(`/`);
       })
       .catch((error: AxiosError) => {
         if (error.response && error.response.data) {
