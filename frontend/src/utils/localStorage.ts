@@ -1,3 +1,5 @@
+// Набор функций, для удобной работы с локальным хранилищем
+
 export function getItem(key: string): string | null {
   return localStorage.getItem(key);
 }

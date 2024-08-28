@@ -1,3 +1,4 @@
+// Самописная функция для склонения месяцев
 export const getMonthByIndex = (index: number): string => {
     let month: string = "";
 

@@ -9,6 +9,7 @@ export const Progress = observer(({ refAudio }: Props) => {
   const isHaveTrack: boolean = player.current.trackId !== 0;
   const time: number = player.current.time;
 
+  // Получение красивого отображения времени
   function getPadTimeZero(time: number) {
     return time.toString().padStart(2, "0");
   }
@@ -27,7 +28,7 @@ export const Progress = observer(({ refAudio }: Props) => {
       Math.floor(refAudio.current?.duration - Number(durationMinutes) * 60),
     );
   }
-
+  
   return (
     <div className="flex align-items-center gap-3 mt-2 player-data">
       <p className="m-0 time-player">

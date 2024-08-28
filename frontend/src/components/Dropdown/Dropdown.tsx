@@ -11,6 +11,8 @@ interface Props {
     classNames?: string;
 }
 
+// Реюз выпадашка
+
 export function Dropdown({trigger, content, classNames}: Props) {
     return (
         <DropdownMenu>

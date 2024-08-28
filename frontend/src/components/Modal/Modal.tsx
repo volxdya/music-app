@@ -13,6 +13,8 @@ interface Props {
     trigger: React.ReactNode;
 }
 
+
+// Реюз модальное окно
 export function Modal({header, footer, content, trigger}: Props) {
     return (
         <Dialog>

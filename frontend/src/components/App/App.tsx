@@ -23,6 +23,12 @@ export default function App() {
   const Account = lazy(() => import("../Account/Account.tsx"));
 
   const location = useLocation();
+
+  /*
+    Массив эндпоинтов, по которым не отображается левый сайдбар.
+    Почему-то params тоже входят в пути React-router и приходится их тоже сюда вписывать, но как-нибудь я найду споспоб, чтобы писать только роут.
+    Например: "/auth", без /login
+  */
   const locationsForValidate: string[] = [
     "/auth/login",
     "/auth/selectAccount",
@@ -32,7 +38,7 @@ export default function App() {
     "/plus/payment_methods",
     "/account",
   ];
-
+  
   const validateLocation: boolean = validateFn<string>(
     locationsForValidate,
     location.pathname,

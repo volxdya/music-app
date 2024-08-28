@@ -13,16 +13,19 @@ const Player = observer(() => {
   const refAudio = useRef<HTMLMediaElement>();
   const [listen] = useListen();
 
+  // Получение значений из стора
   const isPlaying: boolean = player.current.isPlay;
   const time: number = player.current.time;
   const trackId: number = player.current.trackId;
   const isHaveTrack: boolean = player.current.trackId !== 0;
 
+  // Включение трека
   const play = () => {
     refAudio.current?.play();
     player.current.isPlay = true;
   };
 
+  // Пауза
   const pause = () => {
     refAudio.current?.pause();
     player.current.isPlay = false;
@@ -34,6 +37,7 @@ const Player = observer(() => {
     }
   });
 
+  // Функция, которая по истечении 30 секунд, вызывает API запрос, на увеличение прослушивания трека по ID 
   useEffect(() => {
     if (isPlaying && refAudio.current) {
       const interval = setTimeout(async () => {
@@ -46,6 +50,10 @@ const Player = observer(() => {
     }
   }, [trackId]);
 
+  /*
+    Функция, которая увеличивает каждую секунду время трека.
+    Вообще это можно сделать через стор, но пока что вызываются конфликты и оставлю это пока что так
+  */
   useEffect(() => {
     const timer = setInterval(() => {
       if (refAudio.current) {
