@@ -1,4 +1,5 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {Column, DataType, HasMany, Model, Table} from 'sequelize-typescript';
+import {User} from "../user/user.model";
 
 interface ISubscription {
   title: string;
@@ -12,17 +13,19 @@ export class Subscription extends Model<Subscription, ISubscription> {
     type: DataType.INTEGER,
     allowNull: false,
     autoIncrement: true,
-    unique: true,
     primaryKey: true,
   })
   id: number;
 
-  @Column({ type: DataType.STRING, allowNull: false, unique: true })
+  @Column({ type: DataType.STRING, allowNull: false })
   title: string;
 
   @Column({ type: DataType.INTEGER, allowNull: false })
   duration: number;
 
-  @Column({ type: DataType.INTEGER, allowNull: false })
-  price: string;
+  @Column({ type: DataType.STRING, allowNull: false })
+  price: number;
+
+  @HasMany(() => User)
+  users: User[]
 }

@@ -7,6 +7,7 @@ import { PlaylistTracks } from '../modules/track/playlist-tracks.model';
 import { Track } from '../modules/track/track.model';
 import { Album } from '../modules/album/album.model';
 import { Genre } from '../modules/genre/genre.model';
+import { Subscription } from '../modules/subscription/subscription.model';
 
 dotenv.config();
 
@@ -18,5 +19,5 @@ export const DB_CONFIG: SequelizeModuleOptions = {
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   autoLoadModels: true,
-  models: [User, Playlist, PlaylistTracks, Track, Album, Genre],
+  models: [User, Playlist, PlaylistTracks, Track, Album, Genre, Subscription],
 };

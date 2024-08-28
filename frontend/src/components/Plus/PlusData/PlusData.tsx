@@ -19,7 +19,7 @@ interface IPlus {
 }
 
 export const PlusData = observer(() => {
-  const [buy] = useBuySubscription(user.userData.id);
+  const [buy] = useBuySubscription(user.userData.id, 1);
 
   const params = useParams();
 
@@ -72,11 +72,16 @@ export const PlusData = observer(() => {
 
           <div className="plus-data mt-4">
             <div className="plus-main-data">
-              <h2 className="fs-4 text-white font-medium">99₽</h2>
+              <h2 className="fs-4 text-white font-medium">
+                {user.me.subscription && (
+                    <h1>{user.me.subscription.price} ₽</h1>
+                )}
+              </h2>
               {user.me.isSubscribed ? (
                 <p className="mt-2 text-neutral-300">
                   Спишется {getStringDate(user.me.finishSubscribe.date, "DD ")}
                   {getMonthByIndex(user.me.finishSubscribe.indexMonth)}
+                  {getStringDate(user.me.finishSubscribe.date, ", YYYY года")}
                 </p>
               ) : (
                 <p className="mt-2 text-neutral-300">У вас нет подписки =(</p>

@@ -14,14 +14,14 @@ export class PlaylistService {
 
   constructor(
     @InjectModel(Playlist)
-    private readonly playlistRepostitory: typeof Playlist,
+    private readonly playlistRepository: typeof Playlist,
     private readonly trackService: TrackService,
     @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
   ) {}
 
   // Создание плейлиста
   async create(dto: CreatePlaylistDto) {
-    return await this.playlistRepostitory.create(dto);
+    return await this.playlistRepository.create(dto);
   }
 
   // Получение 1 плейлиста по ID
@@ -31,7 +31,7 @@ export class PlaylistService {
     );
 
     if (!playlist) {
-      const playlist: Playlist = await this.playlistRepostitory.findOne({
+      const playlist: Playlist = await this.playlistRepository.findOne({
         include: [Track],
         where: { id: playlistId },
       });
@@ -48,7 +48,7 @@ export class PlaylistService {
   async addTrack(dto: UsePlaylistDto) {
     const track: Track = await this.trackService.getById(dto.trackId);
 
-    const playlist = await this.playlistRepostitory.findOne({
+    const playlist = await this.playlistRepository.findOne({
       include: [Track],
       where: { id: dto.playlistId },
     });
@@ -62,7 +62,7 @@ export class PlaylistService {
   // Удаление трека из плейлиста
   async deleteTrack(trackId: number, playlistId: number) {
     const track = await this.trackService.getById(trackId);
-    const playlist = await this.playlistRepostitory.findOne({
+    const playlist = await this.playlistRepository.findOne({
       where: { id: playlistId },
     });
 

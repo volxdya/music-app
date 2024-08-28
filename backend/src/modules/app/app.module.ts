@@ -14,6 +14,7 @@ import { GenreModule } from '../genre/genre.module';
 import { FilesModule } from '../files/files.module';
 import { STATIC_CONFIG } from '../../config/static.config';
 import { MulterModule } from '@nestjs/platform-express';
+import { SubscriptionModule } from '../subscription/subscription.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { MulterModule } from '@nestjs/platform-express';
     SearchModule,
     GenreModule,
     FilesModule,
+    SubscriptionModule,
   ],
   controllers: [],
   providers: [],

@@ -8,14 +8,15 @@ import user from "@/store/user.ts";
 
 interface Props {
   buyButton: React.ReactNode;
+  subscriptionId: number;
 }
 
-export function BuyModal({ buyButton }: Props) {
+export function BuyModal({ buyButton, subscriptionId }: Props) {
   const [card, setCard] = useState("");
   const [mm, setMM] = useState("");
   const [CVV, setCVV] = useState("");
   const [isDisable, setIsDisalbe] = useState(true);
-  const [buy] = useBuySubscription(user.userData.id);
+  const [buy] = useBuySubscription(user.userData.id, subscriptionId);
 
   const handleSubmit = (e: FormEvent) => {
     stopFormBehavior(e);

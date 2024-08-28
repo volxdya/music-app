@@ -1,8 +1,17 @@
-import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  HasMany,
+  Model,
+  Table,
+} from 'sequelize-typescript';
 import { Playlist } from '../playlist/playlist.model';
 import { Album } from '../album/album.model';
 import { Track } from '../track/track.model';
 import { ApiProperty } from '@nestjs/swagger';
+import { Subscription } from '../subscription/subscription.model';
 
 interface IUser {
   firstName: string;
@@ -89,4 +98,11 @@ export class User extends Model<User, IUser> {
   })
   @Column({ type: DataType.JSON, defaultValue: null })
   finishSubscribe: IFinishSubscibe;
+
+  @ForeignKey(() => Subscription)
+  @Column({ type: DataType.INTEGER })
+  subscriptionId: number;
+
+  @BelongsTo(() => Subscription)
+  subscription: Subscription;
 }

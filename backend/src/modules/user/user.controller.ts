@@ -61,10 +61,13 @@ export class UserController {
   }
 
   @ApiOperation({ summary: 'Покупка подписки' })
-  @Post(`/buy_subscription/userId=:userId`)
+  @Post(`/buy_subscription/:userId/:subscriptionId`)
   @UseGuards(AuthGuard)
-  buySubscription(@Param('userId') userId: number) {
-    return this.userService.buySubscription(userId);
+  buySubscription(
+    @Param('userId') userId: number,
+    @Param('subscriptionId') subscriptionId: number,
+  ) {
+    return this.userService.buySubscription(userId, subscriptionId);
   }
 
   @ApiOperation({ summary: 'Отмена подписки' })

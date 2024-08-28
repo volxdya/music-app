@@ -9,6 +9,8 @@ import { Cache } from 'cache-manager';
 import { Track } from '../track/track.model';
 import * as dayjs from 'dayjs';
 import { UpdateUser } from './dto/updateUser';
+import { SubscriptionService } from '../subscription/subscription.service';
+import { Subscription } from '../subscription/subscription.model';
 
 @Injectable()
 export class UserService {
@@ -18,6 +20,7 @@ export class UserService {
     @InjectModel(User) private readonly userRepository: typeof User,
     @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
     private readonly playlistService: PlaylistService,
+    private readonly subscriptionService: SubscriptionService,
   ) {}
 
   private async deleteCache(userId: number) {
@@ -141,13 +144,13 @@ export class UserService {
         const finishAuthors: User[] = [];
 
         /*
-        Алгоритм:
-           1. Проходимся по всем авторам
-              2. Дальше на каждого автора делаем итерации по трекам
-                 3. Проверяем, совпадаеют ли жанры с кем-то
-                    4. Если да, то пушим в похожих авторов
-                       5. Возвращаем уникальный массиа
-        */
+                                                Алгоритм:
+                                                   1. Проходимся по всем авторам
+                                                      2. Дальше на каждого автора делаем итерации по трекам
+                                                         3. Проверяем, совпадаеют ли жанры с кем-то
+                                                            4. Если да, то пушим в похожих авторов
+                                                               5. Возвращаем уникальный массиа
+                                                */
 
         for (let i = 0; i < authors.length; i++) {
           for (let j = 0; j < authors[i].tracks.length; j++) {
@@ -178,14 +181,16 @@ export class UserService {
   }
 
   // Покупка подписки
-  async buySubscription(userId: number) {
+  async buySubscription(userId: number, subscriptionId: number) {
     const user: User = await this.getById(userId);
+    const subscription: Subscription =
+      await this.subscriptionService.getById(subscriptionId);
 
     const nowData = dayjs();
     const stringDay: string = dayjs().format('DD');
 
     dayjs.locale('ru');
-    const finishData: string = `${nowData.year()}-0${nowData.month() + 2}-${stringDay}`;
+    const finishData: string = `${nowData.year()}-${nowData.month() + subscription.duration + 1}-${stringDay}`;
 
     const toDb: string = dayjs(finishData).toISOString();
 
@@ -193,6 +198,8 @@ export class UserService {
 
     await user.update({
       isSubscribed: true,
+      subscriptionId: subscriptionId,
+      subscription: subscription,
       finishSubscribe: {
         date: toDb,
         indexMonth: nowData.month() + 2,
@@ -211,6 +218,8 @@ export class UserService {
     await user.update({
       isSubscribed: false,
       finishSubscribe: null,
+      subscriptionId: null,
+      subscription: null,
     });
 
     return user;
