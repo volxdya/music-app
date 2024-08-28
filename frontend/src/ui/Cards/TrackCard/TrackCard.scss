@@ -105,10 +105,10 @@ $gray-color: #9a9a9a;
   background: #c41e50;
   border-radius: 50%;
   position: absolute;
-  animation: animationCircle infinite 0.8s linear;
+  animation: animationCircleTrack infinite 0.8s linear;
 }
 
-@keyframes animationCircle {
+@keyframes animationCircleTrack {
   0% {
     transform: scale(1);
   }

@@ -134,7 +134,7 @@ const Player = observer(() => {
           />
         )}
         <div className="flex align-items-center gap-5">
-          {track && (
+          {track && track.author.login && (
             <div>
               <p className="m-0 player-title">{track?.title}</p>
               <p className="m-0 player-author">{track?.author.login}</p>

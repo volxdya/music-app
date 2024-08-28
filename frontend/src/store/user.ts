@@ -41,7 +41,7 @@ class User {
   getAllUsers() {
     const tokens: string[] = getItems("all_tokens");
 
-    if (tokens.length > 0) {
+    if (tokens && tokens.length > 0) {
       tokens.forEach((token: string) => {
         try {
           const decoded: loginJwt = jwtDecode(token);

@@ -25,8 +25,6 @@ export function BuyModal({ buyButton }: Props) {
     if (card.length === 12 && mm.length === 4 && CVV.length === 3) {
       setIsDisalbe(false);
     }
-
-    isDisable);
   }, [card, mm, CVV]);
 
   return (

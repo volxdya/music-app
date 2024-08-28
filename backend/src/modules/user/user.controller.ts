@@ -7,12 +7,15 @@ import {
   Post,
   Put,
   UseGuards,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/createUserDto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../../guards/auth.guard';
 import { UpdateUser } from './dto/updateUser';
+import { CheckUserGuard } from '../../guards/check-user.guard';
 
 @ApiTags('User')
 @Controller('user')
@@ -71,6 +74,9 @@ export class UserController {
     return this.userService.deleteSubscription(userId);
   }
 
+  @ApiOperation({ summary: 'Обновление данных юзера' })
+  @UsePipes(new ValidationPipe())
+  @UseGuards(AuthGuard)
   @Patch(`/update/:userId`)
   update(@Body() fields: UpdateUser, @Param('userId') userId: number) {
     return this.userService.update(fields, userId);

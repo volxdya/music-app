@@ -11,6 +11,7 @@ import plus from "@/store/plus.ts";
 import { ChangePlan } from "@/components/Plus/ChangePlan/ChangePlan.tsx";
 import { StopModal } from "@/components/Plus/Modals/Stop/Stop.tsx";
 import { BuyModal } from "@/components/Plus/Modals/Buy/Buy.tsx";
+import uniqid from "uniqid";
 
 interface IPlus {
   param: string;
@@ -84,6 +85,7 @@ export const PlusData = observer(() => {
             <div className="flex justify-content-between mt-3 links-plus">
               {plusItems.map((item: IPlus) => (
                 <Link
+                  key={uniqid()}
                   to={`/plus/${item.param}`}
                   onClick={() => plus.setCurrent(item.param)}
                   className={

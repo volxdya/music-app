@@ -90,7 +90,7 @@ export const Sidebar = observer(() => {
           </div>
         ) : (
           <>
-            {getItems("all_tokens").length > 0 ? (
+            {getItems("all_tokens") && getItems("all_tokens").length > 0 ? (
               <Link to="/auth/selectAccount" className="w-100">
                 <button className="btn-auth w-100">Войти</button>
               </Link>

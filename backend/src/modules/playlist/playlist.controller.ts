@@ -13,7 +13,7 @@ import { UsePlaylistDto } from './dto/usePlaylistDto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../../guards/auth.guard';
 import { CheckUserGuard } from '../../guards/check-user.guard';
-import {PlaylistGuard} from "../../guards/playlist.guard";
+import { PlaylistGuard } from '../../guards/playlist.guard';
 
 @ApiTags('Playlist')
 @Controller('playlist')

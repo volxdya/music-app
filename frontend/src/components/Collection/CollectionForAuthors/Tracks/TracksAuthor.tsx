@@ -18,11 +18,11 @@ export const TracksAuthor = observer(() => (
                         .map((item: ITrack) => (
                             <TrackCard
                                 title={item.title}
-                                author={user.userData.login}
+                                author={user.me.login}
                                 id={item.id}
                                 img={item.trackData.fileUrlAvatar}
-                                byFind={user.userData.login}
-                                where={user.userData.login}
+                                byFind={user.me.login}
+                                where={user.me.login}
                                 isAlbum={false}
                             />
                         ))}
