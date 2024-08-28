@@ -13,106 +13,117 @@ import { CarouselScroll } from "../CarouselScroll/CarouselScroll";
 import { CarouselItem } from "../ui/carousel";
 import { IUser } from "@/types/IUser";
 import { useSimilarAuthors } from "@/hooks/useSimilarAuthors";
+import { getAuditions } from "@/utils/getAuditions.ts";
+import uniqid from "uniqid";
 
 export default function Author() {
+  const params = useParams();
+  const [userData] = useUserData(Number(params.authorId));
+  const [authors] = useSimilarAuthors(Number(params.authorId));
+  const auditions = getAuditions(userData);
 
-    const params = useParams();
-    const [userData] = useUserData(Number(params.authorId));
-    const [authors] = useSimilarAuthors(Number(params.authorId));
+  return (
+    <>
+      <>
+        {userData && (
+          <HeaderMusic
+            whatIs="Исполнитель"
+            author={`${auditions} прослушиваний`}
+            title={userData?.login}
+            isCircle={true}
+          />
+        )}
+      </>
 
-    return (
-        <>
+      <div className="mt-5">
+        <Link to={`/tracks/get_by_authorId/${userData && userData.id}/true`}>
+          <NavigationText text="Популярные треки" />
+        </Link>
+      </div>
+      <div className="mt-4 row g-0 flex">
+        <div className="col-8">
+          {userData?.tracks && (
             <>
-                {userData && (
-                    <HeaderMusic
-                        whatIs="Исполнитель"
-                        author="qwe"
-                        title={userData?.login}
-                        isCircle={true}
-                    />
-                )}
+              {userData?.tracks
+                .slice(0, 5)
+                .map((item: ITrack) => (
+                  <TrackCard
+                    key={uniqid()}
+                    title={item.title}
+                    author={user.userData.login}
+                    id={item.id}
+                    img={item.trackData.fileUrlAvatar}
+                    byFind={user.userData.login}
+                    where={user.userData.login}
+                    isAlbum={false}
+                  />
+                ))}
             </>
-
-            <div className="mt-5">
-                <Link to={`/tracks/get_by_authorId/${userData && userData.id}/true`}>
-                    <NavigationText text="Популярные треки" />
-                </Link>
-            </div >
-            <div className="mt-4 row g-0 flex">
-                <div className="col-8">
-                    {userData?.tracks && (
-                        <>
-                            {userData?.tracks.slice(0, 5).map((item: ITrack) => (
-                                <TrackCard
-                                    title={item.title}
-                                    author={user.userData.login}
-                                    id={item.id}
-                                    img={item.trackData.fileUrlAvatar}
-                                    byFind={user.userData.login}
-                                    where={user.userData.login}
-                                    isAlbum={false}
-                                />
-                            ))}
-                        </>
-                    )}
-                </div>
-                <div className="col-4 px-5">
-                    <h1 className="realese">Недавний релиз</h1>
-                    {userData && userData?.albums[0] ? (
-                        <div className="mt-3">
-                            <AlbumCard
-                                id={userData.albums[0].id}
-                                author={userData.login}
-                                title={userData.albums[0].title}
-                                year={getStringDate(userData.albums[0].createdAt, "YYYY")}
-                            />
-                        </div>
-                    ) : (
-                        <div>Пока что тут ничего нет =D</div>
-                    )}
-                </div>
-
-
-                <div className="mt-5">
-                    <NavigationText text="Популярные альбомы" />
-                    <div className="mt-4">
-                        {userData?.albums && (
-                            <CarouselScroll content={
-                                <>
-                                    {userData?.albums.map((item: IAlbum) => (
-                                        <CarouselItem className="basis-1/7">
-                                            <AlbumCard
-                                                id={item.id}
-                                                title={item.title}
-                                                author={user.userData.login}
-                                                year={getStringDate(item.createdAt, "YYYY")}
-                                                img={item.avatarUrl}
-                                            />
-                                        </CarouselItem>
-                                    ))}
-                                </>
-                            } />
-                        )}
-                    </div>
-
-                    <div className="mt-5">
-                        <NavigationText text="Похожие исполнители" />
-
-                        <div className="mt-4">
-                            <CarouselScroll content={
-                                <>
-                                    {authors.map((item: IUser) => (
-                                        <CarouselItem className="basis-1/7">
-                                            <CircleCard title={item.login} otherText="Исполнитель" link={`/author/${item.id}`} />
-                                        </CarouselItem>
-                                    ))}
-                                </>
-                            } />
-                        </div>
-                    </div>
-                </div>
-
+          )}
+        </div>
+        <div className="col-4 px-5">
+          <h1 className="realese">Недавний релиз</h1>
+          {userData && userData?.albums[0] ? (
+            <div className="mt-3">
+              <AlbumCard
+                id={userData.albums[0].id}
+                author={userData.login}
+                title={userData.albums[0].title}
+                year={getStringDate(userData.albums[0].createdAt, "YYYY")}
+              />
             </div>
-        </>
-    );
+          ) : (
+            <div>Пока что тут ничего нет =D</div>
+          )}
+        </div>
+
+        <div className="mt-5">
+          <NavigationText text="Популярные альбомы" />
+          <div className="mt-4">
+            {userData?.albums && (
+              <CarouselScroll
+                content={
+                  <>
+                    {userData?.albums.map((item: IAlbum) => (
+                      <CarouselItem className="basis-1/7" key={uniqid()}>
+                        <AlbumCard
+                          id={item.id}
+                          title={item.title}
+                          author={user.userData.login}
+                          year={getStringDate(item.createdAt, "YYYY")}
+                          img={item.avatarUrl}
+                        />
+                      </CarouselItem>
+                    ))}
+                  </>
+                }
+              />
+            )}
+          </div>
+
+          <div className="mt-5">
+            <NavigationText text="Похожие исполнители" />
+
+            <div className="mt-4">
+              <CarouselScroll
+                content={
+                  <>
+                    {authors.map((item: IUser) => (
+                      <CarouselItem className="basis-1/7" key={uniqid()}>
+                        <CircleCard
+                          title={item.login}
+                          otherText="Исполнитель"
+                          link={`/author/${item.id}`}
+                        />
+                      </CarouselItem>
+                    ))}
+                  </>
+                }
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }

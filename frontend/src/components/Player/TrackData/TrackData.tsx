@@ -17,7 +17,7 @@ export const TrackData = observer(() => {
       )}
 
       <div className="d-flex align-items-center mx-2">
-        {track && (
+        {track && track.author && (
           <div>
             <p className="m-0 player-title">{track.title}</p>
             <Link to={`/author/${track.author.id}`}>

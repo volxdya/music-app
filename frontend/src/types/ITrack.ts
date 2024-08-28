@@ -9,6 +9,7 @@ export interface ITrack {
     id: number;
     type: string;
     genre: IGenre;
+    auditions: number;
     trackData: {
         accountId: string;
         filePathAvatar: string;

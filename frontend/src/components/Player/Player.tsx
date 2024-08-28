@@ -36,9 +36,13 @@ const Player = observer(() => {
 
   useEffect(() => {
     if (isPlaying && refAudio.current) {
-      setTimeout(async () => {
+      const interval = setTimeout(async () => {
         await listen(player.current.trackId);
       }, 30000);
+
+      return () => {
+        clearTimeout(interval);
+      };
     }
   }, [trackId]);
 

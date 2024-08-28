@@ -37,7 +37,7 @@ export const useCreateTrack = () => {
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxl0Ftd_hF5Cyemo6wzLip7RMRK4ov97mKLA&s",
               filePathMP3: "trackUrl[0].filePath",
               fileUrlMP3:
-                "https://mp3uks.ru/mp3/files/big-baby-tape-lo-siento-mp3.mp3",
+                "https://elmanana.ru/stream/mym/aHR0cHM6Ly9tb29zaWMubXkubWFpbC5ydS9maWxlLzE1YzE4OTk5YTY4MTZkNTZjZmRlNzU2MDhlNzBiMzNiLm1wMw==z ",
             },
             genreId: genreId,
           },
