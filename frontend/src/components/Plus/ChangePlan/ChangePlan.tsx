@@ -1,4 +1,3 @@
-import { Box } from "@/icons/Box.tsx";
 import "./ChangePlan.scss";
 import { Boxes } from "@/icons/Boxes.tsx";
 import { useSubscriptionsData } from "@/hooks/useSubscriptionsData.ts";
@@ -33,22 +32,22 @@ export function ChangePlan() {
           </div>
 
           {user.me.subscription && (
-              <>
-                {user.me.subscription.id !== item.id && (
-                    <BuyModal
-                        buyButton={
-                          <button className="change-plan-btn btn btn-primary">
-                            {user.me.isSubscribed ? (
-                                <div>Перейти</div>
-                            ): (
-                                <div>Получить</div>
-                            )}
-                          </button>
-                        }
-                        subscriptionId={item.id}
-                    />
-                )}
-              </>
+            <>
+              {user.me.subscription.id !== item.id && (
+                <BuyModal
+                  buyButton={
+                    <button className="change-plan-btn btn btn-primary">
+                      {user.me.isSubscribed ? (
+                        <div>Перейти</div>
+                      ) : (
+                        <div>Получить</div>
+                      )}
+                    </button>
+                  }
+                  subscriptionId={item.id}
+                />
+              )}
+            </>
           )}
         </div>
       ))}

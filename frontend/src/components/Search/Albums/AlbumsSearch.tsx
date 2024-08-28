@@ -5,7 +5,7 @@ import { AlbumCard } from "@/ui/Cards/AlbumCard/AlbumCard.tsx";
 import { getStringDate } from "@/utils/getStringDate.ts";
 
 interface Props {
-    search: ISearch[]
+  search: ISearch[];
 }
 
 export function AlbumsSearch({ search }: Props) {
@@ -18,16 +18,20 @@ export function AlbumsSearch({ search }: Props) {
             <>
               {search.map((item: ISearch) => (
                 <>
-                  {item.type === "album" && (
-                    <CarouselItem className="basis-1/7">
-                      <AlbumCard
-                        title={item.title}
-                        author={item.author.login}
-                        year={getStringDate(item.createdAt, "YYYY")}
-                        img={item.avatarUrl}
-                        id={item.id}
-                      />
-                    </CarouselItem>
+                  {item.login && (
+                    <>
+                      {item.type === "album" && (
+                        <CarouselItem className="basis-1/7">
+                          <AlbumCard
+                            title={item.title}
+                            author={item.author.login}
+                            year={getStringDate(item.createdAt, "YYYY")}
+                            img={item.avatarUrl}
+                            id={item.id}
+                          />
+                        </CarouselItem>
+                      )}
+                    </>
                   )}
                 </>
               ))}

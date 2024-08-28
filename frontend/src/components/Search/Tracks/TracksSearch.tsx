@@ -15,17 +15,21 @@ export function TracksSearch({ search }: Props) {
         <>
           {search.map((item: ISearch) => (
             <>
-              {item.type === "track" && (
-                <TrackCard
-                  title={item.title}
-                  author={item.author.login}
-                  img={item.avatarUrl}
-                  id={item.id}
-                  where="search"
-                  byFind={item.title}
-                  isAlbum={false}
-                  key={uniqid()}
-                />
+              {item.login && (
+                <>
+                  {item.type === "track" && (
+                    <TrackCard
+                      title={item.title}
+                      author={item.author.login}
+                      img={item.avatarUrl}
+                      id={item.id}
+                      where="search"
+                      byFind={item.title}
+                      isAlbum={false}
+                      key={uniqid()}
+                    />
+                  )}
+                </>
               )}
             </>
           ))}

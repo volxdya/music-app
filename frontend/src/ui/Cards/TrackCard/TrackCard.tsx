@@ -94,13 +94,6 @@ export const TrackCard = observer((props: Props) => {
                                     <Play />
                                 </button>
                             )}
-
-                            {/*
-                        {id === player.current.trackId && !player.current.isPlay && (
-                            <button className="play" onClick={set}>
-                                <Play/>
-                            </button>
-                        )}*/}
                         </div>
                     </div>
                 )}
