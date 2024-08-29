@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { toast } from "@/components/ui/use-toast.ts";
+import { API_PATH } from "@/api";
 
 export const register = async (
   login: string,
@@ -9,12 +10,12 @@ export const register = async (
   isAuthor: boolean,
 ) => {
   const response: AxiosResponse = await axios
-    .post(`http://localhost:3010/user/create`, {
+    .post(`${API_PATH}/user/create`, {
       login: login,
       password: password,
       firstName: firstName,
       lastName: lastName,
-      isUser: !isAuthor,
+      isUser: isAuthor,
     })
     .then((resp) => {
       toast({

@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
 import { IGenre } from "@/types/IGenre.ts";
-import axios from "axios";
+import { getGenres } from "@/api/genres/getGenres.ts";
 
 export const useGenresData = () => {
   const [genres, setGenres] = useState<IGenre[]>([]);
 
   // Получение всех жанров
   useEffect(() => {
-    axios
-      .get(`http://localhost:3010/genre/get_all`)
-      .then((resp) => {
+    const get = async () => {
+      await getGenres().then((resp) => {
         setGenres(resp.data);
-      })
-      .catch((err) => {
-        console.log(err);
       });
+    };
+
+    get();
   }, []);
 
   return [genres];

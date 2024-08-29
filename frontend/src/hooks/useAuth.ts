@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { stopFormBehavior } from "@/utils/stopFormBehavior.ts";
-import { auth } from "@/api/auth.ts";
+import { auth } from "@/api/account/auth.ts";
 
 export const useAuth = () => {
   const [isSuccess, setIsSuccess] = useState(false);

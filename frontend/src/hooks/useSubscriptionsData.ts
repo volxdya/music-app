@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { ISubscription } from "@/types/ISubscription.ts";
+import { getSubscriptions } from "@/api/subscription/getSubscriptions.ts";
 
 export const useSubscriptionsData = () => {
   const [subscriptionData, setSubscriptionData] = useState<ISubscription[]>([]);
 
   // Получение информации о подписках
   useEffect(() => {
-    axios
-      .get(`http://localhost:3010/subscription/get_all`)
-      .then((resp) => {
+    const get = async () => {
+      await getSubscriptions().then((resp) => {
         setSubscriptionData(resp.data);
-      })
-      .catch((err) => {
-        console.log(err);
       });
+    };
+
+    get();
   }, []);
 
   return [subscriptionData];

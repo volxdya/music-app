@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { stopFormBehavior } from "@/utils/stopFormBehavior.ts";
-import { register } from "@/api/register.ts";
+import { register } from "@/api/account/register.ts";
 
 export const useRegister = (isAuthor: boolean) => {
   const [isSuccess, setIsSuccess] = useState(false);

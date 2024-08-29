@@ -1,26 +1,24 @@
-import axios from "axios";
-import {useEffect, useState} from "react";
-import {ITrack} from "@/types/ITrack.ts";
-import {useParams} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { ITrack } from "@/types/ITrack.ts";
+import { useParams } from "react-router-dom";
+import { getTracks } from "@/api/tracks/getTracks.ts";
 
 export const useGetTracks = () => {
+  const [tracks, setTracks] = useState<ITrack[]>([]);
+  const params = useParams();
 
-    const [tracks, setTracks] = useState<ITrack[]>([]);
-    const params = useParams();
+  // Получение треков по определенным параметрам
+  useEffect(() => {
+    if (params) {
+      const get = async () => {
+        await getTracks(params.search, params.bySearch).then((resp) => {
+          setTracks(resp.data);
+        });
+      };
 
-    // Получение треков по определенным параметрам
-    useEffect(() => {
-        if (params) {
-            axios.get(`http://localhost:3010/track/${params.search}/${params.bySearch}`)
-                .then((resp) => {
-                    setTracks(resp.data);
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        }
-    }, []);
+      get();
+    }
+  }, []);
 
-    return { tracks, params };
-
-}
+  return { tracks, params };
+};

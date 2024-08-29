@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ITrack } from "@/types/ITrack.ts";
-import axios from "axios";
+import { getTrackData } from "@/api/tracks/getTrackData.ts";
 
 export const useTrackInfo = (trackId: number) => {
   const [track, setTrack] = useState<ITrack>();
@@ -8,14 +8,12 @@ export const useTrackInfo = (trackId: number) => {
   // Получение информации о треке по ID
   useEffect(() => {
     if (trackId !== 0) {
-      axios
-        .get(`http://localhost:3010/track/get_by_id/${trackId}`)
-        .then((res) => {
-          setTrack(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
+      const get = async () => {
+        await getTrackData(trackId).then((resp) => {
+          setTrack(resp.data);
         });
+      };
+      get();
     }
   }, [trackId]);
 

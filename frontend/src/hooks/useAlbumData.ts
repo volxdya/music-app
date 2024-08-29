@@ -1,21 +1,22 @@
 import { IAlbum } from "@/types/IAlbum";
-import axios from "axios";
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
+import { getAlbumData } from "@/api/albums/getAlbumData.ts";
 
 export const useAlbumData = (albumId: number | undefined) => {
-    const [albumData, setAlbumData] = useState<IAlbum>();
+  const [albumData, setAlbumData] = useState<IAlbum>();
 
-    // Получение даты альбома по ID
-    useEffect(() => {
-        if (albumId) {
-            axios.get(`http://localhost:3010/album/get_by_id/${albumId}`)
-                .then((resp) => {
-                    setAlbumData(resp.data);
-                }).catch((err) => {
-                    console.log(err);
-                });
-        }
-    }, []);
+  // Получение данных альбома по ID
+  useEffect(() => {
+    if (albumId) {
+      const get = async () => {
+        await getAlbumData(albumId).then((resp) => {
+          setAlbumData(resp.data);
+        })
+      };
 
-    return [albumData];
-}
+      get();
+    }
+  }, []);
+
+  return [albumData];
+};

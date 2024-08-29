@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { getItems, setItem, setItems } from "@/utils/localStorage.ts";
 import { toast } from "@/components/ui/use-toast.ts";
-import {API_PATH} from "@/api/index.ts";
+import {API_PATH} from "@/api";
 
 export const auth = async (login: string, password: string) => {
   const response: AxiosResponse = await axios

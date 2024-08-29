@@ -1,17 +1,16 @@
 import { ISearch } from "@/types/ISearch";
-import axios from "axios"
-import { useState } from "react"
+import { useState } from "react";
+import { getSearchData } from "@/api/search/getSearchData.ts";
 
 export const useSearch = () => {
-    const [search, setSearch] = useState<ISearch[]>([]);
+  const [search, setSearch] = useState<ISearch[]>([]);
 
-    // Поиск
-    const searchFn = async (value: string) => {
-        axios.get(`http://localhost:3010/search/${value}`)
-            .then((resp) => {
-                setSearch(resp.data);
-            });
-    }
+  // Поиск
+  const searchFn = async (value: string) => {
+    await getSearchData(value).then((resp) => {
+      setSearch(resp.data);
+    });
+  };
 
-    return [search, searchFn];
-}
+  return [search, searchFn];
+};
