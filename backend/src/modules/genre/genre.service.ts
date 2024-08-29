@@ -14,11 +14,13 @@ export class GenreService {
   ) {}
 
   /*
-              Создание жанра, чуть позже стоит добавить самописные декораторы, для ролей пользователя.
-              По админке только сможем добавлять 
-            */
+                Создание жанра, чуть позже стоит добавить самописные декораторы, для ролей пользователя.
+                По админке только сможем добавлять 
+              */
 
   async create(title: string) {
+    await this.cacheManager.del(`genres`);
+
     return await this.genreRepository.create(title);
   }
 

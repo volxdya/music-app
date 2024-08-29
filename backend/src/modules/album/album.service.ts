@@ -16,6 +16,8 @@ export class AlbumService {
 
   // Создание альбома
   async create(dto: CreateAlbumDto) {
+    await this.cacheManager.del(`user/${dto.userId}`);
+
     return await this.albumRepository.create(dto);
   }
 
@@ -46,9 +48,7 @@ export class AlbumService {
         include: { all: true },
       });
 
-      if (album) {
-        await this.cacheManager.set(`album/${id}`, album);
-      }
+      await this.cacheManager.set(`album/${id}`, album);
 
       return album;
     }

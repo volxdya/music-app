@@ -29,11 +29,9 @@ export class UserService {
 
   // Получение всех пользователей
   async getAll() {
-    const users: User[] = await this.userRepository.findAll({
+    return await this.userRepository.findAll({
       include: { all: true },
     });
-
-    return users;
   }
 
   // Получение всех авторов
@@ -144,13 +142,13 @@ export class UserService {
         const finishAuthors: User[] = [];
 
         /*
-                                                Алгоритм:
-                                                   1. Проходимся по всем авторам
-                                                      2. Дальше на каждого автора делаем итерации по трекам
-                                                         3. Проверяем, совпадаеют ли жанры с кем-то
-                                                            4. Если да, то пушим в похожих авторов
-                                                               5. Возвращаем уникальный массиа
-                                                */
+        Алгоритм:
+           1. Проходимся по всем авторам
+           2. Дальше на каждого автора делаем итерации по трекам
+           3. Проверяем, совпадают ли жанры с кем-то
+           4. Если да, то пушим в похожих авторов
+           5. Возвращаем уникальный массив
+        */
 
         for (let i = 0; i < authors.length; i++) {
           for (let j = 0; j < authors[i].tracks.length; j++) {
@@ -165,7 +163,11 @@ export class UserService {
         }
 
         const uniqueAuthors: User[] = [...new Set(finishAuthors)];
-        await this.cacheManager.set(`similar/${authorId}`, uniqueAuthors);
+        await this.cacheManager.set(
+          `similar/${authorId}`,
+          uniqueAuthors,
+          1440 * 1000 * 60,
+        );
 
         return uniqueAuthors;
       }

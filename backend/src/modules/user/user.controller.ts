@@ -16,6 +16,7 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../../guards/auth.guard';
 import { UpdateUser } from './dto/updateUser';
 import { CheckUserGuard } from '../../guards/check-user.guard';
+import {CacheTTL} from "@nestjs/cache-manager";
 
 @ApiTags('User')
 @Controller('user')

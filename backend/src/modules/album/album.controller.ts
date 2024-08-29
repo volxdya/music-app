@@ -35,7 +35,7 @@ export class AlbumController {
 
   @ApiOperation({ summary: 'Получение одного альбома по ID' })
   @Get(`/get_by_id/:albumId`)
-  getById(@Param('id') id: number) {
+  getById(@Param('albumId') id: number) {
     return this.albumService.getById(id);
   }
 

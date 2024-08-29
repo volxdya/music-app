@@ -21,6 +21,8 @@ export class PlaylistService {
 
   // Создание плейлиста
   async create(dto: CreatePlaylistDto) {
+    await this.cacheManager.del(`user/${dto.userId}`);
+
     return await this.playlistRepository.create(dto);
   }
 
@@ -54,7 +56,7 @@ export class PlaylistService {
     });
 
     await playlist.$add('tracks', track);
-    await this.cacheManager.set(`playlist/${dto.playlistId}`, playlist);
+    await this.cacheManager.del(`playlist/${dto.playlistId}`);
 
     return playlist;
   }
@@ -67,6 +69,7 @@ export class PlaylistService {
     });
 
     await playlist.$remove('tracks', track);
+    await this.cacheManager.del(`playlist/${playlistId}`);
 
     return playlist;
   }

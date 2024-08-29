@@ -47,6 +47,7 @@ export class SubscriptionService {
       await this.cacheManager.set(
         `subscription/${subscriptionId}`,
         subscription,
+        1000 * 60,
       );
 
       return subscription;

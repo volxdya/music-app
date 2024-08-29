@@ -5,5 +5,7 @@ import { Cache } from 'cache-manager';
 export class DeleteCache {
   constructor(@Inject(CACHE_MANAGER) private readonly cacheManager: Cache) {}
 
-  // soon
+  public async delete(key: string) {
+    await this.cacheManager.del(key);
+  }
 }

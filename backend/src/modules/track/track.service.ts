@@ -23,11 +23,11 @@ export class TrackService {
 
   // Создание трека
   async create(dto: CreateTrackDto) {
-    /* 
-                                      Проверка, приходит ли нам трек или нет
-                                      Сделано для того, чтобы при создании 1 трека создавался 1 альбом для этого трека
-                                      Если нет, то просто пушим в альбом
-                                    */
+    /*
+     Проверка, приходит ли нам трек или нет
+     Сделано для того, чтобы при создании 1 трека создавался 1 альбом для этого трека
+     Если нет, то просто пушим в альбом
+    */
     if (dto.isTrack) {
       const track: Track = await this.trackRepository.create(dto);
 
@@ -41,7 +41,6 @@ export class TrackService {
 
       await newAlbum.update({
         avatarUrl: track.trackData.fileUrlAvatar,
-        genreId: track.genreId,
       });
 
       await track.update({
@@ -51,6 +50,7 @@ export class TrackService {
       track.albumId = newAlbum.id;
 
       await this.cacheManager.set(`track/${track.id}`, track);
+      await this.cacheManager.del(`/user/${track.userId}`);
 
       return track;
     }
@@ -112,17 +112,17 @@ export class TrackService {
         limit: 50,
       });
 
-      await this.cacheManager.set(`chart`, chart);
+      await this.cacheManager.set(`chart`, chart, 1000 * 30);
     }
 
     return chart;
   }
 
-  /* 
-                    Прослушивание трека
-                    На фронтенде логика, по которой в течении прослушивания 30 секунд трека, отправляется запрос на прослушивание
-                    Сам по себе запрос добавляет к прослушиваниям трека +1
-                  */
+  /*
+    Прослушивание трека
+    На фронтенде логика, по которой в течении прослушивания 30 секунд трека, отправляется запрос на прослушивание
+    Сам по себе запрос добавляет к прослушиваниям трека +1
+  */
   async listen(trackId: number) {
     await this.cacheManager.del(`track/${trackId}`);
     const track = await this.getById(trackId);

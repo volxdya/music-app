@@ -8,27 +8,25 @@ import { User } from '../user/user.model';
 
 @Injectable()
 export class SearchService {
-
   // Инициализация зависимостей
   constructor(
     private readonly trackService: TrackService,
     private readonly albumService: AlbumService,
     private readonly userService: UserService,
-  ) { }
+  ) {}
 
   // Поиск по значению, из INPUT'a
   async search(value: string) {
-
     // Получаем все сущности из сервисов
     const tracks: Track[] = await this.trackService.getAll();
     const authors: User[] = await this.userService.getAll();
     const albums: Album[] = await this.albumService.getAll();
 
     /* 
-      Создаем тип, по которому будет производиться поиск,
-      Для альбомо и треков: title,
-      Для авторов: login
-    */
+          Создаем тип, по которому будет производиться поиск,
+          Для альбомо и треков: title,
+          Для авторов: login
+        */
 
     type SearchableItem = { title?: string; login?: string };
 

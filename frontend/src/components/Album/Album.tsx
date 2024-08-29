@@ -3,6 +3,7 @@ import { ITrack } from "@/types/ITrack";
 import { TrackCard } from "@/ui/Cards/TrackCard/TrackCard";
 import { HeaderMusic } from "@/ui/HeaderMusic/HeaderMusic";
 import { useParams } from "react-router-dom";
+import uniqid from "uniqid";
 
 export default function Album() {
     const params = useParams();
@@ -31,6 +32,7 @@ export default function Album() {
                             <>
                                 {albumData.tracks.map((item: ITrack, index: number) => (
                                     <TrackCard
+                                        key={uniqid()}
                                         title={item.title}
                                         author={albumData.author.login}
                                         where="album"
