@@ -8,6 +8,7 @@ import { getItem } from "@/utils/localStorage.ts";
 export const useUpdateUser = () => {
   const { toast } = useToast();
 
+  // Обновление пользователя
   const handleSubmit = async (
     e: FormEvent,
     login: string,

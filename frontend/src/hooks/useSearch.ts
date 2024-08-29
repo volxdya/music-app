@@ -5,6 +5,7 @@ import { useState } from "react"
 export const useSearch = () => {
     const [search, setSearch] = useState<ISearch[]>([]);
 
+    // Поиск
     const searchFn = async (value: string) => {
         axios.get(`http://localhost:3010/search/${value}`)
             .then((resp) => {

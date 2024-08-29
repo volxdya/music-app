@@ -10,6 +10,7 @@ export const usePlaylistInfo = () => {
         user.getMe();
     }, []);
 
+    // Получение инфы о плейлисте
     useEffect(() => {
         if (user.me.playlists[0]) {
             axios.get(`http://localhost:3010/playlist/get_by_id/${user.me.playlists[0].id}`).then((resp) => {

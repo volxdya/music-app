@@ -8,6 +8,7 @@ export const useCheckLike = (trackId: number) => {
   const playlistTracks = playlist?.tracks;
   const [isLike, setIsLike] = useState(false);
 
+  // Проверка, есть ли лайк у определенного трека
   useEffect(() => {
     const arrayIds = playlistTracks?.map((item: ITrack) => item.id);
 

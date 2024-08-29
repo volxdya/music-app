@@ -12,6 +12,7 @@ export const useCreateAlbum = () => {
     user.getUserData();
   }, []);
 
+  // Создание альбома
   const handleSubmitAlbum = async (
     e: FormEvent,
     title: string,

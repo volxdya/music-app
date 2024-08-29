@@ -6,6 +6,7 @@ import { useToast } from "@/components/ui/use-toast.ts";
 export const useDeleteSubscription = (userId: number) => {
   const { toast } = useToast();
 
+  // Отказ от подписки
   const deleteSubscription = async () => {
     await axios
       .post(

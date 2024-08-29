@@ -36,7 +36,7 @@ export default function Author() {
       </>
 
       <div className="mt-5">
-        <Link to={`/tracks/get_by_authorId/${userData && userData.id}/true`}>
+        <Link to={`/tracks/get_by_authorId/${userData && userData.id}/false`}>
           <NavigationText text="Популярные треки" />
         </Link>
       </div>

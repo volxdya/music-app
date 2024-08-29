@@ -6,6 +6,7 @@ import user from "@/store/user.ts";
 export const useBuySubscription = (userId: number, subscriptionId: number) => {
   const { toast } = useToast();
 
+  // Покупка подписки
   const buy = async () => {
     await axios
       .post(

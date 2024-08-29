@@ -5,6 +5,7 @@ import axios from "axios";
 export const useGenresData = () => {
   const [genres, setGenres] = useState<IGenre[]>([]);
 
+  // Получение всех жанров
   useEffect(() => {
     axios
       .get(`http://localhost:3010/genre/get_all`)

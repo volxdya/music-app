@@ -10,6 +10,7 @@ export const useAuth = (isAuthor: boolean) => {
 
   const { toast } = useToast();
 
+  // JWT Аутентификация
   const handleSubmit = async (
     e: FormEvent,
     login: string,

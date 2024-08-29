@@ -8,6 +8,7 @@ export const useGetTracks = () => {
     const [tracks, setTracks] = useState<ITrack[]>([]);
     const params = useParams();
 
+    // Получение треков по определенным параметрам
     useEffect(() => {
         if (params) {
             axios.get(`http://localhost:3010/track/${params.search}/${params.bySearch}`)

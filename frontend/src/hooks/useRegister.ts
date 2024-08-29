@@ -9,6 +9,7 @@ export const useRegister = (isAuthor: boolean) => {
 
     const { toast } = useToast();
 
+    // Регистрация пользователя
     const handleSubmit = async (e: FormEvent, login: string, password: string, firstName: string, lastName: string) => {
         stopFormBehavior(e);
 

@@ -5,6 +5,7 @@ import { ISubscription } from "@/types/ISubscription.ts";
 export const useSubscriptionsData = () => {
   const [subscriptionData, setSubscriptionData] = useState<ISubscription[]>([]);
 
+  // Получение информации о подписках
   useEffect(() => {
     axios
       .get(`http://localhost:3010/subscription/get_all`)

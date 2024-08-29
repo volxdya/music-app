@@ -5,6 +5,7 @@ import axios from "axios";
 export const useTrackInfo = (trackId: number) => {
   const [track, setTrack] = useState<ITrack>();
 
+  // Получение информации о треке по ID
   useEffect(() => {
     if (trackId !== 0) {
       axios
