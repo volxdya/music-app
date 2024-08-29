@@ -1,7 +1,8 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { getItems, setItem, setItems } from "@/utils/localStorage.ts";
 import { toast } from "@/components/ui/use-toast.ts";
-import {API_PATH} from "@/api";
+import { API_PATH } from "@/api";
+import user from "@/store/user.ts";
 
 export const auth = async (login: string, password: string) => {
   const response: AxiosResponse = await axios
@@ -10,6 +11,16 @@ export const auth = async (login: string, password: string) => {
       password: password,
     })
     .then((resp) => {
+      const isHaveThisUser: boolean = user.users.some(
+        (item) => item.login === login,
+      );
+
+      if (isHaveThisUser) {
+        toast({ title: "Вы уже авторизованы" });
+
+        return resp.data;
+      }
+
       setItem("token", resp.data.token);
       const existingTokens = getItems("all_tokens") || [];
 
@@ -35,7 +46,6 @@ export const auth = async (login: string, password: string) => {
           description: `${error.response.status} HTTP STATUS CODE`,
         });
       }
-
     });
 
   return response.status < 300;
