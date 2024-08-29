@@ -1,34 +1,22 @@
 import { makeAutoObservable } from "mobx";
-import { jwtDecode, JwtPayload } from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import { getItem, getItems } from "@/utils/localStorage.ts";
 import { dfMe, dfUser } from "@/store/defaultValues/dfUser.ts";
-import axios from "axios";
 import { IUser } from "@/types/IUser.ts";
-
-export interface loginJwt extends JwtPayload {
-  login: string;
-  id: number;
-  lastName: string;
-  firstName: string;
-  isUser: boolean;
-  isSubscribed: boolean;
-  finishSubscribe: {
-    date: Date;
-    indexMonth: number;
-  };
-}
+import { IJwt } from "@/types/IJwt.ts";
+import { getUserData } from "@/api/account/getUserData.ts";
 
 class User {
   constructor() {
     makeAutoObservable(this);
   }
 
-  userData: loginJwt = dfUser;
-  users: loginJwt[] = [];
+  userData: IJwt = dfUser;
+  users: IJwt[] = [];
   me: IUser = dfMe;
 
   getUserData() {
-    let decoded: loginJwt;
+    let decoded: IJwt;
 
     const token = getItem("token");
 
@@ -44,7 +32,7 @@ class User {
     if (tokens && tokens.length > 0) {
       tokens.forEach((token: string) => {
         try {
-          const decoded: loginJwt = jwtDecode(token);
+          const decoded: IJwt = jwtDecode(token);
           this.users.push(decoded);
         } catch (error) {
           console.error(`Ошибка декодирования токена: ${token}`, error);
@@ -53,18 +41,13 @@ class User {
     }
   }
 
-  getMe() {
+  async getMe() {
     if (getItem("token")) {
       this.getUserData();
 
-      axios
-        .get(`http://localhost:3010/user/get_by_id/${this.userData.id}`)
-        .then((res) => {
-          this.me = res.data;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      await getUserData(this.userData.id).then((resp) => {
+        this.me = resp.data;
+      });
     }
   }
 }

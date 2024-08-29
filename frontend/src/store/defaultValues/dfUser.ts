@@ -22,6 +22,12 @@ export const dfMe = {
     tracks: [],
     albums: [],
     type: "user",
+    subscription: {
+      id: 0,
+      title: "",
+      price: 0,
+      duration: 0
+    },
     isSubscribed: false,
     finishSubscribe: {
         date: new Date(),

@@ -1,22 +1,19 @@
-import {makeAutoObservable} from "mobx";
-import {ITrack} from "@/types/ITrack.ts";
-import axios from "axios";
+import { makeAutoObservable } from "mobx";
+import { ITrack } from "@/types/ITrack.ts";
+import { getAll } from "@/api/tracks/getAll.ts";
 
 class Track {
-    constructor() {
-        makeAutoObservable(this);
-    }
+  constructor() {
+    makeAutoObservable(this);
+  }
 
-    tracks: ITrack[] = [];
+  tracks: ITrack[] = [];
 
-    async getAllTracks() {
-        await axios.get(`http://localhost:3010/track/get_all`)
-            .then((resp) => {
-                this.tracks = resp.data;
-            }).catch((err) => {
-                console.log(err);
-            });
-    }
+  async getAllTracks() {
+    await getAll().then((resp) => {
+      this.tracks = resp.data;
+    });
+  }
 }
 
 export default new Track();
