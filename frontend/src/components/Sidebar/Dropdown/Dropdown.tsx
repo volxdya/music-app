@@ -1,6 +1,6 @@
 import { Settings } from "@/icons/Settings.tsx";
 import { LogOut } from "@/icons/LogOut.tsx";
-import { Dropdown } from "@/components/Dropdown/Dropdown.tsx";
+import { Dropdown } from "@/ui/Dropdown/Dropdown.tsx";
 import { AppIcon } from "@/icons/AppIcon.tsx";
 import { PersonAdd } from "@/icons/Person/PersonAdd.tsx";
 import { Link } from "react-router-dom";

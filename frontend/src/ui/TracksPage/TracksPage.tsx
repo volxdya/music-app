@@ -2,7 +2,7 @@ import { useGetTracks } from "@/hooks/useGetTracks.ts";
 import { TrackCard } from "@/ui/Cards/TrackCard/TrackCard.tsx";
 import { useParams } from "react-router-dom";
 import { onChange } from "@/utils/onChange.ts";
-import { Modal } from "@/components/Modal/Modal.tsx";
+import { Modal } from "@/ui/Modal/Modal.tsx";
 import { useCreateTrack } from "@/hooks/useCreateTrack.ts";
 import { useEffect, useState } from "react";
 import user from "@/store/user.ts";

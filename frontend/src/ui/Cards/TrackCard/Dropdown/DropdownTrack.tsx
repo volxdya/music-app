@@ -1,4 +1,4 @@
-import {Dropdown} from "@/components/Dropdown/Dropdown.tsx";
+import {Dropdown} from "@/ui/Dropdown/Dropdown.tsx";
 import {Dots} from "@/icons/Dots.tsx";
 import {SecondHeart} from "@/icons/Hearts/SecondHeart.tsx";
 import {BreakHeart} from "@/icons/Hearts/BreakHeart.tsx";

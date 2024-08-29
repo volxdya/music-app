@@ -2,7 +2,7 @@ import './HeaderMusic.scss';
 import { Play } from "@/icons/Play.tsx";
 import { SecondHeart } from "@/icons/Hearts/SecondHeart.tsx";
 import { Dots } from "@/icons/Dots.tsx";
-import { Dropdown } from "@/components/Dropdown/Dropdown.tsx";
+import { Dropdown } from "@/ui/Dropdown/Dropdown.tsx";
 import { Pin } from "@/icons/Pin.tsx";
 
 interface Props {

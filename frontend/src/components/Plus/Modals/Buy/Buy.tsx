@@ -1,4 +1,4 @@
-import { Modal } from "@/components/Modal/Modal.tsx";
+import { Modal } from "@/ui/Modal/Modal.tsx";
 import "./buy.scss";
 import { FormEvent, useEffect, useState } from "react";
 import { onChange } from "@/utils/onChange.ts";

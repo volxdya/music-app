@@ -1,6 +1,6 @@
 import { onChange } from "@/utils/onChange.ts";
 import { UploadFiles } from "@/components/UploadFiles/UploadFiles.tsx";
-import { Modal } from "@/components/Modal/Modal.tsx";
+import { Modal } from "@/ui/Modal/Modal.tsx";
 import { useState } from "react";
 import { IUploadFile } from "@/types/IUploadFile.ts";
 import { useCreateAlbum } from "@/hooks/useCreateAlbum.ts";

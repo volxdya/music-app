@@ -1,4 +1,4 @@
-import { Modal } from "@/components/Modal/Modal.tsx";
+import { Modal } from "@/ui/Modal/Modal.tsx";
 import { Pencil } from "@/icons/Pencil.tsx";
 import "./Modal.scss";
 import { useState } from "react";

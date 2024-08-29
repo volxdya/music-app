@@ -3,7 +3,7 @@ import { CarouselItem } from "@/components/ui/carousel.tsx";
 import { CircleCard } from "@/ui/Cards/CircleCard/CircleCard.tsx";
 import { AlbumCard } from "@/ui/Cards/AlbumCard/AlbumCard.tsx";
 import { getStringDate } from "@/utils/getStringDate.ts";
-import { CarouselScroll } from "@/components/CarouselScroll/CarouselScroll.tsx";
+import { CarouselScroll } from "@/ui/CarouselScroll/CarouselScroll.tsx";
 
 interface Props {
   search: ISearch[];

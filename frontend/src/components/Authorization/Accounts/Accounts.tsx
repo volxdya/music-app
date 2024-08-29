@@ -5,7 +5,7 @@ import "./Accounts.scss";
 import uniqid from "uniqid";
 import { AccountCard } from "@/ui/Cards/AccountCard/AccountCard.tsx";
 import { CarouselItem } from "@/components/ui/carousel.tsx";
-import { CarouselScroll } from "@/components/CarouselScroll/CarouselScroll.tsx";
+import { CarouselScroll } from "@/ui/CarouselScroll/CarouselScroll.tsx";
 import {Link} from "react-router-dom";
 
 const Accounts = observer(() => {

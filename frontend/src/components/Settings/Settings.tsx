@@ -1,5 +1,5 @@
 import { SettingsCard } from "@/components/Settings/SettingsCard/SettingsCard.tsx";
-import { Modal } from "@/components/Modal/Modal.tsx";
+import { Modal } from "@/ui/Modal/Modal.tsx";
 
 export default function Settings() {
   return (

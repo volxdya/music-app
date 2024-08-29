@@ -1,6 +1,6 @@
 import {NavigationText} from "@/ui/Text/NavigationText/NavgiationText.tsx";
 import user from "@/store/user.ts";
-import {CarouselScroll} from "@/components/CarouselScroll/CarouselScroll.tsx";
+import {CarouselScroll} from "@/ui/CarouselScroll/CarouselScroll.tsx";
 import {IAlbum} from "@/types/IAlbum.ts";
 import {CarouselItem} from "@/components/ui/carousel.tsx";
 import {AlbumCard} from "@/ui/Cards/AlbumCard/AlbumCard.tsx";

@@ -1,4 +1,4 @@
-import { Modal } from "@/components/Modal/Modal.tsx";
+import { Modal } from "@/ui/Modal/Modal.tsx";
 import "./Stop.scss";
 import { useDeleteSubscription } from "@/hooks/useDeleteSubscription.ts";
 import user from "@/store/user.ts";

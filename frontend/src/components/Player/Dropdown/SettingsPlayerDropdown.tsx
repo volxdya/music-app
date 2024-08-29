@@ -1,6 +1,6 @@
 import {Settings} from "@/icons/Settings.tsx";
 import uniqid from "uniqid";
-import {Dropdown} from "@/components/Dropdown/Dropdown.tsx";
+import {Dropdown} from "@/ui/Dropdown/Dropdown.tsx";
 
 export function SettingsPlayerDropdown() {
     return (

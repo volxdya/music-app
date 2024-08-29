@@ -9,7 +9,7 @@ import { HeaderMusic } from "@/ui/HeaderMusic/HeaderMusic";
 import { NavigationText } from "@/ui/Text/NavigationText/NavgiationText";
 import { getStringDate } from "@/utils/getStringDate";
 import { Link, useParams } from "react-router-dom";
-import { CarouselScroll } from "../CarouselScroll/CarouselScroll";
+import { CarouselScroll } from "@/ui/CarouselScroll/CarouselScroll";
 import { CarouselItem } from "../ui/carousel";
 import { IUser } from "@/types/IUser";
 import { useSimilarAuthors } from "@/hooks/useSimilarAuthors";

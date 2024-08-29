@@ -1,4 +1,4 @@
-import { CarouselScroll } from "@/components/CarouselScroll/CarouselScroll.tsx";
+import { CarouselScroll } from "@/ui/CarouselScroll/CarouselScroll.tsx";
 import { ISearch } from "@/types/ISearch.ts";
 import { CarouselItem } from "@/components/ui/carousel.tsx";
 import { AlbumCard } from "@/ui/Cards/AlbumCard/AlbumCard.tsx";

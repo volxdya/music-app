@@ -1,5 +1,5 @@
 import {NavigationText} from "@/ui/Text/NavigationText/NavgiationText.tsx";
-import {CarouselScroll} from "@/components/CarouselScroll/CarouselScroll.tsx";
+import {CarouselScroll} from "@/ui/CarouselScroll/CarouselScroll.tsx";
 import {IUser} from "@/types/IUser.ts";
 import {CarouselItem} from "@/components/ui/carousel.tsx";
 import {CircleCard} from "@/ui/Cards/CircleCard/CircleCard.tsx";

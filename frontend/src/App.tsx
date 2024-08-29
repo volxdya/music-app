@@ -1,4 +1,3 @@
-import { Sidebar } from "../Sidebar/Sidebar.tsx";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { lazy, Suspense, useEffect } from "react";
 import user from "@/store/user.ts";
@@ -12,15 +11,16 @@ import Album from "@/components/Album/Album.tsx";
 import Author from "@/components/Author/Author.tsx";
 import Collection from "@/components/Collection/Collection.tsx";
 import MainScreen from "@/components/MainScreen/MainScreen.tsx";
+import {Sidebar} from "@/components/Sidebar/Sidebar.tsx";
 
 export default function App() {
-  const Search = lazy(() => import("../Search/Search.tsx"));
+  const Search = lazy(() => import("../src/components/Search/Search.tsx"));
   const Authorization = lazy(
-    () => import("../Authorization/Authorization.tsx"),
+    () => import("../src/components/Authorization/Authorization.tsx"),
   );
-  const Registration = lazy(() => import("../Registration/Registration.tsx"));
-  const Settings = lazy(() => import("../Settings/Settings.tsx"));
-  const Account = lazy(() => import("../Account/Account.tsx"));
+  const Registration = lazy(() => import("../src/components/Registration/Registration.tsx"));
+  const Settings = lazy(() => import("../src/components/Settings/Settings.tsx"));
+  const Account = lazy(() => import("../src/components/Account/Account.tsx"));
 
   const location = useLocation();
 
@@ -38,7 +38,7 @@ export default function App() {
     "/plus/payment_methods",
     "/account",
   ];
-  
+
   const validateLocation: boolean = validateFn<string>(
     locationsForValidate,
     location.pathname,
