@@ -11,24 +11,30 @@ import Album from "@/components/Album/Album.tsx";
 import Author from "@/components/Author/Author.tsx";
 import Collection from "@/components/Collection/Collection.tsx";
 import MainScreen from "@/components/MainScreen/MainScreen.tsx";
-import {Sidebar} from "@/components/Sidebar/Sidebar.tsx";
+import { Sidebar } from "@/components/Sidebar/Sidebar.tsx";
+import { useCheckSubscription } from "./hooks/useCheckSubscription.ts";
+import { deleteSubscriptionUser } from "@/api/subscription/deleteSubscription.ts";
 
 export default function App() {
   const Search = lazy(() => import("../src/components/Search/Search.tsx"));
   const Authorization = lazy(
     () => import("../src/components/Authorization/Authorization.tsx"),
   );
-  const Registration = lazy(() => import("../src/components/Registration/Registration.tsx"));
-  const Settings = lazy(() => import("../src/components/Settings/Settings.tsx"));
+  const Registration = lazy(
+    () => import("../src/components/Registration/Registration.tsx"),
+  );
+  const Settings = lazy(
+    () => import("../src/components/Settings/Settings.tsx"),
+  );
   const Account = lazy(() => import("../src/components/Account/Account.tsx"));
 
   const location = useLocation();
 
   /*
-    Массив эндпоинтов, по которым не отображается левый сайдбар.
-    Почему-то params тоже входят в пути React-router и приходится их тоже сюда вписывать, но как-нибудь я найду споспоб, чтобы писать только роут.
-    Например: "/auth", без /login
-  */
+        Массив эндпоинтов, по которым не отображается левый сайдбар.
+        Почему-то params тоже входят в пути React-router и приходится их тоже сюда вписывать, но как-нибудь я найду споспоб, чтобы писать только роут.
+        Например: "/auth", без /login
+      */
   const locationsForValidate: string[] = [
     "/auth/login",
     "/auth/selectAccount",
@@ -44,8 +50,14 @@ export default function App() {
     location.pathname,
   );
 
+  const [isFinish] = useCheckSubscription(user.me.id);
+
   useEffect(() => {
     user.getMe();
+
+    if (isFinish) {
+      deleteSubscriptionUser(user.me.id);
+    }
   }, []);
 
   return (

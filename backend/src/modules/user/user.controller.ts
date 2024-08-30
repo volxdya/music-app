@@ -83,7 +83,6 @@ export class UserController {
     return this.userService.update(fields, userId);
   }
 
-  @UseGuards(AuthGuard)
   @Get(`/check/:userId`)
   check(@Param('userId') userId: number) {
     return this.userService.check(userId);
