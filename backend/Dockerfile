@@ -1,4 +1,3 @@
-# Какая-то ошибка с bcrypt зависимостями. Чуть позже фикс будет
 FROM node:20.17.0-alpine
 WORKDIR /app
 COPY package*.json ./
