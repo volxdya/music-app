@@ -142,13 +142,13 @@ export class UserService {
         const finishAuthors: User[] = [];
 
         /*
-        Алгоритм:
-           1. Проходимся по всем авторам
-           2. Дальше на каждого автора делаем итерации по трекам
-           3. Проверяем, совпадают ли жанры с кем-то
-           4. Если да, то пушим в похожих авторов
-           5. Возвращаем уникальный массив
-        */
+                        Алгоритм:
+                           1. Проходимся по всем авторам
+                           2. Дальше на каждого автора делаем итерации по трекам
+                           3. Проверяем, совпадают ли жанры с кем-то
+                           4. Если да, то пушим в похожих авторов
+                           5. Возвращаем уникальный массив
+                        */
 
         for (let i = 0; i < authors.length; i++) {
           for (let j = 0; j < authors[i].tracks.length; j++) {
@@ -205,6 +205,7 @@ export class UserService {
       finishSubscribe: {
         date: toDb,
         indexMonth: nowData.month() + 2,
+        day: Number(stringDay),
       },
     });
 
@@ -225,6 +226,18 @@ export class UserService {
     });
 
     return user;
+  }
+
+  // Проверка, совпадает ли сегодняшняя дата с датой в БД
+  async check(userId: number) {
+    const user: User = await this.getById(userId);
+
+    const nowDate: string[] = [dayjs().format('DD'), dayjs().format('MM')];
+
+    return (
+      Number(nowDate[0]) === user.finishSubscribe.day &&
+      Number(nowDate[1]) === user.finishSubscribe.indexMonth
+    );
   }
 
   // Обновление пользователя

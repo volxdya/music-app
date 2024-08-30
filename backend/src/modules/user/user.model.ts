@@ -24,6 +24,7 @@ interface IUser {
 interface IFinishSubscibe {
   date: string;
   indexMonth: number;
+  day: number;
 }
 
 @Table({ tableName: 'user' })

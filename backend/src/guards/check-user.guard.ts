@@ -8,11 +8,10 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { guardToken } from '../utils/guardToken';
 import { Request } from 'express';
-import { User } from '../modules/user/user.model';
 
 @Injectable()
 export class CheckUserGuard implements CanActivate {
-  constructor(private jwtService: JwtService) {}
+  constructor(private jwtService: JwtService) { }
 
   canActivate(context: ExecutionContext): boolean {
     try {

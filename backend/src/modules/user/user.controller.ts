@@ -18,7 +18,7 @@ import { UpdateUser } from './dto/updateUser';
 @ApiTags('User')
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) { }
 
   @ApiOperation({ summary: 'Получение массива всех пользователей' })
   @Get(`/get_all`)
@@ -81,5 +81,11 @@ export class UserController {
   @Patch(`/update/:userId`)
   update(@Body() fields: UpdateUser, @Param('userId') userId: number) {
     return this.userService.update(fields, userId);
+  }
+
+  @UseGuards(AuthGuard)
+  @Get(`/check/:userId`)
+  check(@Param('userId') userId: number) {
+    return this.userService.check(userId);
   }
 }
