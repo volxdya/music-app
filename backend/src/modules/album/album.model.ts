@@ -33,11 +33,17 @@ export class Album extends Model<Album, IAlbum> {
   @Column({ type: DataType.STRING, allowNull: false })
   title: string;
 
-  @ApiProperty({ example: 'http://imagehost/test', description: 'Аватарка альбома' })
+  @ApiProperty({
+    example: 'http://imagehost/test',
+    description: 'Аватарка альбома',
+  })
   @Column({ type: DataType.STRING, allowNull: false, defaultValue: '' })
   avatarUrl: string;
 
-  @ApiProperty({ example: '[{...}]', description: 'Массив треков, принадлежащий альбому' })
+  @ApiProperty({
+    example: '[{...}]',
+    description: 'Массив треков, принадлежащий альбому',
+  })
   @HasMany(() => Track)
   tracks: Track[];
 
@@ -61,8 +67,9 @@ export class Album extends Model<Album, IAlbum> {
 
   @ApiProperty({
     example: 'ALWAYS ALBUM',
-    description: 'Данное поле используется исключительно на фронтенде, для поиска.',
-    default: 'album'
+    description:
+      'Данное поле используется исключительно на фронтенде, для поиска.',
+    default: 'album',
   })
   @Column({ type: DataType.STRING, defaultValue: 'album' })
   type: string;
