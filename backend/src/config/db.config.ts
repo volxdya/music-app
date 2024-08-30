@@ -11,13 +11,13 @@ import { Subscription } from '../modules/subscription/subscription.model';
 
 dotenv.config();
 
-export const DB_CONFIG: SequelizeModuleOptions = {
+export const POSTGRES_CONFIG: SequelizeModuleOptions = {
   dialect: 'postgres',
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT),
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  host: process.env.POSTGRES_HOST,
+  port: Number(process.env.POSTGRES_PORT),
+  username: process.env.POSTGRES_USERNAME,
+  password: process.env.POSTGRES_PASSWORD,
+  database: process.env.POSTGRES_NAME,
   autoLoadModels: true,
   models: [User, Playlist, PlaylistTracks, Track, Album, Genre, Subscription],
 };

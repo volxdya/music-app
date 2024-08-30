@@ -1,0 +1,44 @@
+version: '3.0'
+
+services:
+  main:
+    container_name: main
+    build:
+      context: .
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - 3010:3010
+      - 9229:9229
+    command: npm run start:dev
+    depends_on:
+      - postgres
+      - redis
+    restart: always
+
+  postgres:
+    container_name: postgres
+    image: postgres:12
+    env_file:
+      - .env
+    environment:
+      PG_DATA: /var/lib/postgres/data
+    ports:
+      - 5432:5432
+    restart: always
+
+  # Пока что здесь не поднимается REDIS, но в будущем мы это исправим =D
+  redis:
+    container_name: redis
+    image: redis:latest
+    env_file:
+      - .env
+    ports:
+      - 6379:6379
+    volumes:
+      - ./redisdata:/data
+    command: [ "redis-server", "--appendonly", "yes" ]
+    restart: always
