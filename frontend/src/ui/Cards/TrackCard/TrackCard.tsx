@@ -8,7 +8,6 @@ import player from "@/store/player.ts";
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Pause } from "@/icons/Player/Pause.tsx";
-import { useCheckLike } from "@/hooks/useCheckLike.ts";
 
 interface Props {
   title: string;

@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { getItems, setItem, setItems } from "@/utils/localStorage.ts";
+import { getItems, pushItems, setItem, setItems } from "@/utils/localStorage.ts";
 import { toast } from "@/components/ui/use-toast.ts";
 import { API_PATH } from "@/api";
 import user from "@/store/user.ts";
@@ -22,13 +22,7 @@ export const auth = async (login: string, password: string) => {
       }
 
       setItem("token", resp.data.token);
-      const existingTokens = getItems("all_tokens") || [];
-
-      // Добавляем новый токен к существующим
-      const allTokens = [...existingTokens, resp.data.token];
-
-      // Сохраняем обновленный массив токенов
-      setItems("all_tokens", allTokens);
+      pushItems("all_tokens", resp.data.token);
 
       toast({
         title: "Вы успешно авторизовались!",
