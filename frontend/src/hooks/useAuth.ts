@@ -18,6 +18,8 @@ export const useAuth = () => {
 
     try {
       setIsSuccess(await auth(login, password));
+
+      window.location.replace('/');
     } finally {
       setIsLoading(false);
     }

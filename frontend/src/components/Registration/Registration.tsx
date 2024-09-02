@@ -80,7 +80,7 @@ export default function Registration() {
                 ) : (
                   <button disabled={isSuccess}>Продолжить</button>
                 )}
-                <Link to="/auth">
+                <Link to="/auth/login">
                   <button className="create-id-btn">У меня есть аккаунт</button>
                 </Link>
               </div>
