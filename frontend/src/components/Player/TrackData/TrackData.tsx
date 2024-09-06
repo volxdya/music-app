@@ -5,6 +5,7 @@ import { observer } from "mobx-react-lite";
 
 export const TrackData = observer(() => {
   const [track] = useTrackInfo(player.current.trackId);
+  console.log(player.current);
 
   return (
     <>

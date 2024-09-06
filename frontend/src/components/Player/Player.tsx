@@ -8,6 +8,7 @@ import { ControlsWithUser } from "@/components/Player/Controls/ControlsWithUser/
 import { ControlsWithPlayer } from "@/components/Player/Controls/ControlsWithPlayer/ControlsWithPlayer.tsx";
 import { Progress } from "@/components/Player/Progress/Progress.tsx";
 import { ControlsWithTrack } from "@/components/Player/Controls/ControlsWithTrack/ControlsWithTrack.tsx";
+import { getRandomInt } from "@/utils/getRandomInt";
 
 const Player = observer(() => {
   const refAudio = useRef<HTMLMediaElement>();
@@ -65,8 +66,23 @@ const Player = observer(() => {
 
     if (refAudio.current) {
       if (time >= refAudio.current.duration) {
-        pause();
-        player.current.time = 0;
+        const { title, byFind } = player.current.play.whatPlay;
+        const { next } = player.current.play;
+        
+        player.setCurrent({
+          trackId: next[getRandomInt(next.length)].id,
+          play: {
+            next: [],
+            whatPlay: {
+              title: title,
+              byFind: byFind,
+            },
+          },
+          isPlay: true,
+          time: 0,
+          previousVolume: player.current.previousVolume,
+          currentVolume: player.current.currentVolume,
+        });
       }
     }
 

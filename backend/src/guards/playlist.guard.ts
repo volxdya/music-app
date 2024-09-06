@@ -24,7 +24,7 @@ export class PlaylistGuard implements CanActivate {
       ) {
         return true;
       }
-      throw new HttpException('Нет доступа', HttpStatus.FORBIDDEN);
+      throw new HttpException('Не ваш плейлист', HttpStatus.FORBIDDEN);
     } catch (err) {
       throw new HttpException('Нет доступа', HttpStatus.FORBIDDEN);
     }

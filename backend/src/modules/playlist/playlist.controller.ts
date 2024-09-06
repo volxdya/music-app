@@ -35,7 +35,7 @@ export class PlaylistController {
 
   @ApiOperation({ summary: 'Добавление трека в плейлист' })
   @Post(`/add_track`)
-  @UseGuards(AuthGuard, PlaylistGuard)
+  @UseGuards(AuthGuard)
   addTrack(@Body() dto: UsePlaylistDto) {
     return this.playlistService.addTrack(dto);
   }

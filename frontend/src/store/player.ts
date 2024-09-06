@@ -1,5 +1,8 @@
-import {makeAutoObservable} from "mobx";
-import {dfPlayer} from "@/store/defaultValues/dfPlayer.ts";
+import { makeAutoObservable } from "mobx";
+import { dfPlayer } from "@/store/defaultValues/dfPlayer.ts";
+import { getTracksByParam } from "@/api/tracks/getByParam";
+import { AxiosResponse } from "axios";
+import { ITrack } from "@/types/ITrack";
 
 interface ICurrent {
     trackId: number;
@@ -8,7 +11,7 @@ interface ICurrent {
             title: string;
             byFind: string | number;
         }; // playlist, author, track, search;
-        next: Array<string>;
+        next: ITrack[];
     },
     isPlay: boolean,
     time: number,
@@ -25,8 +28,13 @@ class Player {
     current: ICurrent = dfPlayer;
 
 
-    setCurrent(current: ICurrent) {
+    async setCurrent(current: ICurrent) {
         this.current = current;
+        const { title, byFind } = this.current.play.whatPlay;
+
+        await getTracksByParam(title, byFind).then((resp: AxiosResponse) => {
+            this.current.play.next = resp.data.tracks;
+        });
     }
 }
 
