@@ -8,6 +8,9 @@ import player from "@/store/player.ts";
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Pause } from "@/icons/Player/Pause.tsx";
+import { getTracksByParam } from "@/api/tracks/getByParam.ts";
+import { AxiosResponse } from "axios";
+import { ITrack } from "@/types/ITrack.ts";
 
 interface Props {
   title: string;
@@ -27,7 +30,7 @@ export const TrackCard = observer((props: Props) => {
 
   const [isCurrent, setIsCurrent] = useState(false);
 
-  function set() {
+  async function set() {
     player.setCurrent({
       trackId: id,
       play: {
@@ -42,6 +45,15 @@ export const TrackCard = observer((props: Props) => {
       previousVolume: player.current.previousVolume,
       currentVolume: player.current.currentVolume,
     });
+
+    let { next } = player.current.play;
+    const { whatPlay } = player.current.play;
+
+    await getTracksByParam(whatPlay.title, whatPlay.byFind).then((resp: AxiosResponse) => {
+      player.current.play.next = resp.data.tracks;
+    });
+
+    next = next.filter((item: ITrack) => item.id !== player.current.trackId);
   }
 
   function pause() {

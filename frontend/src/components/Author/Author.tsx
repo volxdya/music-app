@@ -42,7 +42,7 @@ export default function Author() {
       </div>
       <div className="mt-4 row g-0 flex">
         <div className="col-8">
-          {userData?.tracks && (
+          {userData?.tracks &&  (
             <>
               {userData?.tracks
                 .slice(0, 5)
@@ -53,7 +53,7 @@ export default function Author() {
                     author={user.userData.login}
                     id={item.id}
                     img={item.trackData.fileUrlAvatar}
-                    byFind={user.userData.login}
+                    byFind={userData.id}
                     where={user.userData.login}
                     isAlbum={false}
                   />
