@@ -32,6 +32,27 @@ const Player = observer(() => {
     player.current.isPlay = false;
   };
 
+  // Проигрываение следующего трека
+  const nextTrack = () => {
+    const { title, byFind } = player.current.play.whatPlay;
+    const { next } = player.current.play;
+
+    player.setCurrent({
+      trackId: next[getRandomInt(next.length)].id,
+      play: {
+        next: [],
+        whatPlay: {
+          title: title,
+          byFind: byFind,
+        },
+      },
+      isPlay: true,
+      time: 0,
+      previousVolume: player.current.previousVolume,
+      currentVolume: player.current.currentVolume,
+    });
+  }
+
   useEffect(() => {
     if (isPlaying) {
       refAudio.current?.play();
@@ -66,23 +87,7 @@ const Player = observer(() => {
 
     if (refAudio.current) {
       if (time >= refAudio.current.duration) {
-        const { title, byFind } = player.current.play.whatPlay;
-        const { next } = player.current.play;
-        
-        player.setCurrent({
-          trackId: next[getRandomInt(next.length)].id,
-          play: {
-            next: [],
-            whatPlay: {
-              title: title,
-              byFind: byFind,
-            },
-          },
-          isPlay: true,
-          time: 0,
-          previousVolume: player.current.previousVolume,
-          currentVolume: player.current.currentVolume,
-        });
+        nextTrack();
       }
     }
 
@@ -99,7 +104,7 @@ const Player = observer(() => {
       </div>
 
       <div>
-        <ControlsWithPlayer refAudio={refAudio} play={play} pause={pause} />
+        <ControlsWithPlayer refAudio={refAudio} play={play} pause={pause} nextTrack={nextTrack} />
         <Progress refAudio={refAudio} />
       </div>
 

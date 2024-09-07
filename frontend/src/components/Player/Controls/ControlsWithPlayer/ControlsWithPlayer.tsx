@@ -12,11 +12,12 @@ interface Props {
   isHaveTrack: boolean;
   play: () => void;
   pause: () => void;
+  nextTrack: () => void;
   refAudio: React.MutableRefObject<HTMLMediaElement>;
 }
 
 export const ControlsWithPlayer = observer(
-  ({ play, pause, refAudio }: Props) => {
+  ({ play, pause, nextTrack, refAudio }: Props) => {
     const isPlaying: boolean = player.current.isPlay;
     const [track] = useTrackInfo(player.current.trackId);
     const isHaveTrack: boolean = player.current.trackId !== 0;
@@ -46,7 +47,7 @@ export const ControlsWithPlayer = observer(
             <Play />
           </button>
         )}
-        <button disabled={!isHaveTrack}>
+        <button disabled={!isHaveTrack} onClick={nextTrack}>
           <Skip />
         </button>
         <button className="mx-4" disabled={!isHaveTrack}>
