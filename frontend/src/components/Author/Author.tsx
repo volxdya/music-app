@@ -50,11 +50,11 @@ export default function Author() {
                   <TrackCard
                     key={uniqid()}
                     title={item.title}
-                    author={user.userData.login}
+                    author={userData.login}
                     id={item.id}
                     img={item.trackData.fileUrlAvatar}
-                    byFind={userData.id}
-                    where={user.userData.login}
+                    byFind="author"
+                    where={userData.id}
                     isAlbum={false}
                   />
                 ))}
