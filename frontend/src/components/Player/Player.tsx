@@ -40,7 +40,7 @@ const Player = observer(() => {
     player.setCurrent({
       trackId: next[getRandomInt(next.length)].id,
       play: {
-        next: [],
+        next: next,
         whatPlay: {
           title: title,
           byFind: byFind,

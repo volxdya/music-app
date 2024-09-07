@@ -31,10 +31,13 @@ class Player {
     async setCurrent(current: ICurrent) {
         this.current = current;
         const { title, byFind } = this.current.play.whatPlay;
+        let { next } = this.current.play;
 
         await getTracksByParam(title, byFind).then((resp: AxiosResponse) => {
             this.current.play.next = resp.data.tracks;
         });
+
+        next = next.filter((item: ITrack) => item.id !== current.trackId);
     }
 }
 

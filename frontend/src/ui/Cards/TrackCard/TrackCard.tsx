@@ -31,7 +31,7 @@ export const TrackCard = observer((props: Props) => {
     player.setCurrent({
       trackId: id,
       play: {
-        next: [],
+        next: player.current.play.next,
         whatPlay: {
           title: where,
           byFind: byFind,
