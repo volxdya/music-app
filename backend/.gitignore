@@ -399,3 +399,10 @@ Temporary Items
 dist
 .webpack
 .serverless/**/*.zip
+
+# Docker
+./redisdata
+./pgdata
+./postgresdata
+./redisdata/*
+redisdata
