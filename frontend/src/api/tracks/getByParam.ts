@@ -6,7 +6,7 @@ export const getTracksByParam = async (
     by: number | string,
 ) => {
     const response: AxiosResponse = await axios.get(
-        `${API_PATH}/${whatIs}/get_by_id/${by}`,
+        `${API_PATH}/${whatIs === "author" ? "user" : "playlist"}/get_by_id/${by}`,
     );
     return response;
 };

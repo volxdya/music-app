@@ -7,6 +7,7 @@ import { UsePlaylistDto } from './dto/usePlaylistDto';
 import { Track } from '../track/track.model';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
+import { User } from '../user/user.model';
 
 @Injectable()
 export class PlaylistService {
@@ -17,7 +18,7 @@ export class PlaylistService {
     private readonly playlistRepository: typeof Playlist,
     private readonly trackService: TrackService,
     @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
-  ) {}
+  ) { }
 
   // Создание плейлиста
   async create(dto: CreatePlaylistDto) {

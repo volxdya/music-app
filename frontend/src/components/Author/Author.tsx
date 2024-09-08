@@ -53,8 +53,8 @@ export default function Author() {
                     author={userData.login}
                     id={item.id}
                     img={item.trackData.fileUrlAvatar}
-                    byFind="author"
-                    where={userData.id}
+                    byFind={userData.id}
+                    where="author"
                     isAlbum={false}
                   />
                 ))}

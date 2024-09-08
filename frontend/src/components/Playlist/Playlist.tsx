@@ -4,10 +4,11 @@ import { usePlaylistInfo } from "@/hooks/usePlaylistInfo.ts";
 import { ITrack } from "@/types/ITrack.ts";
 import { TrackCard } from "@/ui/Cards/TrackCard/TrackCard.tsx";
 import uniqid from "uniqid";
-import {observer} from "mobx-react-lite";
+import { observer } from "mobx-react-lite";
 
 const Playlist = observer(() => {
     const { playlist } = usePlaylistInfo();
+
     return (
         <>
             {playlist && (
@@ -24,7 +25,8 @@ const Playlist = observer(() => {
                             <>
                                 {playlist.tracks.reverse().map((item: ITrack) => (
                                     <TrackCard
-                                        id={item.id} author="test"
+                                        id={item.id}
+                                        author={item.userId.toString()}
                                         title={item.title}
                                         img={item.trackData.fileUrlAvatar}
                                         key={uniqid()}

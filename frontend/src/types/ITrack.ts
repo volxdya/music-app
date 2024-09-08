@@ -3,7 +3,7 @@ import {IGenre} from "@/types/IGenre.ts";
 
 export interface ITrack {
     title: string;
-    authorId: number;
+    userId: number;
     albumId: number;
     isTrack: boolean;
     id: number;
