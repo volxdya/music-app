@@ -6,6 +6,7 @@ interface Props {
 }
 
 export function ControlsWithUser({ isHaveTrack }: Props) {
+
   return (
     <div className="flex align-items-center mx-4">
       {isHaveTrack && (

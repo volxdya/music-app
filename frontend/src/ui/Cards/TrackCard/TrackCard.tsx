@@ -11,6 +11,7 @@ import { Pause } from "@/icons/Player/Pause.tsx";
 import { getTracksByParam } from "@/api/tracks/getByParam.ts";
 import { AxiosResponse } from "axios";
 import { ITrack } from "@/types/ITrack.ts";
+import { useDeleteFromPlaylist } from "@/hooks/useDeleteFromPlaylist.ts";
 
 interface Props {
   title: string;
@@ -27,6 +28,7 @@ export const TrackCard = observer((props: Props) => {
   const { title, author, id, img, where, byFind, isAlbum, index } = props;
 
   const { createLike } = useAddToPlaylist(id);
+  const { deleteLike } = useDeleteFromPlaylist(id);
 
   const [isCurrent, setIsCurrent] = useState(false);
 
@@ -115,7 +117,9 @@ export const TrackCard = observer((props: Props) => {
           <SecondHeart />
         </button>
 
-        <BreakHeart />
+        <button onClick={deleteLike}>
+          <BreakHeart />
+        </button>
         <DropdownTrack id={id} />
         <div className="time">03:36</div>
       </div>

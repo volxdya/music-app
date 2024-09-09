@@ -1,8 +1,8 @@
-import {observer} from "mobx-react-lite";
-import {useEffect} from "react";
+import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
 import track from "@/store/track.ts";
-import {ITrack} from "@/types/ITrack.ts";
-import {TrackCard} from "@/ui/Cards/TrackCard/TrackCard.tsx";
+import { ITrack } from "@/types/ITrack.ts";
+import { TrackCard } from "@/ui/Cards/TrackCard/TrackCard.tsx";
 
 const Tracks = observer(() => {
     useEffect(() => {
@@ -15,8 +15,9 @@ const Tracks = observer(() => {
                 <>
                     {item.author && (
                         <TrackCard
-                            author={item.author.login}
-                            title={item.title} id={item.id}
+                            author="qwe"
+                            title={item.title}
+                            id={item.id}
                             img={item.trackData.fileUrlAvatar}
                             where="track"
                             byFind="all"

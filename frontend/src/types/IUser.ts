@@ -8,8 +8,8 @@ export interface IUser {
   id: number;
   lastName: string;
   firstName: string;
-  playlists: Array<IPlaylist>;
-  albums: Array<IAlbum>;
+  playlists: IPlaylist[];
+  albums: IAlbum[];
   tracks: ITrack[];
   isUser: boolean;
   type: string;
