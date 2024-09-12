@@ -21,6 +21,11 @@ export const ControlsWithPlayer = observer(
     const isPlaying: boolean = player.current.isPlay;
     const [track] = useTrackInfo(player.current.trackId);
     const isHaveTrack: boolean = player.current.trackId !== 0;
+    let isRandom: boolean = player.current.isRandom;
+
+    function toggle() {
+      player.current.isRandom = !player.current.isRandom;
+    }
 
     return (
       <div className="flex gap-4 mt-2 justify-center align-items-center controls-track-container">
@@ -32,7 +37,11 @@ export const ControlsWithPlayer = observer(
             className="d-none"
           />
         )}
-        <button className="me-4" disabled={!isHaveTrack}>
+        <button
+          onClick={toggle}
+          className={isRandom ? "active-track-controls me-4" : "me-4"}
+          disabled={!isHaveTrack}
+        >
           <Random />
         </button>
         <button disabled={!isHaveTrack}>

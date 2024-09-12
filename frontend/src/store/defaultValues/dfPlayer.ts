@@ -11,4 +11,6 @@ export const dfPlayer = {
     time: 0,
     previousVolume: 1,
     currentVolume: 1,
+    isRandom: false,
+    isRepeat: false,
 }

@@ -64,12 +64,20 @@
 }
 
 .controls-track-container {
+  .active-track-controls {
+    svg {
+      fill: white;
+    }
+  }
+}
+
+.controls-track-container {
   svg {
     transition: 0.2s;
 
     &:hover {
       cursor: pointer;
-      fill: white;
+      fill: rgb(158, 158, 158);
       transform: scale(1.1);
     }
   }
