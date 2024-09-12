@@ -36,9 +36,10 @@ const Player = observer(() => {
   const nextTrack = () => {
     const { title, byFind } = player.current.play.whatPlay;
     const { next } = player.current.play;
+    const { isRepeat, isRandom, previousVolume, currentVolume, trackIndex } = player.current;
 
     player.setCurrent({
-      trackId: next[getRandomInt(next.length)].id,
+      trackId: next[isRandom ? getRandomInt(next.length) : trackIndex + 1].id,
       play: {
         next: next,
         whatPlay: {
@@ -48,8 +49,11 @@ const Player = observer(() => {
       },
       isPlay: true,
       time: 0,
-      previousVolume: player.current.previousVolume,
-      currentVolume: player.current.currentVolume,
+      previousVolume: previousVolume,
+      currentVolume: currentVolume,
+      isRandom: isRandom,
+      isRepeat: isRepeat,
+      trackIndex: !isRandom ? trackIndex + 1 : trackIndex
     });
   }
 

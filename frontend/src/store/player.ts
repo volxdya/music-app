@@ -15,6 +15,9 @@ interface ICurrent {
     time: number,
     previousVolume: number;
     currentVolume: number;
+    isRepeat: boolean;
+    isRandom: boolean;
+    trackIndex: number;
 }
 
 class Player {

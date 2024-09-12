@@ -46,12 +46,13 @@ export default function Author() {
             <>
               {userData?.tracks
                 .slice(0, 5)
-                .map((item: ITrack) => (
+                .map((item: ITrack, index: number) => (
                   <TrackCard
                     key={uniqid()}
                     title={item.title}
                     author={userData.login}
                     id={item.id}
+                    index={index}
                     img={item.trackData.fileUrlAvatar}
                     byFind={userData.id}
                     where="author"

@@ -13,4 +13,5 @@ export const dfPlayer = {
     currentVolume: 1,
     isRandom: false,
     isRepeat: false,
+    trackIndex: 0
 }

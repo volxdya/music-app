@@ -46,6 +46,9 @@ export const TrackCard = observer((props: Props) => {
       time: id === player.current.trackId ? player.current.time : 0,
       previousVolume: player.current.previousVolume,
       currentVolume: player.current.currentVolume,
+      isRandom: player.current.isRandom,
+      isRepeat: player.current.isRepeat,
+      trackIndex: index ? index : 0
     });
 
     let { next } = player.current.play;
