@@ -4,6 +4,11 @@ import { SecondHeart } from "@/icons/Hearts/SecondHeart.tsx";
 import { Dots } from "@/icons/Dots.tsx";
 import { Dropdown } from "@/ui/Dropdown/Dropdown.tsx";
 import { Pin } from "@/icons/Pin.tsx";
+import { getTracksByParam } from '@/api/tracks/getByParam';
+import player from '@/store/player';
+import { ITrack } from '@/types/ITrack';
+import { AxiosResponse } from 'axios';
+import { getRandomInt } from '@/utils/getRandomInt';
 
 interface Props {
     whatIs: string;
@@ -32,11 +37,18 @@ export function HeaderMusic({ whatIs, author, title, isCircle, img }: Props) {
                 <p className="mt-2 font-medium text-neutral-400 text-[14px] author-text-header">{author}</p>
 
                 <div className="controls-header-music mt-4 d-flex gap-3">
-                    <button className="play"><Play />Слушать</button>
-                    <button className="other-btn"><SecondHeart /></button>
+                    <button className="play">
+                        <Play />
+                        Слушать
+                    </button>
+                    <button className="other-btn">
+                        <SecondHeart />
+                    </button>
                     <Dropdown
                         trigger={
-                            <button className="other-btn"><Dots /></button>
+                            <button className="other-btn">
+                                <Dots />
+                            </button>
                         }
                         content={
                             <div className="mt-1 menu-item">
