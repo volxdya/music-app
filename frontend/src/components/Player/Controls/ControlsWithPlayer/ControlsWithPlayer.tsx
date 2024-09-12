@@ -21,10 +21,14 @@ export const ControlsWithPlayer = observer(
     const isPlaying: boolean = player.current.isPlay;
     const [track] = useTrackInfo(player.current.trackId);
     const isHaveTrack: boolean = player.current.trackId !== 0;
-    let isRandom: boolean = player.current.isRandom;
+    let { isRandom, isRepeat } = player.current;
 
-    function toggle() {
+    function toggleRandom() {
       player.current.isRandom = !player.current.isRandom;
+    }
+
+    function toggleRepeat() {
+      player.current.isRepeat = !player.current.isRepeat;
     }
 
     return (
@@ -38,7 +42,7 @@ export const ControlsWithPlayer = observer(
           />
         )}
         <button
-          onClick={toggle}
+          onClick={toggleRandom}
           className={isRandom ? "active-track-controls me-4" : "me-4"}
           disabled={!isHaveTrack}
         >
@@ -59,7 +63,11 @@ export const ControlsWithPlayer = observer(
         <button disabled={!isHaveTrack} onClick={nextTrack}>
           <Skip />
         </button>
-        <button className="mx-4" disabled={!isHaveTrack}>
+        <button
+          onClick={toggleRepeat}
+          className={isRepeat ? "mx-3 active-track-controls": "mx-3"}
+          disabled={!isHaveTrack}
+        >
           <Repeat />
         </button>
       </div>
