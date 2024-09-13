@@ -53,7 +53,7 @@ const Player = observer(() => {
       currentVolume: currentVolume,
       isRandom: isRandom,
       isRepeat: isRepeat,
-      trackIndex: !isRandom ? trackIndex + 1 : trackIndex
+      trackIndex: !isRandom ? trackIndex + 1 : 0
     });
   }
 
