@@ -4,13 +4,30 @@ import { MainTitle } from "@/ui/Text/MainTitle/MainTitle.tsx";
 import { onChange } from "@/utils/onChange.ts";
 import { Spinner } from "@/ui/Spinner/Spinner.tsx";
 import { Link } from "react-router-dom";
+import { IFormInput } from "@/types/IFormInput";
 
 export function Form() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [isAuthor, setIsAuthor] = useState(false);
 
-  const { handleSubmit, isLoading } = useAuth(isAuthor);
+  const { handleSubmit, isLoading } = useAuth();
+
+  const inputs: IFormInput[] = [
+    {
+      placeholder: "Логин",
+      type: "text",
+      onChangeFn: onChange(setLogin),
+      classNames: "mt-3"
+    },
+    {
+      placeholder: "Пароль",
+      type: "password",
+      onChangeFn: onChange(setPassword),
+      classNames: "mt-3"
+    },
+  ];
+
 
   return (
     <form
@@ -28,18 +45,16 @@ export function Form() {
 
           <div className="mt-4 inputs-container">
             <div>
-              <input
-                placeholder="Логин"
-                className="mt-3"
-                type="text"
-                onChange={onChange(setLogin)}
-              />
-              <input
-                placeholder="Пароль"
-                className="mt-3"
-                type="password"
-                onChange={onChange(setPassword)}
-              />
+
+              {inputs.map((item: IFormInput) => (
+                <input
+                  placeholder={item.placeholder}
+                  className={item.classNames}
+                  type={item.type}
+                  onChange={item.onChangeFn }
+                />
+              ))}
+
               <div className="form-check form-switch mt-3">
                 <input
                   className="form-check-input"

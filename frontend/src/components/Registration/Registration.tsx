@@ -4,6 +4,7 @@ import { useState } from "react";
 import { onChange } from "@/utils/onChange.ts";
 import { useRegister } from "@/hooks/useRegister.ts";
 import { Spinner } from "@/ui/Spinner/Spinner.tsx";
+import { IFormInput } from "@/types/IFormInput";
 
 export default function Registration() {
   const [login, setLogin] = useState("");
@@ -13,6 +14,32 @@ export default function Registration() {
   const [isAuthor, setIsAuthor] = useState(false);
 
   const { handleSubmit, isSuccess, isLoading } = useRegister(isAuthor);
+  const inputs: IFormInput[] = [
+    {
+      placeholder: "Логин",
+      type: "text",
+      onChangeFn: onChange(setLogin),
+      classNames: "mt-3"
+    },
+    {
+      placeholder: "Имя",
+      type: "text",
+      onChangeFn: onChange(setFisrtName),
+      classNames: "mt-3"
+    },
+    {
+      placeholder: "Фамилия",
+      type: "text",
+      onChangeFn: onChange(setLastName),
+      classNames: "mt-3"
+    },
+    {
+      placeholder: "Пароль",
+      type: "password",
+      onChangeFn: onChange(setPassword),
+      classNames: "mt-3"
+    },
+  ];
 
   return (
     <form
@@ -30,30 +57,14 @@ export default function Registration() {
 
           <div className="mt-4 inputs-container">
             <div>
-              <input
-                placeholder="Логин"
-                className="mt-3"
-                type="text"
-                onChange={onChange(setLogin)}
-              />
-              <input
-                placeholder="Имя"
-                className="mt-3"
-                type="text"
-                onChange={onChange(setFisrtName)}
-              />
-              <input
-                placeholder="Фамилия"
-                className="mt-3"
-                type="text"
-                onChange={onChange(setLastName)}
-              />
-              <input
-                placeholder="Пароль"
-                className="mt-3"
-                type="password"
-                onChange={onChange(setPassword)}
-              />
+              {inputs.map((item: IFormInput) => (
+                <input
+                  placeholder={item.placeholder}
+                  className={item.classNames}
+                  type={item.type}
+                  onChange={item.onChangeFn}
+                />
+              ))}
               <div className="form-check form-switch mt-3">
                 <input
                   className="form-check-input"

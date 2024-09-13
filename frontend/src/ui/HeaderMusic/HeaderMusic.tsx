@@ -4,11 +4,6 @@ import { SecondHeart } from "@/icons/Hearts/SecondHeart.tsx";
 import { Dots } from "@/icons/Dots.tsx";
 import { Dropdown } from "@/ui/Dropdown/Dropdown.tsx";
 import { Pin } from "@/icons/Pin.tsx";
-import { getTracksByParam } from '@/api/tracks/getByParam';
-import player from '@/store/player';
-import { ITrack } from '@/types/ITrack';
-import { AxiosResponse } from 'axios';
-import { getRandomInt } from '@/utils/getRandomInt';
 
 interface Props {
     whatIs: string;
